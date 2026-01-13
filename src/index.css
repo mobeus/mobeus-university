@@ -1,0 +1,1812 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Cursor Rules */
+body {
+  cursor: default;
+}
+
+a,
+button,
+[role="button"],
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Ripple Effect */
+.ripple-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Interactive Indicator Styles */
+.interactive-indicator {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.interactive-indicator:hover {
+  background: rgba(65, 150, 217, 0.15) !important;
+  border-color: rgba(65, 150, 217, 0.4) !important;
+  transform: scale(1.02);
+}
+
+.prompt-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(65, 150, 217, 0.95);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 50;
+}
+
+.interactive-indicator:hover .prompt-tooltip {
+  opacity: 1;
+}
+
+/* Accenture + Salesforce RFP Design System */
+
+@layer base {
+  :root {
+    /* Navigation Height */
+    --nav-h: 96px;
+
+    /* ============================================
+     * TELEGLASS PLATFORM - FUTURISTIC DESIGN SYSTEM
+     * ============================================
+     * 
+     * VOLUMETRIC CONVERSATIONAL MEDIA
+     * This is not a website—it's a floating glass interface through which
+     * you fly conversationally. Every element exists in depth space.
+     * 
+     * LAYER ARCHITECTURE:
+     * - Tele (Background): Deep atmospheric space, Tele avatar
+     * - Glass (Foreground): Floating UI panels, cards, navigation
+     * - Depth: Everything has Z-space positioning
+     * 
+     * COLOR PHILOSOPHY:
+     * All colors MUST be HSL format without hsl() wrapper
+     * Example: --primary: 210 70% 50%; (CORRECT)
+     * 
+     * PRIMARY (Cyan Blue) - Main brand, internal pathway
+     * SECONDARY (Emerald Green) - Partner pathway, success
+     * TERTIARY (Amber Orange) - Patient pathway, attention
+     * 
+     * All glass surfaces use white/black with opacity for depth
+     * ============================================ */
+
+    /* ============================================
+     * STRICT COLOR SYSTEM - WHITE BACKGROUND MODE
+     * ============================================
+     * 
+     * ONLY THREE COLORS ALLOWED:
+     * 1. Primary (Blue): 210 70% 50% - Internal/Pharma pathway
+     * 2. Secondary (Green): 145 60% 45% - Partner/Ecosystem pathway  
+     * 3. Tertiary (Orange): 25 95% 53% - Patient/Customer pathway
+     * 
+     * ALL TEXT MUST BE BLACK: 0 0% 0%
+     * ALL BACKGROUNDS MUST USE: white with opacity (white/25, white/30, etc.)
+     * 
+     * NO OTHER COLORS. NO EXCEPTIONS.
+     * ============================================ */
+
+    /* Core Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    /* Card & Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    /* Primary: Gold/Tan - Warm muted accent that complements the design */
+    --primary: 43 53% 54%;
+    --primary-foreground: 0 0% 0%;
+
+    /* Secondary: Dark Teal - Matches LEAP card, used for greens throughout */
+    --secondary: 175 77% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Tertiary: Orange - Patient/Customer pathway */
+    --tertiary: 25 95% 53%;
+    --tertiary-foreground: 0 0% 0%;
+
+    /* UI Colors - Simplified */
+    --muted: 0 0% 80%;
+    --muted-foreground: 0 0% 0%;
+
+    --accent: 38 95% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 0 0% 0% / 0.2;
+    --input: 0 0% 80%;
+    --ring: 38 95% 50%;
+
+    /* Volumetric Glass Shadows - Elegant Depth System */
+    --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.18), 0 12px 48px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.22), 0 20px 64px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.28), 0 32px 96px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --shadow-glow-cyan: 0 0 48px rgba(245, 158, 11, 0.35), 0 0 96px rgba(245, 158, 11, 0.18), 0 4px 20px rgba(245, 158, 11, 0.2);
+    --shadow-glow-ambient: 0 0 80px rgba(255, 255, 255, 0.06), 0 0 40px rgba(255, 255, 255, 0.03);
+
+    /* Volumetric Glass Animations - Elegant Floating */
+    --transition-float: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-depth: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-glow: box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-materialize: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Scroll-based Shadow Intensity Levels */
+    --shadow-depth-0: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.04);
+    --shadow-depth-1: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-depth-2: 0 8px 20px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.12);
+    --shadow-depth-3: 0 12px 28px rgba(0, 0, 0, 0.2), 0 6px 14px rgba(0, 0, 0, 0.15);
+    --shadow-depth-4: 0 16px 36px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.18);
+    --shadow-depth-5: 0 20px 44px rgba(0, 0, 0, 0.3), 0 10px 22px rgba(0, 0, 0, 0.22);
+
+    /* Chat Glass - Responsive Widths */
+    --chat-glass-width: 20.16rem;
+    /* Desktop: 322px (110% increase) */
+    --chat-glass-width-tablet: 19.8rem;
+    /* Tablet: 317px */
+    --chat-glass-width-mobile: 85vw;
+    /* Mobile: 85% of viewport */
+    --teleglass-top: 2rem;
+    --teleglass-right: 1rem;
+
+    --radius: 0.5rem;
+
+    /* ============================================
+     * INTERACTION STANDARDS (Hover & Focus)
+     * ============================================
+     * 
+     * TRANSITION DURATION: duration-300 (consistent across all interactive elements)
+     * 
+     * FOCUS STATES (all focusable elements):
+     * - focus-visible:outline-none
+     * - focus-visible:ring-2
+     * - focus-visible:ring-ring
+     * - focus-visible:ring-offset-2
+     * 
+     * HOVER SCALE (transform feedback):
+     * - Standard cards: hover:scale-[1.01] (subtle feedback)
+     * - Interactive elements (buttons, links): hover:scale-[1.02] + -translate-y-1 (lift effect)
+     * - Images & icons: max hover:scale-[1.02] (controlled zoom)
+     * - Press state: active:scale-[0.98] (consistent press feedback)
+     * 
+     * HOVER EFFECTS (background/shadow):
+     * - Buttons: Shadow glow or background opacity changes
+     * - Cards: Glass hover classes (see below) + scale
+     * - Inputs: hover:border-ring/50
+     * 
+     * CURSOR:
+     * - All interactive elements: cursor-pointer
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * OPACITY STANDARDS (Visual Hierarchy)
+     * ============================================
+     * 
+     * TEXT OPACITY (white text on dark backgrounds):
+     * - text-white/50: Disabled/placeholder text (least readable)
+     * - text-white/60: Muted secondary text, timestamps
+     * - text-white/70: Secondary text, supporting content, subtle labels
+     * - text-white/80: Body text, descriptions (primary readable text)
+     * - text-white/90: Headings, card titles, important text
+     * - text-white: Critical labels, primary headings, navigation
+     * 
+     * BACKGROUND OPACITY (white overlays/tints):
+     * - bg-white/5: Very subtle tints, minimal accent
+     * - bg-white/10: Light overlays, badges, subtle containers
+     * - bg-white/15: Interactive hover states (glass-medium-hover)
+     * - bg-white/20: Stronger overlays, panels, buttons
+     * - bg-white/30: Prominent overlays, active states
+     * 
+     * BACKGROUND OPACITY (black depth/shadow):
+     * - bg-black/5: Minimal depth (glass-subtle)
+     * - bg-black/10: Standard depth (glass-medium), light overlays
+     * - bg-black/15: Strong depth (glass-strong), hover states
+     * - bg-black/20: Prominent depth (glass-prominent), overlays
+     * - bg-black/30: Modal overlays, hover on prominent elements
+     * - bg-black/50: Full backdrop overlays, drawer backgrounds
+     * 
+     * BORDER OPACITY:
+     * - border-white/5: Minimal separation (glass-subtle)
+     * - border-white/10: Standard borders (glass-medium)
+     * - border-white/15: Strong borders (glass-strong, gradient cards)
+     * - border-white/20: Prominent borders (glass-prominent), inputs, badges
+     * - border-white/30: Strong emphasis, active states
+     * - border-white/40: Hover states on emphasized borders
+     * 
+     * USAGE GUIDELINES:
+     * - Always use glass- classes for card backgrounds (automatic opacity)
+     * - Text hierarchy should follow readability: 80 for body, 90 for headings
+     * - Avoid /25, /35, /45, /55, etc. - use standard increments only
+     * - Overlay backgrounds should follow glass- classes or bg-black/50
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * FONT WEIGHT STANDARDS (Typographic Hierarchy)
+     * ============================================
+     * 
+     * WEIGHT SCALE:
+     * - font-normal (400): Default body text, paragraphs (no class needed)
+     * - font-medium (500): Subtle emphasis, inline labels, data values
+     * - font-semibold (600): Subheadings, card titles, section labels, list items
+     * - font-bold (700): Major headings (h1-h4), primary numbers, hero text
+     * 
+     * USAGE GUIDELINES:
+     * - H1/H2: font-bold (primary page/section headings)
+     * - H3/H4: font-bold (subsection headings)
+     * - Card titles: font-semibold (secondary emphasis)
+     * - Labels/badges: font-semibold or font-medium (contextual)
+     * - Data values: font-medium or font-semibold (importance-based)
+     * - Body text: Default 400 weight (no class)
+     * - Inline emphasis: font-medium or font-semibold (contextual)
+     * 
+     * AVOID:
+     * - font-light/font-thin (poor readability on dark backgrounds)
+     * - font-extrabold/font-black (too heavy, use font-bold instead)
+     * - Mixing weights inconsistently in the same context
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * SPACING STANDARDS (Layout Rhythm)
+     * ============================================
+     * 
+     * GAP/SPACING SCALE:
+     * - gap-2 (8px): Tight spacing for inline elements, icons with text
+     * - gap-4 (16px): Standard spacing for flex/grid items, form fields
+     * - gap-6 (24px): Loose spacing for card grids, major sections
+     * - gap-8 (32px): Extra loose spacing for separated content blocks
+     * 
+     * PADDING SCALE:
+     * - p-3 (12px): Compact elements, badges, small buttons
+     * - p-4 (16px): Standard inner content, list items
+     * - p-6 (24px): Card content, form sections (default for cards)
+     * - p-8 (32px): Large containers, hero sections (responsive: p-6 md:p-8)
+     * 
+     * USAGE GUIDELINES:
+     * - Icon + text inline: gap-2
+     * - Form fields vertical stack: gap-4
+     * - Card grids: gap-6
+     * - Major section separation: gap-8
+     * - Card padding: p-6 (consistent across all cards)
+     * - Avoid gap-3, gap-5, etc. - use standard increments only
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * BORDER RADIUS STANDARDS (Shape Language)
+     * ============================================
+     * 
+     * RADIUS SCALE:
+     * - rounded-md (6px): Small elements, badges, tags
+     * - rounded-lg (8px): Standard cards, inner content boxes
+     * - rounded-xl (12px): Main cards, containers, modals
+     * - rounded-2xl (16px): Hero sections, large prominent containers
+     * - rounded-full: Circular buttons, avatars, indicators
+     * 
+     * USAGE GUIDELINES:
+     * - Main cards/containers: rounded-xl (12px)
+     * - Inner content boxes: rounded-lg (8px)
+     * - Small badges: rounded-md (6px)
+     * - Buttons: rounded-full (pill shape)
+     * - Avoid rounded, rounded-sm - use consistent scale
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * TRANSITION STANDARDS (Animation Timing)
+     * ============================================
+     * 
+     * DURATION SCALE:
+     * - duration-200 (200ms): Quick interactions (button press, small movements)
+     * - duration-300 (300ms): Standard transitions (hover, focus, color changes)
+     * - duration-500 (500ms): Image effects, opacity changes
+     * - duration-700 (700ms): Scroll animations, page transitions
+     * 
+     * USAGE GUIDELINES:
+     * - Interactive elements (buttons, links): duration-300
+     * - Hover states: duration-300
+     * - Image zoom/scale: duration-500
+     * - Scroll reveals: duration-700
+     * - Avoid duration-150, duration-250 - use standard increments
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * HOVER STATE STANDARDS (Interactive Feedback)
+     * ============================================
+     * 
+     * GLASS-LIKE HOVER BEHAVIOR:
+     * - Hover: Float backwards slightly (translateZ effect)
+     * - Click: Float into depth, then bounce back forward
+     * - All transitions should feel like floating glass
+     * 
+     * BACKGROUND OPACITY ON HOVER:
+     * - hover:bg-white/5: Subtle hover for table rows, list items
+     * - hover:bg-white/10: Standard hover for cards, navigation items
+     * - hover:bg-white/20: Emphasized hover for CTAs, primary actions
+     * 
+     * GLASS FLOAT ON HOVER (recommended for all interactive cards):
+     * - hover:-translate-y-1: Subtle lift backwards
+     * - hover:scale-[0.99]: Slight scale down for depth illusion
+     * - active:translate-y-1: Press forward into depth
+     * - active:scale-[1.01]: Expand on press
+     * 
+     * SHADOW ON HOVER:
+     * - Glass classes: Built-in shadow intensification on hover
+     * - Icons/buttons: hover:shadow-glow for interactive emphasis
+     * 
+     * USAGE GUIDELINES:
+     * - All interactive cards: glass-float hover effect
+     * - Buttons: gentle float-back on hover, bump forward on click
+     * - Always pair with duration-300 or duration-500 for smooth glass feel
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * SHADOW STANDARDS (Depth System)
+     * ============================================
+     * 
+     * SHADOW SCALE:
+     * - shadow-soft: Subtle elevation for buttons, icons, small elements
+     * - shadow-card: Standard elevation for card elements
+     * - shadow-elegant: Enhanced elevation for modals, large containers
+     * - shadow-glow: Interactive glow for hover states, focus
+     * - shadow-depth-0 to shadow-depth-5: Scroll-based dynamic shadows
+     * 
+     * GLASS SHADOWS (built into glass- classes):
+     * - glass-subtle: Minimal shadow for background elements
+     * - glass-medium: Standard shadow for content cards
+     * - glass-strong: Enhanced shadow for interactive elements
+     * - glass-prominent: Maximum shadow for overlays, modals
+     * 
+     * USAGE GUIDELINES:
+     * - Small interactive elements: shadow-soft
+     * - Standard cards: Use glass-medium (includes shadow)
+     * - Modals/nav drawers: shadow-elegant
+     * - Hover emphasis: hover:shadow-glow
+     * - Avoid custom shadow values - use design system tokens
+     * 
+     * ============================================ */
+
+    /* ============================================
+     * COLOR USAGE STANDARDS
+     * ============================================
+     * 
+     * ALWAYS USE SEMANTIC TOKENS:
+     * ✅ CORRECT:
+     *   - text-primary (for blue)
+     *   - bg-secondary (for green)
+     *   - border-tertiary (for orange)
+     *   - text-primary/20 (with opacity)
+     *   - bg-gradient-to-br from-primary/10 to-black/10
+     * 
+     * ❌ INCORRECT (causes maintenance issues):
+     *   - text-[hsl(210,70%,50%)]
+     *   - bg-[hsl(145,60%,45%)]
+     *   - border-[hsl(25,95%,53%)]
+     * 
+     * PATHWAY COLOR MAPPING:
+     * - Internal/Pharma pathway: primary (blue)
+     * - Partner/Ecosystem pathway: secondary (green)
+     * - Patient/Customer pathway: tertiary (orange)
+     * 
+     * GRADIENT USAGE:
+     * - Use: from-primary/10 to-black/10
+     * - NOT: from-[hsl(210,70%,50%)]/10
+     * 
+     * ICON COLORS:
+     * - Use: text-primary, text-secondary, text-tertiary
+     * - Maintain pathway color consistency
+     * 
+     * ============================================ */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --sidebar: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* ============================================
+   * LIGHTBOARD MODE - CSS-Based Filter System
+   * ============================================
+   * When lightboard-mode class is applied to body,
+   * all videos and backgrounds convert to grayscale
+   * with smooth 600ms transitions.
+   * ============================================ */
+
+  /* Smooth transition for all lightboard-affected elements */
+  .bg-layer,
+  .hero-background,
+  #avatarVideo,
+  video,
+  .background-layer,
+  [class*="background"] {
+    transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Apply grayscale filters when lightboard mode is active */
+  body.lightboard-mode .bg-layer,
+  body.lightboard-mode #avatarVideo,
+  body.lightboard-mode video,
+  body.lightboard-mode .background-layer,
+  body.lightboard-mode [class*="background"]:not(.hero-background):not(.no-lightboard):not(.no-lightboard *) {
+    filter: grayscale(1) contrast(1.2) !important;
+  }
+
+  /* Special handling for hero background */
+  body.lightboard-mode .hero-background {
+    filter: grayscale(1) contrast(1.2) brightness(0.7) !important;
+  }
+
+  /* Exclude elements with no-lightboard class */
+  body.lightboard-mode .no-lightboard,
+  body.lightboard-mode .no-lightboard * {
+    filter: none !important;
+  }
+
+
+
+  .hero-background {
+    background-size: cover;
+    background-position: right top;
+    background-repeat: no-repeat;
+    min-width: 100%;
+    min-height: 100vh;
+  }
+
+  .section-shell {
+    @apply container mx-auto max-w-[1400px] px-16 md:px-24 lg:px-32;
+  }
+
+  /* ============================================
+   * GLOBAL LAYOUT RULES
+   * ============================================
+   * 1. Consistent left/right margin alignment
+   * 2. Max 3 items per row, flow to next row if more
+   * 3. Cards fill available width evenly
+   * ============================================ */
+
+  /* Template container - full width within section */
+  .template-container {
+    @apply w-full;
+  }
+
+  /* Standard card grid - max 3 per row, responsive */
+  .card-grid {
+    @apply grid gap-6 w-full;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  @media (min-width: 768px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      /* Max 3 columns, cards fill remaining space */
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Override for when fewer than 3 cards - stretch to fill */
+  .card-grid-1 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* Skill items grid - 2 per row on desktop */
+  .skill-grid {
+    @apply grid gap-4 w-full;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .skill-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Highlight items - max 3 per row */
+  .highlight-grid {
+    @apply grid gap-4 w-full;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  @media (min-width: 768px) {
+    .highlight-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      max-width: 100%;
+    }
+
+    /* Limit to 3 columns max */
+    .highlight-grid>*:nth-child(n+4) {
+      grid-column: span 1;
+    }
+  }
+
+  .section-controls {
+    position: sticky;
+    top: calc(var(--nav-h, 96px) + 8px);
+    z-index: 30;
+    @apply flex items-center gap-4;
+    width: fit-content;
+    min-height: 2.5rem;
+    background: transparent !important;
+    background-color: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    overflow: visible;
+  }
+
+  .section-controls::before,
+  .section-controls::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  @supports (top: env(safe-area-inset-top)) {
+    .section-controls {
+      top: calc(var(--nav-h, 96px) + env(safe-area-inset-top) + 8px);
+    }
+  }
+
+  .section-header {
+    @apply space-y-2 md:space-y-3;
+    margin-top: 3rem;
+  }
+
+  /* Text Shadow Utilities - for floating effect */
+  .text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Scroll-Depth Shadow Animation Classes */
+  .shadow-scroll-depth {
+    transition: var(--transition-shadow);
+  }
+
+  .shadow-depth-0 {
+    box-shadow: var(--shadow-depth-0);
+  }
+
+  .shadow-depth-1 {
+    box-shadow: var(--shadow-depth-1);
+  }
+
+  .shadow-depth-2 {
+    box-shadow: var(--shadow-depth-2);
+  }
+
+  .shadow-depth-3 {
+    box-shadow: var(--shadow-depth-3);
+  }
+
+  .shadow-depth-4 {
+    box-shadow: var(--shadow-depth-4);
+  }
+
+  .shadow-depth-5 {
+    box-shadow: var(--shadow-depth-5);
+  }
+
+  /* Hover Shadow Pulse - syncs with scroll depth */
+  @keyframes shadow-pulse-0 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-0);
+    }
+
+    50% {
+      box-shadow: var(--shadow-depth-1);
+    }
+  }
+
+  @keyframes shadow-pulse-1 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-1);
+    }
+
+    50% {
+      box-shadow: var(--shadow-depth-2);
+    }
+  }
+
+  @keyframes shadow-pulse-2 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-2);
+    }
+
+    50% {
+      box-shadow: var(--shadow-depth-3);
+    }
+  }
+
+  @keyframes shadow-pulse-3 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-3);
+    }
+
+    50% {
+      box-shadow: var(--shadow-depth-4);
+    }
+  }
+
+  @keyframes shadow-pulse-4 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-4);
+    }
+
+    50% {
+      box-shadow: var(--shadow-depth-5);
+    }
+  }
+
+  @keyframes shadow-pulse-5 {
+
+    0%,
+    100% {
+      box-shadow: var(--shadow-depth-5);
+    }
+
+    50% {
+      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.35), 0 12px 26px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .shadow-depth-0:hover {
+    animation: shadow-pulse-0 1.5s ease-in-out infinite;
+  }
+
+  .shadow-depth-1:hover {
+    animation: shadow-pulse-1 1.5s ease-in-out infinite;
+  }
+
+  .shadow-depth-2:hover {
+    animation: shadow-pulse-2 1.5s ease-in-out infinite;
+  }
+
+  .shadow-depth-3:hover {
+    animation: shadow-pulse-3 1.5s ease-in-out infinite;
+  }
+
+  .shadow-depth-4:hover {
+    animation: shadow-pulse-4 1.5s ease-in-out infinite;
+  }
+
+  .shadow-depth-5:hover {
+    animation: shadow-pulse-5 1.5s ease-in-out infinite;
+  }
+
+  /* Glassmorphism Visual Hierarchy System */
+
+  /* Level 1: Subtle - Background elements, avatars, less important UI */
+  .glass-subtle {
+    @apply bg-black/5 border border-white/5 transition-all duration-300;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-subtle-hover {
+    @apply bg-black/5 border border-white/5 transition-all duration-300;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-subtle-hover:hover {
+    @apply bg-black/10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Level 2: Medium - Standard cards, default content containers */
+  .glass-medium {
+    @apply bg-black/10 border border-white/10 transition-all duration-300;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2), 0 5px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-medium-hover {
+    @apply bg-black/10 border border-white/10 transition-all duration-300;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2), 0 5px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-medium-hover:hover {
+    @apply bg-black/15;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 6px 14px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Level 3: Strong - Interactive elements, primary content, user messages */
+  .glass-strong {
+    @apply bg-black/15 border border-white/15 transition-all duration-300;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25), 0 7px 16px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .glass-strong-hover {
+    @apply bg-black/15 border border-white/15 transition-all duration-300;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25), 0 7px 16px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .glass-strong-hover:hover {
+    @apply bg-black/20;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3), 0 9px 20px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Level 4: Prominent - Overlays, modals, panels, navigation */
+  .glass-prominent {
+    @apply bg-black/20 border border-white/20 transition-all duration-300;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 9px 22px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .glass-prominent-hover {
+    @apply bg-black/20 border border-white/20 transition-all duration-300;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 9px 22px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .glass-prominent-hover:hover {
+    @apply bg-black/25;
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.35), 0 11px 26px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.18);
+  }
+
+  /* Legacy Glass Effects (kept for compatibility) */
+  .glass-card {
+    @apply bg-white/10 border border-white/20 rounded-3xl;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.25), 0 5px 18px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .glass-button {
+    @apply bg-white/10 border border-white/20 rounded-2xl transition-all duration-300;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-button:hover {
+    @apply bg-white/20;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3), 0 5px 18px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Avatar Animation States */
+  @keyframes pulse-ring {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+  }
+
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+  }
+
+  @keyframes pulse-blue {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+
+    50% {
+      box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+    }
+  }
+
+  @keyframes color-pulse {
+
+    0%,
+    100% {
+      filter: grayscale(100%) brightness(1);
+    }
+
+    50% {
+      filter: grayscale(0%) brightness(1.3);
+    }
+  }
+
+  @keyframes avatar-inactive-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 hsl(217 91% 60% / 0.4), 0 0 0 0 hsl(180 70% 45% / 0.4);
+      transform: scale(1);
+    }
+
+    50% {
+      box-shadow:
+        0 0 0 8px hsl(217 91% 60% / 0.2),
+        0 0 0 12px hsl(180 70% 45% / 0.1),
+        0 0 20px hsl(217 91% 60% / 0.3),
+        0 0 30px hsl(180 70% 45% / 0.2);
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes pulsate {
+    50% {
+      box-shadow:
+        0 0 20px #fff,
+        20px 0 80px hsl(190 80% 50%),
+        -20px 0 80px #0ff,
+        inset 0 0 50px #fff,
+        inset -50px 0 80px hsl(190 80% 50%),
+        inset 50px 0 80px #0ff,
+        inset -50px 0 300px hsl(190 80% 50%),
+        inset 50px 0 300px #0ff;
+    }
+  }
+
+  @keyframes avatar-connecting-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 hsl(217 91% 60% / 0.6);
+      transform: scale(1);
+    }
+
+    50% {
+      box-shadow:
+        0 0 0 10px hsl(217 91% 60% / 0.3),
+        0 0 0 20px hsl(217 91% 60% / 0.1),
+        0 0 25px hsl(217 91% 60% / 0.4);
+      transform: scale(1.08);
+    }
+  }
+
+  /* Section entrance animations */
+  @keyframes section-enter {
+    0% {
+      opacity: 0;
+      transform: scale(0.95) translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes section-exit {
+    0% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(0.92) translateY(-10px);
+    }
+  }
+
+  @keyframes page-enter {
+    0% {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes page-exit {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+  }
+
+  @keyframes stagger-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes stagger-exit {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Subsection appear - simple and elegant */
+  @keyframes subsection-appear {
+    0% {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Glass appearance animation - content materializing on glass */
+  @keyframes glass-appear {
+    0% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: scale(0.98);
+    }
+
+    100% {
+      opacity: 1;
+      filter: blur(0px);
+      transform: scale(1);
+    }
+  }
+
+  /* Glass click animation - float into depth then bounce back */
+  @keyframes glass-click {
+    0% {
+      transform: translateZ(0) scale(1);
+    }
+
+    40% {
+      transform: translateZ(-50px) scale(0.96);
+    }
+
+    70% {
+      transform: translateZ(5px) scale(1.01);
+    }
+
+    100% {
+      transform: translateZ(0) scale(1);
+    }
+  }
+
+  /* Glass ripple effect */
+  @keyframes glass-ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.6;
+    }
+
+    50% {
+      opacity: 0.3;
+    }
+
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  /* Chat bubble animations - smoother, more graceful */
+  @keyframes chat-bubble-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes chat-bubble-slide-up {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes typing-indicator-pulse {
+
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 60s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-pulse-ultra-slow {
+    animation: pulse-slow 90s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-pulse-blue {
+    animation: pulse-blue 50s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-pulse-blue-slow {
+    animation: pulse-blue 75s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 12s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-color-pulse {
+    animation: color-pulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Section entrance animations with dramatic depth effects */
+  .animate-section-enter {
+    animation: fly-through-space 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-style: preserve-3d;
+  }
+
+  .animate-section-exit {
+    animation: section-exit 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  /* Page transition animations */
+  .animate-page-enter {
+    animation: page-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-page-exit {
+    animation: page-exit 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  .animate-stagger-enter {
+    animation: stagger-enter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .animate-stagger-exit {
+    animation: stagger-exit 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  .animate-stagger-1 {
+    animation-delay: 0.05s;
+  }
+
+  .animate-stagger-2 {
+    animation-delay: 0.1s;
+  }
+
+  .animate-stagger-3 {
+    animation-delay: 0.15s;
+  }
+
+  .animate-stagger-4 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-stagger-5 {
+    animation-delay: 0.25s;
+  }
+
+  .animate-stagger-6 {
+    animation-delay: 0.3s;
+  }
+
+  /* Exit animations with reverse delays */
+  .exit-stagger-1 {
+    animation-delay: 0s;
+  }
+
+  .exit-stagger-2 {
+    animation-delay: 0.03s;
+  }
+
+  .exit-stagger-3 {
+    animation-delay: 0.06s;
+  }
+
+  .exit-stagger-4 {
+    animation-delay: 0.09s;
+  }
+
+  .exit-stagger-5 {
+    animation-delay: 0.12s;
+  }
+
+  .exit-stagger-6 {
+    animation-delay: 0.15s;
+  }
+
+  /* Chat bubble animations */
+  .animate-chat-bubble-enter {
+    animation: chat-bubble-enter 0.4s ease-out forwards;
+  }
+
+  .animate-chat-slide-up {
+    animation: chat-bubble-slide-up 0.3s ease-out forwards;
+  }
+
+  .animate-typing-pulse {
+    animation: typing-indicator-pulse 1.4s ease-in-out infinite;
+  }
+
+  /* Chat message staggered entrance delays */
+  .chat-delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  .chat-delay-2 {
+    animation-delay: 0.2s;
+  }
+
+  .chat-delay-3 {
+    animation-delay: 0.3s;
+  }
+
+  .chat-delay-4 {
+    animation-delay: 0.4s;
+  }
+
+  .chat-delay-5 {
+    animation-delay: 0.5s;
+  }
+
+  .avatar-inactive-glow {
+    opacity: 0.75;
+    filter: grayscale(1);
+    animation: avatar-inactive-pulse 2.25s ease-in-out infinite;
+  }
+
+
+
+  .avatar-connecting-pulse {
+    filter: grayscale(0) brightness(1.1) contrast(1.1);
+    animation: pulsate 1.5s linear infinite;
+  }
+
+  @keyframes avatar-connected-pulse {
+
+    0%,
+    100% {
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+      box-shadow:
+        0 0 0 0 hsl(185 65% 45% / 0.9),
+        0 0 50px hsl(185 65% 45% / 0.8),
+        0 0 70px hsl(180 70% 45% / 0.6),
+        0 0 90px hsl(185 65% 45% / 0.5);
+    }
+
+    50% {
+      border: 1px solid hsl(0 0% 100%);
+      background: hsl(0 0% 100%) border-box;
+      box-shadow:
+        0 0 0 1px hsl(0 0% 100% / 0.95),
+        0 0 60px hsl(185 65% 45% / 0.9),
+        0 0 80px hsl(180 70% 45% / 0.7),
+        0 0 100px hsl(185 65% 45% / 0.6);
+      transform: scale(1.02);
+    }
+  }
+
+  @media (min-width: 640px) {
+    @keyframes avatar-connected-pulse {
+
+      0%,
+      100% {
+        border: 3px solid transparent;
+        background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+        box-shadow:
+          0 0 0 0 hsl(185 65% 45% / 0.9),
+          0 0 50px hsl(185 65% 45% / 0.8),
+          0 0 70px hsl(180 70% 45% / 0.6),
+          0 0 90px hsl(185 65% 45% / 0.5);
+      }
+
+      50% {
+        border: 3px solid hsl(0 0% 100%);
+        background: hsl(0 0% 100%) border-box;
+        box-shadow:
+          0 0 0 3px hsl(0 0% 100% / 0.95),
+          0 0 60px hsl(185 65% 45% / 0.9),
+          0 0 80px hsl(180 70% 45% / 0.7),
+          0 0 100px hsl(185 65% 45% / 0.6);
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  .avatar-connected-glow {
+    filter: grayscale(0) brightness(1.2) contrast(1.2);
+    background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+    border: 1px solid transparent;
+    animation-name: avatar-connected-pulse !important;
+    animation-duration: 12s !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  @media (min-width: 640px) {
+    .avatar-connected-glow {
+      border: 3px solid transparent;
+    }
+  }
+
+  .chosen-section-highlight {
+    box-shadow:
+      0 0 0 0 hsl(185 65% 45% / 0.9),
+      0 0 50px hsl(185 65% 45% / 0.8),
+      0 0 70px hsl(180 70% 45% / 0.6),
+      0 0 90px hsl(185 65% 45% / 0.5) !important;
+  }
+
+
+
+  /* Custom Scrollbar with Gradient Blue */
+  ::-webkit-scrollbar {
+    width: 0;
+    /* Hide scrollbar gutter by default */
+    height: 0;
+  }
+
+  /* Reveal scrollbar size on activity */
+  body:hover::-webkit-scrollbar,
+  body.scrolling::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+    /* Hidden by default */
+    border-radius: 3px;
+    transition: background 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--sidebar-ring));
+  }
+
+  /* Show scrollbar thumb on scroll or hover */
+  body:hover::-webkit-scrollbar-thumb,
+  body.scrolling::-webkit-scrollbar-thumb {
+    background: hsl(var(--sidebar-ring));
+  }
+
+  /* Firefox */
+  body {
+    scrollbar-width: none;
+    /* Hide by default */
+    scrollbar-color: transparent transparent;
+  }
+
+  body:hover,
+  body.scrolling {
+    scrollbar-width: thin;
+    /* Show when active */
+    scrollbar-color: hsl(var(--sidebar-ring)) transparent;
+  }
+
+  /* Auto-hide scrollbar after inactivity */
+  @keyframes fadeOutScrollbar {
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Chat Glass Squeeze - Responsive */
+  .chat-squeezed #root {
+    max-width: calc(100vw - var(--chat-glass-width));
+    transition: var(--transition-smooth);
+    overflow-x: hidden;
+  }
+
+  /* Below 1280px: Full width chat panel */
+  @media (max-width: 1279px) {
+    :root {
+      --chat-glass-width: 100vw;
+    }
+
+    .chat-squeezed #root {
+      max-width: 100vw;
+      /* No squeeze on mobile/tablet */
+    }
+
+    .chat-squeezed .teleglass-panel {
+      z-index: 60;
+      /* Higher z-index for overlay */
+    }
+  }
+
+  /* Tablet squeeze behavior (only applies at 1280px+) */
+  @media (max-width: 1023px) and (min-width: 768px) {
+    :root {
+      --chat-glass-width: 100vw;
+    }
+
+    .chat-squeezed #root {
+      max-width: 100vw;
+    }
+  }
+
+  /* Mobile: No squeeze, overlay instead */
+  @media (max-width: 767px) {
+    :root {
+      --chat-glass-width: 100vw;
+    }
+
+    .chat-squeezed #root {
+      max-width: 100vw;
+      /* No squeeze on mobile */
+    }
+
+    .chat-squeezed .teleglass-panel {
+      z-index: 60;
+      /* Higher z-index for overlay */
+    }
+  }
+
+  .chat-squeezed {
+    overflow-x: hidden;
+  }
+
+  /* Responsive layout improvements */
+  @media (max-width: 640px) {
+    .container {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    /* Ensure content doesn't get too narrow when chat is open */
+    .chat-squeezed .container {
+      max-width: none;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+
+    /* Adjust navigation height on very small screens */
+    .glass-nav .container>div {
+      min-height: 8rem;
+    }
+
+    /* Make sure buttons are touch-friendly */
+    .md\\:hidden button {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .chat-squeezed .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  /* Prevent horizontal overflow on all screen sizes */
+  body,
+  #root {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Fix background attachment on mobile devices */
+  @media (max-width: 767px) {
+    .min-h-screen>div[style*="background"] {
+      background-attachment: scroll !important;
+    }
+  }
+
+  .chat-messages-container {
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    /* mask: linear-gradient(to bottom, transparent 0px, black 20px, black calc(100% - 20px), transparent 100%);
+    -webkit-mask: linear-gradient(to bottom, transparent 0px, black 20px, black calc(100% - 20px), transparent 100%); */
+  }
+
+  /* Responsive chat message sizing */
+  @media (max-width: 767px) {
+    .chat-messages-container .chat-message-bubble {
+      max-width: 85%;
+      /* Smaller bubbles on mobile */
+      padding: 0.75rem;
+      /* Reduced padding */
+      font-size: 0.875rem;
+      /* Smaller text */
+    }
+
+    .chat-messages-container .chat-avatar {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .chat-messages-container .chat-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+
+  /* Teleglass responsive positioning */
+  @media (max-width: 640px) {
+    :root {
+      --teleglass-top: 1.5rem;
+      --teleglass-right: 0.75rem;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1023px) {
+    :root {
+      --teleglass-top: 1.75rem;
+      --teleglass-right: 1rem;
+    }
+  }
+
+  .chat-messages-container::-webkit-scrollbar {
+    display: none;
+    /* WebKit */
+  }
+
+  /* Hide scrollbar for auto-scroll elements */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+  }
+
+  /* Subsection scroll highlight animation */
+  @keyframes subsection-highlight {
+    0% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0.6);
+      transform: scale(1);
+    }
+
+    50% {
+      box-shadow: 0 0 0 12px hsl(var(--primary) / 0.2), 0 0 24px hsl(var(--primary) / 0.3);
+      transform: scale(1.01);
+    }
+
+    100% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0);
+      transform: scale(1);
+    }
+  }
+
+  /* Page transition animations for smooth section changes */
+  @keyframes page-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes scroll-progress {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+
+  /* Smooth section exit animation */
+  .section-exit {
+    animation: page-fade-out 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Vertical Rhythm Utilities */
+  .stack-y-4>*+* {
+    margin-top: 1rem;
+  }
+
+  .stack-y-6>*+* {
+    margin-top: 1.5rem;
+  }
+
+  .stack-y-8>*+* {
+    margin-top: 2rem;
+  }
+
+  .stack-y-12>*+* {
+    margin-top: 3rem;
+  }
+
+  /* Remove width/max-width overrides to prevent responsive breakpoint shifts */
+
+  /* Volumetric Depth Layers - Space Between Glass and Tele */
+  .glass-depth-1 {
+    transform: translateZ(10px);
+  }
+
+  .glass-depth-2 {
+    transform: translateZ(20px);
+  }
+
+  .glass-depth-3 {
+    transform: translateZ(30px);
+  }
+
+  /* Section Transition - Flying Through Space with Motion Blur and Depth Fade */
+  @keyframes fly-through-space {
+    0% {
+      opacity: 0;
+      transform: translateZ(-200px) scale(0.95);
+      filter: blur(4px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateZ(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Conversational Regeneration Effect */
+  @keyframes regenerate {
+    0% {
+      opacity: 0;
+      transform: scale(0.95) translateY(20px);
+      filter: blur(8px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-regenerate {
+    animation: regenerate 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* ============================================
+   * LIGHTBOARD MODE - GLOBAL THEME
+   * ============================================ */
+
+  body.lightboard-mode {
+    /* Global filter for background elements */
+    --lightboard-glow: 0 0 30px rgba(255, 255, 255, 0.4);
+    --lightboard-glow-strong: 0 0 40px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Force grayscale on all background elements and videos */
+  body.lightboard-mode .bg-layer,
+  body.lightboard-mode .bg-layer *,
+  body.lightboard-mode .hero-background,
+  body.lightboard-mode .background-layer,
+  body.lightboard-mode video,
+  body.lightboard-mode canvas,
+  body.lightboard-mode [class*="background"] {
+    filter: grayscale(1) contrast(1.2) !important;
+  }
+
+  /* Lightboard mode styling for all cards and panels */
+  body.lightboard-mode .glass-subtle,
+  body.lightboard-mode .glass-medium,
+  body.lightboard-mode .glass-strong,
+  body.lightboard-mode .glass-prominent {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(8px) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Exclude elements with no-lightboard class */
+  body.lightboard-mode .no-lightboard,
+  body.lightboard-mode .no-lightboard * {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Lightboard mode text enhancement */
+  body.lightboard-mode h1,
+  body.lightboard-mode h2,
+  body.lightboard-mode h3,
+  body.lightboard-mode h4,
+  body.lightboard-mode .badge {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Lightboard mode borders */
+  body.lightboard-mode [class*="border-"] {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* Lightboard mode buttons and interactive elements */
+  body.lightboard-mode button:not(.no-lightboard),
+  body.lightboard-mode .interactive-indicator {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3) !important;
+  }
+
+  body.lightboard-mode button:hover:not(.no-lightboard),
+  body.lightboard-mode .interactive-indicator:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* Lightboard mode icons */
+  body.lightboard-mode svg,
+  body.lightboard-mode .lucide {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  }
+
+  /* Lightboard mode navigation */
+  body.lightboard-mode nav,
+  body.lightboard-mode header {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Lightboard mode subsections */
+  body.lightboard-mode section,
+  body.lightboard-mode article {
+    transition: all 500ms ease-out;
+  }
+}

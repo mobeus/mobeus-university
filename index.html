@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="canonical" id="canonical-url" href="/" />
+
+  <!-- Primary Meta Tags -->
+  <title>trAIn Co | Your Skills. Your Future. Your First Tech Career.</title>
+  <meta name="title" content="trAIn Co | Saudi Vision 2030 Talent Platform" />
+  <meta name="description"
+    content="Join Saudi Arabia's premier talent platform connecting graduates with leading tech employers. Build your skills, prove your readiness, and start your career journey with Magic - your AI upskilling concierge." />
+  <meta name="author" content="trAIn Co - Backed by PIF" />
+  <meta name="keywords"
+    content="trAIn Co, Saudi Vision 2030, tech careers, upskilling, AI training, job matching, skills assessment, PIF, Saudi Arabia jobs, graduate employment, tech talent, career development" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" id="og-url" content="/" />
+  <meta property="og:title" content="trAIn Co | Your Skills. Your Future. Your First Tech Career." />
+  <meta property="og:description"
+    content="Join Saudi Arabia's premier talent platform connecting graduates with leading tech employers. Build your skills, prove your readiness, and start your career journey with confidence." />
+  <meta property="og:image" id="og-image" content="/og-image.png" />
+  <meta property="og:image:secure_url" id="og-image-secure" content="/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"
+    content="trAIn Co - Your Skills. Your Future. Your First Tech Career. Saudi Vision 2030 talent platform backed by PIF." />
+  <meta property="og:site_name" content="trAIn Co" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" id="twitter-url" content="/" />
+  <meta name="twitter:title" content="trAIn Co | Your Skills. Your Future. Your First Tech Career." />
+  <meta name="twitter:description"
+    content="Join Saudi Arabia's premier talent platform. Build skills, prove readiness, start your tech career. Backed by PIF." />
+  <meta name="twitter:image" id="twitter-image" content="/og-image.png" />
+  <meta name="twitter:image:alt" content="trAIn Co - Saudi Vision 2030 Talent Platform" />
+
+  <!-- iMessage / Apple Messages -->
+  <meta property="al:ios:url" id="ios-url" content="/" />
+  <meta property="al:ios:app_name" content="trAIn Co" />
+  <meta property="al:android:url" id="android-url" content="/" />
+  <meta property="al:android:app_name" content="trAIn Co" />
+  <meta property="al:web:url" id="web-url" content="/" />
+
+  <!-- WhatsApp / Telegram -->
+  <meta property="og:image:url" id="og-image-url" content="/og-image.png" />
+
+  <!-- LinkedIn -->
+  <meta property="og:see_also" id="og-see-also" content="/" />
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="theme-color" content="#0a2a1f" />
+
+  <!-- Dynamic URL Script - Sets absolute URLs based on current domain -->
+  <script>
+    (function setDynamicMetaUrls() {
+      const baseUrl = window.location.origin;
+      const currentUrl = window.location.href;
+      const ogImageUrl = baseUrl + '/og-image.png';
+
+      // Set canonical and URL meta tags
+      const urlElements = ['canonical-url', 'og-url', 'twitter-url', 'ios-url', 'android-url', 'web-url', 'og-see-also'];
+      urlElements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(id === 'canonical-url' ? 'href' : 'content', currentUrl);
+      });
+
+      // Set image meta tags
+      const imageElements = ['og-image', 'og-image-secure', 'twitter-image', 'og-image-url'];
+      imageElements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute('content', ogImageUrl);
+      });
+
+      // Update structured data
+      const ldScript = document.getElementById('ld-json');
+      if (ldScript) {
+        try {
+          const data = JSON.parse(ldScript.textContent);
+          data.url = baseUrl;
+          ldScript.textContent = JSON.stringify(data);
+        } catch (e) { }
+      }
+    })();
+  </script>
+
+  <!-- Structured Data - Organization -->
+  <script type="application/ld+json" id="ld-json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "trAIn Co",
+        "description": "Saudi Arabia's premier talent platform connecting graduates with leading tech employers for Vision 2030",
+        "author": {
+          "@type": "Organization",
+          "name": "trAIn Co",
+          "description": "Backed by PIF - Public Investment Fund of Saudi Arabia"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": "Vision 2030 Talent Development",
+          "description": "AI-powered upskilling platform for Saudi tech careers with skills assessment, job matching, and interview preparation"
+        }
+      }
+    </script>
+  <script>
+    window.UIFRAMEWORK_AUTO_INIT = true;
+    window.UIFrameworkPreInitConfig = {
+      autoConnect: false,
+      autoConnectAvatar: false,
+      autoConnectVoice: false,
+      waitForAvatarBeforeVoice: true,
+      voiceUIVisible: false,
+      muteByDefault: false,
+      enableLightboard: false,
+      lightboard: {
+        enabled: false,
+      },
+    };
+  </script>
+
+  <script>
+    (function registerUIFrameworkSiteFunctions() {
+      const callTeleMethod = (method, args = []) => {
+        const nav =
+          typeof window !== "undefined" ? window.teleNavigation : undefined;
+        const fn =
+          nav && typeof nav[method] === "function" ? nav[method] : undefined;
+        if (fn) {
+          return fn.apply(nav, args);
+        }
+        return undefined;
+      };
+
+      const navigationBridge = {
+        navigateToSection(...args) {
+          if (
+            typeof window !== "undefined" &&
+            typeof window.navigateToSection === "function"
+          ) {
+            return window.navigateToSection(...args);
+          }
+          return callTeleMethod("navigateToSection", args);
+        },
+      };
+
+      const flashBridge = {
+        flashTele() {
+          const nav =
+            typeof window !== "undefined" ? window.teleNavigation : undefined;
+          const fn =
+            nav && typeof nav.flashTele === "function" ? nav.flashTele : undefined;
+          if (fn) {
+            return fn.call(nav);
+          }
+          return callTeleMethod("flashTele");
+        },
+      };
+
+      const emotionBridge = {
+        showEmotion(emotion) {
+          if (typeof emotion !== "string") return undefined;
+          const normalized = emotion.trim().toLowerCase();
+          if (!["gratitude", "happy", "agree", "calm"].includes(normalized))
+            return undefined;
+
+          if (
+            typeof window !== "undefined" &&
+            typeof window.showEmotion === "function"
+          ) {
+            window.showEmotion(normalized);
+            return true;
+          }
+          return undefined;
+        },
+      };
+
+      const carColorBridge = {
+        setCarColor(color) {
+          if (typeof color !== "string") return undefined;
+          const normalized = color.trim().toLowerCase();
+          if (!["white", "red", "black", "silver"].includes(normalized))
+            return undefined;
+
+          if (
+            typeof window !== "undefined" &&
+            typeof window.setCarColor === "function"
+          ) {
+            return window.setCarColor(normalized);
+          }
+
+          const nav =
+            typeof window !== "undefined" ? window.teleNavigation : undefined;
+          if (nav && typeof nav.setCarColor === "function") {
+            return nav.setCarColor(normalized);
+          }
+          return undefined;
+        },
+      };
+
+      const checkCompleteBridge = {
+        checkComplete(identifier) {
+          const validIdentifiers = [
+            "verify-identity",
+            "access-reset-portal",
+            "complete-reset",
+            "confirm-change",
+            "test-new-password",
+          ];
+
+          // Handle array of identifiers
+          if (Array.isArray(identifier)) {
+            const normalized = identifier
+              .map((id) =>
+                typeof id === "string" ? id.trim().toLowerCase() : null
+              )
+              .filter((id) => id && validIdentifiers.includes(id));
+
+            if (normalized.length === 0) return undefined;
+
+            if (
+              typeof window !== "undefined" &&
+              typeof window.checkComplete === "function"
+            ) {
+              window.checkComplete(normalized);
+              return true;
+            }
+            return undefined;
+          }
+
+          // Handle single identifier
+          if (typeof identifier !== "string") return undefined;
+          const normalized = identifier.trim().toLowerCase();
+          if (!validIdentifiers.includes(normalized)) return undefined;
+
+          if (
+            typeof window !== "undefined" &&
+            typeof window.checkComplete === "function"
+          ) {
+            window.checkComplete(normalized);
+            return true;
+          }
+          return undefined;
+        },
+      };
+
+      const evidenceBridge = {
+        dynamicDataLoader(payload) {
+          if (typeof payload !== "string") return undefined;
+
+          if (
+            typeof window !== "undefined" &&
+            typeof window.dynamicDataLoader === "function"
+          ) {
+            window.dynamicDataLoader(payload);
+            return true;
+          }
+          return undefined;
+        },
+      };
+
+      const authBridge = {
+        auther(name) {
+          if (
+            typeof window !== "undefined" &&
+            typeof window.auther === "function"
+          ) {
+            return window.auther(name);
+          }
+          return undefined;
+        },
+        checker(code) {
+          if (
+            typeof window !== "undefined" &&
+            typeof window.checker === "function"
+          ) {
+            return window.checker(code);
+          }
+          return undefined;
+        },
+        getCookieValue() {
+          const cookieName = "Authed";
+          const cookies = document.cookie ? document.cookie.split(";") : [];
+          for (const cookie of cookies) {
+            const trimmed = cookie.trim();
+            if (trimmed.startsWith(`${cookieName}=`)) {
+              return trimmed.substring(cookieName.length + 1);
+            }
+          }
+          return false;
+        }
+      };
+
+      const alertBridge = {
+        showAlert(message) {
+          if (typeof message !== "string" || !message.trim()) {
+            return undefined;
+          }
+          if (
+            typeof window !== "undefined" &&
+            typeof window.alert === "function"
+          ) {
+            const normalized = message.trim();
+            window.alert(normalized);
+            return true;
+          }
+          return undefined;
+        },
+      };
+
+      const externalCallBridge = {
+        async externalCall(question) {
+          if (typeof question !== "string" || !question.trim()) {
+            return undefined;
+          }
+
+          // Navigate to dynamic-evidence section
+          if (typeof window !== "undefined" && typeof window.navigateToSection === "function") {
+            window.navigateToSection('dynamic-evidence');
+          }
+          try {
+            // Make the POST request to match-question API
+            const response = await fetch('https://rfp.mobeus.ai/api/match-question', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                question: question.trim(),
+                topK: 3
+              })
+            });
+
+            if (!response.ok) {
+              console.error('Failed to match question:', response.status);
+              return undefined;
+            }
+
+            const responseData = await response.json();
+
+            // Navigate to dynamic-evidence section
+            if (typeof window !== "undefined" && typeof window.navigateToSection === "function") {
+              window.navigateToSection('dynamic-evidence');
+            }
+
+            // Wait 200ms then call dynamicDataLoader with just the data property
+            setTimeout(() => {
+              if (typeof window !== "undefined" && typeof window.dynamicDataLoader === "function") {
+                // Pass only the data property, not the entire response
+                window.dynamicDataLoader(JSON.stringify(responseData.data));
+              }
+            }, 200);
+
+            return true;
+          } catch (error) {
+            console.error('Error in externalCall:', error);
+            return undefined;
+          }
+        },
+      };
+
+
+      const volumeBridge = {
+        setVolume(level) {
+          if (typeof level !== "number") return undefined;
+          if (
+            typeof window !== "undefined" &&
+            window.teleVolume &&
+            typeof window.teleVolume.setVolume === "function"
+          ) {
+            window.teleVolume.setVolume(level);
+            return true;
+          }
+          return undefined;
+        },
+        adjustVolume(delta) {
+          if (typeof delta !== "number") return undefined;
+          if (
+            typeof window !== "undefined" &&
+            window.teleVolume &&
+            typeof window.teleVolume.adjustVolume === "function"
+          ) {
+            window.teleVolume.adjustVolume(delta);
+            return true;
+          }
+          return undefined;
+        },
+        getVolume() {
+          if (
+            typeof window !== "undefined" &&
+            window.teleVolume &&
+            typeof window.teleVolume.getVolume === "function"
+          ) {
+            return window.teleVolume.getVolume();
+          }
+          return undefined;
+        },
+      };
+
+      const webcamBridge = {
+        startWebcam() {
+          if (
+            typeof window !== "undefined" &&
+            window.UIFramework &&
+            typeof window.UIFramework.startWebcam === "function"
+          ) {
+            window.UIFramework.startWebcam();
+            return true;
+          }
+          return undefined;
+        },
+        stopWebcam() {
+          if (
+            typeof window !== "undefined" &&
+            window.UIFramework &&
+            typeof window.UIFramework.stopWebcam === "function"
+          ) {
+            window.UIFramework.stopWebcam();
+            return true;
+          }
+          return undefined;
+        },
+      };
+
+      const zoomBridge = {
+        zoomLevel(zoom) {
+          const val = parseInt(zoom);
+          if (![-1, 0, 1].includes(val)) return undefined;
+
+          const rootElement = document.getElementById("root");
+          if (!rootElement) return undefined;
+
+          let currentZoom = parseFloat(rootElement.style.zoom) || 1;
+
+          if (val === -1) {
+            currentZoom -= 0.1;
+          } else if (val === 1) {
+            currentZoom += 0.1;
+          } else if (val === 0) {
+            currentZoom = 1;
+          }
+
+          // Limit minimum zoom to avoid visibility issues
+          if (currentZoom < 0.1) currentZoom = 0.1;
+
+          rootElement.style.zoom = currentZoom;
+          return true;
+        },
+      };
+
+      const greyscaleBridge = {
+        toggleGreyscale(enable) {
+          let shouldEnable = enable;
+          const html = document.documentElement;
+
+          // If argument is string "true"/"false" (from agent sometimes) handle that
+          if (typeof enable === 'string') {
+            shouldEnable = enable.toLowerCase() === 'true';
+          }
+
+          // If boolean/parsed is undefined, toggle
+          if (shouldEnable === undefined || shouldEnable === null) {
+            shouldEnable = html.style.filter !== "grayscale(100%)";
+          }
+
+          if (shouldEnable) {
+            html.style.filter = "grayscale(100%)";
+            return "Greyscale ON";
+          } else {
+            html.style.filter = "";
+            return "Greyscale OFF";
+          }
+        }
+      };
+
+      const existingRegistry =
+        typeof window !== "undefined" &&
+          window.UIFrameworkSiteFunctions &&
+          typeof window.UIFrameworkSiteFunctions === "object"
+          ? window.UIFrameworkSiteFunctions
+          : {};
+
+      window.UIFrameworkSiteFunctions = {
+        ...existingRegistry,
+        ...navigationBridge,
+        ...flashBridge,
+        ...emotionBridge,
+        ...carColorBridge,
+        ...checkCompleteBridge,
+        ...evidenceBridge,
+        ...alertBridge,
+        ...authBridge,
+        ...externalCallBridge,
+        ...volumeBridge,
+        ...webcamBridge,
+        ...zoomBridge,
+        ...greyscaleBridge,
+      };
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.showAlert !== "function"
+      ) {
+        window.showAlert = (message) => alertBridge.showAlert(message);
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.auther !== "function"
+      ) {
+        window.auther = (name) => authBridge.auther(name);
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.checker !== "function"
+      ) {
+        window.checker = (code) => authBridge.checker(code);
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.getCookieValue !== "function"
+      ) {
+        window.getCookieValue = () => authBridge.getCookieValue();
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.externalCall !== "function"
+      ) {
+        window.externalCall = (question) => externalCallBridge.externalCall(question);
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.flashTele !== "function"
+      ) {
+        window.flashTele = () => flashBridge.flashTele();
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.toggleGreyscale !== "function"
+      ) {
+        window.toggleGreyscale = (enable) => greyscaleBridge.toggleGreyscale(enable);
+      }
+
+      try {
+        window.dispatchEvent(
+          new CustomEvent("UIFrameworkSiteFunctionsReady", {
+            detail: { registry: window.UIFrameworkSiteFunctions },
+          })
+        );
+      } catch (error) {
+        // Silent error handling for production
+      }
+    })();
+  </script>
+  <!-- UI Framework bundle (local during dev, hosted in production) -->
+  <script type="module" src="https://telecdn.s3.us-east-2.amazonaws.com/js/ui-framework.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
