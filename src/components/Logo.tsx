@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { default as traincoLogo } from '@/assets/trainco-logo.png';
+import { default as fiservLogo } from '@/assets/fiserv-logo.png';
 
 interface LogoProps {
     onClick?: () => void;
@@ -25,8 +25,8 @@ export const Logo: React.FC<LogoProps> = ({ onClick, className = '' }) => {
             disabled={!onClick}
         >
             <img
-                src={traincoLogo}
-                alt="Trainco Logo"
+                src={fiservLogo}
+                alt="Fiserv DMA"
                 className="no-lightboard h-[27px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
                 style={{ aspectRatio: 'auto' }}
             />

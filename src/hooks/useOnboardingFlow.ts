@@ -7,7 +7,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { OnboardingData } from '@/types/onboarding';
 import { ONBOARDING_FLOW } from '@/data/onboardingFlow';
 
-const LOCAL_STORAGE_KEY = 'trainco_onboarding_complete';
+const LOCAL_STORAGE_KEY = 'fiserv_dma_onboarding_complete';
 
 interface UseOnboardingFlowReturn {
     // State

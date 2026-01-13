@@ -30,88 +30,61 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 import { StaticJourneyNav } from "@/components/StaticJourneyNav";
 import { useOnboardingFlow } from "@/hooks/useOnboardingFlow";
-import { exposeVisitorRoleAPI } from "@/hooks/useVisitorRole";
 
 
-// Welcome section - Vision 2030 trAIN Co Concierge Content
+// Welcome section - Fiserv DMA Enterprise Sales Platform
 const WELCOME_VARIANTS = [
   {
-    badge: "YOUR CAREER COACH",
-    title: "Hi, I'm Your AI Career Coach",
-    subtitle: "I'll help you discover opportunities, close skill gaps, and land the right role—every step of the way",
+    badge: "FISERV DMA",
+    title: "Digital Merchant Acquisition Platform",
+    subtitle: "Guide your bank through the complete merchant lifecycle—from onboarding to long-term relationship management",
     generativeSubsections: [
       {
-        id: "welcome-carousel",
-        templateId: "ActionCarousel",
+        id: "welcome-grid",
+        templateId: "FeatureGrid",
         props: {
-          cards: [
+          columns: 4,
+          showStats: true,
+          features: [
             {
-              imageUrl: "/assets/welcome/profile-building.png",
-              title: "Build Skills Twin",
-              subtitle: "Share your skills, experience, and career goals—I'll capture everything and build your AI-powered Skills Twin profile",
-              icon: "Sparkles",
-              actionPhrase: "I want to build my profile and tell you about myself",
-              buttons: [
-                { label: "Start Profile", icon: "Sparkles", actionPhrase: "Help me build my skills profile" },
-                { label: "Upload Resume", icon: "FileText", actionPhrase: "I want to upload my resume" },
-                { label: "Add Skills", icon: "Target", actionPhrase: "Help me add my skills" }
-              ]
+              id: "f1",
+              title: "Merchant Onboarding",
+              subtitle: "Compliance & KYC",
+              description: "Digital-first application with automated underwriting and real-time identity verification.",
+              icon: "file",
+              stat: "3 days",
+              statLabel: "Avg. time to live",
+              actionPhrase: "Show me merchant onboarding"
             },
             {
-              imageUrl: "/assets/welcome/job-exploration.png",
-              title: "Explore Jobs",
-              subtitle: "Find roles that fit your skills and aspirations—browse Vision 2030 opportunities matched to your experience level",
-              icon: "Briefcase",
-              actionPhrase: "Show me job opportunities that match my skills and experience",
-              buttons: [
-                { label: "Browse Jobs", icon: "Briefcase", actionPhrase: "Show me available jobs" },
-                { label: "My Matches", icon: "Target", actionPhrase: "Show me my best job matches" },
-                { label: "Save Job", icon: "BookOpen", actionPhrase: "How do I save jobs I like?" }
-              ]
+              id: "f2",
+              title: "Transaction Operations",
+              subtitle: "Daily processing",
+              description: "Real-time transaction visibility, card type analysis, and self-service merchant portals.",
+              icon: "zap",
+              stat: "2 sec",
+              statLabel: "Transaction latency",
+              actionPhrase: "Show me transaction operations"
             },
             {
-              imageUrl: "/assets/welcome/upskill-training.png",
-              title: "Upskill & Train",
-              subtitle: "Identify courses to close your skill gaps—access certifications, training programs, and learning paths aligned to your goals",
-              icon: "GraduationCap",
-              actionPhrase: "Show me training courses and certifications to advance my career",
-              buttons: [
-                { label: "Browse Courses", icon: "GraduationCap", actionPhrase: "Show me available training courses" },
-                { label: "My Skill Gaps", icon: "Target", actionPhrase: "What skills do I need to improve?" },
-                { label: "Get Certified", icon: "Award", actionPhrase: "How can I get certified?" }
-              ]
+              id: "f3",
+              title: "Settlement & Fees",
+              subtitle: "Financial clarity",
+              description: "Itemized fee transparency, gross-to-net breakdowns, and automated reconciliation.",
+              icon: "dollar",
+              stat: "95%",
+              statLabel: "Auto-processed",
+              actionPhrase: "Show me settlement and fees"
             },
             {
-              title: "LEAP 2026",
-              subtitle: "The world's largest tech event — Network with global leaders and discover career opportunities",
-              icon: "Calendar",
-              actionPhrase: "Tell me about the LEAP conference in Riyadh",
-              backgroundColor: "#0d4d4d",
-              isEvent: true,
-              eventDate: "April 13–16, 2026",
-              eventLocation: "Riyadh, Saudi Arabia",
-              registerAction: "Register me for LEAP 2026 in Riyadh"
-            },
-            {
-              imageUrl: "/assets/welcome/career_interview.png",
-              title: "Interview Prep",
-              subtitle: "Practice with AI-powered mock interviews, get personalized feedback, and build confidence for your upcoming interviews",
-              icon: "MessageSquare",
-              actionPhrase: "Help me prepare for my interviews",
-              buttons: [
-                { label: "Mock Interview", icon: "MessageSquare", actionPhrase: "Start a mock interview" },
-                { label: "Common Questions", icon: "BookOpen", actionPhrase: "Show me common interview questions" },
-                { label: "Tips & Tricks", icon: "Zap", actionPhrase: "Give me interview tips" }
-              ]
-            },
-            {
-              title: "AI Educator",
-              subtitle: "NEOM Academy seeks passionate AI trainers. Lead workshops, mentor talent, and shape the future of Saudi's tech workforce.",
-              icon: "GraduationCap",
-              actionPhrase: "Tell me about the AI Educator position at NEOM",
-              backgroundColor: "#134e4a",
-              isJobMatch: true,
-              matchPercent: 92
+              id: "f4",
+              title: "Merchant Relationships",
+              subtitle: "Long-term value",
+              description: "Historical trends, proactive alerts, and tools that position your bank as a financial partner.",
+              icon: "heart",
+              stat: "22%",
+              statLabel: "Higher retention",
+              actionPhrase: "Show me merchant relationship tools"
             }
           ]
         }
@@ -122,7 +95,7 @@ const WELCOME_VARIANTS = [
 
 
 
-const STORAGE_KEY = "pharma-access";
+const STORAGE_KEY = "fiserv-access";
 const API_BASE_URL = (import.meta.env.VITE_PROMPT_TOOL_API_URL || "https://prompt.mobeus.ai").replace(/\/$/, "");
 
 // SUBSECTION-ONLY ARCHITECTURE: "Welcome" is now a generative template too.
@@ -552,15 +525,8 @@ const Index = () => {
   useEffect(() => {
     (window as any).showEmotion = showEmotion;
 
-    // Expose visitor role API for Tele to switch between candidate/recruiter modes
-    exposeVisitorRoleAPI();
-
     return () => {
       delete (window as any).showEmotion;
-      delete (window as any).switchToRecruiter;
-      delete (window as any).switchToCandidate;
-      delete (window as any).getVisitorRole;
-      delete (window as any).isRecruiterMode;
     };
   }, []);
 
@@ -887,38 +853,6 @@ const Index = () => {
             subsectionIds: finalSubsectionIds, // Legacy, kept for fallback
             generativeSubsections: generativeContent // New payload
           });
-
-          // ============================================
-          // AUTO-DETECT ROLE FROM TEMPLATE IDs
-          // ============================================
-          // If Tele renders a recruiter-specific template, switch navigation to recruiter mode
-          // IMPORTANT: Keep this in sync with templateRegistry.ts Recruiter Experience section (8 templates)
-          const RECRUITER_TEMPLATES = [
-            'RecruiterDashboard',
-            'CandidatePipeline',
-            'AnalyticsDashboard',
-            'RecruiterAnalytics',  // Analytics with KPIs, job performance
-            'TasksList',
-            'RecruiterJobDetail',
-            'RecruiterTaskHub',    // Task management for funnel
-            'OfferPipeline'        // Offer tracking
-          ];
-          const templateIds = generativeContent.map((sub: any) => sub.templateId);
-          const hasRecruiterTemplate = templateIds.some((id: string) => RECRUITER_TEMPLATES.includes(id));
-
-          if (hasRecruiterTemplate) {
-            console.log('[Navigation] Detected recruiter template, switching to recruiter mode');
-            if (typeof (window as any).switchToRecruiter === 'function') {
-              (window as any).switchToRecruiter();
-            }
-          }
-          // Check if it's explicitly candidate content (ActionCarousel on welcome, etc.)
-          else if (badge === "YOUR CAREER COACH" || templateIds.includes('ActionCarousel')) {
-            console.log('[Navigation] Detected candidate template, switching to candidate mode');
-            if (typeof (window as any).switchToCandidate === 'function') {
-              (window as any).switchToCandidate();
-            }
-          }
         } else {
           setDynamicSectionData(null);
         }
@@ -1394,7 +1328,7 @@ const Index = () => {
       <RippleEffect />
       <GitVersionIndicator />
       {/* Dynamic SEO based on active section - TeleGlass Platform */}
-      <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.starter)} />
+      <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.welcome)} />
 
       {/* Fixed Background Layer - Portaled to body for absolute stability */}
       <BackgroundLayer image={imageBackground} />

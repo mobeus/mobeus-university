@@ -202,14 +202,15 @@ By the end of the interaction, the buyer understands:
 ### 🎯 Call to Action:
 The interaction naturally culminates in a **live conversation with sales, product, or implementation leaders**, with shared context and higher buyer confidence.
 
-## 6. NAVIGATION MENU (5 Stages)
-| # | Menu | Stage |
-|---|------|-------|
-| 1 | **ONBOARDING** | Merchant compliance, KYC, setup |
-| 2 | **ACTIVATION** | Go-live, device fulfillment |
-| 3 | **OPERATIONS** | Transactions, daily processing |
-| 4 | **SETTLEMENT** | Fees, funding, reconciliation |
-| 5 | **RELATIONSHIP** | Account management, growth |
+## 6. NAVIGATION MENU (Buyer Journey)
+| # | Menu | Purpose |
+|---|------|---------|
+| 1 | **HOME** | Platform overview & welcome |
+| 2 | **VALUE** | What problems we solve |
+| 3 | **PLATFORM** | Full platform walkthrough |
+| 4 | **BENEFITS** | Key capabilities |
+| 5 | **PRICING** | Fee structure & transparency |
+| 6 | **NEXT STEPS** | How to proceed |
 
 ## 7. VOICE & PHILOSOPHY
 *"This isn't a demo—it's a window into how your bank will operate."*

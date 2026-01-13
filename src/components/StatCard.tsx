@@ -12,8 +12,8 @@ interface StatCardProps {
 }
 
 const StatCard = ({ icon: Icon, stat, title, description, className = "" }: StatCardProps) => {
-  // Executive-inspired border colors (muted and transparent)
-  const pharmaColors: Record<string, string> = {
+  // Themed border colors (muted and transparent)
+  const themeColors: Record<string, string> = {
     'A': 'bg-primary/10 border-primary/30',
     'B': 'bg-secondary/10 border-secondary/30',
     'C': 'bg-tertiary/10 border-tertiary/30',
@@ -22,7 +22,7 @@ const StatCard = ({ icon: Icon, stat, title, description, className = "" }: Stat
     'F': 'bg-tertiary/10 border-tertiary/30',
   };
 
-  const colorClass = pharmaColors[stat] || 'bg-primary/10 border-primary/30';
+  const colorClass = themeColors[stat] || 'bg-primary/10 border-primary/30';
 
   return (
     <MicroInteraction type="subtle">

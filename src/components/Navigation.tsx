@@ -1,13 +1,12 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as traincoLogo } from "@/assets/trainco-logo.png";
+import { default as fiservLogo } from "@/assets/fiserv-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
 import { SubsectionMetadata } from "@/types/subsection";
 import { useShadowEffects } from "@/contexts/ShadowEffectsContext";
-import { useVisitorRole } from "@/hooks/useVisitorRole";
 
 
 type NavigationProps = {
@@ -16,16 +15,10 @@ type NavigationProps = {
   onSectionChange: (section: string, subSection?: string | string[] | SubsectionMetadata[] | null) => void;
 };
 
-// SUBSECTION-ONLY ARCHITECTURE: No more section ID parsing
-
 const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { playUniversalSound } = useSound();
-  const { shadowIntensity, isScrolled } = useShadowEffects();
-  const { isRecruiter, role } = useVisitorRole();
-
-  // Debug logging for role state
-  console.log('[Navigation] Current role:', role, 'isRecruiter:', isRecruiter);
+  const { isScrolled } = useShadowEffects();
 
   // Dynamically measure nav height and update CSS variable
   useLayoutEffect(() => {
@@ -42,9 +35,10 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // CANDIDATE NAVIGATION (8 items - yellow/black)
+  // FISERV DMA BUYER JOURNEY NAVIGATION
+  // Guides enterprise bank buyers through platform discovery
   // ============================================
-  const candidateNavItems: Array<{
+  const navItems: Array<{
     id: string;
     label: string;
     teleQuery: string;
@@ -52,109 +46,39 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'home',
         label: 'HOME',
-        teleQuery: '(M) Show me my welcome dashboard and next steps with a short response'
+        teleQuery: '(M) Show platform overview'
       },
       {
-        id: 'twin',
-        label: 'MY TWIN',
-        teleQuery: '(M) Show me where I am with my Skills Twin - my profile completeness and verified credentials with a short response'
+        id: 'value',
+        label: 'VALUE',
+        teleQuery: '(M) What problems does this solve?'
       },
       {
-        id: 'skills',
-        label: 'SKILLS',
-        teleQuery: '(M) Show me where I am with my skills - my skill gaps, assessments, and tier level with a short response'
+        id: 'platform',
+        label: 'PLATFORM',
+        teleQuery: '(M) Show me the full onboarding journey'
       },
       {
-        id: 'upskill',
-        label: 'TRAIN',
-        teleQuery: '(M) Show me where I am with upskilling - courses in progress, certifications, and recommendations with a short response'
+        id: 'benefits',
+        label: 'BENEFITS',
+        teleQuery: '(M) What are the main benefits?'
       },
       {
-        id: 'match',
-        label: 'MATCH',
-        teleQuery: '(M) Show me where I am with job matching - my best matches and compatibility scores with a short response'
+        id: 'pricing',
+        label: 'PRICING',
+        teleQuery: '(M) Show me the fee structure'
       },
       {
-        id: 'apply',
-        label: 'APPLY',
-        teleQuery: '(M) Show me where I am with applications - jobs I applied to and their status with a short response'
-      },
-      {
-        id: 'interview',
-        label: 'INTERVIEW',
-        teleQuery: '(M) Show me where I am with interviews - upcoming dates, prep tips, and next steps with a short response'
-      },
-      {
-        id: 'accept',
-        label: 'ACCEPT',
-        teleQuery: '(M) Show me where I am with offers - any offers received and next steps to accept with a short response'
+        id: 'next',
+        label: 'NEXT STEPS',
+        teleQuery: '(M) What\'s next? How do we proceed?'
       }
     ];
 
-  // ============================================
-  // RECRUITER NAVIGATION (7 items - green/white)
-  // ============================================
-  const recruiterNavItems: Array<{
-    id: string;
-    label: string;
-    teleQuery: string;
-  }> = [
-      {
-        id: 'home',
-        label: 'HOME',
-        teleQuery: '(M) Show me my recruiter dashboard with key metrics and quick actions'
-      },
-      {
-        id: 'postings',
-        label: 'POSTINGS',
-        teleQuery: '(M) Show me all my job postings and their status'
-      },
-      {
-        id: 'candidates',
-        label: 'CANDIDATES',
-        teleQuery: '(M) Show me all candidate applications across my jobs'
-      },
-      {
-        id: 'interviews',
-        label: 'INTERVIEWS',
-        teleQuery: '(M) Show me scheduled interviews with candidates'
-      },
-      {
-        id: 'offers',
-        label: 'OFFERS',
-        teleQuery: '(M) Show me pending offers and acceptance status'
-      },
-      {
-        id: 'onboarding',
-        label: 'ONBOARDING',
-        teleQuery: '(M) Show me new hire onboarding status and tasks'
-      },
-      {
-        id: 'analytics',
-        label: 'ANALYTICS',
-        teleQuery: '(M) Show me hiring analytics and pipeline metrics'
-      }
-    ];
-
-  // Select navigation items based on role
-  const navItems = isRecruiter ? recruiterNavItems : candidateNavItems;
-
-  // ============================================
-  // ROLE-BASED STYLING
-  // ============================================
-  // Candidate: Yellow buttons with black text (primary color)
-  // Recruiter: Green buttons with black text (emerald-500)
-  const buttonBaseStyles = isRecruiter
-    ? "bg-emerald-500 border-emerald-500 text-black hover:bg-emerald-400 hover:border-emerald-400"
-    : "bg-primary border-primary text-black hover:bg-primary/80 hover:border-primary/80";
-
-  const glowColor = isRecruiter
-    ? "from-emerald-500/20 via-emerald-500/10"
-    : "from-primary/20 via-primary/10";
-
-  const edgeGlowColor = isRecruiter
-    ? "via-emerald-500/30"
-    : "via-primary/30";
+  // Emerald styling for Fiserv DMA
+  const buttonBaseStyles = "bg-emerald-500 border-emerald-500 text-black hover:bg-emerald-400 hover:border-emerald-400";
+  const glowColor = "from-emerald-500/20 via-emerald-500/10";
+  const edgeGlowColor = "via-emerald-500/30";
 
   return (
     <nav
@@ -166,7 +90,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       }}
     >
       <div className="relative px-4 md:px-8">
-        {/* Top edge glow - color changes based on role */}
+        {/* Top edge glow */}
         {isScrolled && (
           <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${edgeGlowColor} to-transparent`} />
         )}
@@ -174,17 +98,17 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between h-20 sm:h-24 lg:h-28">
             <div className="flex items-center gap-6">
-              {/* Logo - branding only, no navigation */}
+              {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={traincoLogo}
-                  alt="trAIN Co Logo"
+                  src={fiservLogo}
+                  alt="Fiserv DMA"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />
               </div>
 
-              {/* Desktop Navigation - Floating glass buttons */}
+              {/* Desktop Navigation */}
               <div className="hidden xl:flex items-end space-x-3">
                 {navItems.map((item) => (
                   <Button
@@ -193,11 +117,9 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                       handleAcknowledgment(item.id);
                       playUniversalSound();
 
-                      // HOME button goes to welcome screen
                       if (item.id === 'home') {
                         onSectionChange('welcome', null);
                       } else {
-                        // Send the teleQuery to Tele
                         sendToTele(item.teleQuery);
                       }
                     }}
@@ -212,14 +134,13 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     ${buttonBaseStyles}`}
                   >
                     <span className="relative z-10">{item.label}</span>
-                    {/* Glow effect on hover */}
                     <div className={`absolute inset-0 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${glowColor} to-transparent blur-xl`} />
                   </Button>
                 ))}
               </div>
             </div>
 
-            {/* Right side: Mobile menu button */}
+            {/* Mobile menu button */}
             {!isChatGlassOpen && (
               <div className="flex items-center">
                 <button
@@ -248,7 +169,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         />
       )}
 
-      {/* Mobile Slide-in Menu - Volumetric Glass Panel */}
+      {/* Mobile Slide-in Menu */}
       <div
         style={{
           zIndex: 50,
@@ -259,13 +180,9 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
           xl:hidden transform transition-all duration-500 ease-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
       >
-        {/* Top edge glow - color changes based on role */}
-        <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${isRecruiter ? 'from-emerald-500/50 via-emerald-500/30' : 'from-primary/50 via-primary/30'} to-transparent`} />
-        {/* Menu Header */}
+        <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-emerald-500/50 via-emerald-500/30 to-transparent`} />
         <div className="relative flex items-center justify-between p-6 border-b border-white/10">
-          <h2 className="text-lg font-bold text-white">
-            Navigate
-          </h2>
+          <h2 className="text-lg font-bold text-white">Navigate</h2>
           <button
             onClick={() => {
               handleAcknowledgment('nav-menu-close');
@@ -280,7 +197,6 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
           </button>
         </div>
 
-        {/* Menu Items - Floating Glass Buttons */}
         <div className="flex flex-col p-6 space-y-3">
           {navItems.map((item, index) => (
             <Button
@@ -289,11 +205,9 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                 handleAcknowledgment(item.id);
                 playUniversalSound();
 
-                // HOME button goes to welcome screen
                 if (item.id === 'home') {
                   onSectionChange('welcome', null);
                 } else {
-                  // Send the teleQuery to Tele
                   sendToTele(item.teleQuery);
                 }
                 setIsMenuOpen(false);
@@ -311,14 +225,11 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               style={{ animationDelay: `${index * 0.05}s`, animationFillMode: 'forwards' }}
             >
               <span className="relative z-10">{item.label}</span>
-              {/* Glow on hover */}
               <div className={`absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${glowColor} to-transparent blur-xl`} />
             </Button>
           ))}
         </div>
       </div>
-
-      {/* Fixed TeleglassSection - positioning handled in component */}
     </nav>
   );
 };
