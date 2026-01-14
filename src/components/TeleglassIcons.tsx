@@ -143,11 +143,11 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
       {avatarState === 'off' && showConnectButton && (
         <Button
           onClick={onAvatarClick}
-          className="bg-white text-black hover:bg-white/90 shadow-soft hover:shadow-card transition-all duration-300 font-semibold uppercase flex items-center gap-2"
-          size="sm"
+          className="bg-[#ff6600] text-white hover:bg-[#ff6600]/90 shadow-soft hover:shadow-card transition-all duration-300 font-bold uppercase text-base tracking-wide flex items-center gap-2"
+          size="default"
         >
           Talk to Tele
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-5 h-5" />
         </Button>
       )}
 
