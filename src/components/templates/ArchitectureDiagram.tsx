@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { Cloud, Database, Shield, Zap, Server, Globe, ArrowRight, ArrowLeftRight } from "lucide-react";
+import { Cloud, Database, Shield, Zap, Server, Globe, ArrowUpDown } from "lucide-react";
 
 interface ArchitectureComponent {
     id: string;
@@ -58,8 +58,8 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({
             {/* Header */}
             {title && (
                 <div className="text-center mb-8">
-                    <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-                    {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
+                    <h2 className="text-xl font-bold text-white">{title}</h2>
+                    {subtitle && <p className="text-white/70 mt-1">{subtitle}</p>}
                 </div>
             )}
 
@@ -68,32 +68,32 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({
                 {layers.map((layer, layerIdx) => (
                     <div key={layer.id}>
                         {/* Layer Label */}
-                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-2">
+                        <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2 pl-2">
                             {layer.name}
                         </div>
 
                         {/* Components */}
-                        <div className="flex justify-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                        <div className="flex justify-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
                             {layer.components.map((component) => {
                                 const IconComponent = iconMap[component.icon || "server"] || Server;
                                 return (
                                     <div
                                         key={component.id}
                                         className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all min-w-[120px] ${component.highlight
-                                                ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-white shadow-lg"
-                                                : "border-gray-200 bg-white"
+                                                ? "border-[#FF6600] bg-[#FF6600]/10 shadow-lg"
+                                                : "border-white/20 bg-white/10"
                                             }`}
                                     >
-                                        <div className={`p-3 rounded-lg ${component.highlight ? "bg-cyan-100" : "bg-gray-100"
+                                        <div className={`p-3 rounded-lg ${component.highlight ? "bg-[#FF6600]/20" : "bg-white/10"
                                             }`}>
-                                            <IconComponent className={`w-6 h-6 ${component.highlight ? "text-cyan-600" : "text-gray-600"
+                                            <IconComponent className={`w-6 h-6 ${component.highlight ? "text-[#FF6600]" : "text-white/70"
                                                 }`} />
                                         </div>
-                                        <p className="font-medium text-gray-900 mt-2 text-center text-sm">
+                                        <p className="font-medium text-white mt-2 text-center text-sm">
                                             {component.name}
                                         </p>
                                         {component.description && (
-                                            <p className="text-xs text-gray-500 mt-1 text-center">
+                                            <p className="text-xs text-white/50 mt-1 text-center">
                                                 {component.description}
                                             </p>
                                         )}
@@ -106,9 +106,9 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({
                         {layerIdx < layers.length - 1 && (
                             <div className="flex justify-center py-3">
                                 <div className="flex flex-col items-center">
-                                    <div className="w-0.5 h-4 bg-gray-300" />
-                                    <ArrowLeftRight className="w-5 h-5 text-cyan-500 my-1" />
-                                    <div className="w-0.5 h-4 bg-gray-300" />
+                                    <div className="w-0.5 h-4 bg-white/30" />
+                                    <ArrowUpDown className="w-5 h-5 text-[#FF6600] my-1" />
+                                    <div className="w-0.5 h-4 bg-white/30" />
                                 </div>
                             </div>
                         )}
@@ -138,14 +138,6 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({
                         Auto-Scaling
                     </div>
                     <p className="text-xs text-orange-600 mt-1">Handles any volume</p>
-                </div>
-            </div>
-
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <div className="w-3 h-3 rounded-full bg-orange-400" />
-                    Powered by Fiserv
                 </div>
             </div>
         </div>

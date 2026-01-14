@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
-import { ChevronLeft, ChevronRight, MessageSquare, Printer, ChevronDown } from "lucide-react";
+import { ChevronLeft, ChevronRight, Building2, CreditCard, Wallet, ArrowUpRight, Receipt, FileText } from "lucide-react";
 
 interface OfferCard {
     id: string;
@@ -37,29 +37,52 @@ interface BankPortalMockupProps {
 }
 
 /**
- * BankPortalMockup Template
+ * BankPortalMockup Template - Glassmorphism Redesign
  * 
- * Simulates a bank's digital portal with embedded Offer Engine carousel.
- * Demonstrates how offers seamlessly integrate into existing banking interfaces.
- * 
- * Key Messages:
- * - One API integration
- * - Adopts bank's style and aesthetics
- * - Contextually aware offer placement
- * - Non-intrusive, homogenous experience
+ * White frosted glass aesthetic with pill-shaped buttons.
+ * Mobile-first responsive design.
  */
 export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
-    bankName = "First Financial Bank",
-    userName = "John Doe",
+    bankName = "Modern Bank Co",
+    userName = "John",
     accounts = [
-        { id: "1", name: "Open Checking", availableBalance: "$5,289.19", currentBalance: "$5,289.19" },
-        { id: "2", name: "Open Savings", availableBalance: "$10,320.29", currentBalance: "$10,320.29" },
-        { id: "3", name: "Secondary Savings", availableBalance: "$1,800.19", currentBalance: "$1,800.19" },
+        { id: "1", name: "Business Checking", availableBalance: "$15,289.19", currentBalance: "$15,289.19" },
+        { id: "2", name: "Business Savings", availableBalance: "$42,320.29", currentBalance: "$42,320.29" },
     ],
-    offers = [],
+    offers = [
+        {
+            id: "1",
+            title: "Clover POS System",
+            subtitle: "POINT OF SALE",
+            description: "A powerful POS system optimized for your business. $49-$1,349 depending on device.",
+            imageUrl: "/offers/clover-pos.png",
+            ctaLabel: "Apply Now",
+            actionPhrase: "Show me step 1",
+            badge: "RECOMMENDED"
+        },
+        {
+            id: "2",
+            title: "Clover Capital",
+            subtitle: "BUSINESS FUNDING",
+            description: "Get fast access to working capital based on your sales history. Up to $500K available.",
+            imageUrl: "/offers/clover-capital.png",
+            ctaLabel: "Learn More",
+            actionPhrase: "Tell me about Clover Capital",
+            badge: "POPULAR"
+        },
+        {
+            id: "3",
+            title: "Business Credit Line",
+            subtitle: "FLEXIBLE CREDIT",
+            description: "Revolving credit line for your business needs. Rates as low as 8.99% APR.",
+            imageUrl: "/offers/credit-line.png",
+            ctaLabel: "Check Rates",
+            actionPhrase: "Show me credit line options"
+        }
+    ],
     autoRotate = true,
     rotateInterval = 5000,
-    consentText = "By checking this box I consent to shared data with Fiserv",
+    consentText = "I consent to share data with Fiserv for this application",
     animationClass = "",
     isExiting = false,
 }) => {
@@ -67,14 +90,11 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
     const [isConsentChecked, setIsConsentChecked] = useState(false);
     const { playClick } = useSound();
 
-    // Auto-rotate offers (safely handles empty offers)
     useEffect(() => {
         if (!autoRotate || !offers || offers.length <= 1) return;
-
         const timer = setInterval(() => {
             setCurrentOfferIndex((prev) => (prev + 1) % offers.length);
         }, rotateInterval);
-
         return () => clearInterval(timer);
     }, [autoRotate, rotateInterval, offers]);
 
@@ -90,21 +110,19 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
         setCurrentOfferIndex((prev) => (prev + 1) % offers.length);
     }, [offers, playClick]);
 
-    const handleOfferClick = useCallback((offer: OfferCard) => {
+    const handleOfferClick = useCallback(() => {
         playClick();
-        sendToTele(offer.actionPhrase);
+        // All offers lead to step 1 of onboarding
+        sendToTele("Show me step 1");
     }, [playClick]);
 
     const handleAccountClick = useCallback((account: AccountRow) => {
         playClick();
-        if (account.actionPhrase) {
-            sendToTele(account.actionPhrase);
-        }
+        if (account.actionPhrase) sendToTele(account.actionPhrase);
     }, [playClick]);
 
-    // Early return if no offers - prevents crash and renders nothing
     if (!offers || offers.length === 0) {
-        console.warn('[BankPortalMockup] No offers provided, skipping render');
+        console.warn('[BankPortalMockup] No offers provided');
         return null;
     }
 
@@ -112,201 +130,262 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
 
     return (
         <div className={`w-full ${animationClass} ${isExiting ? "opacity-50" : ""}`}>
-            {/* Browser Chrome Simulation */}
-            <div className="bg-gray-100 rounded-t-xl border border-gray-300 overflow-hidden shadow-xl">
-                {/* Top Bar - Bank Header */}
-                <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-                    {/* Bank Logo */}
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center">
-                            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z" />
-                            </svg>
+            {/* Glassmorphism Container */}
+            <div className="bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl overflow-hidden">
+
+                {/* Header - Frosted Glass */}
+                <div className="bg-white/40 backdrop-blur-md px-4 sm:px-6 py-4 border-b border-white/20">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                            </div>
+                            <div className="hidden sm:block">
+                                <p className="text-gray-800 font-semibold text-lg">{bankName}</p>
+                                <p className="text-gray-600 text-sm">Welcome back, {userName}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Navigation Tabs */}
-                    <nav className="flex items-center gap-8">
-                        <button className="text-cyan-600 font-medium border-b-2 border-cyan-600 pb-2 px-1">
-                            Accounts
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800 pb-2 px-1">
-                            Transfers
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800 pb-2 px-1">
-                            Pay Bills
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800 pb-2 px-1">
-                            Manage Money
-                        </button>
-                    </nav>
-
-                    {/* User Actions */}
-                    <div className="flex items-center gap-4 text-gray-500 text-sm">
-                        <button className="flex items-center gap-1 hover:text-gray-700">
-                            <MessageSquare className="w-4 h-4" />
-                            Live Chat
-                        </button>
-                        <span className="text-gray-300">|</span>
-                        <button className="flex items-center gap-1 hover:text-gray-700">
-                            <Printer className="w-4 h-4" />
-                            Print
-                        </button>
-                        <span className="text-gray-300">|</span>
-                        <button className="flex items-center gap-1 hover:text-gray-700">
-                            {userName}
-                            <ChevronDown className="w-4 h-4" />
-                        </button>
+                        {/* Nav Pills */}
+                        <nav className="hidden md:flex items-center gap-2">
+                            {["Accounts", "Transfers", "Pay Bills"].map((tab, idx) => (
+                                <button
+                                    key={tab}
+                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${idx === 0
+                                        ? "bg-cyan-500 text-white shadow-md"
+                                        : "text-gray-700 hover:bg-white/50"
+                                        }`}
+                                >
+                                    {tab}
+                                </button>
+                            ))}
+                        </nav>
                     </div>
                 </div>
 
-                {/* Main Content Area */}
-                <div className="bg-gray-50 p-6 flex gap-6 min-h-[400px]">
-                    {/* Left Side - Accounts Table */}
-                    <div className="flex-1 bg-white rounded-lg border border-gray-200 p-6">
-                        <h2 className="text-cyan-600 text-xl font-semibold mb-4">Accounts</h2>
+                {/* Main Content */}
+                <div className="p-4 sm:p-6 lg:p-8">
+                    <div className="flex flex-col lg:flex-row gap-6">
 
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-left text-gray-700 text-sm font-medium border-b border-gray-200">
-                                    <th className="pb-3">Accounts</th>
-                                    <th className="pb-3">Available Balance</th>
-                                    <th className="pb-3">Current Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {accounts.map((account) => (
-                                    <tr
-                                        key={account.id}
-                                        className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors"
-                                        onClick={() => handleAccountClick(account)}
-                                    >
-                                        <td className="py-4 text-cyan-600 hover:underline">{account.name}</td>
-                                        <td className="py-4 text-gray-800">{account.availableBalance}</td>
-                                        <td className="py-4 text-gray-800">{account.currentBalance}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                        {/* Accounts Section - Frosted Cards */}
+                        <div className="flex-1 space-y-6">
+                            {/* Accounts */}
+                            <div>
+                                <h2 className="text-gray-800 text-xl font-bold mb-4 flex items-center gap-2">
+                                    <Wallet className="w-5 h-5 text-cyan-600" />
+                                    Your Accounts
+                                </h2>
 
-                    {/* Right Side - Offer Engine Carousel */}
-                    <div className="w-80 flex-shrink-0">
-                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-                            {/* Offer Image */}
-                            <div className="relative h-48 overflow-hidden">
-                                <img
-                                    src={currentOffer?.imageUrl}
-                                    alt={currentOffer?.title}
-                                    className="w-full h-full object-cover transition-all duration-500"
-                                />
-
-                                {/* Carousel Navigation */}
-                                {offers.length > 1 && (
-                                    <>
+                                <div className="space-y-3">
+                                    {accounts.map((account) => (
                                         <button
-                                            onClick={goToPrevious}
-                                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center shadow hover:bg-white transition-colors"
+                                            key={account.id}
+                                            onClick={() => handleAccountClick(account)}
+                                            className="w-full bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-white/40 hover:bg-white/80 transition-all shadow-sm hover:shadow-md text-left"
                                         >
-                                            <ChevronLeft className="w-5 h-5 text-gray-700" />
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-xl flex items-center justify-center">
+                                                        <CreditCard className="w-5 h-5 text-cyan-600" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-gray-800 font-semibold text-base">{account.name}</p>
+                                                        <p className="text-gray-500 text-sm">Available Balance</p>
+                                                    </div>
+                                                </div>
+                                                <p className="text-gray-900 font-bold text-xl">{account.availableBalance}</p>
+                                            </div>
                                         </button>
-                                        <button
-                                            onClick={goToNext}
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center shadow hover:bg-white transition-colors"
-                                        >
-                                            <ChevronRight className="w-5 h-5 text-gray-700" />
-                                        </button>
-                                    </>
-                                )}
-
-                                {/* Badge */}
-                                {currentOffer?.badge && (
-                                    <div className="absolute top-3 right-3 bg-cyan-500 text-white text-xs font-bold px-2 py-1 rounded">
-                                        {currentOffer.badge}
-                                    </div>
-                                )}
+                                    ))}
+                                </div>
                             </div>
 
-                            {/* Offer Content */}
-                            <div className="p-4">
-                                <h3 className="text-cyan-600 font-semibold text-lg mb-1">
-                                    {currentOffer?.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                                    {currentOffer?.description}
-                                </p>
+                            {/* Quick Actions */}
+                            <div>
+                                <h3 className="text-gray-700 font-semibold mb-3">Quick Actions</h3>
+                                <div className="grid grid-cols-3 gap-3">
+                                    <button className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/40 hover:bg-white/80 transition-all text-center">
+                                        <div className="w-10 h-10 mx-auto bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mb-2">
+                                            <ArrowUpRight className="w-5 h-5 text-green-600" />
+                                        </div>
+                                        <span className="text-gray-700 text-sm font-medium">Transfer</span>
+                                    </button>
+                                    <button className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/40 hover:bg-white/80 transition-all text-center">
+                                        <div className="w-10 h-10 mx-auto bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center mb-2">
+                                            <Receipt className="w-5 h-5 text-purple-600" />
+                                        </div>
+                                        <span className="text-gray-700 text-sm font-medium">Pay Bills</span>
+                                    </button>
+                                    <button className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/40 hover:bg-white/80 transition-all text-center">
+                                        <div className="w-10 h-10 mx-auto bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center mb-2">
+                                            <FileText className="w-5 h-5 text-orange-600" />
+                                        </div>
+                                        <span className="text-gray-700 text-sm font-medium">Statements</span>
+                                    </button>
+                                </div>
+                            </div>
 
-                                {/* Consent Checkbox */}
-                                <label className="flex items-start gap-2 text-xs text-gray-500 mb-4 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={isConsentChecked}
-                                        onChange={(e) => setIsConsentChecked(e.target.checked)}
-                                        className="mt-0.5 rounded border-gray-300"
+                            {/* Recent Activity */}
+                            <div>
+                                <h3 className="text-gray-700 font-semibold mb-3">Recent Activity</h3>
+                                <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-white/40 divide-y divide-white/30">
+                                    <div className="p-3 flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                                                <ArrowUpRight className="w-4 h-4 text-red-500 rotate-90" />
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-800 font-medium text-sm">Office Supplies Co</p>
+                                                <p className="text-gray-500 text-xs">Today, 9:42 AM</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-red-600 font-semibold">-$245.00</span>
+                                    </div>
+                                    <div className="p-3 flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                                <ArrowUpRight className="w-4 h-4 text-green-500 -rotate-90" />
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-800 font-medium text-sm">Client Payment</p>
+                                                <p className="text-gray-500 text-xs">Yesterday, 3:15 PM</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-green-600 font-semibold">+$1,250.00</span>
+                                    </div>
+                                    <div className="p-3 flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                                                <ArrowUpRight className="w-4 h-4 text-red-500 rotate-90" />
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-800 font-medium text-sm">Monthly Subscription</p>
+                                                <p className="text-gray-500 text-xs">Jan 12, 2026</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-red-600 font-semibold">-$99.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Offer Carousel - Featured */}
+                        <div className="lg:w-[380px] flex-shrink-0">
+                            <div className="bg-white/70 backdrop-blur-lg rounded-3xl border border-white/50 shadow-xl overflow-hidden">
+
+                                {/* Offer Image */}
+                                <div className="relative aspect-[16/9] overflow-hidden">
+                                    <img
+                                        src={currentOffer?.imageUrl}
+                                        alt={currentOffer?.title}
+                                        className="w-full h-full object-cover"
                                     />
-                                    <span>{consentText}</span>
-                                </label>
 
-                                {/* CTA Button */}
-                                <div className="flex items-center gap-2">
+                                    {/* Badge */}
+                                    {currentOffer?.badge && (
+                                        <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                            {currentOffer.badge}
+                                        </div>
+                                    )}
+
+                                    {/* Navigation Arrows */}
+                                    {offers.length > 1 && (
+                                        <>
+                                            <button
+                                                onClick={goToPrevious}
+                                                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
+                                            >
+                                                <ChevronLeft className="w-5 h-5 text-gray-700" />
+                                            </button>
+                                            <button
+                                                onClick={goToNext}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
+                                            >
+                                                <ChevronRight className="w-5 h-5 text-gray-700" />
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+
+                                {/* Offer Content */}
+                                <div className="p-5">
+                                    <p className="text-cyan-600 text-sm font-semibold uppercase tracking-wide mb-1">
+                                        {currentOffer?.subtitle}
+                                    </p>
+                                    <h3 className="text-gray-900 font-bold text-xl mb-2">
+                                        {currentOffer?.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-base leading-relaxed mb-4">
+                                        {currentOffer?.description}
+                                    </p>
+
+                                    {/* Consent */}
+                                    <label className="flex items-start gap-3 text-sm text-gray-600 mb-5 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={isConsentChecked}
+                                            onChange={(e) => setIsConsentChecked(e.target.checked)}
+                                            className="mt-1 w-5 h-5 rounded-lg border-gray-300 text-cyan-500 focus:ring-cyan-500"
+                                        />
+                                        <span>{consentText}</span>
+                                    </label>
+
+                                    {/* CTA - Pill Button */}
                                     <button
-                                        onClick={() => handleOfferClick(currentOffer)}
-                                        className="bg-cyan-500 hover:bg-cyan-600 text-white font-medium px-4 py-2 rounded transition-colors text-sm flex-1"
+                                        onClick={handleOfferClick}
+                                        className="w-full bg-[#FF6600] hover:bg-[#E55A00] text-gray-900 font-bold py-4 px-6 rounded-full transition-all shadow-lg hover:shadow-xl text-lg"
                                     >
                                         {currentOffer?.ctaLabel}
                                     </button>
-                                    <div className="w-3 h-3 rounded-full bg-orange-400" title="Powered by Fiserv" />
-                                </div>
 
-                                {/* Privacy Link */}
-                                <a href="#" className="block text-center text-cyan-600 text-xs mt-3 hover:underline">
-                                    Privacy Policy
-                                </a>
+                                    {/* Carousel Dots */}
+                                    {offers.length > 1 && (
+                                        <div className="flex justify-center gap-2 mt-4">
+                                            {offers.map((_, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => {
+                                                        playClick();
+                                                        setCurrentOfferIndex(index);
+                                                    }}
+                                                    className={`w-2.5 h-2.5 rounded-full transition-all ${index === currentOfferIndex
+                                                        ? "bg-[#FF6600] w-6"
+                                                        : "bg-gray-400 hover:bg-gray-500"
+                                                        }`}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
-                            {/* Carousel Indicators */}
-                            {offers.length > 1 && (
-                                <div className="flex justify-center gap-2 pb-4">
-                                    {offers.map((_, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => {
-                                                playClick();
-                                                setCurrentOfferIndex(index);
-                                            }}
-                                            className={`w-2 h-2 rounded-full transition-colors ${index === currentOfferIndex ? "bg-cyan-500" : "bg-gray-300"
-                                                }`}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Integration Badge */}
-                        <div className="mt-4 text-center">
-                            <span className="inline-flex items-center gap-2 text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full">
-                                <span className="w-2 h-2 bg-green-400 rounded-full" />
-                                Offer Engine via One API
-                            </span>
+                            {/* Integration Badge */}
+                            <div className="mt-4 text-center">
+                                <span className="inline-flex items-center gap-2 text-sm text-gray-600 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/40">
+                                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                                    Powered by Fiserv One API
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Key Messages Below */}
-            <div className="mt-6 grid grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
-                    <h4 className="text-white font-semibold mb-1">Seamless Integration</h4>
-                    <p className="text-white/70 text-sm">One API embeds into existing digital services</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
-                    <h4 className="text-white font-semibold mb-1">Native Experience</h4>
-                    <p className="text-white/70 text-sm">Adopts bank's style and aesthetics automatically</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
-                    <h4 className="text-white font-semibold mb-1">Contextually Aware</h4>
-                    <p className="text-white/70 text-sm">Right offer, right place, right time</p>
-                </div>
+            {/* Key Messages - Frosted Glass Cards */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                    { title: "Seamless Integration", desc: "One API embeds into your existing portal" },
+                    { title: "Native Experience", desc: "Adopts your bank's style automatically" },
+                    { title: "Contextually Aware", desc: "Right offer, right place, right time" },
+                ].map((msg, idx) => (
+                    <div
+                        key={idx}
+                        className="bg-white/15 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:bg-white/25 transition-all"
+                    >
+                        <h4 className="text-white font-semibold text-lg mb-1">{msg.title}</h4>
+                        <p className="text-white/70 text-sm">{msg.desc}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );

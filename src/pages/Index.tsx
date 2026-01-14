@@ -79,7 +79,7 @@ const WELCOME_VARIANTS = [
           features: [
             {
               id: "cta1",
-              title: "See the Bank Experience",
+              title: "See the Bank Portal Experience",
               subtitle: "What merchants see",
               description: "Preview how offers appear seamlessly in your digital portal—non-intrusive, branded, contextual.",
               icon: "eye",

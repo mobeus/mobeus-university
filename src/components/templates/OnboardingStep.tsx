@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
-import { MessageSquare, Printer, ChevronDown, Check, ChevronUp, Plus, Minus, Circle } from "lucide-react";
+import { Check, ChevronUp, ChevronDown, Plus, Minus, Building2, ArrowLeft, ArrowRight } from "lucide-react";
 import { getDeviceIcon, getCategoryIcon, Confetti, AnimatedCheckmark, PaymentCardIcon } from "./OnboardingStepComponents";
 
 interface CategoryOption {
@@ -96,12 +96,17 @@ interface OnboardingStepProps {
     showPrivacyLink?: boolean;
     animationClass?: string;
     isExiting?: boolean;
-    // Celebration mode (Step 10)
     isCelebration?: boolean;
     celebrationMessage?: string;
     celebrationDetails?: string[];
 }
 
+/**
+ * OnboardingStep Template - Glassmorphism Redesign
+ * 
+ * White frosted glass with pill-shaped buttons.
+ * Mobile-first responsive design.
+ */
 export const OnboardingStep: React.FC<OnboardingStepProps> = ({
     stepNumber,
     totalSteps = 10,
@@ -114,12 +119,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
     formSections = [],
     reviewSections = [],
     progressSteps = [],
-    showBackButton = false,
-    bankName = "First Financial Bank",
-    userName = "John Doe",
-    activeTab = "Merchant Services",
+    showBackButton = true,
+    bankName = "Modern Bank Co",
+    userName = "John",
     ctaLabel = "Continue",
-    backLabel = "Go Back",
+    backLabel = "Back",
     ctaActionPhrase,
     backActionPhrase,
     showPrivacyLink = true,
@@ -177,13 +181,26 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
     const handleContinue = useCallback(() => {
         playClick();
-        if (ctaActionPhrase) sendToTele(ctaActionPhrase);
-    }, [ctaActionPhrase, playClick]);
+        // Navigate to next step or return to bank portal after completion
+        if (stepNumber >= totalSteps) {
+            // After step 10 (celebration), return to bank portal
+            sendToTele("Show me the bank portal");
+        } else {
+            const nextStep = stepNumber + 1;
+            sendToTele(`Show me step ${nextStep}`);
+        }
+    }, [stepNumber, totalSteps, playClick]);
 
     const handleBack = useCallback(() => {
         playClick();
-        if (backActionPhrase) sendToTele(backActionPhrase);
-    }, [backActionPhrase, playClick]);
+        // Navigate to previous step
+        const prevStep = stepNumber - 1;
+        if (prevStep >= 1) {
+            sendToTele(`Show me step ${prevStep}`);
+        } else if (backActionPhrase) {
+            sendToTele(backActionPhrase);
+        }
+    }, [stepNumber, backActionPhrase, playClick]);
 
     const progress = (stepNumber / totalSteps) * 100;
     const totalDevices = Object.values(deviceQuantities).reduce((sum, qty) => sum + qty, 0);
@@ -198,47 +215,63 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
     return (
         <div className={`w-full ${animationClass} ${isExiting ? "opacity-50" : ""}`}>
-            <div className="bg-gray-100 rounded-t-xl border border-gray-300 overflow-hidden shadow-xl">
-                {/* Bank Header */}
-                <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-                    <div className="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z" />
-                        </svg>
-                    </div>
-                    <nav className="flex items-center gap-8">
-                        {["Accounts", "Transfers", "Pay Bills", "Manage Money", "Merchant Services"].map((tab) => (
-                            <button key={tab} className={`pb-2 px-1 ${tab === activeTab ? "text-cyan-600 font-medium border-b-2 border-cyan-600" : "text-gray-600 hover:text-gray-800"}`}>{tab}</button>
-                        ))}
-                    </nav>
-                    <div className="flex items-center gap-4 text-gray-500 text-sm">
-                        <button className="flex items-center gap-1 hover:text-gray-700"><MessageSquare className="w-4 h-4" />Live Chat</button>
-                        <span className="text-gray-300">|</span>
-                        <button className="flex items-center gap-1 hover:text-gray-700"><Printer className="w-4 h-4" />Print</button>
-                        <span className="text-gray-300">|</span>
-                        <button className="flex items-center gap-1 hover:text-gray-700">{userName}<ChevronDown className="w-4 h-4" /></button>
+            {/* Main Glassmorphism Container */}
+            <div className="bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl overflow-hidden">
+
+                {/* Header */}
+                <div className="bg-white/40 backdrop-blur-md px-4 sm:px-6 py-4 border-b border-white/20">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                            </div>
+                            <div>
+                                <p className="text-gray-800 font-semibold text-base sm:text-lg">{bankName}</p>
+                                <p className="text-gray-600 text-sm">Merchant Application</p>
+                            </div>
+                        </div>
+
+                        {/* Step Progress Pills */}
+                        {!isCelebration && (
+                            <div className="hidden sm:flex items-center gap-2">
+                                <span className="bg-cyan-500/20 text-cyan-700 font-semibold px-4 py-2 rounded-full text-sm">
+                                    Step {stepNumber} of {totalSteps}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
 
-                {/* Progress Steps (for form flows) */}
+                {/* Progress Bar */}
+                {!isCelebration && (
+                    <div className="bg-white/30 h-2">
+                        <div
+                            className="h-full bg-gradient-to-r from-cyan-400 to-cyan-600 transition-all duration-500 ease-out"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+                )}
+
+                {/* Progress Steps */}
                 {progressSteps.length > 0 && (
-                    <div className="bg-white border-b border-gray-200 px-8 py-4">
-                        <div className="flex items-center justify-between max-w-4xl mx-auto">
+                    <div className="bg-white/30 backdrop-blur-sm px-4 sm:px-8 py-4 border-b border-white/20 overflow-x-auto">
+                        <div className="flex items-center justify-between min-w-max gap-4">
                             {progressSteps.map((step, idx) => (
                                 <div key={step.id} className="flex items-center">
                                     <div className="flex items-center gap-2">
-                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${step.status === "completed" ? "bg-cyan-500 text-white" :
-                                            step.status === "current" ? "bg-cyan-500 text-white" :
-                                                "bg-gray-200 text-gray-500"
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${step.status === "completed" ? "bg-cyan-500 text-white" :
+                                            step.status === "current" ? "bg-cyan-500 text-white ring-4 ring-cyan-200" :
+                                                "bg-white/50 text-gray-500"
                                             }`}>
-                                            {step.status === "completed" ? <Check className="w-3 h-3" /> : idx + 1}
+                                            {step.status === "completed" ? <Check className="w-4 h-4" /> : idx + 1}
                                         </div>
-                                        <span className={`text-sm ${step.status === "current" ? "text-cyan-600 font-medium" : "text-gray-500"}`}>
+                                        <span className={`text-sm whitespace-nowrap ${step.status === "current" ? "text-gray-800 font-semibold" : "text-gray-600"
+                                            }`}>
                                             {step.label}
                                         </span>
                                     </div>
                                     {idx < progressSteps.length - 1 && (
-                                        <div className="w-16 h-px bg-gray-200 mx-4" />
+                                        <div className="w-8 sm:w-12 h-0.5 bg-white/40 mx-2" />
                                     )}
                                 </div>
                             ))}
@@ -247,86 +280,171 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 )}
 
                 {/* Main Content */}
-                <div className="bg-white p-8 min-h-[520px]">
-                    {!hasFormContent && !isCelebration && (
-                        <div className="w-32 h-1 bg-gray-200 rounded-full mb-8">
-                            <div className="h-full bg-cyan-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
-                        </div>
-                    )}
+                <div className="p-4 sm:p-6 lg:p-8 min-h-[400px]">
 
                     {/* Celebration Mode */}
                     {isCelebration ? (
-                        <div className="max-w-2xl mx-auto text-left relative">
+                        <div className="w-full relative py-4">
                             <Confetti />
-                            <div className="bg-white border-2 border-cyan-500 rounded-xl p-8 shadow-lg animate-fade-in-up">
-                                <div className="flex items-start gap-4">
-                                    <AnimatedCheckmark />
-                                    <div className="flex-1">
-                                        <h1 className="text-xl font-semibold text-gray-900 mb-2">{title}</h1>
-                                        {celebrationMessage && (
-                                            <p className="text-gray-600 mb-4">{celebrationMessage}</p>
-                                        )}
-                                        {celebrationDetails.map((detail, idx) => (
-                                            <p key={idx} className="text-sm text-gray-500 mb-2">{detail}</p>
-                                        ))}
+
+                            {/* Header - Full Width */}
+                            <div className="text-center mb-8">
+                                <AnimatedCheckmark />
+                                <h1 className="text-3xl sm:text-4xl font-bold text-white mt-6 mb-3">{title}</h1>
+                                {celebrationMessage && (
+                                    <p className="text-white/70 text-lg max-w-xl mx-auto">{celebrationMessage}</p>
+                                )}
+                            </div>
+
+                            {/* 3-Column Layout */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                                {/* Left - What's Included */}
+                                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                        <Check className="w-5 h-5 text-[#FF6600]" />
+                                        What's Included
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                <Check className="w-3 h-3 text-[#FF6600]" />
+                                            </div>
+                                            <div>
+                                                <p className="text-white font-medium">Your Clover Device</p>
+                                                <p className="text-white/50 text-sm">Ships in 1-5 business days</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                <Check className="w-3 h-3 text-[#FF6600]" />
+                                            </div>
+                                            <div>
+                                                <p className="text-white font-medium">Merchant Account</p>
+                                                <p className="text-white/50 text-sm">Payment processing activated</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                <Check className="w-3 h-3 text-[#FF6600]" />
+                                            </div>
+                                            <div>
+                                                <p className="text-white font-medium">24/7 Support</p>
+                                                <p className="text-white/50 text-sm">Dedicated merchant assistance</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* CTA Button */}
-                                <div className="mt-6 flex items-center gap-3">
-                                    <button
-                                        onClick={handleContinue}
-                                        className="px-6 py-2.5 rounded font-medium bg-cyan-500 hover:bg-cyan-600 text-white transition-colors"
-                                    >
-                                        {ctaLabel}
-                                    </button>
-                                    <div className="w-3 h-3 rounded-full bg-orange-400" title="Powered by Fiserv" />
+                                {/* Center - Order Confirmation */}
+                                <div className="bg-gradient-to-br from-[#FF6600]/20 to-[#FF6600]/5 backdrop-blur-sm rounded-2xl p-6 border-2 border-[#FF6600]/40">
+                                    <h3 className="text-lg font-bold text-white mb-4">Order Confirmation</h3>
+                                    {celebrationDetails.length > 0 ? (
+                                        <div className="space-y-3">
+                                            {celebrationDetails.map((detail, idx) => (
+                                                <div key={idx} className="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                                    <Check className="w-5 h-5 text-[#FF6600] mt-0.5 flex-shrink-0" />
+                                                    <span className="text-white">{detail}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                                                <Check className="w-5 h-5 text-[#FF6600]" />
+                                                <span className="text-white">Application approved</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                                                <Check className="w-5 h-5 text-[#FF6600]" />
+                                                <span className="text-white">Account created</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                                                <Check className="w-5 h-5 text-[#FF6600]" />
+                                                <span className="text-white">Device shipping soon</span>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Right - Next Steps */}
+                                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                        <ArrowRight className="w-5 h-5 text-[#FF6600]" />
+                                        What's Next
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600] flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">1</div>
+                                            <div>
+                                                <p className="text-white font-medium">Check Your Email</p>
+                                                <p className="text-white/50 text-sm">Confirmation & tracking sent</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600]/60 flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">2</div>
+                                            <div>
+                                                <p className="text-white font-medium">Receive Device</p>
+                                                <p className="text-white/50 text-sm">Via FedEx in 1-5 days</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-[#FF6600]/30 flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">3</div>
+                                            <div>
+                                                <p className="text-white font-medium">Start Accepting</p>
+                                                <p className="text-white/50 text-sm">Plug in and go live</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <style>{`
-                                @keyframes fade-in-up {
-                                    0% { opacity: 0; transform: translateY(20px); }
-                                    100% { opacity: 1; transform: translateY(0); }
-                                }
-                                .animate-fade-in-up {
-                                    animation: fade-in-up 0.5s ease-out forwards;
-                                }
-                            `}</style>
+
+                            {/* CTA Button */}
+                            <div className="flex justify-center">
+                                <button
+                                    onClick={handleContinue}
+                                    className="bg-[#FF6600] hover:bg-[#E55A00] text-white font-bold py-4 px-10 rounded-full transition-all shadow-lg hover:shadow-xl text-lg inline-flex items-center gap-2"
+                                >
+                                    {ctaLabel}
+                                    <ArrowRight className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
                     ) : (
-                        <div className={`mx-auto ${hasFormContent ? "max-w-3xl text-left" : "max-w-5xl text-center"}`}>
-                            <h1 className="text-2xl font-semibold text-gray-900 mb-2">{title}</h1>
-                            {subtitle && <p className="text-gray-500 mb-8">{subtitle}</p>}
+                        <div className={`mx-auto ${hasFormContent ? "max-w-3xl" : "max-w-5xl"}`}>
+                            {/* Title Section */}
+                            <div className="text-center mb-8">
+                                <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">{title}</h1>
+                                {subtitle && <p className="text-white/80 text-lg">{subtitle}</p>}
+                            </div>
 
                             {/* Form Sections */}
                             {formSections.map((section) => (
-                                <div key={section.id} className="mb-8">
-                                    <h2 className="text-base font-semibold text-gray-900 mb-1">{section.title}</h2>
-                                    {section.subtitle && <p className="text-sm text-gray-500 mb-4">{section.subtitle}</p>}
+                                <div key={section.id} className="mb-8 text-left">
+                                    <h2 className="text-xl font-semibold text-white mb-1">{section.title}</h2>
+                                    {section.subtitle && <p className="text-white/70 mb-4">{section.subtitle}</p>}
 
                                     <div className="space-y-4">
                                         {section.fields.map((field) => (
                                             <div key={field.id}>
                                                 {field.type === "radio" && field.options && (
-                                                    <div className="space-y-2">
+                                                    <div className="space-y-3">
                                                         {field.options.map((opt) => (
                                                             <label
                                                                 key={opt.id}
-                                                                className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${formValues[field.id] === opt.id
-                                                                    ? "border-cyan-500 bg-cyan-50/50"
-                                                                    : "border-gray-200 hover:border-gray-300"
+                                                                className={`flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all bg-white/50 backdrop-blur-sm hover:bg-white/70 ${formValues[field.id] === opt.id
+                                                                    ? "border-cyan-500 bg-white/70"
+                                                                    : "border-white/40"
                                                                     }`}
                                                                 onClick={() => { playClick(); handleFormChange(field.id, opt.id); }}
                                                             >
-                                                                <div className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center ${formValues[field.id] === opt.id ? "border-cyan-500" : "border-gray-300"
+                                                                <div className={`mt-0.5 w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${formValues[field.id] === opt.id ? "border-cyan-500 bg-cyan-500" : "border-gray-300"
                                                                     }`}>
                                                                     {formValues[field.id] === opt.id && (
-                                                                        <div className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
+                                                                        <div className="w-2.5 h-2.5 rounded-full bg-white" />
                                                                     )}
                                                                 </div>
                                                                 <div>
-                                                                    <p className="text-gray-900 font-medium">{opt.label}</p>
-                                                                    {opt.subtitle && <p className="text-sm text-gray-500">{opt.subtitle}</p>}
+                                                                    <p className="text-gray-900 font-semibold text-lg">{opt.label}</p>
+                                                                    {opt.subtitle && <p className="text-gray-500">{opt.subtitle}</p>}
                                                                 </div>
                                                             </label>
                                                         ))}
@@ -335,45 +453,32 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
                                                 {field.type === "text" && (
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">{field.label}</label>
+                                                        <label className="block text-white font-semibold mb-2 text-lg">{field.label}</label>
                                                         <input
                                                             type="text"
                                                             placeholder={field.placeholder}
                                                             value={formValues[field.id] || field.defaultValue || ""}
                                                             onChange={(e) => handleFormChange(field.id, e.target.value)}
-                                                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                                                        />
-                                                    </div>
-                                                )}
-
-                                                {field.type === "textarea" && (
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">{field.label}</label>
-                                                        <textarea
-                                                            placeholder={field.placeholder}
-                                                            value={formValues[field.id] || field.defaultValue || ""}
-                                                            onChange={(e) => handleFormChange(field.id, e.target.value)}
-                                                            rows={3}
-                                                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
+                                                            className="w-full px-5 py-4 bg-white/70 backdrop-blur-sm border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-lg"
                                                         />
                                                     </div>
                                                 )}
 
                                                 {field.type === "select" && field.options && (
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">{field.label}</label>
+                                                        <label className="block text-white font-semibold mb-2 text-lg">{field.label}</label>
                                                         <div className="relative">
                                                             <select
                                                                 value={formValues[field.id] || ""}
                                                                 onChange={(e) => handleFormChange(field.id, e.target.value)}
-                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent appearance-none bg-white"
+                                                                className="w-full px-5 py-4 bg-white/70 backdrop-blur-sm border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent appearance-none text-lg"
                                                             >
                                                                 <option value="">Select...</option>
                                                                 {field.options.map((opt) => (
                                                                     <option key={opt.id} value={opt.id}>{opt.label}</option>
                                                                 ))}
                                                             </select>
-                                                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                                                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                                                         </div>
                                                     </div>
                                                 )}
@@ -385,17 +490,17 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
                             {/* Review Sections */}
                             {reviewSections.length > 0 && (
-                                <div className="space-y-8 mb-8">
+                                <div className="space-y-6 mb-8 text-left">
                                     {reviewSections.map((section, sectionIdx) => (
-                                        <div key={section.id} className="text-left">
-                                            <h2 className="text-lg font-semibold text-cyan-600 mb-4 pb-2 border-b border-gray-200">
+                                        <div key={section.id} className="bg-white/50 backdrop-blur-sm rounded-2xl p-5 border border-white/40">
+                                            <h2 className="text-xl font-semibold text-cyan-600 mb-4">
                                                 {sectionIdx + 1}. {section.title}
                                             </h2>
-                                            <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 {section.items.map((item, itemIdx) => (
-                                                    <div key={itemIdx} className="flex justify-between py-2 border-b border-gray-100">
-                                                        <span className="text-sm text-gray-500">{item.label}</span>
-                                                        <span className="text-sm font-medium text-gray-900">{item.value}</span>
+                                                    <div key={itemIdx} className="flex justify-between py-2">
+                                                        <span className="text-gray-500">{item.label}</span>
+                                                        <span className="font-semibold text-gray-900">{item.value}</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -406,16 +511,24 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
                             {/* Category Selection */}
                             {categories.length > 0 && (
-                                <div className="grid grid-cols-3 gap-4 mb-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                                     {categories.map((cat) => {
                                         const isSelected = selectedCategories.includes(cat.id);
                                         return (
-                                            <button key={cat.id} onClick={() => toggleCategory(cat.id)} className={`relative bg-white border-2 rounded-lg p-6 transition-all hover:shadow-md ${isSelected ? "border-cyan-500 shadow-md" : "border-gray-200"}`}>
-                                                <div className={`absolute top-3 right-3 w-5 h-5 border rounded flex items-center justify-center ${isSelected ? "bg-cyan-500 border-cyan-500" : "border-gray-300"}`}>
-                                                    {isSelected && <Check className="w-3 h-3 text-white" />}
+                                            <button
+                                                key={cat.id}
+                                                onClick={() => toggleCategory(cat.id)}
+                                                className={`relative bg-white/60 backdrop-blur-sm border-2 rounded-2xl p-6 transition-all hover:bg-white/80 hover:shadow-lg ${isSelected ? "border-cyan-500 bg-white/80 shadow-lg" : "border-white/40"
+                                                    }`}
+                                            >
+                                                <div className={`absolute top-3 right-3 w-6 h-6 rounded-lg flex items-center justify-center ${isSelected ? "bg-cyan-500" : "border-2 border-gray-300"
+                                                    }`}>
+                                                    {isSelected && <Check className="w-4 h-4 text-white" />}
                                                 </div>
-                                                <div className="text-gray-600 mb-3 flex justify-center">{getCategoryIcon(cat.icon)}</div>
-                                                <span className="text-gray-700 font-medium">{cat.label}</span>
+                                                <div className="text-gray-600 mb-3 flex justify-center">
+                                                    {getCategoryIcon(cat.icon)}
+                                                </div>
+                                                <span className="text-gray-900 font-semibold text-lg">{cat.label}</span>
                                             </button>
                                         );
                                     })}
@@ -424,28 +537,59 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
                             {/* Plan Selection */}
                             {plans.length > 0 && (
-                                <div className="grid grid-cols-2 gap-6 mb-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                                     {plans.map((plan) => {
                                         const isExpanded = expandedPlan === plan.id;
                                         return (
-                                            <div key={plan.id} className={`relative bg-white border-2 rounded-xl overflow-hidden transition-all hover:shadow-lg ${selectedPlan === plan.id ? "border-cyan-500 shadow-lg" : "border-gray-200"}`}>
-                                                {plan.recommended && <div className="absolute top-0 right-0 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">RECOMMENDED</div>}
-                                                <div className="pt-6 pb-2 flex justify-center"><PaymentCardIcon /></div>
-                                                <div className="px-6 pb-6">
-                                                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">{plan.tier}</p>
-                                                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{plan.title}</h3>
-                                                    <p className="text-2xl font-bold text-gray-900 mb-2">{plan.price}</p>
-                                                    <p className="text-gray-500 text-sm mb-4">{plan.description}</p>
+                                            <div
+                                                key={plan.id}
+                                                className={`relative bg-white/70 backdrop-blur-lg border-2 rounded-3xl overflow-hidden transition-all hover:shadow-xl flex flex-col ${selectedPlan === plan.id ? "border-cyan-500 shadow-xl" : "border-white/40"
+                                                    }`}
+                                            >
+                                                {plan.recommended && (
+                                                    <div className="absolute top-0 right-0 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl">
+                                                        RECOMMENDED
+                                                    </div>
+                                                )}
+                                                <div className="pt-8 pb-2 flex justify-center">
+                                                    <PaymentCardIcon />
+                                                </div>
+                                                <div className="px-6 pb-6 flex flex-col flex-grow">
+                                                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">{plan.tier}</p>
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.title}</h3>
+                                                    <p className="text-3xl font-bold text-gray-900 mb-2">{plan.price}</p>
+                                                    <p className="text-gray-500 mb-4 flex-grow">{plan.description}</p>
+
                                                     {plan.features && plan.features.length > 0 && (
                                                         <>
-                                                            <button onClick={() => togglePlanDetails(plan.id)} className="flex items-center gap-1 text-gray-500 text-sm hover:text-gray-700 mb-4">Details {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}</button>
-                                                            {isExpanded && <ul className="text-left text-sm text-gray-600 space-y-2 mb-4 border-t border-gray-100 pt-4">{plan.features.map((f, i) => <li key={i} className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5" />{f}</li>)}</ul>}
+                                                            <button
+                                                                onClick={() => togglePlanDetails(plan.id)}
+                                                                className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+                                                            >
+                                                                Details {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                                            </button>
+                                                            {isExpanded && (
+                                                                <ul className="text-left text-gray-600 space-y-2 mb-4 border-t border-white/40 pt-4">
+                                                                    {plan.features.map((f, i) => (
+                                                                        <li key={i} className="flex items-start gap-2">
+                                                                            <Check className="w-5 h-5 text-cyan-500 mt-0.5" />{f}
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
                                                         </>
                                                     )}
-                                                    <button onClick={() => handlePlanSelect(plan.id, plan.actionPhrase)} className={`w-full py-3 rounded-lg font-medium transition-all ${selectedPlan === plan.id ? "bg-cyan-500 text-white" : "border-2 border-cyan-500 text-cyan-600 hover:bg-cyan-50"}`}>Select plan and continue</button>
-                                                    <a href="#" className="block text-center text-cyan-600 text-xs mt-3 hover:underline">Privacy Policy</a>
+
+                                                    <button
+                                                        onClick={() => handlePlanSelect(plan.id, plan.actionPhrase)}
+                                                        className={`w-full py-4 rounded-full font-bold text-lg transition-all ${selectedPlan === plan.id
+                                                            ? "bg-[#FF6600] text-gray-900 shadow-lg"
+                                                            : "border-2 border-[#FF6600] text-[#FF6600] hover:bg-orange-50"
+                                                            }`}
+                                                    >
+                                                        Select Plan
+                                                    </button>
                                                 </div>
-                                                {plan.recommended && <div className="absolute bottom-4 right-4"><div className="w-3 h-3 rounded-full bg-orange-400" /></div>}
                                             </div>
                                         );
                                     })}
@@ -455,55 +599,113 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                             {/* Device Selection */}
                             {devices.length > 0 && (
                                 <>
-                                    <div className="grid grid-cols-3 gap-6 mb-8">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                                         {devices.map((device) => {
                                             const qty = deviceQuantities[device.id] || 0;
                                             const isExpanded = expandedDevice === device.id;
                                             return (
-                                                <div key={device.id} className={`bg-white border-2 rounded-xl overflow-hidden transition-all hover:shadow-lg ${qty > 0 ? "border-cyan-500 shadow-lg" : "border-gray-200"}`}>
-                                                    <div className="pt-6 pb-4 flex justify-center bg-gradient-to-b from-gray-50 to-white">
-                                                        {device.imageUrl ? <img src={device.imageUrl} alt={device.name} className="w-32 h-24 object-contain" /> : getDeviceIcon(device.name)}
+                                                <div
+                                                    key={device.id}
+                                                    className={`bg-white/70 backdrop-blur-lg border-2 rounded-3xl overflow-hidden transition-all hover:shadow-xl ${qty > 0 ? "border-cyan-500 shadow-xl" : "border-white/40"
+                                                        }`}
+                                                >
+                                                    <div className="h-40 flex items-center justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+                                                        {device.imageUrl ? (
+                                                            <img src={device.imageUrl} alt={device.name} className="w-full h-full object-contain p-4" />
+                                                        ) : getDeviceIcon(device.name)}
                                                     </div>
                                                     <div className="px-5 pb-5">
-                                                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">{device.name}</p>
-                                                        <h3 className="text-base font-semibold text-gray-900 mb-1 leading-tight">{device.title}</h3>
+                                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">{device.name}</p>
+                                                        <h3 className="text-lg font-bold text-gray-900 mb-1">{device.title}</h3>
                                                         <p className="text-gray-500 text-sm mb-2">{device.subtitle}</p>
-                                                        <p className="text-xl font-bold text-gray-900 mb-3">{device.price}</p>
+                                                        <p className="text-2xl font-bold text-gray-900 mb-4">{device.price}</p>
+
                                                         {device.features && device.features.length > 0 && (
                                                             <>
-                                                                <button onClick={() => toggleDeviceDetails(device.id)} className="flex items-center gap-1 text-gray-500 text-sm hover:text-gray-700 mb-4">Details {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}</button>
-                                                                {isExpanded && <ul className="text-left text-xs text-gray-600 space-y-1.5 mb-4 border-t border-gray-100 pt-3">{device.features.map((f, i) => <li key={i} className="flex items-start gap-2"><Check className="w-3 h-3 text-green-500 mt-0.5" />{f}</li>)}</ul>}
+                                                                <button
+                                                                    onClick={() => toggleDeviceDetails(device.id)}
+                                                                    className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+                                                                >
+                                                                    Details {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                                                </button>
+                                                                {isExpanded && (
+                                                                    <ul className="text-left text-sm text-gray-600 space-y-1.5 mb-4 border-t border-white/40 pt-3">
+                                                                        {device.features.map((f, i) => (
+                                                                            <li key={i} className="flex items-start gap-2">
+                                                                                <Check className="w-4 h-4 text-cyan-500 mt-0.5" />{f}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                )}
                                                             </>
                                                         )}
-                                                        <div className="flex items-center justify-between border border-gray-200 rounded-lg overflow-hidden">
-                                                            <button onClick={() => updateDeviceQuantity(device.id, -1)} disabled={qty === 0} className={`w-12 h-10 flex items-center justify-center ${qty === 0 ? "text-gray-300" : "text-gray-600 hover:bg-gray-100"}`}><Minus className="w-4 h-4" /></button>
-                                                            <span className="text-lg font-semibold text-gray-900 w-12 text-center">{qty}</span>
-                                                            <button onClick={() => updateDeviceQuantity(device.id, 1)} className="w-12 h-10 flex items-center justify-center bg-cyan-500 text-white hover:bg-cyan-600"><Plus className="w-4 h-4" /></button>
+
+                                                        {/* Quantity Control - Pill Style */}
+                                                        <div className="flex items-center justify-between bg-white/60 backdrop-blur-sm rounded-full overflow-hidden border border-white/40">
+                                                            <button
+                                                                onClick={() => updateDeviceQuantity(device.id, -1)}
+                                                                disabled={qty === 0}
+                                                                className={`w-14 h-12 flex items-center justify-center ${qty === 0 ? "text-gray-300" : "text-gray-600 hover:bg-white/80"
+                                                                    }`}
+                                                            >
+                                                                <Minus className="w-5 h-5" />
+                                                            </button>
+                                                            <span className="text-xl font-bold text-gray-900">{qty}</span>
+                                                            <button
+                                                                onClick={() => updateDeviceQuantity(device.id, 1)}
+                                                                className="w-14 h-12 flex items-center justify-center bg-[#FF6600] text-gray-900 hover:bg-[#E55A00]"
+                                                            >
+                                                                <Plus className="w-5 h-5" />
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             );
                                         })}
                                     </div>
+
+                                    {/* Order Summary */}
                                     {totalDevices > 0 && (
-                                        <div className="bg-white/80 backdrop-blur rounded-lg p-4 mb-6 inline-flex items-center gap-6 border border-gray-200">
-                                            <div className="text-left"><p className="text-sm text-gray-500">Devices</p><p className="text-lg font-bold text-gray-900">{totalDevices}</p></div>
-                                            <div className="w-px h-10 bg-gray-200" />
-                                            <div className="text-left"><p className="text-sm text-gray-500">Total</p><p className="text-lg font-bold text-cyan-600">${totalDevicePrice.toFixed(2)}</p></div>
+                                        <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-5 mb-6 inline-flex items-center gap-8 border border-white/40 shadow-lg">
+                                            <div>
+                                                <p className="text-gray-500 text-sm">Devices</p>
+                                                <p className="text-2xl font-bold text-gray-900">{totalDevices}</p>
+                                            </div>
+                                            <div className="w-px h-12 bg-gray-200" />
+                                            <div>
+                                                <p className="text-gray-500 text-sm">Total</p>
+                                                <p className="text-2xl font-bold text-cyan-600">${totalDevicePrice.toFixed(2)}</p>
+                                            </div>
                                         </div>
                                     )}
                                 </>
                             )}
 
-                            {/* Footer */}
-                            <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
-                                {showPrivacyLink && <a href="#" className="text-cyan-600 text-sm hover:underline">Privacy Policy</a>}
-                                <div className="flex items-center gap-3 ml-auto">
+                            {/* Footer Actions */}
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-white/30">
+                                {showPrivacyLink && (
+                                    <a href="#" className="text-cyan-600 hover:underline">Privacy Policy</a>
+                                )}
+                                <div className="flex items-center gap-3">
                                     {showBackButton && (
-                                        <button onClick={handleBack} className="px-6 py-2.5 rounded font-medium text-gray-600 hover:text-gray-900 transition-colors">{backLabel}</button>
+                                        <button
+                                            onClick={handleBack}
+                                            className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white/70 hover:text-white hover:bg-white/20 transition-all border border-white/20"
+                                        >
+                                            <ArrowLeft className="w-5 h-5" />
+                                            {backLabel}
+                                        </button>
                                     )}
-                                    <div className="w-3 h-3 rounded-full bg-orange-400" title="Powered by Fiserv" />
-                                    <button onClick={handleContinue} disabled={!canContinue} className={`px-6 py-2.5 rounded font-medium transition-colors ${!canContinue ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-cyan-500 hover:bg-cyan-600 text-white"}`}>{ctaLabel}</button>
+                                    <button
+                                        onClick={handleContinue}
+                                        disabled={!canContinue}
+                                        className={`px-8 py-4 rounded-full font-bold text-lg transition-all ${!canContinue
+                                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                            : "bg-[#FF6600] hover:bg-[#E55A00] text-gray-900 shadow-lg hover:shadow-xl"
+                                            }`}
+                                    >
+                                        {ctaLabel}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -511,8 +713,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 </div>
             </div>
 
-            <div className="mt-4 text-center">
-                <span className="inline-flex items-center gap-2 text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full">Step {stepNumber} of {totalSteps}</span>
+            {/* Step Indicator - Mobile */}
+            <div className="mt-4 text-center sm:hidden">
+                <span className="inline-flex items-center gap-2 text-sm text-gray-600 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/40">
+                    Step {stepNumber} of {totalSteps}
+                </span>
             </div>
         </div>
     );

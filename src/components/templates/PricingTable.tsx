@@ -120,14 +120,6 @@ export const PricingTable: React.FC<PricingTableProps> = ({
             {note && (
                 <p className="text-center text-sm text-gray-500 mt-6">{note}</p>
             )}
-
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <div className="w-3 h-3 rounded-full bg-orange-400" />
-                    Powered by Fiserv
-                </div>
-            </div>
         </div>
     );
 };

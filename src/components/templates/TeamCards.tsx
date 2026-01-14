@@ -61,8 +61,8 @@ export const TeamCards: React.FC<TeamCardsProps> = ({
             {/* Header */}
             {title && (
                 <div className="mb-6">
-                    <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-                    {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
+                    <h2 className="text-xl font-bold text-white">{title}</h2>
+                    {subtitle && <p className="text-white/70 mt-1">{subtitle}</p>}
                 </div>
             )}
 
@@ -72,7 +72,7 @@ export const TeamCards: React.FC<TeamCardsProps> = ({
                     <div
                         key={member.id}
                         onClick={() => handleMemberClick(member)}
-                        className={`p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-cyan-300 transition-all ${member.actionPhrase ? "cursor-pointer" : ""
+                        className={`p-5 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/30 transition-all ${member.actionPhrase ? "cursor-pointer" : ""
                             }`}
                     >
                         {/* Avatar */}
@@ -89,49 +89,42 @@ export const TeamCards: React.FC<TeamCardsProps> = ({
                                 </div>
                             )}
                             <div>
-                                <h3 className="font-semibold text-gray-900">{member.name}</h3>
-                                <p className="text-sm text-cyan-600">{member.role}</p>
+                                <h3 className="font-semibold text-white">{member.name}</h3>
+                                <p className="text-sm text-orange-400">{member.role}</p>
                                 {member.department && (
-                                    <p className="text-xs text-gray-400">{member.department}</p>
+                                    <p className="text-xs text-white/50">{member.department}</p>
                                 )}
                             </div>
                         </div>
 
                         {/* Specialty */}
                         {member.specialty && (
-                            <p className="text-sm text-gray-600 mb-4">{member.specialty}</p>
+                            <p className="text-sm text-white/70 mb-4">{member.specialty}</p>
                         )}
 
                         {/* Contact Actions */}
                         <div className="flex items-center gap-2">
                             {member.email && (
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-cyan-100 transition-colors">
-                                    <Mail className="w-4 h-4 text-gray-600" />
+                                <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                                    <Mail className="w-4 h-4 text-white/70" />
                                 </button>
                             )}
                             {member.phone && (
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-cyan-100 transition-colors">
-                                    <Phone className="w-4 h-4 text-gray-600" />
+                                <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                                    <Phone className="w-4 h-4 text-white/70" />
                                 </button>
                             )}
-                            <button className="p-2 rounded-lg bg-gray-100 hover:bg-cyan-100 transition-colors">
-                                <Calendar className="w-4 h-4 text-gray-600" />
+                            <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                                <Calendar className="w-4 h-4 text-white/70" />
                             </button>
-                            <button className="p-2 rounded-lg bg-gray-100 hover:bg-cyan-100 transition-colors">
-                                <MessageCircle className="w-4 h-4 text-gray-600" />
+                            <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                                <MessageCircle className="w-4 h-4 text-white/70" />
                             </button>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <div className="w-3 h-3 rounded-full bg-orange-400" />
-                    Powered by Fiserv
-                </div>
-            </div>
         </div>
     );
 };

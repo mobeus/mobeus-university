@@ -6,10 +6,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // LAYOUT TEMPLATES
     // ==========================================
 
-    // ChapterGrid: Clickable chapter/section cards in a grid
-    // USE FOR: Main navigation, topic overview, value propositions
-    ChapterGrid: lazy(() => import("@/components/templates/ChapterGrid").then(m => ({ default: m.ChapterGrid }))),
-
     // FeatureGrid: Feature cards with icons and descriptions
     // USE FOR: Feature lists, benefits, service offerings
     FeatureGrid: lazy(() => import("@/components/templates/FeatureGrid").then(m => ({ default: m.FeatureGrid }))),
@@ -17,10 +13,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // FeatureCallouts: Large icon boxes with titles and descriptions
     // USE FOR: Key features, pillars, core capabilities
     FeatureCallouts: lazy(() => import("@/components/templates/FeatureCallouts").then(m => ({ default: m.FeatureCallouts }))),
-
-    // ImageCards: Cards with 16:9 images and content below
-    // USE FOR: Products, offers, catalog items, portfolios
-    ImageCards: lazy(() => import("@/components/templates/ImageCards").then(m => ({ default: m.ImageCards }))),
 
     // SplitContent: Two-column layout with image/text
     // USE FOR: About sections, hero content, side-by-side comparisons
@@ -34,9 +26,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // USE FOR: Product comparison, pricing tiers, plan differences
     ComparisonTable: lazy(() => import("@/components/templates/ComparisonTable").then(m => ({ default: m.ComparisonTable }))),
 
-    // DataTable: Tabular data display
-    // USE FOR: Data grids, records, structured information
-    DataTable: lazy(() => import("@/components/templates/DataTable").then(m => ({ default: m.DataTable }))),
 
     // MetricsGrid: KPI cards with numbers and trends
     // USE FOR: Analytics, dashboards, key metrics, stats
@@ -82,9 +71,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // USE FOR: Technical diagrams, integrations, system flows
     ArchitectureDiagram: lazy(() => import("@/components/templates/ArchitectureDiagram").then(m => ({ default: m.ArchitectureDiagram }))),
 
-    // StatusTracker: Progress tracker with stages
-    // USE FOR: Order status, application progress, journey stages
-    StatusTracker: lazy(() => import("@/components/templates/StatusTracker").then(m => ({ default: m.StatusTracker }))),
 
     // ==========================================
     // PEOPLE & CONTACT TEMPLATES
@@ -110,13 +96,7 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // USE FOR: Confirmations, celebrations, success states
     Celebration: lazy(() => import("@/components/templates/Celebration").then(m => ({ default: m.Celebration }))),
 
-    // QuickActions: Action button grid
-    // USE FOR: Quick actions, shortcuts, CTAs
-    QuickActions: lazy(() => import("@/components/templates/QuickActions").then(m => ({ default: m.QuickActions }))),
 
-    // SegmentSelector: Choice/segment selection
-    // USE FOR: Category selection, filters, user choices
-    SegmentSelector: lazy(() => import("@/components/templates/SegmentSelector").then(m => ({ default: m.SegmentSelector }))),
 
     // ==========================================
     // SPECIALIZED TEMPLATES (Domain-Specific)
@@ -126,9 +106,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // USE FOR: Branding previews, customization demos
     BrandingPreview: lazy(() => import("@/components/templates/BrandingPreview").then(m => ({ default: m.BrandingPreview }))),
 
-    // ProblemSolutionMatrix: Problem-solution pairs
-    // USE FOR: Value propositions, pain point resolution
-    ProblemSolutionMatrix: lazy(() => import("@/components/templates/ProblemSolutionMatrix").then(m => ({ default: m.ProblemSolutionMatrix }))),
 
     // ==========================================
     // FISERV-SPECIFIC (Do Not Genericize)
@@ -139,6 +116,4 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
 
     // Onboarding Templates - Fiserv merchant onboarding
     OnboardingStep: lazy(() => import("@/components/templates/OnboardingStep").then(m => ({ default: m.OnboardingStep }))),
-    OnboardingFlow: lazy(() => import("@/components/templates/OnboardingFlow").then(m => ({ default: m.OnboardingFlow }))),
-    OnboardingCarousel: lazy(() => import("@/components/templates/OnboardingCarousel").then(m => ({ default: m.OnboardingCarousel }))),
 };

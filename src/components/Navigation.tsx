@@ -61,7 +61,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'onboarding',
         label: 'ONBOARDING',
-        teleQuery: '(M) Show me the 10-step onboarding carousel'
+        teleQuery: '(M) Show me step 1 of the merchant onboarding'
       },
       {
         id: 'integration',

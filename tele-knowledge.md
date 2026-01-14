@@ -50,7 +50,7 @@
     | Portal experience | **BankPortalMockup** | FeatureGrid |
     | What merchants see | **BankPortalMockup** | IconList |
     | Onboarding process | **OnboardingStep** | WorkflowDiagram |
-    | Application flow | **OnboardingStep** + **ChapterGrid** | SplitContent |
+    | Application flow | **OnboardingStep** | SplitContent |
 
     ---
 

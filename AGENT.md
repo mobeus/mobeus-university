@@ -48,7 +48,6 @@ Tele (the AI voice agent) helps **bank executives** understand the DMA Offer Eng
 ### Generic Templates (Use for ANY content type)
 | Template | Purpose | Key Props |
 |----------|---------|-----------|
-| **ChapterGrid** | Clickable chapter cards in grid | `steps[]`, `journeyTitle` |
 | **FeatureGrid** | Feature cards with icons | `features[]`, `columns` |
 | **FeatureCallouts** | Large icon boxes | `callouts[]`, `columns` |
 | **ImageCards** | Cards with 16:9 images | `offers[]`, `columns` |
@@ -70,8 +69,6 @@ Tele (the AI voice agent) helps **bank executives** understand the DMA Offer Eng
 |----------|---------|
 | **BankPortalMockup** | Bank portal with offer carousel |
 | **OnboardingStep** | Single step in 10-step flow |
-| **OnboardingFlow** | Visual journey diagram |
-| **OnboardingCarousel** | All 10 steps as carousel |
 
 ---
 

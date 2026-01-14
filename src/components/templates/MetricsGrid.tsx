@@ -56,31 +56,31 @@ export const MetricsGrid: React.FC<MetricsGridProps> = ({
                         <div
                             key={metric.id}
                             className={`p-6 rounded-xl border transition-all ${metric.highlight
-                                    ? "bg-gradient-to-br from-cyan-500 to-cyan-600 text-white border-cyan-600 shadow-lg shadow-cyan-500/20"
-                                    : "bg-white border-gray-200 hover:shadow-md"
+                                    ? "bg-gradient-to-br from-orange-500 to-orange-600 text-white border-orange-600 shadow-lg shadow-orange-500/20"
+                                    : "bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20"
                                 }`}
                         >
                             <div className="flex items-start justify-between mb-3">
-                                <IconComponent className={`w-6 h-6 ${metric.highlight ? "text-white/80" : "text-cyan-500"}`} />
+                                <IconComponent className={`w-6 h-6 ${metric.highlight ? "text-white/80" : "text-orange-400"}`} />
                                 {metric.trend && (
                                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${metric.trend === "up"
-                                            ? metric.highlight ? "bg-white/20 text-white" : "bg-green-100 text-green-700"
-                                            : metric.trend === "down"
-                                                ? "bg-red-100 text-red-700"
-                                                : "bg-gray-100 text-gray-600"
+                                        ? metric.highlight ? "bg-white/20 text-white" : "bg-green-100 text-green-700"
+                                        : metric.trend === "down"
+                                            ? "bg-red-100 text-red-700"
+                                            : "bg-gray-100 text-gray-600"
                                         }`}>
                                         {metric.trendValue || (metric.trend === "up" ? "↑" : metric.trend === "down" ? "↓" : "—")}
                                     </span>
                                 )}
                             </div>
-                            <p className={`text-3xl font-bold mb-1 ${metric.highlight ? "text-white" : "text-gray-900"}`}>
+                            <p className={`text-3xl font-bold mb-1 ${metric.highlight ? "text-white" : "text-white"}`}>
                                 {metric.value}
                             </p>
-                            <p className={`text-sm font-medium ${metric.highlight ? "text-white/90" : "text-gray-700"}`}>
+                            <p className={`text-sm font-medium ${metric.highlight ? "text-white/90" : "text-white/80"}`}>
                                 {metric.label}
                             </p>
                             {metric.sublabel && (
-                                <p className={`text-xs mt-1 ${metric.highlight ? "text-white/70" : "text-gray-500"}`}>
+                                <p className={`text-xs mt-1 ${metric.highlight ? "text-white/70" : "text-white/60"}`}>
                                     {metric.sublabel}
                                 </p>
                             )}
@@ -89,13 +89,6 @@ export const MetricsGrid: React.FC<MetricsGridProps> = ({
                 })}
             </div>
 
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <div className="w-3 h-3 rounded-full bg-orange-400" />
-                    Powered by Fiserv
-                </div>
-            </div>
         </div>
     );
 };

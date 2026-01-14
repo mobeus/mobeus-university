@@ -143,14 +143,6 @@ export const FeatureCallouts: React.FC<FeatureCalloutsProps> = ({
                     </button>
                 </div>
             )}
-
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-8">
-                <div className="flex items-center gap-2 text-xs text-white/50">
-                    <div className="w-3 h-3 rounded-full bg-[#ff6600]" />
-                    Powered by Fiserv
-                </div>
-            </div>
         </div>
     );
 };

@@ -109,14 +109,6 @@ export const WorkflowDiagram: React.FC<WorkflowDiagramProps> = ({
             <div className="flex flex-col items-center space-y-0">
                 {steps.map((step, idx) => renderStep(step, idx === steps.length - 1))}
             </div>
-
-            {/* Fiserv Badge */}
-            <div className="flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <div className="w-3 h-3 rounded-full bg-orange-400" />
-                    Powered by Fiserv
-                </div>
-            </div>
         </div>
     );
 };

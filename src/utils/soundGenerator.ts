@@ -100,19 +100,25 @@ export const playUISound = (type: 'on' | 'off', buttonType: 'chat' | 'mic' | 'av
 // ============================================================
 // THINKING SOUND SYSTEM
 // A subtle, pulsing ambient tone that plays while Tele is thinking
+// Limited to MAX 3 plays per thinking session
 // ============================================================
 
 let thinkingOscillators: OscillatorNode[] = [];
 let thinkingGainNodes: GainNode[] = [];
 let thinkingLFO: OscillatorNode | null = null;
 let isThinkingSoundPlaying = false;
+let thinkingSoundPlayCount = 0;
+const MAX_THINKING_SOUND_PLAYS = 3;
 
 /**
  * Starts a subtle pulsing ambient sound for the "thinking" state
  * Creates an ethereal, minimal pulse that won't compete with voice
+ * Limited to MAX 3 plays per thinking session
  */
 export const playThinkingSound = (): void => {
+  // Skip if already playing or if we've hit the max plays limit
   if (isThinkingSoundPlaying) return;
+  if (thinkingSoundPlayCount >= MAX_THINKING_SOUND_PLAYS) return;
 
   try {
     const ctx = getUIAudioContext();
@@ -122,6 +128,8 @@ export const playThinkingSound = (): void => {
       ctx.resume();
     }
 
+    // Increment play counter
+    thinkingSoundPlayCount++;
     isThinkingSoundPlaying = true;
 
     const startGain = 0.0075; // Reduced by 50%
@@ -196,6 +204,7 @@ export const playThinkingSound = (): void => {
 
 /**
  * Stops the thinking sound with a smooth fade out
+ * Resets the play counter for the next thinking session
  */
 export const stopThinkingSound = (): void => {
   if (!isThinkingSoundPlaying) return;
@@ -230,6 +239,7 @@ export const stopThinkingSound = (): void => {
       thinkingGainNodes = [];
       thinkingLFO = null;
       isThinkingSoundPlaying = false;
+      thinkingSoundPlayCount = 0; // Reset counter for next session
     }, fadeOutTime * 1000 + 50);
 
   } catch (error) {
@@ -243,5 +253,6 @@ export const stopThinkingSound = (): void => {
     thinkingGainNodes = [];
     thinkingLFO = null;
     isThinkingSoundPlaying = false;
+    thinkingSoundPlayCount = 0; // Reset counter for next session
   }
 };
