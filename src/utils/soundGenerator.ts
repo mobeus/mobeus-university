@@ -132,7 +132,7 @@ export const playThinkingSound = (): void => {
     thinkingSoundPlayCount++;
     isThinkingSoundPlaying = true;
 
-    const startGain = 0.0075; // Reduced by 50%
+    const startGain = 0.005; // Reduced by 1/3 from 0.0075
     const minGain = startGain * 0.5; // Never go below 50%
 
     // Create main oscillators - soft harmonic tones
@@ -164,7 +164,7 @@ export const playThinkingSound = (): void => {
 
     thinkingLFO.type = 'sine';
     thinkingLFO.frequency.setValueAtTime(0.8, ctx.currentTime); // ~1Hz pulse
-    lfoGain.gain.setValueAtTime(0.008, ctx.currentTime); // Subtle modulation depth
+    lfoGain.gain.setValueAtTime(0.005, ctx.currentTime); // Subtle modulation depth (reduced by 1/3)
 
     thinkingLFO.connect(lfoGain);
 
