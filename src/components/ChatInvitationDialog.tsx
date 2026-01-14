@@ -1,6 +1,7 @@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
+import { useSound } from "@/hooks/useSound";
 
 type InvitationType = "chat" | "audio" | "video";
 
@@ -31,13 +32,16 @@ const dialogCopy: Record<InvitationType, { title: string; description: string; a
 
 export function ChatInvitationDialog({ open, type, onAccept, onDecline }: ChatInvitationDialogProps) {
   const { title, description, acceptLabel } = dialogCopy[type];
+  const { playClick } = useSound();
 
   const handleAcceptClick = () => {
+    playClick();
     handleAcknowledgment('chat-accept');
     onAccept();
   };
 
   const handleDeclineClick = () => {
+    playClick();
     handleAcknowledgment('chat-decline');
     onDecline();
   };

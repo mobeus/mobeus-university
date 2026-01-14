@@ -15,7 +15,8 @@ import { URLPreview } from "@/components/chat/URLPreview";
 import { URLPreviewLoading } from "@/components/chat/URLPreviewLoading";
 import type { OpenGraphData } from "@/types/openGraph";
 import { ChatInvitationDialog } from "@/components/ChatInvitationDialog";
-import { playUISound } from "@/utils/soundGenerator";
+import { playUISound, playThinkingSound, stopThinkingSound } from "@/utils/soundGenerator";
+import { ThinkingIndicator } from "@/components/ThinkingIndicator";
 import { notifyTele } from "@/utils/acknowledgmentHelpers";
 import { useLightboard } from "@/contexts/LightboardContext";
 
@@ -49,6 +50,19 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
   const [showVideoInvitation, setShowVideoInvitation] = useState(false);
   const { isLightboardMode, toggleLightboard } = useLightboard();
   const [isOTPDialogOpen, setIsOTPDialogOpen] = useState(false);
+  const [navigationIsLoading, setNavigationIsLoading] = useState(false);
+
+  // Control thinking sound based on navigation loading state
+  useEffect(() => {
+    if (navigationIsLoading) {
+      playThinkingSound();
+    } else {
+      stopThinkingSound();
+    }
+    return () => {
+      stopThinkingSound();
+    };
+  }, [navigationIsLoading]);
 
 
   const [isMouseActive, setIsMouseActive] = useState(true);
@@ -426,6 +440,31 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
           if (status === 'connected') ensureMutedAfterConnect();
         }
       };
+      const onOutputItemAdded = (event: any) => {
+        if (
+          event.item.type === "function_call" &&
+          event.item.name === "navigateToSection"
+        ) {
+          setNavigationIsLoading(true);
+          window.dispatchEvent(
+            new CustomEvent("navigationLoadingChange", {
+              detail: { isLoading: true },
+            })
+          );
+        }
+      };
+      const onFunctionCallCompleted = (event: any) => {
+        if (event.name === "navigateToSection") {
+          setNavigationIsLoading(false);
+          window.dispatchEvent(
+            new CustomEvent("navigationLoadingChange", {
+              detail: { isLoading: false },
+            })
+          );
+        }
+      };
+      model.addEventListener("outputItemAdded", onOutputItemAdded);
+      model.addEventListener("functionCallCompleted", onFunctionCallCompleted);
       model.addEventListener("muteStateChanged", onMuteChange);
       model.addEventListener("connectionStateChange", onConnChange);
       model.addEventListener("statusChange", onStatus);
@@ -699,6 +738,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
 
   return (
     <>
+      <ThinkingIndicator isActive={navigationIsLoading} />
       {/* Normal positioning when chat glass is closed */}
       <TeleglassIcons
         isChatGlassOpen={isChatGlassOpen}

@@ -49,7 +49,7 @@ const WELCOME_VARIANTS = [
               subtitle: "New Revenue Stream",
               description: "Monetize your digital channels with embedded merchant offers. One API integration, your branding, zero disruption.",
               icon: "trending",
-              actionPhrase: "Tell me more about value for banks"
+              actionPhrase: "Show me more about value for banks"
             },
             {
               id: "v2",
@@ -57,7 +57,7 @@ const WELCOME_VARIANTS = [
               subtitle: "Right Offer, Right Time",
               description: "Merchants get relevant products when they need them—POS systems, capital, credit lines—all within their trusted banking portal.",
               icon: "users",
-              actionPhrase: "Tell me more about value for merchants"
+              actionPhrase: "Show me more about value for merchants"
             },
             {
               id: "v3",
@@ -65,7 +65,7 @@ const WELCOME_VARIANTS = [
               subtitle: "Trust + Timing = Conversion",
               description: "Merchants trust their bank. Contextual offers at the right moment convert better than cold outreach. You stay in the relationship.",
               icon: "check",
-              actionPhrase: "Tell me why this model works"
+              actionPhrase: "Show me why this model works"
             }
           ]
         }
@@ -230,6 +230,18 @@ const Index = () => {
       window.removeEventListener("pageshow", handlePageShow);
     };
   }, [cleanupSessionStorage]);
+
+  // Toggle body class for background pulsing effect while connecting
+  useEffect(() => {
+    if (isConnecting) {
+      document.body.classList.add('avatar-connecting');
+    } else {
+      document.body.classList.remove('avatar-connecting');
+    }
+    return () => {
+      document.body.classList.remove('avatar-connecting');
+    };
+  }, [isConnecting]);
 
   const attachUIFrameworkDisconnectCleanup = useCallback(() => {
     if (typeof window === "undefined") {
@@ -950,14 +962,14 @@ const Index = () => {
 
     const isVerified = verifyAuthCode(otp);
     if (isVerified) {
-      notifyTele("Tell me that the user has successfully authenticated and now has access behind the NDA firewall");
+      notifyTele("Show me a success message that I have successfully authenticated and now have access behind the NDA firewall");
       window.showEmotion("happy");
       if (backData) {
         window.teleNavigation.navigateToSection(backData);
       }
 
     } else {
-      notifyTele("Tell me that the code entered is incorrect and ask to try again");
+      notifyTele("Show me an error that the code entered is incorrect and ask to try again");
     }
   };
 
@@ -1245,7 +1257,7 @@ const Index = () => {
         onNavigateToNDAFirewall={() => {
           setBackData(navigationBackData);
           handleSectionChange("nda-firewall");
-          notifyTele("Tell me to enter my email or phone to get the code");
+          notifyTele("Show me the NDA authentication screen to enter my email or phone to get the code");
         }}
       />
     );

@@ -69,10 +69,15 @@ export const useSound = () => {
     }
   }, [volume]);
 
-  // Generic click
+  // Generic click - ensures audio context is active
   const playClick = useCallback(() => {
+    // Resume audio context on user interaction (browser autoplay policy)
+    const ctx = initAudioContext();
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume();
+    }
     void playUniversalSound();
-  }, [playUniversalSound]);
+  }, [initAudioContext, playUniversalSound]);
 
   // Teleglass specific
   const playTeleglassSound = useCallback(() => {

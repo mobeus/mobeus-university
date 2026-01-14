@@ -75,6 +75,7 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
     const { playClick } = useSound();
 
     const handleAction = (actionPhrase: string) => {
+        console.log('[FeatureGrid] Card clicked, playing sound for:', actionPhrase);
         playClick();
         notifyTele(actionPhrase);
     };

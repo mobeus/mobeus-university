@@ -1,5 +1,5 @@
 /**
- * OfferCards
+ * ImageCards
  * Display merchant offers with 16:9 images at the top, dark glass styling
  * Design: Image fills top of card edge-to-edge, content below
  */
@@ -21,7 +21,7 @@ interface OfferCard {
     actionPhrase?: string;
 }
 
-interface OfferCardsProps {
+interface ImageCardsProps {
     offers: OfferCard[];
     columns?: 2 | 3 | 4;
     animationClass?: string;
@@ -43,7 +43,7 @@ const defaultImages: Record<string, string> = {
     "default": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop&q=80",
 };
 
-export const OfferCards: React.FC<OfferCardsProps> = ({
+export const ImageCards: React.FC<ImageCardsProps> = ({
     offers = [],
     columns = 3,
     animationClass = "",
@@ -147,4 +147,4 @@ export const OfferCards: React.FC<OfferCardsProps> = ({
     );
 };
 
-export default OfferCards;
+export default ImageCards;

@@ -56,7 +56,7 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
         { id: "2", name: "Open Savings", availableBalance: "$10,320.29", currentBalance: "$10,320.29" },
         { id: "3", name: "Secondary Savings", availableBalance: "$1,800.19", currentBalance: "$1,800.19" },
     ],
-    offers,
+    offers = [],
     autoRotate = true,
     rotateInterval = 5000,
     consentText = "By checking this box I consent to shared data with Fiserv",
@@ -67,26 +67,28 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
     const [isConsentChecked, setIsConsentChecked] = useState(false);
     const { playClick } = useSound();
 
-    // Auto-rotate offers
+    // Auto-rotate offers (safely handles empty offers)
     useEffect(() => {
-        if (!autoRotate || offers.length <= 1) return;
+        if (!autoRotate || !offers || offers.length <= 1) return;
 
         const timer = setInterval(() => {
             setCurrentOfferIndex((prev) => (prev + 1) % offers.length);
         }, rotateInterval);
 
         return () => clearInterval(timer);
-    }, [autoRotate, rotateInterval, offers.length]);
+    }, [autoRotate, rotateInterval, offers]);
 
     const goToPrevious = useCallback(() => {
+        if (!offers || offers.length === 0) return;
         playClick();
         setCurrentOfferIndex((prev) => (prev - 1 + offers.length) % offers.length);
-    }, [offers.length, playClick]);
+    }, [offers, playClick]);
 
     const goToNext = useCallback(() => {
+        if (!offers || offers.length === 0) return;
         playClick();
         setCurrentOfferIndex((prev) => (prev + 1) % offers.length);
-    }, [offers.length, playClick]);
+    }, [offers, playClick]);
 
     const handleOfferClick = useCallback((offer: OfferCard) => {
         playClick();
@@ -99,6 +101,12 @@ export const BankPortalMockup: React.FC<BankPortalMockupProps> = ({
             sendToTele(account.actionPhrase);
         }
     }, [playClick]);
+
+    // Early return if no offers - prevents crash and renders nothing
+    if (!offers || offers.length === 0) {
+        console.warn('[BankPortalMockup] No offers provided, skipping render');
+        return null;
+    }
 
     const currentOffer = offers[currentOfferIndex];
 

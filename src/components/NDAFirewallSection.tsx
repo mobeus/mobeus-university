@@ -121,7 +121,7 @@ const NDAFirewallSection = ({
         } else if (user.phone) {
           message = "Check your phone for the 6-digit code";
         }
-        notifyTele(`Improvise a response that is less than 10 words using this as your raw material - ${message}`);
+        notifyTele(`Show me a message that says: ${message}`);
         toast.success(message);
 
         // Focus first input after a short delay
@@ -200,7 +200,7 @@ const NDAFirewallSection = ({
       const isVerified = verifyAuthCode(code);
       if (!isVerified) {
         toast.error("Invalid code. Please try again.");
-        notifyTele("Improvise a response that is less than 10 words using this as your raw material - The code you entered is incorrect, please try again");
+        notifyTele("Show me an error that the code entered is incorrect, please try again");
         setCodeDigits(['', '', '', '', '', '']);
         inputRefs.current[0]?.focus();
         return;
@@ -208,7 +208,7 @@ const NDAFirewallSection = ({
 
       // On success, navigate to next section or show success
       toast.success("Access granted!");
-      notifyTele("Improvise a response that is less than 10 words using this as your raw material - Access granted. Welcome!");
+      notifyTele("Show me a success message: Access granted. Welcome!");
       (window as any).teleNavigation?.navigateToSection?.("welcome");
       (window as any).showEmotion?.("happy");
 
@@ -235,7 +235,7 @@ const NDAFirewallSection = ({
     try {
       await sendAuthCode("", matchedUser.email, matchedUser.phone);
       toast.success("New code sent!");
-      notifyTele("Improvise a response that is less than 10 words using this as your raw material - A new code has been sent");
+      notifyTele("Show me a message that a new code has been sent");
     } catch (error) {
       console.error("[NDA] Resend error:", error);
       toast.error("Failed to resend code");
@@ -252,7 +252,7 @@ const NDAFirewallSection = ({
 
     try {
       await sendNdaAccessRequestEmail(email);
-      notifyTele("User just sent a request to get accsess to ristricted area. Notify the user that we will review their request and get back to them shortly");
+      notifyTele("Show me a message that we received the access request and will review and respond shortly");
       toast.success("Request received. We'll review and respond shortly.");
       (window as any).teleNavigation?.navigateToSection?.("welcome");
     } catch (error) {

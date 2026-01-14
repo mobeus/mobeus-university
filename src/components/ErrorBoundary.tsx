@@ -2,6 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { handleAcknowledgment } from '@/utils/acknowledgmentHelpers';
+import { playUISound } from '@/utils/soundGenerator';
 
 interface Props {
   children: ReactNode;
@@ -30,11 +31,13 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   private handleReset = () => {
+    playUISound('on', 'avatar', 0.5);
     handleAcknowledgment('error-reset');
     this.setState({ hasError: false, error: null });
   };
 
   private handleReload = () => {
+    playUISound('on', 'avatar', 0.5);
     handleAcknowledgment('error-reload');
     window.location.reload();
   };

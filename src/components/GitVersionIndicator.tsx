@@ -28,10 +28,10 @@ export const GitVersionIndicator: React.FC = () => {
                 // This prevents showing "current time" as build time
                 const fallback: BuildInfo = {
                     hash: 'dev',
-                    timestamp: 'Jan 14, 2026, 1:58 AM',
-                    author: 'Santhosh Rao',
+                    timestamp: 'Jan 14, 2026, 3:49 AM',
+                    author: 'Richie Etwaru',
                     branch: 'main',
-                    buildDate: '2026-01-14T01:58:36.000Z'
+                    buildDate: '2026-01-14T08:49:31.000Z'
                 };
                 setBuildInfo(fallback);
             }
@@ -58,7 +58,7 @@ export const GitVersionIndicator: React.FC = () => {
             className="fixed top-4 right-4 z-50 pointer-events-none select-none transition-opacity duration-300"
             style={{
                 fontFamily: 'monospace',
-                fontSize: '5.5px',
+                fontSize: '11px',
                 color: 'rgba(255, 255, 255, 0.175)',
                 letterSpacing: '0.5px',
                 textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
@@ -66,11 +66,11 @@ export const GitVersionIndicator: React.FC = () => {
                 lineHeight: '1.5',
             }}
         >
-            <div style={{ fontSize: '5px', opacity: 0.6 }}>Last Compiled</div>
+            <div style={{ fontSize: '10px', opacity: 0.6 }}>Last Compiled</div>
             <div style={{ fontWeight: 'bold' }}>{buildInfo.timestamp}</div>
-            <div style={{ fontSize: '5px', opacity: 0.6, marginTop: '4px' }}>Engineer</div>
+            <div style={{ fontSize: '10px', opacity: 0.6, marginTop: '4px' }}>Engineer</div>
             <div style={{ fontWeight: 'bold' }}>{buildInfo.author}</div>
-            <div style={{ fontSize: '4.5px', opacity: 0.4, marginTop: '4px' }}>{buildInfo.hash} · {buildInfo.branch}</div>
+            <div style={{ fontSize: '9px', opacity: 0.4, marginTop: '4px' }}>{buildInfo.hash} · {buildInfo.branch}</div>
         </div>
     );
 };

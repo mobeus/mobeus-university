@@ -36,7 +36,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
 
   // ============================================
   // FISERV OFFER ENGINE NAVIGATION
-  // Maps to the 5 CHAPTERS conversation structure
+  // 6 Menu items for complete demo coverage
   // ============================================
   const navItems: Array<{
     id: string;
@@ -46,7 +46,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'home',
         label: 'HOME',
-        teleQuery: '(M) Welcome - show me the 5 chapters overview'
+        teleQuery: '(M) Show me the welcome overview'
       },
       {
         id: 'bank-portal',
@@ -54,19 +54,24 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: '(M) Show me the bank portal with the offer'
       },
       {
-        id: 'offer-onboarding',
-        label: 'OFFER ONBOARDING',
-        teleQuery: '(M) Show me the complete onboarding flow'
+        id: 'devices',
+        label: 'DEVICES',
+        teleQuery: '(M) Show me the Clover device comparison'
+      },
+      {
+        id: 'onboarding',
+        label: 'ONBOARDING',
+        teleQuery: '(M) Show me the 10-step onboarding carousel'
       },
       {
         id: 'integration',
         label: 'INTEGRATION',
-        teleQuery: '(M) How does the One API integration work?'
+        teleQuery: '(M) Show me how the One API integration works'
       },
       {
         id: 'next-steps',
-        label: 'NEXT STEPS',
-        teleQuery: "(M) I want to schedule a meeting with Fiserv"
+        label: 'BOOK DEMO',
+        teleQuery: '(M) Show me how to schedule a meeting with Fiserv'
       }
     ];
 
@@ -138,6 +143,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                 <button
                   onClick={() => {
                     handleAcknowledgment('nav-menu-open');
+                    playUniversalSound();
                     setIsMenuOpen(!isMenuOpen);
                   }}
                   className="xl:hidden p-2 rounded-full text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 mr-3"
@@ -156,6 +162,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 xl:hidden transition-opacity duration-300"
           onClick={() => {
             handleAcknowledgment('nav-menu-close');
+            playUniversalSound();
             setIsMenuOpen(false);
           }}
         />

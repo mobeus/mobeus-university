@@ -1,5 +1,5 @@
 /**
- * OnboardingJourney
+ * ChapterGrid
  * Visual timeline template showing onboarding steps with activities,
  * people involved, and expected duration between phases.
  */
@@ -53,7 +53,7 @@ interface JourneyStep {
     actionPhrase?: string;
 }
 
-interface OnboardingJourneyProps {
+interface ChapterGridProps {
     // Journey title
     journeyTitle?: string;
     journeySubtitle?: string;
@@ -112,7 +112,7 @@ const personIconMap = {
     system: Zap,
 };
 
-export const OnboardingJourney: React.FC<OnboardingJourneyProps> = ({
+export const ChapterGrid: React.FC<ChapterGridProps> = ({
     journeyTitle = "Merchant Onboarding Journey",
     journeySubtitle,
     steps = [],
@@ -393,4 +393,4 @@ export const OnboardingJourney: React.FC<OnboardingJourneyProps> = ({
     );
 };
 
-export default OnboardingJourney;
+export default ChapterGrid;

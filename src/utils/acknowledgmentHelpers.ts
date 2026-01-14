@@ -144,258 +144,258 @@ const ACKNOWLEDGMENT_CONFIG: Record<AcknowledgmentId, AcknowledgmentConfig> = {
   // Proposal sections
   "proposal-overview": {
     key: "proposalOverviewAcknowledged",
-    message: "Tell me about the comprehensive national development information being reviewed",
+    message: "Show me about the comprehensive national development information being reviewed",
   },
   "proposal-value": {
     key: "proposalValueAcknowledged",
-    message: "Tell me about the measurable business value and ROI for warranty operations",
+    message: "Show me about the measurable business value and ROI for warranty operations",
   },
   "proposal-leverage": {
     key: "proposalLeverageAcknowledged",
-    message: "Tell me about the technology leverage and integration capabilities",
+    message: "Show me about the technology leverage and integration capabilities",
   },
   "proposal-alignment": {
     key: "proposalAlignmentAcknowledged",
-    message: "Tell me about the strategic alignment with Guyana's development goals",
+    message: "Show me about the strategic alignment with Guyana's development goals",
   },
 
   // Technology sections
   "any-model": {
     key: "anyModelAcknowledged",
-    message: "Tell me about AI model flexibility and multi-provider support",
+    message: "Show me about AI model flexibility and multi-provider support",
   },
   "any-cloud": {
     key: "anyCloudAcknowledged",
-    message: "Tell me about cloud-native architecture and deployment options",
+    message: "Show me about cloud-native architecture and deployment options",
   },
   "any-experience": {
     key: "anyExperienceAcknowledged",
-    message: "Tell me about omnichannel user experience capabilities",
+    message: "Show me about omnichannel user experience capabilities",
   },
 
   // Solution sections
   "solution-overview": {
     key: "solutionOverviewAcknowledged",
-    message: "Tell me about the comprehensive solution architecture and capabilities",
+    message: "Show me about the comprehensive solution architecture and capabilities",
   },
   "solution-speed": {
     key: "solutionSpeedAcknowledged",
-    message: "Tell me about rapid deployment and time-to-value strategies",
+    message: "Show me about rapid deployment and time-to-value strategies",
   },
   "solution-economics": {
     key: "solutionEconomicsAcknowledged",
-    message: "Tell me about cost optimization and measurable ROI",
+    message: "Show me about cost optimization and measurable ROI",
   },
   "solution-risk": {
     key: "solutionRiskAcknowledged",
-    message: "Tell me about compliance, security, and governance frameworks",
+    message: "Show me about compliance, security, and governance frameworks",
   },
 
   // Navigation & UI actions
   "nav-back": {
     key: "navBackAcknowledged",
-    message: "Tell me that we are navigating back to the welcome screen",
+    message: "Show me that we are navigating back to the welcome screen",
   },
   "nav-scroll-top": {
     key: "navScrollTopAcknowledged",
-    message: "Tell me that we are scrolling to the top of the page",
+    message: "Show me that we are scrolling to the top of the page",
   },
   "nav-menu-open": {
     key: "navMenuOpenAcknowledged",
-    message: "Tell me that the navigation menu is opening",
+    message: "Show me that the navigation menu is opening",
   },
   "nav-menu-close": {
     key: "navMenuCloseAcknowledged",
-    message: "Tell me that the navigation menu is closing",
+    message: "Show me that the navigation menu is closing",
   },
   "copy-deeplink": {
     key: "copyDeeplinkAcknowledged",
-    message: "Tell me that the deep link has been copied to the clipboard",
+    message: "Show me that the deep link has been copied to the clipboard",
   },
   "error-reset": {
     key: "errorResetAcknowledged",
-    message: "Tell me that the error boundary is being reset",
+    message: "Show me that the error boundary is being reset",
   },
   "error-reload": {
     key: "errorReloadAcknowledged",
-    message: "Tell me that the application is reloading",
+    message: "Show me that the application is reloading",
   },
   "chat-accept": {
     key: "chatAcceptAcknowledged",
-    message: "Tell me that the chat invitation has been accepted",
+    message: "Show me that the chat invitation has been accepted",
   },
   "chat-decline": {
     key: "chatDeclineAcknowledged",
-    message: "Tell me that the chat invitation has been declined",
+    message: "Show me that the chat invitation has been declined",
   },
 
   // Starter section actions
   "starter-copy-code": {
     key: "starterCopyCodeAcknowledged",
-    message: "Tell me that the code snippet is being copied for implementation",
+    message: "Show me that the code snippet is being copied for implementation",
   },
   "starter-contact": {
     key: "starterContactAcknowledged",
-    message: "Tell me that the contact form is opening for inquiries",
+    message: "Show me that the contact form is opening for inquiries",
   },
   "starter-learn-more": {
     key: "starterLearnMoreAcknowledged",
-    message: "Tell me more about tele capabilities",
+    message: "Show me more about tele capabilities",
   },
 
   // Evidence section
   "evidence-copy": {
     key: "evidenceCopyAcknowledged",
-    message: "Tell me that the compliance evidence data is being copied",
+    message: "Show me that the compliance evidence data is being copied",
   },
   "evidence-followup": {
     key: "evidenceFollowupAcknowledged",
-    message: "Tell me that you are taking a message about evidence for RFP responders",
+    message: "Show me that you are taking a message about evidence for RFP responders",
   },
 
   // Things I Can Do
   "capture-followup": {
     key: "captureFollowupAcknowledged",
-    message: "Tell me that if I have questions I don't see answers to, you can take that message and send it back to the RFP responders",
+    message: "Show me that if I have questions I don't see answers to, you can take that message and send it back to the RFP responders",
   },
   "speak-language": {
     key: "speakAnyLanguageAcknowledged",
-    message: "Tell me that I can just start speaking a different language and you will automatically change to speak in that language",
+    message: "Show me that I can just start speaking a different language and you will automatically change to speak in that language",
   },
   "schedule-meeting": {
     key: "scheduleMeetingsAcknowledged",
-    message: "Tell me that you can schedule meetings with the RFP responders for me",
+    message: "Show me that you can schedule meetings with the RFP responders for me",
   },
 
   // Menu actions
   "menu-followup": {
     key: "menuFollowupAcknowledged",
-    message: "Tell me that you are ready to take a message for the RFP responders",
+    message: "Show me that you are ready to take a message for the RFP responders",
   },
   "menu-scheduling": {
     key: "menuSchedulingAcknowledged",
-    message: "Tell me that you are ready to help coordinate a meeting to discuss the RFP response",
+    message: "Show me that you are ready to help coordinate a meeting to discuss the RFP response",
   },
   "menu-suggest": {
     key: "menuSuggestAcknowledged",
-    message: "Tell me that you are ready to provide helpful questions about the proposal",
+    message: "Show me that you are ready to provide helpful questions about the proposal",
   },
   "menu-responses": {
     key: "menuResponsesAcknowledged",
-    message: "Tell me that you are ready to show available responses and Q&A",
+    message: "Show me that you are ready to show available responses and Q&A",
   },
 
   // Take Message section
   "message-request-info": {
     key: "messageRequestInfoAcknowledged",
-    message: "Tell me that you are ready to capture an information request",
+    message: "Show me that you are ready to capture an information request",
   },
   "message-clarify": {
     key: "messageClarifyAcknowledged",
-    message: "Tell me that you are ready to answer questions to clarify information",
+    message: "Show me that you are ready to answer questions to clarify information",
   },
   "message-other": {
     key: "messageOtherAcknowledged",
-    message: "Tell me that you are ready to capture another type of message",
+    message: "Show me that you are ready to capture another type of message",
   },
 
   // Scheduling section
   "schedule-workshop": {
     key: "scheduleWorkshopAcknowledged",
-    message: "Tell me that you are ready to coordinate a 2-hour collaborative workshop",
+    message: "Show me that you are ready to coordinate a 2-hour collaborative workshop",
   },
   "schedule-checkin": {
     key: "scheduleCheckinAcknowledged",
-    message: "Tell me that you are ready to find a time for a 30-minute engagement check-in",
+    message: "Show me that you are ready to find a time for a 30-minute engagement check-in",
   },
   "schedule-qa": {
     key: "scheduleQAAcknowledged",
-    message: "Tell me that you are ready to book a 1-hour Q&A clarification session",
+    message: "Show me that you are ready to book a 1-hour Q&A clarification session",
   },
 
   // Carousel navigation
   "carousel-nav": {
     key: "carouselNavAcknowledged",
-    message: "Tell me that we are navigating through carousel slides",
+    message: "Show me that we are navigating through carousel slides",
   },
 
   // NDA Firewall users
   "nda-brijesh": {
     key: "ndaBrijeshAcknowledged",
-    message: "Tell me that you've sent the security code to Brijesh's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Brijesh's email and ask him to tell you the code when he receives it",
   },
   "nda-maurice": {
     key: "ndaMauriceAcknowledged",
-    message: "Tell me that you've sent the security code to Maurice's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Maurice's email and ask him to tell you the code when he receives it",
   },
   "nda-lee": {
     key: "ndaLeeAcknowledged",
-    message: "Tell me that you've sent the security code to Lee's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Lee's email and ask him to tell you the code when he receives it",
   },
   "nda-miles": {
     key: "ndaMilesAcknowledged",
-    message: "Tell me that you've sent the security code to Miles's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Miles's email and ask him to tell you the code when he receives it",
   },
   "nda-kieron": {
     key: "ndaKieronAcknowledged",
-    message: "Tell me that you've sent the security code to Kieron's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Kieron's email and ask him to tell you the code when he receives it",
   },
   "nda-tuhin": {
     key: "ndaTuhinAcknowledged",
-    message: "Tell me that you've sent the security code to Tuhin's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Tuhin's email and ask him to tell you the code when he receives it",
   },
   "nda-dan": {
     key: "ndaDanAcknowledged",
-    message: "Tell me that you've sent the security code to Dan's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Dan's email and ask him to tell you the code when he receives it",
   },
   "nda-james": {
     key: "ndaJamesAcknowledged",
-    message: "Tell me that you've sent the security code to James's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to James's email and ask him to tell you the code when he receives it",
   },
   "nda-simon": {
     key: "ndaSimonAcknowledged",
-    message: "Tell me that you've sent the security code to Simon's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Simon's email and ask him to tell you the code when he receives it",
   },
   "nda-sujay": {
     key: "ndaSujayAcknowledged",
-    message: "Tell me that you've sent the security code to Sujay's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Sujay's email and ask him to tell you the code when he receives it",
   },
   "nda-venkata": {
     key: "ndaVenkataAcknowledged",
-    message: "Tell me that you've sent the security code to Venkata's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Venkata's email and ask him to tell you the code when he receives it",
   },
   "nda-vinay": {
     key: "ndaVinayAcknowledged",
-    message: "Tell me that you've sent the security code to Vinay's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Vinay's email and ask him to tell you the code when he receives it",
   },
   "nda-yann": {
     key: "ndaYannAcknowledged",
-    message: "Tell me that you've sent the security code to Yann's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Yann's email and ask him to tell you the code when he receives it",
   },
   "nda-ahmet": {
     key: "ndaAhmetAcknowledged",
-    message: "Tell me that you've sent the security code to Ahmet's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Ahmet's email and ask him to tell you the code when he receives it",
   },
   "nda-nima": {
     key: "ndaNimaAcknowledged",
-    message: "Tell me that Nima has access behind the NDA firewall now",
+    message: "Show me that Nima has access behind the NDA firewall now",
   },
   "nda-joe": {
     key: "ndaJoeAcknowledged",
-    message: "Tell me that you've sent the security code to Joe's email and ask him to tell you the code when he receives it",
+    message: "Show me that you've sent the security code to Joe's email and ask him to tell you the code when he receives it",
   },
   "nda-richie": {
     key: "ndaRichieAcknowledged",
-    message: "Tell me that Richie has access behind the NDA firewall now",
+    message: "Show me that Richie has access behind the NDA firewall now",
   },
   "nda-gene": {
     key: "ndaGeneAcknowledged",
-    message: "Tell me that Gene has access behind the NDA firewall now",
+    message: "Show me that Gene has access behind the NDA firewall now",
   },
 
   "nda-request-access": {
     key: "ndaRequestAccessAcknowledged",
-    message: "Tell me that you are collecting information to forward to the authorization team for NDA firewall access",
+    message: "Show me that you are collecting information to forward to the authorization team for NDA firewall access",
   },
 };
 

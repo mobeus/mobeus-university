@@ -96,3 +96,152 @@ export const playUISound = (type: 'on' | 'off', buttonType: 'chat' | 'mic' | 'av
     console.warn("Sound playback failed", error);
   }
 };
+
+// ============================================================
+// THINKING SOUND SYSTEM
+// A subtle, pulsing ambient tone that plays while Tele is thinking
+// ============================================================
+
+let thinkingOscillators: OscillatorNode[] = [];
+let thinkingGainNodes: GainNode[] = [];
+let thinkingLFO: OscillatorNode | null = null;
+let isThinkingSoundPlaying = false;
+
+/**
+ * Starts a subtle pulsing ambient sound for the "thinking" state
+ * Creates an ethereal, minimal pulse that won't compete with voice
+ */
+export const playThinkingSound = (): void => {
+  if (isThinkingSoundPlaying) return;
+
+  try {
+    const ctx = getUIAudioContext();
+    if (!ctx) return;
+
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+
+    isThinkingSoundPlaying = true;
+
+    const startGain = 0.0075; // Reduced by 50%
+    const minGain = startGain * 0.5; // Never go below 50%
+
+    // Create main oscillators - soft harmonic tones
+    const frequencies = [261.63, 392.00]; // C4 and G4 - perfect fifth
+
+    frequencies.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      // Very quiet - almost subliminal
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(startGain, ctx.currentTime + 0.5); // Fade in
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+
+      thinkingOscillators.push(osc);
+      thinkingGainNodes.push(gain);
+    });
+
+    // Create LFO for pulsing effect
+    thinkingLFO = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+
+    thinkingLFO.type = 'sine';
+    thinkingLFO.frequency.setValueAtTime(0.8, ctx.currentTime); // ~1Hz pulse
+    lfoGain.gain.setValueAtTime(0.008, ctx.currentTime); // Subtle modulation depth
+
+    thinkingLFO.connect(lfoGain);
+
+    // Connect LFO to modulate the gain of main oscillators
+    thinkingGainNodes.forEach(gain => {
+      lfoGain.connect(gain.gain);
+    });
+
+    thinkingLFO.start(ctx.currentTime);
+
+    // Gradually reduce volume over time, but never below 50%
+    let currentGain = startGain;
+    const fadeInterval = setInterval(() => {
+      if (!isThinkingSoundPlaying) {
+        clearInterval(fadeInterval);
+        return;
+      }
+
+      // Reduce by 10% every 2 seconds
+      currentGain = Math.max(minGain, currentGain * 0.9);
+
+      thinkingGainNodes.forEach(gain => {
+        try {
+          gain.gain.linearRampToValueAtTime(currentGain, ctx.currentTime + 0.3);
+        } catch (_) { }
+      });
+    }, 2000);
+
+    // Store interval reference for cleanup
+    (window as any).__thinkingFadeInterval = fadeInterval;
+
+  } catch (error) {
+    console.warn("Thinking sound failed to start", error);
+    isThinkingSoundPlaying = false;
+  }
+};
+
+/**
+ * Stops the thinking sound with a smooth fade out
+ */
+export const stopThinkingSound = (): void => {
+  if (!isThinkingSoundPlaying) return;
+
+  try {
+    const ctx = getUIAudioContext();
+    if (!ctx) return;
+
+    // Clear the fade interval
+    if ((window as any).__thinkingFadeInterval) {
+      clearInterval((window as any).__thinkingFadeInterval);
+      delete (window as any).__thinkingFadeInterval;
+    }
+
+    const fadeOutTime = 0.3;
+
+    // Fade out all gain nodes
+    thinkingGainNodes.forEach(gain => {
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + fadeOutTime);
+    });
+
+    // Stop oscillators after fade
+    setTimeout(() => {
+      thinkingOscillators.forEach(osc => {
+        try { osc.stop(); } catch (_) { }
+      });
+      if (thinkingLFO) {
+        try { thinkingLFO.stop(); } catch (_) { }
+      }
+
+      thinkingOscillators = [];
+      thinkingGainNodes = [];
+      thinkingLFO = null;
+      isThinkingSoundPlaying = false;
+    }, fadeOutTime * 1000 + 50);
+
+  } catch (error) {
+    console.warn("Thinking sound failed to stop", error);
+    // Force cleanup
+    if ((window as any).__thinkingFadeInterval) {
+      clearInterval((window as any).__thinkingFadeInterval);
+      delete (window as any).__thinkingFadeInterval;
+    }
+    thinkingOscillators = [];
+    thinkingGainNodes = [];
+    thinkingLFO = null;
+    isThinkingSoundPlaying = false;
+  }
+};

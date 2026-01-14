@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MicroInteraction } from "@/components/MicroInteraction";
 import { LucideIcon } from "lucide-react";
 import { sendToTele, generateCardPrompt } from "@/utils/teleInteraction";
+import { useSound } from "@/hooks/useSound";
 
 interface StatCardProps {
   icon: LucideIcon;
@@ -12,6 +13,8 @@ interface StatCardProps {
 }
 
 const StatCard = ({ icon: Icon, stat, title, description, className = "" }: StatCardProps) => {
+  const { playClick } = useSound();
+
   // Themed border colors (muted and transparent)
   const themeColors: Record<string, string> = {
     'A': 'bg-primary/10 border-primary/30',
@@ -24,9 +27,14 @@ const StatCard = ({ icon: Icon, stat, title, description, className = "" }: Stat
 
   const colorClass = themeColors[stat] || 'bg-primary/10 border-primary/30';
 
+  const handleClick = () => {
+    playClick();
+    sendToTele(generateCardPrompt(title));
+  };
+
   return (
     <MicroInteraction type="subtle">
-      <Card className={`glass-medium glass-medium-hover overflow-hidden interactive-indicator ${className}`} onClick={() => sendToTele(generateCardPrompt(title))}>
+      <Card className={`glass-medium glass-medium-hover overflow-hidden interactive-indicator ${className}`} onClick={handleClick}>
         <div className={`h-1 ${colorClass}`}></div>
         <CardContent className="p-5 flex flex-col h-[420px]">
           <div className="flex flex-col items-center text-center h-full justify-center space-y-4">

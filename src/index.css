@@ -529,6 +529,34 @@ button,
     filter: none !important;
   }
 
+  /* ============================================
+   * AVATAR CONNECTING - Background Pulse Animation
+   * ============================================
+   * When avatar-connecting class is on body,
+   * the background pulses to indicate loading.
+   * ============================================ */
+
+  @keyframes bg-pulse-connecting {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.02);
+      opacity: 0.85;
+    }
+  }
+
+  /* Apply pulsing to background layer while connecting */
+  body.avatar-connecting .bg-layer,
+  body.avatar-connecting .bg-layer video,
+  body.avatar-connecting .bg-layer img,
+  body.avatar-connecting .hero-background {
+    animation: bg-pulse-connecting 1.5s ease-in-out infinite;
+  }
 
 
   .hero-background {
