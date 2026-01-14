@@ -1524,6 +1524,83 @@ ctaLabel?, ctaActionPhrase?
 }
 ```
 
+### Device Shipping Times (DataTable)
+**User:** "How fast does the device ship?" / "What are the shipping options?" / "Delivery times?"
+```json
+{ "badge": "SHIPPING", "title": "Device Shipping Timeline",
+  "subtitle": "From approval to merchant's door",
+  "generativeSubsections": [{
+    "id": "shipping-table",
+    "templateId": "DataTable",
+    "props": {
+      "title": "Priority Shipping from Atlanta, GA",
+      "columns": [
+        { "key": "region", "header": "Region", "sortable": true },
+        { "key": "standard", "header": "Standard" },
+        { "key": "express", "header": "Express" },
+        { "key": "overnight", "header": "Priority Overnight" }
+      ],
+      "rows": [
+        { "region": "Southeast (FL, SC, NC)", "standard": "3-4 days", "express": "1-2 days", "overnight": "Next Day 10:30 AM" },
+        { "region": "Northeast (NY, NJ, PA)", "standard": "5-6 days", "express": "2-3 days", "overnight": "Next Day 10:30 AM" },
+        { "region": "Midwest (IL, OH, MI)", "standard": "4-5 days", "express": "2 days", "overnight": "Next Day 12:00 PM" },
+        { "region": "West Coast (CA, WA, OR)", "standard": "6-7 days", "express": "3 days", "overnight": "Next Day 4:30 PM" }
+      ]
+    }
+  }]
+}
+```
+
+### One API Overview (SplitContent)
+**User:** "Tell me more about the API" / "How does the integration work?"
+```json
+{ "badge": "INTEGRATION", "title": "One API Integration",
+  "subtitle": "Simple, powerful, secure",
+  "generativeSubsections": [{
+    "id": "api-overview",
+    "templateId": "SplitContent",
+    "props": {
+      "title": "Single API Endpoint",
+      "content": "Banks integrate with one RESTful API endpoint. The DMA platform handles everything else—from merchant onboarding to device fulfillment to ongoing support.",
+      "bulletPoints": [
+        { "id": "b1", "text": "REST over HTTPS with OAuth 2.0 authentication" },
+        { "id": "b2", "text": "JSON data format with webhook notifications" },
+        { "id": "b3", "text": "TLS 1.3 encryption, PCI DSS Level 1 compliant" },
+        { "id": "b4", "text": "SDKs available for Java, Python, Node.js, .NET" }
+      ],
+      "layout": "image-left"
+    }
+  }]
+}
+```
+
+### Compare Clover Devices (ComparisonTable)
+**User:** "Compare the Clover devices" / "What's the difference between Go, Flex, and Mini?"
+```json
+{ "badge": "HARDWARE", "title": "Compare Clover Devices",
+  "subtitle": "Find the right fit for your merchants",
+  "generativeSubsections": [{
+    "id": "device-comparison",
+    "templateId": "ComparisonTable",
+    "props": {
+      "title": "Clover Device Comparison",
+      "options": [
+        { "id": "go", "name": "Clover Go", "price": "$49 - $99", "highlighted": false },
+        { "id": "flex", "name": "Clover Flex", "price": "$299 - $499", "highlighted": true },
+        { "id": "mini", "name": "Clover Mini", "price": "$499 - $749", "highlighted": false }
+      ],
+      "features": [
+        { "name": "Form Factor", "values": ["Card reader", "Handheld terminal", "Countertop POS"] },
+        { "name": "Display", "values": ["Pairs with phone", "6\" touchscreen", "8\" touchscreen"] },
+        { "name": "Printer", "values": ["No", "Built-in", "Optional dock"] },
+        { "name": "Best For", "values": ["Mobile/pop-up", "Tableside service", "Retail counter"] },
+        { "name": "Battery", "values": ["N/A", "All-day battery", "Plugged in"] }
+      ]
+    }
+  }]
+}
+```
+
 ---
 
 ## 🚨 RULES

@@ -24,12 +24,9 @@ import NDAFirewallSection from "@/components/NDAFirewallSection";
 import { CarColorProvider } from "@/contexts/CarColorContext";
 import RippleEffect from "@/components/RippleEffect";
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
-// Static Onboarding Flow
-import { StaticSectionLoader } from "@/components/StaticSectionLoader";
+// Onboarding Transition (kept for potential future use)
 import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
-import { StaticJourneyNav } from "@/components/StaticJourneyNav";
-import { useOnboardingFlow } from "@/hooks/useOnboardingFlow";
 
 
 // Welcome section - Fiserv DMA Introduction
@@ -119,81 +116,15 @@ const showWelcomeVideo = true;
 
 const Index = () => {
   // ========================================
-  // STATIC ONBOARDING FLOW
+  // ONBOARDING STATE (simplified - always complete)
   // ========================================
-  const {
-    currentStepIndex,
-    isOnboardingComplete,
-    isTransitioning,
-    userData,
-    goToNext,
-    goToBack,
-    goToSkip,
-    completeOnboarding,
-    setUserData: setOnboardingData,
-    resetOnboarding,
-  } = useOnboardingFlow();
+  // Static onboarding removed - always show dynamic experience directly
+  const isOnboardingComplete = true;
+  const isTransitioning = false;
+  const contentRevealed = true;
 
-  // Track when the content is ready to be gracefully revealed (prevents flash during transition)
-  const [contentRevealed, setContentRevealed] = useState(false);
-
-  // Delay content reveal until the transition overlay has mostly faded
-  useEffect(() => {
-    if (isTransitioning && !contentRevealed) {
-      // Wait until the overlay is mostly transparent before revealing content
-      // The overlay starts fading at 3500ms and completes at 4200ms
-      const revealTimer = setTimeout(() => {
-        setContentRevealed(true);
-      }, 3200); // Slightly before full fade-out for seamless experience
-      return () => clearTimeout(revealTimer);
-    }
-    // Once onboarding is complete, ensure content stays revealed
-    if (isOnboardingComplete) {
-      setContentRevealed(true);
-    }
-  }, [isTransitioning, isOnboardingComplete, contentRevealed]);
-
-  // Expose reset function for debugging
-  useEffect(() => {
-    (window as any).resetOnboarding = resetOnboarding;
-    return () => {
-      delete (window as any).resetOnboarding;
-    };
-  }, [resetOnboarding]);
-
-  // SHIFT+S keyboard shortcut - Only on first static section
-  // Triggers Tele connection and transition to dynamic experience
-  useEffect(() => {
-    // Only attach listener when on first step of onboarding (not complete, not transitioning)
-    if (isOnboardingComplete || isTransitioning || currentStepIndex !== 0) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      // Check for SHIFT+S (case insensitive)
-      if (event.shiftKey && (event.key === 'S' || event.key === 's')) {
-        event.preventDefault();
-        console.log('[Keyboard Shortcut] SHIFT+S detected - Starting transition and Tele connection');
-
-        // Trigger the onboarding completion (starts transition)
-        completeOnboarding();
-
-        // Also trigger Tele connection after a short delay to allow transition to start
-        setTimeout(() => {
-          const avatarClick = (window as any).teleConnect;
-          if (typeof avatarClick === 'function') {
-            avatarClick();
-          }
-        }, 500); // Small delay to let transition overlay appear first
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOnboardingComplete, isTransitioning, currentStepIndex, completeOnboarding]);
+  // No-op functions (preserved for API compatibility if OnboardingTransition needs them)
+  const completeOnboarding = () => { };
 
   // ========================================
   // DYNAMIC EXPERIENCE STATE
@@ -1366,46 +1297,10 @@ const Index = () => {
         )}
 
         {/* ========================================
-            STATIC ONBOARDING FLOW
+            DYNAMIC EXPERIENCE (always shown)
             ======================================== */}
-        {!isOnboardingComplete && !isTransitioning && (
-          <>
-            {/* Header with Logo and Marketing Nav during onboarding */}
-            <div className="no-lightboard container mx-auto max-w-[1400px] px-16 md:px-24 lg:px-32 py-6">
-              <div className="flex items-center justify-between">
-                <Logo />
-                <StaticJourneyNav />
-              </div>
-            </div>
-
-            {/* Static Onboarding Content */}
-            <div
-              className="min-h-[calc(100vh-100px)]"
-              style={{ position: "relative", zIndex: 10, perspective: "2000px", perspectiveOrigin: "center center" }}
-            >
-              <ErrorBoundary>
-                <StaticSectionLoader
-                  currentStepIndex={currentStepIndex}
-                  onNext={goToNext}
-                  onBack={goToBack}
-                  onSkip={goToSkip}
-                  onComplete={completeOnboarding}
-                  userData={userData}
-                  setUserData={setOnboardingData}
-                />
-              </ErrorBoundary>
-            </div>
-          </>
-        )}
-
-        {/* ========================================
-            DYNAMIC EXPERIENCE (Shows during transition and after)
-            ======================================== */}
-        {(isTransitioning || isOnboardingComplete) && (
-          <div
-            className={`transition-opacity duration-700 ease-out ${contentRevealed ? 'opacity-100' : 'opacity-0'
-              }`}
-          >
+        {isOnboardingComplete && (
+          <div className="opacity-100">
             {/* Platform Header - Navigation and Teleglass Interface */}
             <div className={`no-lightboard flex justify-between align-center container mx-auto max-w-[1400px] px-16 md:px-24 lg:px-32`}>
               <Navigation
