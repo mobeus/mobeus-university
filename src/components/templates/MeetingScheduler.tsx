@@ -165,13 +165,13 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
             <div className="max-w-2xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-                    <p className="text-gray-500 mt-1">{subtitle}</p>
+                    <h2 className="text-2xl font-bold text-white">{title}</h2>
+                    <p className="text-white/60 mt-1">{subtitle}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Left: Host Info */}
-                    <div className="bg-gradient-to-br from-cyan-50 to-white border border-cyan-200 rounded-xl p-6">
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
                         <div className="flex items-center gap-4 mb-4">
                             {hostImageUrl ? (
                                 <img src={hostImageUrl} alt={hostName} className="w-14 h-14 rounded-full object-cover" />
@@ -181,35 +181,35 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
                                 </div>
                             )}
                             <div>
-                                <h3 className="font-semibold text-gray-900">{hostName}</h3>
-                                <p className="text-sm text-cyan-600">{hostRole}</p>
-                                <p className="text-xs text-gray-500">{hostCompany}</p>
+                                <h3 className="font-semibold text-white">{hostName}</h3>
+                                <p className="text-sm text-cyan-400">{hostRole}</p>
+                                <p className="text-xs text-white/50">{hostCompany}</p>
                             </div>
                         </div>
 
                         <div className="space-y-3 text-sm">
-                            <div className="flex items-center gap-3 text-gray-600">
+                            <div className="flex items-center gap-3 text-white/70">
                                 {getMeetingTypeIcon()}
                                 <span>{getMeetingTypeLabel()}</span>
                             </div>
-                            <div className="flex items-center gap-3 text-gray-600">
-                                <Timer className="w-4 h-4 text-gray-400" />
+                            <div className="flex items-center gap-3 text-white/70">
+                                <Timer className="w-4 h-4 text-white/50" />
                                 <span>{meetingDuration}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Right: Meeting Details */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-6">
-                        <h3 className="font-semibold text-gray-900 mb-4">Meeting Details</h3>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+                        <h3 className="font-semibold text-white mb-4">Meeting Details</h3>
 
                         {/* Date */}
                         <div className="mb-4">
-                            <label className="text-sm text-gray-500 block mb-1">Date</label>
-                            <div className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${meetingDate ? "border-cyan-500 bg-cyan-50" : "border-dashed border-gray-300 bg-gray-50"
+                            <label className="text-sm text-white/60 block mb-1">Date</label>
+                            <div className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${meetingDate ? "border-cyan-500 bg-cyan-500/10" : "border-dashed border-white/30 bg-white/5"
                                 }`}>
-                                <Calendar className={`w-5 h-5 ${meetingDate ? "text-cyan-500" : "text-gray-400"}`} />
-                                <span className={meetingDate ? "text-gray-900 font-medium" : "text-gray-400"}>
+                                <Calendar className={`w-5 h-5 ${meetingDate ? "text-cyan-400" : "text-white/40"}`} />
+                                <span className={meetingDate ? "text-white font-medium" : "text-white/40"}>
                                     {meetingDate || "Tell me your preferred date..."}
                                 </span>
                             </div>
@@ -217,11 +217,11 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
 
                         {/* Time */}
                         <div className="mb-4">
-                            <label className="text-sm text-gray-500 block mb-1">Time</label>
-                            <div className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${meetingTime ? "border-cyan-500 bg-cyan-50" : "border-dashed border-gray-300 bg-gray-50"
+                            <label className="text-sm text-white/60 block mb-1">Time</label>
+                            <div className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${meetingTime ? "border-cyan-500 bg-cyan-500/10" : "border-dashed border-white/30 bg-white/5"
                                 }`}>
-                                <Clock className={`w-5 h-5 ${meetingTime ? "text-cyan-500" : "text-gray-400"}`} />
-                                <span className={meetingTime ? "text-gray-900 font-medium" : "text-gray-400"}>
+                                <Clock className={`w-5 h-5 ${meetingTime ? "text-cyan-400" : "text-white/40"}`} />
+                                <span className={meetingTime ? "text-white font-medium" : "text-white/40"}>
                                     {meetingTime || "What time works for you?"}
                                 </span>
                             </div>
@@ -229,10 +229,10 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
 
                         {/* Duration */}
                         <div className="mb-6">
-                            <label className="text-sm text-gray-500 block mb-1">Duration</label>
-                            <div className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-gray-50">
-                                <Timer className="w-5 h-5 text-gray-400" />
-                                <span className="text-gray-600">{meetingDuration}</span>
+                            <label className="text-sm text-white/60 block mb-1">Duration</label>
+                            <div className="flex items-center gap-3 p-3 rounded-lg border border-white/20 bg-white/5">
+                                <Timer className="w-5 h-5 text-white/40" />
+                                <span className="text-white/70">{meetingDuration}</span>
                             </div>
                         </div>
 
@@ -247,7 +247,7 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
                         )}
 
                         {!canConfirm && (
-                            <p className="text-center text-sm text-gray-400">
+                            <p className="text-center text-sm text-white/40">
                                 Just tell me when you're available
                             </p>
                         )}
@@ -257,7 +257,7 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
                 {/* Available Time Slots (if provided) */}
                 {availableSlots.length > 0 && (
                     <div className="mt-6">
-                        <h3 className="font-semibold text-gray-900 mb-3">Available Times</h3>
+                        <h3 className="font-semibold text-white mb-3">Available Times</h3>
                         <div className="flex flex-wrap gap-2">
                             {availableSlots.map((slot) => (
                                 <button
@@ -267,8 +267,8 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
                                     className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all ${selectedSlot === slot.id
                                         ? "border-cyan-500 bg-cyan-500 text-white"
                                         : slot.available
-                                            ? "border-gray-200 bg-white hover:border-cyan-300 text-gray-700"
-                                            : "border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed"
+                                            ? "border-white/20 bg-white/10 hover:border-cyan-400 text-white"
+                                            : "border-white/10 bg-white/5 text-white/30 cursor-not-allowed"
                                         }`}
                                 >
                                     {slot.time}
@@ -280,7 +280,7 @@ export const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
 
                 {/* Fiserv Badge */}
                 <div className="flex justify-center mt-6">
-                    <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <div className="flex items-center gap-2 text-xs text-white/50">
                         <div className="w-3 h-3 rounded-full bg-orange-400" />
                         Powered by Fiserv
                     </div>
