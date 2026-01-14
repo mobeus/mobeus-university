@@ -335,7 +335,7 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
 }
 ```
 
-### Value for Banks
+### Chapter 1: Value to Banks
 **User:** "Tell me about the value for banks" / "What's in it for us?"
 **Tele says:** "This is about making your bank more valuable to your merchants—while opening a new revenue stream."
 ```json
@@ -359,7 +359,7 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
 }
 ```
 
-### Value for Merchants
+### Chapter 2: Value to Merchants
 **User:** "Tell me about the value for merchants" / "What do merchants get?"
 **Tele says:** "Your merchants get seamless access to payments, funding, and tools—right from the portal they already trust."
 ```json
@@ -408,31 +408,8 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
 ```
 
 ### Chapter 4: See the Bank Experience
-**User:** "Show me the merchant experience" / "Experience it myself" / "Show me what merchants see"
-**Tele says:** "Let me walk you through exactly what your merchants will experience—starting from the moment they see the offer."
-```json
-{ "badge": "LIVE DEMO", "title": "The Merchant Experience",
-  "subtitle": "From offer to approval—see how frictionless it is",
-  "generativeSubsections": [{
-    "id": "experience-journey",
-    "templateId": "OnboardingFlow",
-    "props": {
-      "title": "The Journey",
-      "subtitle": "Click any step to dive deeper",
-      "steps": [
-        { "id": "s1", "number": 1, "title": "See the Offer", "description": "Contextual offer appears in banking portal", "status": "available", "actionPhrase": "Show me the bank portal view" },
-        { "id": "s2", "number": 2, "title": "Start Application", "description": "One click begins the process", "status": "available", "actionPhrase": "Start the onboarding walkthrough" },
-        { "id": "s3", "number": 3, "title": "Complete Onboarding", "description": "10 mobile-friendly steps", "status": "available", "actionPhrase": "Walk me through the onboarding steps" },
-        { "id": "s4", "number": 4, "title": "Get Approved", "description": "Most merchants approved same day", "status": "available", "actionPhrase": "What happens after they submit?" },
-        { "id": "s5", "number": 5, "title": "Receive Device", "description": "Clover device shipped in 1-5 days", "status": "available", "actionPhrase": "How fast does the device ship?" }
-      ]
-    }
-  }]
-}
-```
-
-### Show Bank Portal View
-**User:** "Show me the bank portal" / "What does the offer look like?"
+**User:** "Show me the bank experience" / "Show me the bank portal" / "What does the offer look like?"
+**Tele says:** "Let me show you what your merchants will see—offers that blend seamlessly into your portal."
 ```json
 { "badge": "BANK PORTAL", "title": "Offer Engine in Action",
   "subtitle": "This is what merchants see in their banking portal—contextual offers that blend seamlessly",
@@ -445,30 +422,21 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
           "id": "clover-pos",
           "title": "Clover POS System",
           "subtitle": "Point of Sale",
-          "description": "A powerful point-of-sale system tailored for your business. Our partnership with Clover allows us to offer a variety of POS solutions.",
+          "description": "A powerful point-of-sale system tailored for your business.",
           "imageUrl": "/offers/clover-pos.png",
-          "ctaLabel": "Click here to apply",
-          "actionPhrase": "Start merchant onboarding for Clover POS",
+          "ctaLabel": "Click to apply",
+          "actionPhrase": "Start the onboarding flow",
           "badge": "Most Popular"
         },
         {
           "id": "clover-capital",
           "title": "Clover Capital",
           "subtitle": "Business Funding",
-          "description": "Get fast access to working capital for your business. Approval in as little as 24 hours with flexible repayment terms.",
+          "description": "Get fast access to working capital for your business.",
           "imageUrl": "/offers/clover-capital.png",
-          "ctaLabel": "Check my eligibility",
-          "actionPhrase": "Show me Clover Capital details",
+          "ctaLabel": "Check eligibility",
+          "actionPhrase": "Show me Clover Capital",
           "badge": "Fast Approval"
-        },
-        {
-          "id": "business-credit",
-          "title": "Business Credit Line",
-          "subtitle": "Revolving Credit",
-          "description": "A flexible credit line for your business expenses. Draw funds when you need them, pay interest only on what you use.",
-          "imageUrl": "/offers/business-credit.png",
-          "ctaLabel": "Apply now",
-          "actionPhrase": "Show me Business Credit Line details"
         }
       ],
       "autoRotate": true,
@@ -478,7 +446,7 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
 }
 ```
 
-### Show Onboarding Flow
+### Chapter 5: See the Onboarding Flow
 **User:** "Show me the onboarding" / "What happens when they click?"
 ```json
 { "badge": "MERCHANT ONBOARDING", "title": "10-Step Activation Flow",
