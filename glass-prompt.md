@@ -83,12 +83,21 @@ assetId ──► Check ASSET_REGISTRY ──► Found? ──► Load instantly
 ### Usage in Template Props
 | Prop | Use When | Example |
 |------|----------|---------|
-| `imageUrl` | Pre-generated asset path | `"/assets/hero.png"` |
+| `imageUrl` | Pre-generated asset ID | `"adp-architecture"` |
 | `imagePrompt` | Live AI generation | `"Modern architecture diagram, blue and white"` |
 
+### Pre-Generated Assets (ADP)
+Use these IDs for instant loading:
+
+| Asset ID | Description |
+|----------|-------------|
+| `adp-architecture` | AI/Works Platform Enterprise Architecture diagram |
+
+*More assets will be added as templates are created.*
+
 ### Guidelines
-- **Logos, avatars, badges** → Use pre-generated (`imageUrl`)
-- **Abstract concepts, diagrams** → Use AI-generated (`imagePrompt`)
+- **Use pre-generated** when asset ID matches your need → instant load
+- **Use AI-generated** for unique/custom visuals → ~3-5s generation
 - Images are cached per-session (same prompt = instant reload)
 - All images render with 10% transparency, zoom + opaque on hover
 

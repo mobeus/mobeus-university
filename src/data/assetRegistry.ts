@@ -1,9 +1,19 @@
 /**
- * AIworks Asset Registry (Minimal)
+ * AIworks Asset Registry
  * 
  * Usage: Pass assetId to SmartImage component
  * - If assetId exists here → loads local file instantly
  * - If assetId NOT here → SmartImage treats it as a prompt and generates via AI
+ * 
+ * Categories:
+ * - adp: AI/Works Development Platform assets
+ * - avatar: Profile images
+ * - platform: General platform images
+ * - badge: Status and category badges
+ * - dashboard: Dashboard UI elements
+ * - hero: Hero/banner images
+ * - ui: Generic UI elements
+ * - icon: Icon assets
  */
 
 export interface AssetDefinition {
@@ -12,11 +22,24 @@ export interface AssetDefinition {
     alt: string;
     description: string;
     generationPrompt: string;
-    category: "avatar" | "platform" | "badge" | "dashboard" | "hero" | "ui" | "icon";
+    category: "adp" | "avatar" | "platform" | "badge" | "dashboard" | "hero" | "ui" | "icon";
 }
 
-// Empty registry - all images will be AI-generated
-export const ASSET_REGISTRY: Record<string, AssetDefinition> = {};
+// Asset Registry - Pre-generated images for instant loading
+export const ASSET_REGISTRY: Record<string, AssetDefinition> = {
+    // ==========================================
+    // ADP (AI/Works Development Platform) ASSETS
+    // ==========================================
+
+    "adp-architecture": {
+        id: "adp-architecture",
+        path: "/assets/adp/aiworks-architecture.png",
+        alt: "AI/Works Platform Enterprise Architecture",
+        description: "Enterprise architecture diagram showing AI/Works platform components including AI agents, microservices, cloud infrastructure, data lake, API gateway, and user interface",
+        generationPrompt: "Modern enterprise software architecture diagram showing AI/Works platform components, dark teal and white color scheme, clean professional tech illustration",
+        category: "adp"
+    },
+};
 
 // Helper: Get all assets by category
 export const getAssetsByCategory = (category: AssetDefinition["category"]): AssetDefinition[] => {
