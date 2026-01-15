@@ -764,8 +764,8 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
           transform transition-all duration-500 ease-out ${isChatGlassOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }
           ${isLightboardMode
-            ? 'bg-mist/10 border-l border-mist/15'
-            : 'bg-onyx/15 border-l border-mist/5'
+            ? 'bg-black/30 border-l border-black/40'
+            : 'bg-black/40 border-l border-black/50'
           }
         flex flex-col
         xl:right-0
@@ -776,7 +776,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         }}
       >
         {/* Simple top border line */}
-        <div className={`absolute top-0 left-0 right-0 h-px ${isLightboardMode ? 'bg-mist/30' : 'bg-mist/10'}`} />
+        <div className={`absolute top-0 left-0 right-0 h-px ${isLightboardMode ? 'bg-black/50' : 'bg-black/40'}`} />
 
         {/* Teleglass Icons at top of chat bar */}
         <div className="sm:h-10" style={{ paddingTop: 'var(--teleglass-top)' }}>
@@ -784,8 +784,8 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
 
         {isP2PActive && (
           <div className={`mx-3 sm:mx-4 mt-3 px-3 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm ${isLightboardMode
-            ? 'bg-mist/20 border border-mist/30 text-mist'
-            : 'bg-wave/20 border border-wave/30 text-mist'
+            ? 'bg-black/35 border border-black/45 text-mist'
+            : 'bg-black/40 border border-black/50 text-mist'
             }`}>
             <div className={`w-2 h-2 rounded-full animate-pulse bg-flamingo/80`}></div>
             <span className="font-medium text-mist">Connected to admin</span>
@@ -810,8 +810,8 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                   <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full 
                     backdrop-blur-sm flex items-center justify-center flex-shrink-0
                     ${isLightboardMode
-                      ? 'bg-mist/20 border border-mist/30'
-                      : 'bg-mist/10 border border-mist/20'
+                      ? 'bg-black/35 border border-black/45'
+                      : 'bg-black/40 border border-black/50'
                     }`}>
                     <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
@@ -821,11 +821,11 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                   hover:scale-[1.01]
                   border backdrop-blur-sm text-sm sm:text-base text-mist ${isLightboardMode
                     ? msg.role === 'user'
-                      ? 'bg-mist/20 border-mist/30'
-                      : 'bg-mist/15 border-mist/25'
+                      ? 'bg-black/35 border-black/45'
+                      : 'bg-black/30 border-black/40'
                     : msg.role === 'user'
-                      ? 'bg-mist/15 border-mist/20'
-                      : 'bg-onyx/40 border-mist/10'
+                      ? 'bg-black/40 border-black/50'
+                      : 'bg-black/45 border-black/55'
                   }`}>
                   {/* Tool Call and RAG Search Indicators (only shown in Smart Mode) */}
                   {isSmartMode && msg.role === 'assistant' && (msg as any).metadata && (
@@ -893,8 +893,8 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                   <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
                     backdrop-blur-sm flex items-center justify-center flex-shrink-0
                     ${isLightboardMode
-                      ? 'bg-mist/20 border border-mist/30'
-                      : 'bg-mist/10 border border-mist/20'
+                      ? 'bg-black/35 border border-black/45'
+                      : 'bg-black/40 border border-black/50'
                     }`}>
                     <User className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
@@ -908,14 +908,14 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
               <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
                 backdrop-blur-sm flex items-center justify-center flex-shrink-0
                 ${isLightboardMode
-                  ? 'bg-mist/20 border border-mist/30'
-                  : 'bg-mist/10 border border-mist/20'
+                  ? 'bg-black/35 border border-black/45'
+                  : 'bg-black/40 border border-black/50'
                 }`}>
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
               <div className={`backdrop-blur-sm p-3 sm:p-4 rounded-2xl border ${isLightboardMode
-                ? 'bg-mist/15 border-mist/25'
-                : 'bg-onyx/40 border-mist/10'
+                ? 'bg-black/30 border-black/40'
+                : 'bg-black/45 border-black/55'
                 }`}>
                 <div className="flex space-x-1.5">
                   <div className="w-2 h-2 bg-mist/60 rounded-full animate-typing-pulse"></div>
@@ -928,7 +928,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         </div>
 
         {/* Chat Input Area - CLEAN MINIMAL */}
-        <div className="border-t border-mist/10 bg-onyx/40 backdrop-blur-sm">
+        <div className="border-t border-black/50 bg-black/50 backdrop-blur-sm">
           <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-3">
             <input
               type="text"
@@ -941,8 +941,8 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 text-mist placeholder:text-mist/40 text-sm sm:text-base
                 transition-all duration-300
                 ${isLightboardMode
-                  ? 'bg-mist/15 border border-mist/30 focus:border-mist/50 focus:bg-mist/25'
-                  : 'bg-mist/10 border border-mist/15 focus:border-mist/30 focus:bg-mist/15'
+                  ? 'bg-black/30 border border-black/40 focus:border-black/60 focus:bg-black/40'
+                  : 'bg-black/35 border border-black/45 focus:border-black/55 focus:bg-black/45'
                 }
                 focus:outline-none`}
               ref={chatInputRef}
@@ -955,7 +955,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 active:scale-95
                 disabled:opacity-50 disabled:cursor-not-allowed
                 ${isLightboardMode
-                  ? 'bg-mist/20 border border-mist/30 hover:bg-mist/30'
+                  ? 'bg-black/35 border border-black/45 hover:bg-black/45'
                   : 'bg-sapphire/70 border border-sapphire/50 hover:bg-sapphire/90'
                 }`}
               disabled={!chatMessage.trim()}

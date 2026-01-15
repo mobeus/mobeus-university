@@ -893,18 +893,18 @@ button,
 
   /* Legacy Glass Effects (kept for compatibility) */
   .glass-card {
-    @apply bg-white/10 border border-white/20 rounded-3xl;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.25), 0 5px 18px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+    @apply bg-black/30 border border-black/40 rounded-3xl;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 5px 18px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.18);
   }
 
   .glass-button {
-    @apply bg-white/10 border border-white/20 rounded-2xl transition-all duration-300;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1);
+    @apply bg-black/20 border border-black/30 rounded-2xl transition-all duration-300;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.12);
   }
 
   .glass-button:hover {
-    @apply bg-white/20;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3), 0 5px 18px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.15);
+    @apply bg-black/35;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.4), 0 5px 18px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   /* ============================================
@@ -912,20 +912,20 @@ button,
    * Use these in components instead of inline Tailwind
    * ============================================ */
 
-  /* Template Container - Light frost glass panel */
+  /* Template Container - Tinted dark glass panel */
   .glass-template-container {
     @apply backdrop-blur-sm rounded-2xl p-6;
-    background: rgba(237, 241, 243, 0.1);
-    /* mist/10 */
-    border: 1px solid rgba(237, 241, 243, 0.2);
-    /* mist/20 */
+    background: rgba(0, 0, 0, 0.4);
+    /* onyx/40 - tinted glass */
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    /* onyx/50 */
   }
 
   /* Image Container - For template image sections */
   .glass-image-container {
     @apply rounded-xl overflow-hidden;
-    background: linear-gradient(to bottom right, rgba(237, 241, 243, 0.1), rgba(237, 241, 243, 0.05));
-    border: 1px solid rgba(237, 241, 243, 0.1);
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+    border: 1px solid rgba(0, 0, 0, 0.4);
   }
 
   /* ============================================
@@ -1035,6 +1035,94 @@ button,
   }
 
   /* ============================================
+   * BRAND COLOR UTILITY CLASSES
+   * Explicit definitions for dynamic usage
+   * ============================================ */
+
+  /* Text colors - explicit hex for reliability */
+  .text-flamingo {
+    color: #F2617A !important;
+  }
+
+  .text-turmeric {
+    color: #CC850A !important;
+  }
+
+  .text-jade {
+    color: #6B9E78 !important;
+  }
+
+  .text-sapphire {
+    color: #47A1AD !important;
+  }
+
+  .text-amethyst {
+    color: #634F7D !important;
+  }
+
+  .text-mist {
+    color: #EDF1F3 !important;
+  }
+
+  .text-wave {
+    color: #003D4F !important;
+  }
+
+  /* Background colors */
+  .bg-flamingo {
+    background-color: #F2617A !important;
+  }
+
+  .bg-turmeric {
+    background-color: #CC850A !important;
+  }
+
+  .bg-jade {
+    background-color: #6B9E78 !important;
+  }
+
+  .bg-sapphire {
+    background-color: #47A1AD !important;
+  }
+
+  .bg-amethyst {
+    background-color: #634F7D !important;
+  }
+
+  /* Background colors with opacity */
+  .bg-flamingo\/10 {
+    background-color: rgba(242, 97, 122, 0.1) !important;
+  }
+
+  .bg-flamingo\/20 {
+    background-color: rgba(242, 97, 122, 0.2) !important;
+  }
+
+  .bg-turmeric\/10 {
+    background-color: rgba(204, 133, 10, 0.1) !important;
+  }
+
+  .bg-turmeric\/20 {
+    background-color: rgba(204, 133, 10, 0.2) !important;
+  }
+
+  .bg-jade\/10 {
+    background-color: rgba(107, 158, 120, 0.1) !important;
+  }
+
+  .bg-jade\/20 {
+    background-color: rgba(107, 158, 120, 0.2) !important;
+  }
+
+  .bg-sapphire\/10 {
+    background-color: rgba(71, 161, 173, 0.1) !important;
+  }
+
+  .bg-sapphire\/20 {
+    background-color: rgba(71, 161, 173, 0.2) !important;
+  }
+
+  /* ============================================
    * TEMPLATE LAYOUT CLASSES
    * Grid and flex layouts for templates
    * ============================================ */
@@ -1066,45 +1154,48 @@ button,
    * Different card styles for templates
    * ============================================ */
 
-  /* Base card - minimal glass */
+  /* Base card - minimal tinted glass */
   .glass-card-minimal {
     @apply rounded-xl p-4 transition-all duration-300;
-    background: rgba(237, 241, 243, 0.05);
-    border: 1px solid rgba(237, 241, 243, 0.1);
+    background: rgba(0, 0, 0, 0.25);
+    /* onyx/25 - tinted glass */
+    border: 1px solid rgba(0, 0, 0, 0.35);
   }
 
   .glass-card-minimal:hover {
-    background: rgba(237, 241, 243, 0.1);
-    border-color: rgba(237, 241, 243, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+    border-color: rgba(0, 0, 0, 0.45);
     transform: translateY(-2px);
   }
 
-  /* Standard card - medium glass */
+  /* Standard card - medium tinted glass */
   .glass-card-standard {
     @apply rounded-2xl p-5 transition-all duration-300;
-    background: rgba(237, 241, 243, 0.1);
-    border: 1px solid rgba(237, 241, 243, 0.15);
+    background: rgba(0, 0, 0, 0.35);
+    /* onyx/35 - tinted glass */
+    border: 1px solid rgba(0, 0, 0, 0.45);
   }
 
   .glass-card-standard:hover {
-    background: rgba(237, 241, 243, 0.15);
-    border-color: rgba(237, 241, 243, 0.25);
+    background: rgba(0, 0, 0, 0.45);
+    border-color: rgba(0, 0, 0, 0.55);
     transform: translateY(-2px);
   }
 
-  /* Featured card - prominent glass */
+  /* Featured card - prominent tinted glass */
   .glass-card-featured {
     @apply rounded-2xl p-6 transition-all duration-300;
-    background: rgba(237, 241, 243, 0.15);
-    border: 1px solid rgba(237, 241, 243, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.45);
+    /* onyx/45 - tinted glass */
+    border: 1px solid rgba(0, 0, 0, 0.55);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   }
 
   .glass-card-featured:hover {
-    background: rgba(237, 241, 243, 0.2);
-    border-color: rgba(237, 241, 243, 0.3);
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(0, 0, 0, 0.65);
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
   }
 
   /* Clickable card - interactive with cursor */

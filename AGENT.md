@@ -45,22 +45,24 @@ Catherine (the AI agent) helps **Thoughtworks employees** understand the AI/Work
 
 ## 2. TEMPLATE LIBRARY
 
-### Available Template
-| Template | Purpose | Key Props |
-|----------|---------|-----------|
-| **SplitContent** | Image + text layout | `title`, `content`, `bulletPoints[]`, `imagePrompt` |
+**50 templates available** — See `glass-prompt.md` for complete reference with:
+- `GOOD FOR` — What each template is suited for
+- `Props` — Required and optional props
+- `actionPhrase` — Required for volumetric navigation
+
+**Source of truth:** `src/data/templateRegistry.ts` (lazy-loaded)
 
 ---
 
 ## 3. KEY FILES
 
-| File | Purpose | Max Lines |
-|------|---------|-----------|
-| `glass-prompt.md` | Catherine instructions | 200 |
-| `tele-knowledge.md` | Domain knowledge | 150 |
-| `src/data/templateRegistry.ts` | Template registry | - |
-| `src/pages/Index.tsx` | Main app entry | - |
-| `src/components/Navigation.tsx` | Top nav bar | - |
+| File | Purpose |
+|------|---------|
+| `glass-prompt.md` | Catherine's instructions — templates, JSON structure, shot prompts |
+| `tele-knowledge.md` | Domain knowledge — AI/Works facts, competitive intel |
+| `src/data/templateRegistry.ts` | Template registry (50 templates, lazy-loaded) |
+| `src/data/assetRegistry.ts` | Pre-generated image assets |
+| `src/components/DynamicSectionLoader.tsx` | Renders templates from registry |
 
 ---
 

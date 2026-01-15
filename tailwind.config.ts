@@ -5,6 +5,19 @@ export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
+  // Safelist brand colors for dynamic usage
+  safelist: [
+    // Text colors
+    'text-flamingo', 'text-turmeric', 'text-jade', 'text-sapphire', 'text-amethyst', 'text-mist', 'text-wave',
+    // Background colors
+    'bg-flamingo', 'bg-turmeric', 'bg-jade', 'bg-sapphire', 'bg-amethyst', 'bg-mist', 'bg-wave',
+    // Background with opacity
+    'bg-flamingo/10', 'bg-flamingo/20', 'bg-turmeric/10', 'bg-turmeric/20', 'bg-jade/10', 'bg-jade/20',
+    'bg-sapphire/10', 'bg-sapphire/20', 'bg-amethyst/10', 'bg-amethyst/20',
+    // Border colors
+    'border-flamingo', 'border-turmeric', 'border-jade', 'border-sapphire', 'border-amethyst',
+    'border-flamingo/30', 'border-turmeric/30', 'border-jade/30', 'border-sapphire/30',
+  ],
   theme: {
     container: {
       center: true,

@@ -46,32 +46,32 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'home',
         label: 'HOME',
-        teleQuery: '(M) Show me the welcome overview'
+        teleQuery: 'Show me AI/Works overview'
       },
       {
         id: 'super-spec',
         label: 'SUPER SPEC',
-        teleQuery: '(M) Show me how the Super Spec works'
+        teleQuery: 'Show me how Super Spec works'
       },
       {
         id: 'environments',
         label: 'ENVIRONMENTS',
-        teleQuery: '(M) Show me the 3 environments'
+        teleQuery: 'Show me the 3 environments'
       },
       {
         id: 'competitive',
         label: 'COMPETITIVE',
-        teleQuery: '(M) Show me competitive positioning'
+        teleQuery: 'Show me competitive positioning'
       },
       {
         id: 'technical',
         label: 'TECHNICAL',
-        teleQuery: '(M) Show me the technical stack support'
+        teleQuery: 'Show me technical stack'
       },
       {
         id: 'pricing',
         label: 'PRICING',
-        teleQuery: '(M) Show me pricing and engagement model'
+        teleQuery: 'Show me pricing and engagement'
       }
     ];
 
