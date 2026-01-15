@@ -39,10 +39,10 @@ const NDAFirewallSection = ({
   const authorizedUsers: AuthorizedUser[] = [
     { id: "exec-nima", name: "Nima A.", email: "nima@mobeus.com", phone: "exec-nima-b1179fbb-8b59-4bf9-af0b-8cc2ba640e31", phoneNumber: "+14373244231" },
     { id: "exec-richie", name: "Richie E.", email: "richie@mobeus.com", phone: "exec-richie-a375538c-b687-4cc6-ad04-bccbf7a74fa2", phoneNumber: "+19174030642" },
-    { id: "exec-sales", name: "Sales Leadership", email: "sales@fiserv.com" },
-    { id: "exec-product", name: "Product Team", email: "product@fiserv.com" },
-    { id: "exec-strategy", name: "Corporate Strategy", email: "strategy@fiserv.com" },
-    { id: "exec-board", name: "Executive Board", email: "board@fiserv.com" },
+    { id: "exec-sales", name: "Sales Leadership", email: "sales@thoughtworks.com" },
+    { id: "exec-product", name: "Product Team", email: "product@thoughtworks.com" },
+    { id: "exec-strategy", name: "Corporate Strategy", email: "strategy@thoughtworks.com" },
+    { id: "exec-board", name: "Executive Board", email: "board@thoughtworks.com" },
   ];
 
   // Countdown timer for resend
@@ -277,7 +277,7 @@ const NDAFirewallSection = ({
           <UnifiedSectionHeader
             badge="EXECUTIVE ACCESS"
             title="Confidential Information"
-            subtitle="Sensitive strategic information accessible to authorized Fiserv executives and partners."
+            subtitle="Sensitive strategic information accessible to authorized Thoughtworks employees and partners."
             animate={true}
           />
 
@@ -287,7 +287,7 @@ const NDAFirewallSection = ({
             <div className="flex justify-center items-center gap-4 mb-10">
               <Building2 className="w-10 h-10 text-white/70" />
               <div className="text-center">
-                <h4 className="text-white/90 text-lg font-semibold">Fiserv DMA Executive Access</h4>
+                <h4 className="text-white/90 text-lg font-semibold">AI/Works Executive Access</h4>
                 <p className="text-white/60 text-sm">Authorized Access Only</p>
               </div>
             </div>

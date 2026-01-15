@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Fiserv DMA | Digital Merchant Acquisition Platform',
-  description = 'Enterprise sales guide for banks evaluating merchant acquiring solutions. Explore the complete merchant lifecycle from onboarding to long-term relationship management.',
-  image = '/og-image.jpg',
+  title = 'AI/Works | Thoughtworks Agentic Delivery Platform',
+  description = 'Transform trapped technical debt into modern, AI-ready systems. 30 years of Thoughtworks architectural wisdom, now encoded into intelligent agents.',
+  image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['merchant acquiring', 'digital merchant acquisition', 'Fiserv', 'payment processing', 'bank solutions', 'enterprise sales'],
+  keywords = ['AI/Works', 'Thoughtworks', 'Agentic AI', 'Super Spec', 'Legacy Modernization', 'Enterprise AI', '3-3-3 Delivery'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'Fiserv DMA', true);
+    updateMetaTag('og:site_name', 'AI/Works by Thoughtworks', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,71 +72,65 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - Fiserv DMA Buyer Journey
+// Pre-configured SEO for sections - AI/Works Internal Enablement
 export const sectionSEO = {
   welcome: {
-    title: 'Fiserv DMA | Digital Merchant Acquisition Platform',
-    description: 'Guide your bank through the complete merchant lifecycle—from onboarding to long-term relationship management. Powered by Tele, your enterprise sales guide.',
-    keywords: ['Fiserv', 'merchant acquisition', 'digital onboarding', 'payment processing', 'enterprise sales'],
+    title: 'AI/Works | Thoughtworks Agentic Delivery Platform',
+    description: 'Transform trapped technical debt into modern, AI-ready systems. The Super Spec Engine—specification first, code follows, zero technical debt.',
+    keywords: ['AI/Works', 'Thoughtworks', 'Super Spec', 'agentic AI', 'enterprise transformation'],
   },
 
   value: {
-    title: 'Value Proposition | Fiserv DMA',
-    description: 'Discover how the Fiserv DMA platform solves critical challenges in merchant acquiring—reducing risk, increasing revenue, and strengthening relationships.',
-    keywords: ['value proposition', 'merchant problems', 'bank solutions', 'risk reduction', 'revenue growth'],
+    title: 'Value Proposition | AI/Works',
+    description: 'Discover how AI/Works solves critical enterprise challenges—legacy modernization, zero technical debt, and 3-3-3 delivery model.',
+    keywords: ['value proposition', 'legacy modernization', 'zero technical debt', 'enterprise AI'],
   },
 
   platform: {
-    title: 'Platform Overview | Fiserv DMA',
-    description: 'Explore the complete merchant lifecycle: onboarding, activation, operations, settlement, and relationship management.',
-    keywords: ['platform overview', 'merchant lifecycle', 'onboarding', 'transaction processing', 'settlement'],
+    title: 'Platform Overview | AI/Works',
+    description: 'Explore the 10 components of AI/Works: from reverse engineering to AIOps, the complete agentic development platform.',
+    keywords: ['platform overview', 'Super Spec', 'CodeConcise', 'Control Plane', 'AIOps'],
   },
 
   benefits: {
-    title: 'Key Benefits | Fiserv DMA',
-    description: 'Key capabilities that drive bank success: fast onboarding, real-time visibility, fee transparency, and merchant retention tools.',
-    keywords: ['benefits', 'capabilities', 'fast onboarding', 'fee transparency', 'merchant retention'],
+    title: 'Key Benefits | AI/Works',
+    description: 'Key capabilities that drive enterprise success: 40-60% cost reduction, 3-4 developers delivering 20x output, 90-day production.',
+    keywords: ['benefits', 'ROI', 'cost reduction', 'developer productivity', 'enterprise efficiency'],
   },
 
   pricing: {
-    title: 'Fee Structure | Fiserv DMA',
-    description: 'Transparent fee structure and pricing flexibility for merchant acquiring programs.',
-    keywords: ['pricing', 'fee structure', 'merchant fees', 'interchange', 'processing costs'],
+    title: 'Pricing & Engagement | AI/Works',
+    description: 'Transparent 3-3-3 pricing model: $675K validation, $1.2M prototype, $2.35M production. Fixed-price confidence.',
+    keywords: ['pricing', '3-3-3 model', 'engagement', 'fixed price', 'enterprise investment'],
   },
 
   'next-steps': {
-    title: 'Next Steps | Fiserv DMA',
-    description: 'Ready to learn more? Schedule a conversation with our sales team or explore specific platform capabilities.',
-    keywords: ['next steps', 'contact sales', 'schedule demo', 'learn more'],
+    title: 'Next Steps | AI/Works',
+    description: 'Ready to transform your development? Schedule a deep dive with our architecture team or identify your pilot use case.',
+    keywords: ['next steps', 'contact', 'schedule demo', 'pilot program'],
   },
 
-  onboarding: {
-    title: 'Merchant Onboarding | Fiserv DMA',
-    description: 'Digital-first merchant onboarding with automated underwriting, KYC verification, and compliance workflows.',
-    keywords: ['merchant onboarding', 'KYC', 'compliance', 'underwriting', 'digital application'],
+  competitive: {
+    title: 'Competitive Positioning | AI/Works',
+    description: 'How AI/Works beats the competition: legacy + greenfield, 30 years of wisdom, production-grade quality in 90 days.',
+    keywords: ['competitive', 'vs Globant', 'vs Ascendion', 'vs Deloitte', 'differentiation'],
   },
 
-  activation: {
-    title: 'Merchant Activation | Fiserv DMA',
-    description: 'Get merchants live quickly with device fulfillment tracking, approval visibility, and first transaction confirmation.',
-    keywords: ['merchant activation', 'go-live', 'device fulfillment', 'first transaction'],
+  technical: {
+    title: 'Technical Architecture | AI/Works',
+    description: 'Deep dive into the Super Spec Engine, Control Plane, Context Library, and the 10-component AI/Works architecture.',
+    keywords: ['technical', 'architecture', 'Super Spec', 'Control Plane', 'AIOps'],
   },
 
-  operations: {
-    title: 'Transaction Operations | Fiserv DMA',
-    description: 'Real-time transaction visibility, card type analysis, and self-service merchant portals.',
-    keywords: ['transaction operations', 'payment processing', 'card types', 'merchant portal'],
+  security: {
+    title: 'Security & Compliance | AI/Works',
+    description: 'Enterprise-grade security shifted left: OWASP Top 10, HIPAA, GDPR, SOX, PCI-DSS compliance baked into generation.',
+    keywords: ['security', 'compliance', 'HIPAA', 'GDPR', 'enterprise security'],
   },
 
-  settlement: {
-    title: 'Settlement & Fees | Fiserv DMA',
-    description: 'Itemized fee transparency, gross-to-net breakdowns, and automated reconciliation.',
-    keywords: ['settlement', 'fees', 'reconciliation', 'funding', 'chargebacks'],
-  },
-
-  relationship: {
-    title: 'Merchant Relationships | Fiserv DMA',
-    description: 'Tools that position your bank as a financial partner—historical trends, proactive alerts, and growth opportunities.',
-    keywords: ['merchant relationships', 'retention', 'account management', 'growth'],
+  casestudies: {
+    title: 'Case Studies | AI/Works',
+    description: 'Real enterprise transformations: healthcare claims modernization, retail omnichannel platforms, financial services.',
+    keywords: ['case studies', 'success stories', 'healthcare', 'retail', 'financial services'],
   },
 };

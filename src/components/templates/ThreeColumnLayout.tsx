@@ -28,6 +28,11 @@ export const ThreeColumnLayout: React.FC<ThreeColumnLayoutProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty layout
+    if (!columns || columns.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);

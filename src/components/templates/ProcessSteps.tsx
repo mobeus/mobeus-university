@@ -28,6 +28,11 @@ export const ProcessSteps: React.FC<ProcessStepsProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty process
+    if (!steps || steps.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);

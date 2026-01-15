@@ -31,6 +31,11 @@ export const MetricsGrid: React.FC<MetricsGridProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty grid
+    if (!metrics || metrics.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);

@@ -11,7 +11,7 @@ interface UniversalSubsectionProps {
  * UniversalSubsection
  * 
  * Legacy component for static subsection rendering.
- * For Fiserv DMA, all templates are loaded dynamically via TEMPLATE_REGISTRY
+ * For AI/Works, all templates are loaded dynamically via TEMPLATE_REGISTRY
  * in DynamicSectionLoader. This component is kept for backwards compatibility
  * with any remaining static content.
  */

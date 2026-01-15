@@ -31,6 +31,11 @@ export const FlowDiagram: React.FC<FlowDiagramProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty flow
+    if (!steps || steps.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);

@@ -138,42 +138,6 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
         );
     }
 
-    // Case 5: Error State (no fallback, show retry)
-    return (
-        <div ref={ref as React.LegacyRef<HTMLDivElement>} className={`relative group flex flex-col items-center justify-center bg-onyx/40 backdrop-blur-sm border border-mist/10 rounded-2xl p-6 text-center overflow-hidden min-h-[200px] ${className}`}>
-            {/* Subtle gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-flamingo/5 via-transparent to-wave/5" />
-
-            {/* Icon with glow */}
-            <div className="relative mb-4">
-                <div className="absolute inset-0 bg-flamingo/10 blur-xl rounded-full" />
-                <ImageOff className="w-12 h-12 text-flamingo/80 relative z-10" />
-            </div>
-
-            {/* Error message */}
-            <h3 className="text-sm font-semibold text-mist/90 mb-2">Image Unavailable</h3>
-            <p className="text-xs text-mist/50 mb-4 max-w-[240px] leading-relaxed">
-                {generationError ? `Generation error: ${generationError}` : (error ? "Failed to load image" : "Unknown Asset ID")}
-            </p>
-
-            {/* Prompt display */}
-            {showPromptOnMissing && (
-                <div className="w-full max-w-[280px] bg-onyx/30 backdrop-blur-sm border border-mist/5 rounded-lg p-3 text-left mb-4">
-                    <p className="text-[10px] uppercase tracking-widest text-mist/40 font-bold mb-1">Source</p>
-                    <p className="text-xs text-mist/60 italic leading-relaxed line-clamp-3">"{assetId}"</p>
-                </div>
-            )}
-
-            {/* Retry button */}
-            <Button
-                variant="outline"
-                size="sm"
-                className="gap-2 bg-mist/5 hover:bg-mist/10 border-mist/10 hover:border-mist/20 text-mist/80 hover:text-mist transition-all duration-300"
-                onClick={() => generateImage(assetId)}
-            >
-                <RefreshCw className="w-3 h-3" />
-                Try Again
-            </Button>
-        </div>
-    );
+    // Case 5: Generation pending or failed - hide instead of showing error
+    return null;
 });

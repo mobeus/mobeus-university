@@ -33,6 +33,11 @@ export const CardGrid: React.FC<CardGridProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty grid
+    if (!cards || cards.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);

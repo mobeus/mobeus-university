@@ -32,70 +32,121 @@ import { Logo } from "@/components/Logo";
 // Welcome section - Thoughtworks AI/Works Introduction
 const WELCOME_VARIANTS = [
   {
-    badge: "THOUGHTWORKS AI/WORKS",
-    title: "Architectural Synthesis for the Enterprise",
-    subtitle: "The Super Spec Engine—specification first, code follows, zero technical debt",
+    badge: "SPARKS THE EXTRAORDINARY",
+    title: "AI/Works by Thoughtworks",
+    subtitle: "30 years of architectural wisdom, now encoded into intelligent agents. Where legacy meets agentic intelligence.",
     generativeSubsections: [
+      // Hero Stat - The Big Number
       {
-        id: "value-props",
-        templateId: "FeatureGrid",
+        id: "hero-stat",
+        templateId: "StatHighlight",
         props: {
-          columns: 3,
-          showStats: false,
-          features: [
+          value: "3-4 = 20",
+          label: "Team Multiplier",
+          description: "A team of 3-4 developers now delivers what used to take 20. AI/Works doesn't replace engineers—it multiplies them.",
+          trend: "up",
+          trendValue: "Enterprise-ready in 90 days",
+          actionPhrase: "Show me how AI/Works multiplies teams"
+        }
+      },
+      // Key Differentiators
+      {
+        id: "differentiators",
+        templateId: "MetricsGrid",
+        props: {
+          columns: 4,
+          metrics: [
+            { value: "40-60%", label: "Cost Reduction", change: "vs traditional development", trend: "down", actionPhrase: "Show me ROI details" },
+            { value: "90 Days", label: "To Production", change: "3-3-3 delivery model", trend: "down", actionPhrase: "Show me the 3-3-3 model" },
+            { value: "Zero", label: "Technical Debt", change: "Regenerate from spec", trend: "down", actionPhrase: "Show me how Super Spec works" },
+            { value: "30+", label: "Years of Wisdom", change: "Thoughtworks heritage", trend: "up", actionPhrase: "Show me our architectural foundation" }
+          ]
+        }
+      },
+      // Super Spec Explanation
+      {
+        id: "super-spec",
+        templateId: "SplitContent",
+        props: {
+          title: "The Super Spec Engine",
+          subtitle: "Specification First, Code Follows",
+          content: "Unlike code generators that create spaghetti faster, AI/Works generates the specification first—Architecture Decision Records (ADRs), functional requirements, and UX designs. The code follows the spec, ensuring architectural integrity. Need changes? Modify the spec and regenerate. That's how we guarantee zero technical debt.",
+          bulletPoints: [
+            "Single Source of Truth for all stakeholders",
+            "Human-approved before any code is generated",
+            "Instant regeneration—change the spec, rebuild the system"
+          ],
+          imagePrompt: "Modern software architecture blueprint, specification document transforming into elegant code, professional tech illustration, dark teal and white color scheme"
+        }
+      },
+      // The 3 Environments
+      {
+        id: "environments",
+        templateId: "ThreeColumnLayout",
+        props: {
+          columns: [
             {
-              id: "v1",
-              title: "Super Spec Engine",
-              subtitle: "Specification First",
-              description: "We generate the specification first—ADRs, functional requirements, UX designs—then the code follows, ensuring architectural integrity.",
-              icon: "trending",
-              actionPhrase: "Show me how the Super Spec works"
+              title: "Developer Portal",
+              subtitle: "Access & Context",
+              description: "The command center where you set context, access libraries, and configure AI agents. Your journey begins here.",
+              badge: "ENVIRONMENT 1",
+              actionPhrase: "Show me the Developer Portal"
             },
             {
-              id: "v2",
-              title: "3-3-3 Delivery",
-              subtitle: "Validate → Prototype → Production",
-              description: "3 days to validate, 3 weeks to prototype, 3 months to production. Enterprise speed without enterprise chaos.",
-              icon: "users",
-              actionPhrase: "Show me the 3-3-3 delivery model"
+              title: "IDE Integration",
+              subtitle: "Spec to Code",
+              description: "Where the Super Spec transforms into production-grade code. ADRs, requirements, and UX designs come to life here.",
+              badge: "ENVIRONMENT 2",
+              actionPhrase: "Show me IDE integration"
             },
             {
-              id: "v3",
-              title: "Legacy + Greenfield",
-              subtitle: "We Handle Both",
-              description: "Unlike competitors who only do new development, we modernize legacy systems while building new. Your mainframe and your microservices.",
-              icon: "check",
-              actionPhrase: "Show me legacy modernization"
+              title: "AIOps",
+              subtitle: "Self-Healing Operations",
+              description: "Post-deployment monitoring, proactive maintenance, and self-healing. AI agents maintain your systems 24/7.",
+              badge: "ENVIRONMENT 3",
+              actionPhrase: "Show me AIOps capabilities"
             }
           ]
         }
       },
+      // 3-3-3 Delivery Timeline
       {
-        id: "cta-section",
-        templateId: "FeatureGrid",
+        id: "delivery-model",
+        templateId: "TimelineHorizontal",
         props: {
-          columns: 2,
-          showStats: false,
-          features: [
-            {
-              id: "cta1",
-              title: "The 3 Environments",
-              subtitle: "Developer Portal, IDE, AIOps",
-              description: "Explore the three environments where AI/Works operates—from context to code to production operations.",
-              icon: "eye",
-              highlight: true,
-              actionPhrase: "Show me the 3 environments"
-            },
-            {
-              id: "cta2",
-              title: "Competitive Edge",
-              subtitle: "vs. Globant, Ascendion, Deloitte",
-              description: "See how AI/Works positions against competitors. 30 years of architectural wisdom defeats 4,000 agents.",
-              icon: "layers",
-              highlight: true,
-              actionPhrase: "Show me competitive positioning"
-            }
+          milestones: [
+            { label: "3 DAYS", duration: "Validation", description: "Concept validation, feasibility assessment, Go/No-Go decision", status: "complete", actionPhrase: "Show me the validation phase" },
+            { label: "3 WEEKS", duration: "Prototype", description: "Working prototype, stakeholder demo, user testing", status: "active", actionPhrase: "Show me the prototype phase" },
+            { label: "3 MONTHS", duration: "Production", description: "Enterprise deployment with AIOps monitoring and self-healing", status: "pending", actionPhrase: "Show me production deployment" }
           ]
+        }
+      },
+      // Competitive Edge
+      {
+        id: "competitive",
+        templateId: "ValuePropCard",
+        props: {
+          title: "Why Thoughtworks?",
+          tagline: "Legacy modernization + agentic AI—a combination no one else offers",
+          benefits: [
+            "We invented Agile and Microservices. AI/Works is the next evolution.",
+            "CodeConcise extracts logic from 30-year-old COBOL without stopping your business.",
+            "Control Plane provides enterprise governance, not wild AI behavior.",
+            "30 years of architectural wisdom defeats 4,000 commodity agents."
+          ],
+          actionPhrase: "Show me competitive positioning"
+        }
+      },
+      // Call to Action
+      {
+        id: "cta",
+        templateId: "CTABanner",
+        props: {
+          headline: "Ready to Spark the Extraordinary?",
+          subheadline: "Ask Catherine about the 10 platform components, ROI models, or competitive positioning.",
+          ctaLabel: "Explore AI/Works",
+          ctaActionPhrase: "Show me the 10 components of AI/Works",
+          variant: "gradient"
         }
       }
     ]

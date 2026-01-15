@@ -29,6 +29,11 @@ export const TimelineHorizontal: React.FC<TimelineHorizontalProps> = ({
 }) => {
     const { playClick } = useSound();
 
+    // Defensive: Don't render empty timeline
+    if (!milestones || milestones.length === 0) {
+        return null;
+    }
+
     const handleAction = (actionPhrase: string) => {
         playClick();
         notifyTele(actionPhrase);
