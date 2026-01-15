@@ -103,415 +103,111 @@ Use these IDs for instant loading:
 
 ---
 
-## 📋 TEMPLATE LIBRARY (50 Templates)
+## 📋 TEMPLATE LIBRARY (Quick Reference)
 
-**⚠️ IMPORTANT:** Mix and match templates dynamically based on what BEST fits the content. These are building blocks — use multiples in a single response when it helps tell the story.
+**⚠️ IMPORTANT:** Mix templates dynamically. Every clickable item MUST include `actionPhrase`.
 
-**🔴 CRITICAL:** Every clickable item prop (cards, rows, items, features, etc.) MUST include `actionPhrase` for volumetric navigation.
+### LAYOUT
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `SplitContent` | Hero, features, side-by-side | `title, content, imageUrl/imagePrompt` |
+| `TwoColumnContent` | Dual perspectives | `leftColumn, rightColumn` |
+| `ThreeColumnLayout` | 3 environments/pillars | `columns[]` with `actionPhrase` |
 
----
+### METRICS & DATA
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `MetricsGrid` | ROI stats, KPIs | `metrics[]` with `value, label, actionPhrase` |
+| `StatHighlight` | Hero stat, big number | `value, label, actionPhrase` |
+| `BarChart` | Comparisons, rankings | `bars[]` with `label, value, actionPhrase` |
+| `PieChart` | Distribution, breakdown | `segments[]` with `label, value, actionPhrase` |
+| `LineChart` | Trends, growth | `data[]` with `label, value` |
+| `ScoreCard` | Assessments, maturity | `criteria[]` with `score, actionPhrase` |
+| `ResultsGrid` | Outcomes, impact | `results[]` with `metric, value, actionPhrase` |
 
-### 📐 LAYOUT TEMPLATES
+### COMPARISON
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `ComparisonTable` | Feature matrix, vs competitor | `headers[], rows[]` with `actionPhrase` |
+| `BeforeAfter` | Transformation | `beforeTitle, beforeContent, afterTitle, afterContent` |
+| `BattleCard` | Competitor analysis | `competitor, theirClaim, ourCounter, actionPhrase` |
 
-#### SplitContent
-**GOOD FOR:** Hero content, feature explanations, about sections, side-by-side image+text
-```
-{ title, subtitle?, content, bulletPoints?[], imageUrl?, imagePrompt?, imagePosition?: "left"|"right" }
-```
+### PROCESS & FLOW
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `FlowDiagram` | Workflows, how it works | `steps[]` with `id, title, actionPhrase` |
+| `ProcessSteps` | How-to, numbered guides | `steps[]` with `title, description, actionPhrase` |
+| `TimelineHorizontal` | 3-3-3 model, phases | `milestones[]` with `label, status, actionPhrase` |
+| `TimelineVertical` | Event history, roadmap | `events[]` with `title, status, actionPhrase` |
+| `GanttChart` | Project timelines | `tasks[]` with `name, start, duration, actionPhrase` |
+| `RoadmapView` | Future plans | `lanes[]` with `items[]` |
 
-#### TwoColumnContent
-**GOOD FOR:** Dual perspectives, left/right comparison, balanced content
-```
-{ leftColumn: { title, content, badge?, actionPhrase }, rightColumn: {...} }
-```
+### CARDS & GRIDS
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `CardGrid` | Topics, categories | `cards[]` with `title, actionPhrase` |
+| `IconGrid` | Tech stack, capabilities | `items[]` with `icon, label, actionPhrase` |
+| `NavigationGrid` | Menu, section nav | `items[]` with `icon, title, actionPhrase` |
+| `PricingCards` | Pricing tiers | `tiers[]` with `name, price, features[], actionPhrase` |
+| `ClientLogoGrid` | Social proof | `logos[]` with `name, actionPhrase` |
 
-#### ThreeColumnLayout
-**GOOD FOR:** 3 environments, 3 pillars, tri-fold content, "the 3 things"
-```
-{ columns[{ title, subtitle?, description, badge?, actionPhrase }] }
-```
+### LISTS
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `FeatureList` | Capabilities | `features[]` with `text, actionPhrase` |
+| `AccordionList` | FAQs, expandable | `items[]` with `title, content, actionPhrase` |
+| `ChecklistCard` | Requirements | `items[]` with `text, actionPhrase` |
+| `NumberedList` | Priority lists | `items[]` with `text, actionPhrase` |
+| `DataTable` | Tabular data | `headers[], rows[]` |
+| `ResourceLinks` | Docs, resources | `resources[]` with `title, actionPhrase` |
 
----
+### EXPLANATIONS
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `ConceptCard` | What is X | `title, definition` |
+| `TalkingPoints` | Pitch prep | `points[]` with `point, actionPhrase` |
+| `ParagraphBlock` | Long-form text | `paragraphs[]` |
+| `ScenarioCard` | Objection handling | `scenario, response, actionPhrase` |
 
-### 📊 METRICS & DATA
+### PROOF & EVIDENCE
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `CaseStudyCard` | Customer success | `clientName, challenge, solution, results[]` |
+| `QuoteCard` | Testimonials | `quote, author, actionPhrase` |
+| `ValuePropCard` | Why choose us | `title, benefits[], actionPhrase` |
+| `IndustryCard` | Vertical focus | `industry, headline, description` |
 
-#### MetricsGrid
-**GOOD FOR:** ROI stats, KPIs, "show me the numbers", performance data
-```
-{ metrics[{ value, label, change?, trend?: "up"|"down", actionPhrase }], columns?: 2|3|4|6 }
-```
+### TECHNICAL DIAGRAMS
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `ArchitectureDiagram` | System architecture | `components[]` with `name, actionPhrase` |
+| `LayerDiagram` | Tech stack layers | `layers[]` with `name, actionPhrase` |
+| `DataFlowDiagram` | Integration flows | `nodes[]` with `name, type, actionPhrase` |
+| `ComponentDiagram` | Module breakdown | `components[]` with `name, actionPhrase` |
 
-#### StatHighlight
-**GOOD FOR:** Hero stat, key metric spotlight, "the big number", impact figures
-```
-{ value, label, description?, trend?: "up"|"down", trendValue?, ctaLabel?, actionPhrase }
-```
+### CALLS TO ACTION
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `CTABanner` | Get started | `headline, ctaLabel, ctaActionPhrase` |
+| `NextStepsCard` | Action items | `steps[]` with `title, actionPhrase` |
+| `ContactCard` | Contact info | `name, contactActionPhrase` |
 
-#### BarChart
-**GOOD FOR:** Comparisons, rankings, quantity visualization
-```
-{ title?, bars[{ label, value, maxValue?, color?, actionPhrase }], orientation?: "horizontal"|"vertical", showValues? }
-```
-
-#### PieChart
-**GOOD FOR:** Distribution, percentage breakdown, composition
-```
-{ title?, segments[{ label, value, color?, actionPhrase }], showLegend?, donut? }
-```
-
-#### LineChart
-**GOOD FOR:** Trends over time, growth visualization, progress
-```
-{ title?, data[{ label, value }], color?, showTrend?, actionPhrase }
-```
-
-#### ScoreCard
-**GOOD FOR:** Assessments, capability scores, maturity ratings
-```
-{ title?, subtitle?, criteria[{ label, score, maxScore, description?, actionPhrase }], showOverall? }
-```
-
-#### ResultsGrid
-**GOOD FOR:** Project outcomes, impact summary, results showcase
-```
-{ title?, results[{ category, metric, value, description?, icon?: "trending"|"award"|"target", actionPhrase }] }
-```
-
----
-
-### ⚖️ COMPARISON
-
-#### ComparisonTable
-**GOOD FOR:** "How do we compare", vs competitor, feature matrix
-```
-{ headers[], rows[{ feature, values[], highlight?, actionPhrase }], highlightColumn? }
-```
-
-#### BeforeAfter
-**GOOD FOR:** Transformation, impact visualization, "before/after"
-```
-{ beforeTitle, beforeContent, beforeImageUrl?, beforeActionPhrase, afterTitle, afterContent, afterImageUrl?, afterActionPhrase }
-```
-
-#### BattleCard
-**GOOD FOR:** Competitor analysis, "how do we beat X", competitive positioning
-```
-{ competitor, theirClaim, ourCounter, differentiators?[{ point, us: bool, them: bool }], winningMove?, actionPhrase }
-```
-
----
-
-### 🔄 PROCESS & FLOW
-
-#### FlowDiagram
-**GOOD FOR:** Workflows, processes, "how does it work", step-by-step
-```
-{ steps[{ id, title, description?, actionPhrase }], direction?: "horizontal"|"vertical" }
-```
-
-#### ProcessSteps
-**GOOD FOR:** How-to guides, implementation steps, numbered guides
-```
-{ title?, steps[{ title, description, actionPhrase }] }
-```
-
-#### TimelineHorizontal
-**GOOD FOR:** 3-3-3 delivery model, project phases, roadmaps, milestones
-```
-{ milestones[{ label, duration?, description?, status?: "pending"|"active"|"complete", actionPhrase }] }
-```
-
-#### TimelineVertical
-**GOOD FOR:** Event history, vertical roadmap, chronological sequence
-```
-{ title?, events[{ date?, title, description?, status?, actionPhrase }] }
-```
-
-#### GanttChart
-**GOOD FOR:** Project timelines, task scheduling, resource planning
-```
-{ title?, tasks[{ id, name, start: 0-100, duration: 0-100, status?: "pending"|"in-progress"|"complete", actionPhrase }], periods?[] }
-```
-
-#### RoadmapView
-**GOOD FOR:** Future plans, "what's coming", release timeline
-```
-{ title?, lanes[{ id, label, items[{ id, title, description?, status?: "done"|"current"|"planned"|"future", highlight?, actionPhrase }] }] }
-```
+### INTERACTIVE
+| Template | Use For | Required Props |
+|----------|---------|----------------|
+| `StepWizard` | Onboarding | `steps[]` with `title, status, actionPhrase` |
+| `ImageCarousel` | Gallery | `images[]` with `actionPhrase` |
 
 ---
 
-### 🃏 CARDS & GRIDS
+## 🚨 COMMON MISTAKES
 
-#### CardGrid
-**GOOD FOR:** Multiple topics, categories, navigation options, browse
-```
-{ cards[{ title, description?, imageUrl?, imagePrompt?, badge?, actionPhrase }], columns?: 2|3|4 }
-```
-
-#### IconGrid
-**GOOD FOR:** Tech stack, capabilities at a glance, supported technologies
-```
-{ items[{ icon: "LucideIconName", label, sublabel?, actionPhrase }], columns?: 3|4|6 }
-```
-
-#### NavigationGrid
-**GOOD FOR:** Main menu, section navigation, "where do you want to go"
-```
-{ title?, items[{ icon, title, description?, badge?, actionPhrase }], columns?: 2|3|4 }
-```
-
-#### PricingCards
-**GOOD FOR:** Pricing options, packages, tier comparison
-```
-{ tiers[{ name, price, period?, description?, features[], highlighted?, ctaLabel?, actionPhrase }] }
-```
-
-#### ClientLogoGrid
-**GOOD FOR:** Social proof, client showcase, "who uses this"
-```
-{ title?, subtitle?, logos[{ name, imageUrl?, imagePrompt?, actionPhrase }], columns?: 3|4|6 }
-```
-
----
-
-### 📝 LISTS
-
-#### FeatureList
-**GOOD FOR:** Listing capabilities, security features, platform features
-```
-{ title?, features[{ icon?: "LucideIconName", text, detail?, actionPhrase }], columns?: 1|2 }
-```
-
-#### AccordionList
-**GOOD FOR:** FAQs, detailed breakdowns, expandable sections
-```
-{ title?, items[{ title, content, defaultOpen?, actionPhrase }] }
-```
-
-#### ChecklistCard
-**GOOD FOR:** Requirements, prerequisites, completion tracking
-```
-{ title?, items[{ text, completed?: bool, actionPhrase }] }
-```
-
-#### NumberedList
-**GOOD FOR:** Priority lists, ranked items, "top N things"
-```
-{ title?, items[{ text, detail?, actionPhrase }], startNumber? }
-```
-
-#### DataTable
-**GOOD FOR:** Structured data, tabular information, listings
-```
-{ headers[], rows[{ cells[], actionPhrase }], striped? }
-```
-
-#### ResourceLinks
-**GOOD FOR:** Documentation, resources, "where can I learn more"
-```
-{ title?, resources[{ title, description?, type?: "doc"|"video"|"guide"|"link", actionPhrase }] }
-```
-
----
-
-### 💡 EXPLANATIONS
-
-#### ConceptCard
-**GOOD FOR:** Explaining a single concept, definition, "what is X"
-```
-{ title, definition, details?, imageUrl?, imagePrompt?, ctaLabel?, ctaActionPhrase? }
-```
-
-#### TalkingPoints
-**GOOD FOR:** Sales talking points, pitch prep, "what should I say"
-```
-{ title?, subtitle?, points[{ point, detail?, actionPhrase }], ctaLabel?, ctaActionPhrase? }
-```
-
-#### ParagraphBlock
-**GOOD FOR:** Long-form text, detailed explanations, narrative content
-```
-{ title?, paragraphs[], imageUrl?, imagePrompt?, imagePosition?: "top"|"left"|"right", ctaLabel?, ctaActionPhrase? }
-```
-
-#### ExpandableSection
-**GOOD FOR:** Progressive disclosure, detailed info that can be hidden
-```
-{ title, preview?, content, defaultExpanded?, ctaLabel?, ctaActionPhrase? }
-```
-
-#### TabContent
-**GOOD FOR:** Multiple related sections, category tabs, organized content
-```
-{ tabs[{ id, label, content, ctaLabel?, ctaActionPhrase? }], defaultTabId? }
-```
-
-#### ScenarioCard
-**GOOD FOR:** "What if", situation responses, objection handling
-```
-{ scenario, response, keyPoints?[], ctaLabel?, actionPhrase }
-```
-
----
-
-### 🏆 PROOF & EVIDENCE
-
-#### CaseStudyCard
-**GOOD FOR:** Customer success, "show me examples", proof points
-```
-{ clientName, industry, challenge, solution, results[{ metric, value }], imageUrl?, imagePrompt?, actionPhrase }
-```
-
-#### QuoteCard
-**GOOD FOR:** Testimonials, customer quotes, endorsements
-```
-{ quote, author, role?, company?, imageUrl?, imagePrompt?, actionPhrase }
-```
-
-#### ProofPointCard
-**GOOD FOR:** Validation, evidence, credibility builders
-```
-{ type: "certification"|"award"|"validation"|"guarantee", title, description, source?, date?, actionPhrase }
-```
-
-#### ValuePropCard
-**GOOD FOR:** Why choose us, value propositions, benefits summary
-```
-{ title, tagline, benefits[], imageUrl?, imagePrompt?, ctaLabel?, actionPhrase }
-```
-
-#### IndustryCard
-**GOOD FOR:** Vertical focus, industry capabilities, "do you work in X industry"
-```
-{ industry, headline, description, capabilities?[], clients?[], imageUrl?, imagePrompt?, actionPhrase }
-```
-
----
-
-### 🏗️ TECHNICAL DIAGRAMS
-
-#### ArchitectureDiagram
-**GOOD FOR:** System architecture, "show me the architecture"
-```
-{ title?, components[{ id, name, description?, icon?: "box"|"database"|"cloud"|"server"|"code"|"shield"|"cpu"|"layers", layer?: "top"|"middle"|"bottom", actionPhrase }] }
-```
-
-#### LayerDiagram
-**GOOD FOR:** Technology stack, layered architecture, abstraction levels
-```
-{ title?, layers[{ id, name, description?, color?, actionPhrase }] }
-```
-
-#### DataFlowDiagram
-**GOOD FOR:** Integration flows, data pipelines, system connections
-```
-{ title?, nodes[{ id, name, type?: "source"|"process"|"destination", icon?, actionPhrase }] }
-```
-
-#### ComponentDiagram
-**GOOD FOR:** System components, module breakdown, component relationships
-```
-{ title?, components[{ id, name, description?, type?: "core"|"module"|"service"|"library", subComponents?[], actionPhrase }] }
-```
-
----
-
-### 🎯 CALLS TO ACTION
-
-#### CTABanner
-**GOOD FOR:** Primary action, "get started", conversion
-```
-{ headline, subheadline?, ctaLabel, ctaActionPhrase, variant?: "primary"|"secondary"|"gradient" }
-```
-
-#### NextStepsCard
-**GOOD FOR:** Action items, "what now", post-demo, recommended actions
-```
-{ title?, subtitle?, steps[{ title, description, priority?: "high"|"medium"|"low", actionPhrase }] }
-```
-
-#### ContactCard
-**GOOD FOR:** Contact info, "how to reach us", sales contact
-```
-{ name, role?, email?, phone?, location?, linkedIn?, imageUrl?, imagePrompt?, bookMeetingActionPhrase?, contactActionPhrase }
-```
-
----
-
-### 🖼️ INTERACTIVE
-
-#### StepWizard
-**GOOD FOR:** Multi-step processes, onboarding wizards, guided flows
-```
-{ title?, steps[{ id, title, description?, status: "complete"|"current"|"upcoming", imageUrl?, imagePrompt?, actionPhrase }], currentStep? }
-```
-
-#### ImageCarousel
-**GOOD FOR:** Image gallery, screenshot showcase, multiple visuals
-```
-{ title?, images[{ imageUrl?, imagePrompt?, caption?, actionPhrase }], autoPlay?, interval? }
-```
-
----
-
-## 🚨 COMMON MISTAKES (AVOID THESE)
-
-### ❌ Wrong: Sending string instead of array
-```json
-// WRONG - bulletPoints must be array
-{ "bulletPoints": "Point 1, Point 2" }
-
-// CORRECT
-{ "bulletPoints": ["Point 1", "Point 2"] }
-```
-
-### ❌ Wrong: Missing required props
-```json
-// WRONG - title and content are REQUIRED
-{ "imagePrompt": "Some image" }
-
-// CORRECT
-{ "title": "Title Here", "content": "Content here", "imagePrompt": "..." }
-```
-
-### ❌ Wrong: Using wrong prop names
-```json
-// WRONG - "image" is not a prop
-{ "image": "some-url.png" }
-
-// CORRECT - use imageUrl or imagePrompt
-{ "imageUrl": "adp-architecture" }
-// OR
-{ "imagePrompt": "Description for AI to generate" }
-```
-
-### ❌ Wrong: Empty arrays break rendering
-```json
-// WRONG - empty array may cause issues
-{ "bulletPoints": [] }
-
-// CORRECT - omit if no data, or provide items
-{ "bulletPoints": ["At least one item"] }
-// OR just omit the prop entirely
-{ "title": "...", "content": "..." }
-```
-
-### ✅ Complete Valid Example
-```json
-{
-  "title": "The Control Plane",
-  "subtitle": "Governance and Orchestration",
-  "content": "The Control Plane manages AI infrastructure and ensures quality, security and cost-effectiveness.",
-  "bulletPoints": [
-    "Role-based access control",
-    "Automated policy enforcement",
-    "Real-time monitoring"
-  ],
-  "imageUrl": "adp-architecture",
-  "imagePosition": "right"
-}
-```
+| ❌ Wrong | ✅ Correct |
+|----------|------------|
+| `"bulletPoints": "Point 1, Point 2"` | `"bulletPoints": ["Point 1", "Point 2"]` |
+| `{ "imagePrompt": "..." }` (missing title) | `{ "title": "...", "content": "...", "imagePrompt": "..." }` |
+| `{ "image": "url" }` | `{ "imageUrl": "id" }` or `{ "imagePrompt": "desc" }` |
+| `{ "bulletPoints": [] }` | Omit empty arrays entirely |
 
 ---
 
@@ -869,36 +565,6 @@ Use these IDs for instant loading:
 
 ---
 
-### 12. Next Steps & Contact
-**User:** "How do I get started?" / "Next steps?" / "Book a demo?" / "Contact?"
-**Catherine says:** "Ready to move forward? Here's exactly what happens next—and who to contact."
-```json
-{ "badge": "GET STARTED", "title": "Your Path Forward",
-  "subtitle": "From this conversation to production deployment",
-  "generativeSubsections": [
-    { "id": "steps", "templateId": "NextStepsCard", "props": {
-      "title": "Recommended Next Steps",
-      "subtitle": "Based on our conversation",
-      "steps": [
-        { "title": "Schedule Deep Dive", "description": "90-minute technical session with our architecture team", "priority": "high", "actionPhrase": "Book architecture session" },
-        { "title": "Identify Pilot Use Case", "description": "Select a bounded problem for the 3-day validation", "priority": "high", "actionPhrase": "Show me ideal pilot criteria" },
-        { "title": "Stakeholder Alignment", "description": "Brief CIO/CTO on Super Spec differentiation", "priority": "medium", "actionPhrase": "Show me executive briefing" },
-        { "title": "Contract Review", "description": "Review SOW template and pricing options", "priority": "medium", "actionPhrase": "Show me engagement terms" }
-      ]
-    }},
-    { "id": "contact", "templateId": "ContactCard", "props": {
-      "name": "AI/Works Platform Team",
-      "role": "Internal Enablement",
-      "email": "aiworks@thoughtworks.com",
-      "bookMeetingActionPhrase": "Book a platform demo",
-      "contactActionPhrase": "Contact the AI/Works team"
-    }}
-  ]
-}
-```
-
----
-
 ### 13. Case Studies & Social Proof
 **User:** "Show me examples" / "Who uses this?" / "Case studies?" / "Proof?"
 **Catherine says:** "Let me show you what we've delivered. Real clients, real results, real production systems."
@@ -940,64 +606,6 @@ Use these IDs for instant loading:
 ```
 
 ---
-
-### 14. FAQs & Key Concepts
-**User:** "FAQ" / "Common questions" / "What exactly is Super Spec?" / "Explain the concepts"
-**Catherine says:** "Let me clarify the concepts that matter most. These are the questions everyone asks."
-```json
-{ "badge": "FAQ", "title": "Frequently Asked Questions",
-  "subtitle": "The concepts everyone needs to understand",
-  "generativeSubsections": [
-    { "id": "concept", "templateId": "ConceptCard", "props": {
-      "title": "The Super Spec",
-      "definition": "A comprehensive specification that combines Architecture Decision Records (ADRs), functional requirements, and UX designs into a single source of truth.",
-      "details": "Unlike code-first approaches, Super Spec ensures that every line of generated code traces back to validated architectural decisions. Change the spec, regenerate the code—zero technical debt accumulation.",
-      "imagePrompt": "Blueprint document transforming into digital code, architectural specification visualization, professional tech illustration",
-      "ctaLabel": "See Super Spec in Action",
-      "ctaActionPhrase": "Show me Super Spec workflow"
-    }},
-    { "id": "faq", "templateId": "AccordionList", "props": {
-      "title": "Common Questions",
-      "items": [
-        { "title": "How is this different from GitHub Copilot?", "content": "Copilot generates code snippets. AI/Works generates the specification first (ADRs, requirements, architecture) and then generates production-grade systems that follow that spec. We ensure architectural integrity, not just syntax correctness.", "actionPhrase": "Show me Copilot comparison" },
-        { "title": "Can it work with our existing codebase?", "content": "Yes. CodeConcise uses AST analysis to extract business logic from legacy systems. We don't require rip-and-replace—your existing systems keep running while we modernize.", "actionPhrase": "Show me legacy integration" },
-        { "title": "Who controls the AI agents?", "content": "You do. The Control Plane provides RBAC, input/output filters, and complete audit trails. Agents operate within guardrails you define.", "actionPhrase": "Show me Control Plane" },
-        { "title": "What if the generated code is wrong?", "content": "You modify the Super Spec and regenerate. Unlike traditional development, you don't patch code—you fix the specification and the code follows. This is how we guarantee zero technical debt.", "actionPhrase": "Show me regeneration workflow" }
-      ]
-    }}
-  ]
-}
-```
-
----
-
-### 15. Industry Verticals
-**User:** "Healthcare?" / "Financial services?" / "What industries?" / "Do you work with retail?"
-**Catherine says:** "We serve enterprises across every major vertical. Here's how AI/Works applies to your industry."
-```json
-{ "badge": "INDUSTRIES", "title": "Industry Solutions",
-  "subtitle": "Vertical-specific patterns and compliance built in",
-  "generativeSubsections": [
-    { "id": "grid", "templateId": "CardGrid", "props": {
-      "cards": [
-        { "title": "Healthcare", "description": "HIPAA-ready claims processing, EHR integration, patient portals", "badge": "HIPAA", "actionPhrase": "Show me healthcare solutions" },
-        { "title": "Financial Services", "description": "SOX/PCI-DSS compliance, real-time fraud detection, legacy core modernization", "badge": "SOX", "actionPhrase": "Show me financial solutions" },
-        { "title": "Retail & E-commerce", "description": "Omnichannel platforms, inventory optimization, customer personalization", "badge": "SCALE", "actionPhrase": "Show me retail solutions" },
-        { "title": "Manufacturing", "description": "IoT integration, supply chain optimization, predictive maintenance", "badge": "IOT", "actionPhrase": "Show me manufacturing solutions" }
-      ],
-      "columns": 2
-    }},
-    { "id": "detail", "templateId": "IndustryCard", "props": {
-      "industry": "Financial Services",
-      "headline": "Modernize Core Banking Without the Risk",
-      "description": "Financial institutions face a unique challenge: legacy core systems that can't be replaced but limit innovation. AI/Works enables parallel modernization—new capabilities on modern architecture, seamless integration with existing cores.",
-      "capabilities": ["Legacy COBOL extraction", "Real-time fraud pattern detection", "Regulatory compliance automation", "Open banking API generation"],
-      "clients": ["Top 10 US Bank", "Global Insurance Leader", "Regional Credit Union Network"],
-      "actionPhrase": "Show me financial services case study"
-    }}
-  ]
-}
-```
 
 ---
 

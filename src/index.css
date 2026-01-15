@@ -2298,4 +2298,34 @@ button,
   body.lightboard-mode article {
     transition: all 500ms ease-out;
   }
+
+  /* ============================================
+   * WELCOME CAROUSEL - Infinite Scroll Animation
+   * ============================================ */
+  
+  @keyframes carousel-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-carousel-scroll {
+    animation: carousel-scroll linear infinite;
+  }
+
+  /* Glow shadow for carousel cards on hover */
+  .shadow-glow {
+    box-shadow: 
+      0 0 20px rgba(65, 150, 217, 0.3),
+      0 0 40px rgba(65, 150, 217, 0.15),
+      0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Background variable for gradient fade edges */
+  .from-background {
+    --tw-gradient-from: hsl(var(--background));
+  }
 }

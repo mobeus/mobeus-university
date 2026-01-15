@@ -34,119 +34,58 @@ const WELCOME_VARIANTS = [
   {
     badge: "SPARKS THE EXTRAORDINARY",
     title: "AI/Works by Thoughtworks",
-    subtitle: "30 years of architectural wisdom, now encoded into intelligent agents. Where legacy meets agentic intelligence.",
+    subtitle: "30 years of architectural wisdom, now encoded into intelligent agents",
     generativeSubsections: [
-      // Hero Stat - The Big Number
+      // Stakeholder Questions Carousel
       {
-        id: "hero-stat",
-        templateId: "StatHighlight",
+        id: "questions-carousel",
+        templateId: "WelcomeCarousel",
         props: {
-          value: "3-4 = 20",
-          label: "Team Multiplier",
-          description: "A team of 3-4 developers now delivers what used to take 20. AI/Works doesn't replace engineers—it multiplies them.",
-          trend: "up",
-          trendValue: "Enterprise-ready in 90 days",
-          actionPhrase: "Show me how AI/Works multiplies teams"
-        }
-      },
-      // Key Differentiators
-      {
-        id: "differentiators",
-        templateId: "MetricsGrid",
-        props: {
-          columns: 4,
-          metrics: [
-            { value: "40-60%", label: "Cost Reduction", change: "vs traditional development", trend: "down", actionPhrase: "Show me ROI details" },
-            { value: "90 Days", label: "To Production", change: "3-3-3 delivery model", trend: "down", actionPhrase: "Show me the 3-3-3 model" },
-            { value: "Zero", label: "Technical Debt", change: "Regenerate from spec", trend: "down", actionPhrase: "Show me how Super Spec works" },
-            { value: "30+", label: "Years of Wisdom", change: "Thoughtworks heritage", trend: "up", actionPhrase: "Show me our architectural foundation" }
-          ]
-        }
-      },
-      // Super Spec Explanation
-      {
-        id: "super-spec",
-        templateId: "SplitContent",
-        props: {
-          title: "The Super Spec Engine",
-          subtitle: "Specification First, Code Follows",
-          content: "Unlike code generators that create spaghetti faster, AI/Works generates the specification first—Architecture Decision Records (ADRs), functional requirements, and UX designs. The code follows the spec, ensuring architectural integrity. Need changes? Modify the spec and regenerate. That's how we guarantee zero technical debt.",
-          bulletPoints: [
-            "Single Source of Truth for all stakeholders",
-            "Human-approved before any code is generated",
-            "Instant regeneration—change the spec, rebuild the system"
-          ],
-          imagePrompt: "Modern software architecture blueprint, specification document transforming into elegant code, professional tech illustration, dark teal and white color scheme"
-        }
-      },
-      // The 3 Environments
-      {
-        id: "environments",
-        templateId: "ThreeColumnLayout",
-        props: {
-          columns: [
+          autoPlayInterval: 60000,
+          cards: [
             {
-              title: "Developer Portal",
-              subtitle: "Access & Context",
-              description: "The command center where you set context, access libraries, and configure AI agents. Your journey begins here.",
-              badge: "ENVIRONMENT 1",
-              actionPhrase: "Show me the Developer Portal"
+              question: "I'm pitching AI/Works to a skeptical CIO—how do I win them over?",
+              subtext: "Sales & Client Principals",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me how to pitch AI/Works to a skeptical CIO"
             },
             {
-              title: "IDE Integration",
-              subtitle: "Spec to Code",
-              description: "Where the Super Spec transforms into production-grade code. ADRs, requirements, and UX designs come to life here.",
-              badge: "ENVIRONMENT 2",
-              actionPhrase: "Show me IDE integration"
+              question: "I'm competing against Globant on a major deal—what's our edge?",
+              subtext: "Sales & Business Development",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me how AI/Works beats Globant in competitive deals"
             },
             {
-              title: "AIOps",
-              subtitle: "Self-Healing Operations",
-              description: "Post-deployment monitoring, proactive maintenance, and self-healing. AI agents maintain your systems 24/7.",
-              badge: "ENVIRONMENT 3",
-              actionPhrase: "Show me AIOps capabilities"
+              question: "I'm working on a legacy modernization project—how does AI/Works help?",
+              subtext: "Developers & Architects",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me how AI/Works handles legacy modernization"
+            },
+            {
+              question: "I want to learn about the Super Spec Engine—what is it?",
+              subtext: "Technical Teams",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me how the Super Spec Engine works"
+            },
+            {
+              question: "I need to explain the 3-3-3 delivery model to a client—help me?",
+              subtext: "Client Principals & Delivery Leads",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me the 3-3-3 delivery model explained"
+            },
+            {
+              question: "I'm an architect evaluating AI tools—how is this different?",
+              subtext: "Enterprise Architects",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me what makes AI/Works different from other AI tools"
+            },
+            {
+              question: "I want to see the ROI numbers—what can I tell my executives?",
+              subtext: "Executive Sponsors",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me the ROI and business case for AI/Works"
             }
           ]
-        }
-      },
-      // 3-3-3 Delivery Timeline
-      {
-        id: "delivery-model",
-        templateId: "TimelineHorizontal",
-        props: {
-          milestones: [
-            { label: "3 DAYS", duration: "Validation", description: "Concept validation, feasibility assessment, Go/No-Go decision", status: "complete", actionPhrase: "Show me the validation phase" },
-            { label: "3 WEEKS", duration: "Prototype", description: "Working prototype, stakeholder demo, user testing", status: "active", actionPhrase: "Show me the prototype phase" },
-            { label: "3 MONTHS", duration: "Production", description: "Enterprise deployment with AIOps monitoring and self-healing", status: "pending", actionPhrase: "Show me production deployment" }
-          ]
-        }
-      },
-      // Competitive Edge
-      {
-        id: "competitive",
-        templateId: "ValuePropCard",
-        props: {
-          title: "Why Thoughtworks?",
-          tagline: "Legacy modernization + agentic AI—a combination no one else offers",
-          benefits: [
-            "We invented Agile and Microservices. AI/Works is the next evolution.",
-            "CodeConcise extracts logic from 30-year-old COBOL without stopping your business.",
-            "Control Plane provides enterprise governance, not wild AI behavior.",
-            "30 years of architectural wisdom defeats 4,000 commodity agents."
-          ],
-          actionPhrase: "Show me competitive positioning"
-        }
-      },
-      // Call to Action
-      {
-        id: "cta",
-        templateId: "CTABanner",
-        props: {
-          headline: "Ready to Spark the Extraordinary?",
-          subheadline: "Ask Catherine about the 10 platform components, ROI models, or competitive positioning.",
-          ctaLabel: "Explore AI/Works",
-          ctaActionPhrase: "Show me the 10 components of AI/Works",
-          variant: "gradient"
         }
       }
     ]

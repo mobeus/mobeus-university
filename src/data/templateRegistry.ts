@@ -446,4 +446,15 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
      * PROPS: { title?, lanes[{ id, label, items[{ id, title, description?, status?, highlight?, actionPhrase }] }] }
      */
     RoadmapView: lazy(() => import("@/components/templates/RoadmapView").then(m => ({ default: m.RoadmapView }))),
+
+    // ==========================================
+    // WELCOME & ONBOARDING
+    // ==========================================
+
+    /**
+     * WelcomeCarousel
+     * USE WHEN: Welcome page, stakeholder questions, "ask Catherine" cards
+     * PROPS: { cards[{ question, subtext?, imageUrl, actionPhrase }], autoPlayInterval? }
+     */
+    WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
 };
