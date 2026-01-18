@@ -51,27 +51,27 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'concepts',
         label: 'CONCEPTS',
-        teleQuery: 'Explain the two agent architecture'
+        teleQuery: 'Show me all core concepts'
       },
       {
         id: 'slash-commands',
         label: 'SLASH COMMANDS',
-        teleQuery: 'Explain the slash commands'
+        teleQuery: 'Show me all about slash commands, and give me a sense of how powerful they are'
       },
       {
         id: 'phases',
         label: 'PHASES',
-        teleQuery: 'Show me the hackathon phases'
+        teleQuery: 'Show me the hackathon phases and walk me through them'
       },
       {
         id: 'templates',
         label: 'TEMPLATES',
-        teleQuery: 'Show me all templates'
+        teleQuery: 'Show me all available templates'
       },
       {
         id: 'ready',
         label: 'AM I READY?',
-        teleQuery: 'Start the readiness experience'
+        teleQuery: 'Show me where my readiness is right now, and help me pass'
       }
     ];
 

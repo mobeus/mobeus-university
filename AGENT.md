@@ -1,6 +1,7 @@
 # 🤖 AGENT.md - Mobeus University Development Reference
 
 > **Two-Agent Architecture Documentation**
+> Catherine v63.0 | Zero Friction Release
 > Last updated: January 18, 2026
 
 ---
@@ -32,7 +33,7 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 ### How They Collaborate
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      BUILD TIME                                   │
+│                      BUILD TIME                                  │
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │              BUILD AGENT (Claude)                         │   │
 │  │  • Creates templates in src/components/templates/         │   │
@@ -78,10 +79,11 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 This is **Mobeus University** — a teaching platform where Catherine (the Runtime Agent) teaches developers how to build teles (conversational AI applications).
 
 ### Core Identity
-- **Tele:** Catherine — A programming teacher
+- **Tele:** Catherine — A hackathon prep programming teacher
 - **Audience:** Developers learning to build teles
 - **Mission:** Teach the Tele Builder Hackathon curriculum
 - **Platform:** Mobeus Teleglass Platform
+- **Design Philosophy:** Zero Friction | Clean Transparency | Reactive Mastery
 
 ### The Hackathon Curriculum (3 hours, 6 phases)
 | Phase | Time | Focus | Deliverable |
@@ -100,14 +102,14 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 ### Shared Between Agents
 | File | Purpose | Line Limit |
 |------|---------|------------|
-| `tele-knowledge.md` | Domain knowledge — what Catherine knows | 750 lines |
-| `glass-prompt.md` | Tool definition — templates, shot prompts | 1500 lines |
+| `tele-knowledge.md` | Domain knowledge — what Catherine knows | ~150 lines |
+| `glass-prompt.md` | Tool definition — templates, shot prompts | ~1400 lines |
 
 ### Build Agent Reference
 | File | Purpose |
 |------|---------|
 | `AGENT.md` | This file — Build Agent reference |
-| `src/data/templateRegistry.ts` | Template registry (32+ templates) |
+| `src/data/templateRegistry.ts` | Template registry (16 templates) |
 | `.agent/workflows/*.md` | Workflow definitions |
 
 ### Glass Application
@@ -119,7 +121,20 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 
 ---
 
-## 4. WORKFLOWS
+## 4. TEMPLATE REGISTRY (16 Templates)
+
+### Current Templates
+| Category | Templates |
+|----------|-----------|
+| **Hackathon** | HackathonTimeline, PhaseOverview, ReadinessCheck, ReadinessAssessment, ReadinessExperience |
+| **Concept Teaching** | ConceptCard, ConceptExplainer, TalkingPoints, ProcessSteps |
+| **Navigation** | CardGrid, WelcomeCarousel, CTABanner |
+| **Layout & Content** | SplitContent, AccordionList |
+| **Tools & Code** | ToolCard, CodeBlock |
+
+---
+
+## 5. WORKFLOWS
 
 ### /add-glass — Add Template
 Create a new visual component:
@@ -134,17 +149,17 @@ Create a new visual component:
 Add to `tele-knowledge.md`:
 1. Use compact YAML-like notation
 2. Focus on WHAT tele knows
-3. Keep under 750 lines
+3. Keep concise and efficient
 
 ### /tele-should — Add Shot Prompt
 Add response mapping to `glass-prompt.md`:
 1. Format: `USER: "phrase"` → `navigateToSection: {json}` → `TELE SAYS: "response"`
 2. Always call navigateToSection
-3. Keep under 1500 lines
+3. Maintain natural speech patterns
 
 ---
 
-## 5. THE 5 IMMUTABLE LAWS
+## 6. THE 5 IMMUTABLE LAWS
 
 1. **VOLUMETRIC NAVIGATION** — Every clickable MUST call `notifyTele(actionPhrase)`. NO DEAD ENDS.
 2. **TOOL SIGNATURE STABILITY** — `navigateToSection` signature MUST NEVER change.
@@ -154,21 +169,21 @@ Add response mapping to `glass-prompt.md`:
 
 ---
 
-## 6. CENTRALIZED STYLING
+## 7. CENTRALIZED STYLING
 
 **ALL STYLES MUST BE IN `src/index.css`**
 
-### Brand Colors
+### Brand Colors (8-Color Palette)
 | Color | Hex | Use |
 |-------|-----|-----|
-| Mist | `#EDF1F3` | Text, icons |
-| Onyx | `#000000` | Backgrounds |
-| Flamingo | `#F2617A` | CTAs, primary |
+| Mist | `#F5F5F5` | Text, icons |
+| Onyx | `#0D0D0D` | Backgrounds |
+| Flamingo | `#9B5DE5` | CTAs, primary (purple) |
 | Wave | `#003D4F` | Dark teal bg |
 | Turmeric | `#CC850A` | Secondary |
-| Jade | `#1A4D2E` | Success |
+| Jade | `#5EEAD4` | Success |
 | Sapphire | `#47A1AD` | Default buttons |
-| Amethyst | `#6B5B95` | Accents |
+| Amethyst | `#7C3AED` | Accents |
 
 ### CSS Classes
 - **Containers:** `glass-template-container`, `glass-image-container`
@@ -189,7 +204,7 @@ Add response mapping to `glass-prompt.md`:
 
 ---
 
-## 7. SMARTIMAGE SYSTEM
+## 8. SMARTIMAGE SYSTEM
 
 Hybrid image system that auto-chooses between pre-generated and AI-generated:
 
@@ -210,7 +225,7 @@ assetId → Check ASSET_REGISTRY → Found? → Load file
 
 ---
 
-## 8. DEVELOPMENT
+## 9. DEVELOPMENT
 
 ```bash
 npm run dev -- --port 3131    # Start dev server
@@ -223,7 +238,7 @@ npm run build                 # Production build
 
 ---
 
-## 9. TEMPLATE SKELETON
+## 10. TEMPLATE SKELETON
 
 ```tsx
 /**
@@ -265,7 +280,7 @@ export const TemplateName: React.FC<Props> = ({ items = [] }) => {
 
 ---
 
-## 10. QUICK REFERENCE
+## 11. QUICK REFERENCE
 
 ### Navigation Flow
 ```
@@ -283,4 +298,5 @@ User clicks → playClick() → notifyTele(actionPhrase) → sendToTele()
 ---
 
 *Mobeus University — Teaching the World to Build Teles*
-*Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT)*
+*Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT 5.0)*
+*Catherine v63.0 | Zero Friction Release | January 18, 2026*

@@ -280,7 +280,7 @@ export const ReadinessExperience: React.FC<ReadinessExperienceProps> = ({
                             className={`glass-card-minimal p-5 cursor-pointer transition-all duration-300 
                                 ${getProgressBorderColor(concept.progress || 0)}
                                 ${isPassed ? 'bg-jade/10' : needsAttention ? 'bg-turmeric/5 hover:bg-turmeric/10' : 'hover:border-sapphire/40'}
-                                ${needsAttention ? 'ring-2 ring-turmeric/30 animate-pulse' : ''}`}
+                                ${needsAttention ? 'ring-2 ring-turmeric/30' : ''}`}
                             onClick={() => concept.actionPhrase && handleAction(concept.actionPhrase)}
                         >
                             <div className="flex items-start gap-4">

@@ -7,19 +7,21 @@ description: Add domain knowledge to Tele (what Tele knows about)
 When adding new domain knowledge that Tele should know about, update `tele-knowledge.md`.
 
 ## When to Use
-- Adding information about new events (LEAP, conferences)
-- Adding information about new programs or services
-- Adding Vision 2030 context
-- Adding recruiter-specific knowledge
-- Adding industry/sector knowledge
+- Adding information about new concepts or terminology
+- Adding information about new features or capabilities
+- Adding hackathon-related knowledge
+- Adding platform-specific patterns
+- Adding technical reference material
 
 ## Steps
 
 1. Identify the knowledge type:
-   - **Journey Knowledge** → Section 3 (THE 8-STEP TALENT JOURNEY)
-   - **Vision 2030 Context** → Section 2 (THE VISION 2030 MISSION)
-   - **Recruiter Knowledge** → Recruiter Mode section
-   - **Event Knowledge** → Add new section or inline
+   - **Identity/Role** → ---IDENTITY--- section
+   - **Architecture** → ---ARCHITECTURE--- section
+   - **Templates** → ---TEMPLATES-REGISTRY--- section
+   - **Curriculum** → ---CURRICULUM--- section
+   - **Hackathon** → ---HACKATHON--- section
+   - **Commands** → ---COMMANDS--- section
 
 2. Open `tele-knowledge.md` and find the appropriate section
 
@@ -28,39 +30,50 @@ When adding new domain knowledge that Tele should know about, update `tele-knowl
    ```bash
    wc -l tele-knowledge.md
    ```
-   **Limit: 750 lines max**
+   **Target: ~150 lines max (token efficiency)**
 
-4. Add knowledge in this format:
+4. Add knowledge in compact notation format:
    ```markdown
-   ### [TOPIC NAME]
-   *   **Key Point 1:** Brief description
-   *   **Key Point 2:** Brief description
-   *   **My Role:** How I help with this topic
+   key:value|another value
+   nested-key:
+     sub-key:{property1,property2}
    ```
 
 5. Keep it concise:
-   - ✅ Bullet points, not paragraphs
-   - ✅ Action-oriented ("I help users...")
+   - ✅ Compact notation, not paragraphs
+   - ✅ Use pipes (|) for multiple values
+   - ✅ Use colons (:) for key-value pairs
    - ✅ Include what Tele should SAY about this topic
    - ❌ No redundant information already in glass-prompt.md
 
 // turbo
-6. Verify the file is under 750 lines:
+6. Verify the file is under 150 lines:
    ```bash
    wc -l tele-knowledge.md
    ```
 
-## Example: Adding Event Knowledge
+## Example: Adding a New Command
 
 ```markdown
-### LEAP 2026
-*   **What:** World's largest tech event in Riyadh
-*   **When:** April 13-16, 2026
-*   **My Role:** I help candidates register, prepare for networking, and discover career opportunities at LEAP.
-*   **What I Say:** "LEAP is happening April 13-16 in Riyadh. It's a great opportunity to network with global tech leaders. Want me to help you prepare?"
+---COMMANDS---
+"What is a tele?"→ConceptCard
+"Explain the architecture"→Two-agent diagram
+"Show me the hackathon phases"→HackathonTimeline
+"NEW COMMAND"→TemplateToShow
+```
+
+## Example: Adding Hackathon Phase
+
+```markdown
+---HACKATHON---
+phases:
+  1-voice-coding:0:00-0:30|Train tele by speaking in admin mode
+  NEW-PHASE:TIMING|Description of what happens
 ```
 
 ## Don't Forget
-- ✅ Keep tele-knowledge.md ≤ 750 lines
+- ✅ Keep tele-knowledge.md ≤ 150 lines (token efficiency)
 - ✅ Knowledge should be WHAT Tele knows, not HOW Tele shows it (that's glass-prompt.md)
-- ✅ Include example phrases Tele might say
+- ✅ Use compact notation (key:value|key2:value2)
+- ✅ Update the version number at the end of the file
+- ✅ Maintain the ---SECTION--- format for organization

@@ -1,14 +1,83 @@
 # Template Style Migration Guide
-## From Light Mode → Static Template Dark Glass Style
+## Dark Glass Aesthetic — Mobeus University
 
-> **⚠️ NOTE: This guide is for reference only.**
-> Templates should use **centralized CSS classes** from `src/index.css`, not inline Tailwind.
-> See classes like `.glass-template-container`, `.glass-card-standard`, `.text-template-title` etc.
+> **Catherine v63.0 | Zero Friction Release**
+> Last updated: January 18, 2026
 
-### Color Token Mapping
+### ⚠️ Key Principle: Use Centralized CSS Classes
+Templates MUST use **centralized CSS classes** from `src/index.css`, not inline Tailwind.
+See classes like `.glass-template-container`, `.glass-card-standard`, `.text-template-title` etc.
 
-| Light Mode (Current) | Dark Glass Mode (Target) |
-|---------------------|-------------------------|
+---
+
+## Brand Color Palette (8 Colors)
+
+| Color Name | Hex Code | Purpose |
+|------------|----------|---------|
+| **Mist** | `#F5F5F5` | Text, icons, light elements |
+| **Onyx** | `#0D0D0D` | Dark backgrounds |
+| **Flamingo** | `#9B5DE5` | Primary accent (purple), CTAs |
+| **Wave** | `#003D4F` | Dark teal backgrounds |
+| **Turmeric** | `#CC850A` | Secondary buttons, warnings |
+| **Jade** | `#5EEAD4` | Success states, teal accents |
+| **Sapphire** | `#47A1AD` | Default buttons, links |
+| **Amethyst** | `#7C3AED` | Deep purple accents |
+
+---
+
+## Centralized CSS Classes Reference
+
+### Containers
+| Class | Use |
+|-------|-----|
+| `.glass-template-container` | Main template wrapper |
+| `.glass-image-container` | Image sections |
+
+### Cards
+| Class | Use |
+|-------|-----|
+| `.glass-card-minimal` | Subtle, low-emphasis cards |
+| `.glass-card-standard` | Standard content cards |
+| `.glass-card-featured` | High-emphasis, highlighted cards |
+| `.glass-card-clickable` | Add for interactive cards |
+
+### Typography
+| Class | Use |
+|-------|-----|
+| `.text-template-title` | Headings (mist/white) |
+| `.text-template-subtitle` | Subtitles (flamingo accent) |
+| `.text-template-content` | Body text (mist/70) |
+| `.text-template-bullet` | List items (mist/80) |
+
+### Buttons
+| Class | Use |
+|-------|-----|
+| `.btn-cta` | Primary CTA (flamingo/purple) |
+| `.btn-sapphire` | Default button (sapphire blue) |
+| `.btn-turmeric` | Secondary button (turmeric yellow) |
+| `.btn-ghost` | Minimal outline button |
+
+### Grids
+| Class | Use |
+|-------|-----|
+| `.template-grid-2` | 2-column grid |
+| `.template-grid-3` | 3-column grid |
+| `.template-grid-4` | 4-column grid |
+
+### Badges
+| Class | Use |
+|-------|-----|
+| `.template-badge` | Default badge (flamingo) |
+| `.template-badge-sapphire` | Sapphire badge |
+| `.template-badge-turmeric` | Turmeric badge |
+| `.template-badge-mist` | Mist/white badge |
+
+---
+
+## Color Token Mapping (Legacy → Dark Glass)
+
+| Light Mode (Legacy) | Dark Glass Mode (Current) |
+|---------------------|---------------------------|
 | `bg-white/90` | `bg-white/10` |
 | `bg-white` | `bg-white/5` or `bg-white/10` |
 | `bg-gray-100` | `bg-white/10` |
@@ -22,144 +91,67 @@
 | `text-gray-600` | `text-white/70` |
 | `text-gray-500` | `text-white/60` |
 | `text-gray-400` | `text-white/50` |
-| `text-black` | `text-white` or `text-black` (for primary buttons only) |
+| `text-black` | `text-white` |
 | `hover:bg-gray-100` | `hover:bg-white/10` |
 | `hover:bg-gray-200` | `hover:bg-white/20` |
-| `shadow-black/20` | `shadow-lg shadow-black/30` |
 
-### Card Patterns
+---
 
-**Container Card:**
-```diff
-- bg-white/90 backdrop-blur-sm border border-black/10 rounded-2xl
-+ backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl
+## Status Colors
+
+| Status | Class Pattern |
+|--------|---------------|
+| Success | `text-jade`, `bg-jade/20` |
+| Warning | `text-turmeric`, `bg-turmeric/20` |
+| Error | `text-red-400`, `bg-red-400/20` |
+| Info | `text-sapphire`, `bg-sapphire/20` |
+| Pending | `text-white/60`, `bg-white/10` |
+
+---
+
+## Template Pattern Examples
+
+### ❌ DON'T — Inline Tailwind
+```tsx
+<div className="bg-mist/10 border border-mist/20 rounded-2xl p-6 backdrop-blur-sm">
+  <h3 className="text-gray-900 font-bold">Title</h3>
+  <p className="text-gray-600">Content</p>
+</div>
 ```
 
-**Inner Card/Item:**
-```diff
-- bg-gray-100/80 rounded-lg
-+ bg-white/5 border border-white/10 rounded-xl
+### ✅ DO — Centralized Classes
+```tsx
+<div className="glass-template-container">
+  <h3 className="text-template-title">Title</h3>
+  <p className="text-template-content">Content</p>
+</div>
 ```
 
-**Highlighted/Active Card:**
-```diff
-- bg-blue-50 border-blue-200
-+ bg-primary/10 border border-primary/20
+---
+
+## Button Patterns
+
+### ❌ DON'T
+```tsx
+<button className="bg-primary text-white rounded-lg px-4 py-2">
 ```
 
-### Typography
-
-**Headings:**
-```diff
-- text-gray-900 font-bold
-+ text-white font-bold
+### ✅ DO
+```tsx
+<button className="btn-cta">
 ```
 
-**Subheadings:**
-```diff
-- text-gray-700 font-semibold
-+ text-white font-semibold
-```
+---
 
-**Body Text:**
-```diff
-- text-gray-600
-+ text-white/70
-```
+## Adding New Styles
 
-**Muted/Secondary:**
-```diff
-- text-gray-500
-+ text-white/60
-```
+If existing classes don't cover your need:
 
-**Timestamps/Meta:**
-```diff
-- text-gray-400 text-xs
-+ text-white/50 text-xs
-```
+1. **Add it to `src/index.css`** in the appropriate section
+2. **Name it semantically** (e.g., `.glass-card-pricing`)
+3. **Document it** in this guide
+4. **Use the class name** in templates
 
-### Buttons
+---
 
-**Primary CTA:**
-```diff
-- bg-primary text-white rounded-lg
-+ bg-primary text-black font-semibold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:scale-105
-```
-
-**Secondary/Ghost:**
-```diff
-- bg-gray-100 text-gray-700 rounded-lg
-+ bg-white/10 text-white rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300
-```
-
-### Icon Containers
-
-**Large (48x48):**
-```diff
-- bg-gray-100 rounded-lg
-+ w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center
-```
-
-**Small (badge-style):**
-```diff
-- bg-blue-100 p-1.5 rounded
-+ p-2 bg-primary/20 rounded-lg
-```
-
-**Icon Colors:**
-```diff
-- text-gray-600
-+ text-primary (or text-secondary for success/positive)
-```
-
-### Hover States
-
-```diff
-- hover:bg-gray-100
-+ hover:bg-white/10
-
-- hover:border-gray-300
-+ hover:border-primary/30
-
-- hover:shadow-md
-+ hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20
-```
-
-### Status Colors (keep semantic meaning)
-
-| Status | Light Mode | Dark Glass Mode |
-|--------|-----------|-----------------|
-| Success | `text-green-600`, `bg-green-100` | `text-secondary`, `bg-secondary/20` |
-| Warning | `text-yellow-600`, `bg-yellow-100` | `text-amber-400`, `bg-amber-400/20` |
-| Error | `text-red-600`, `bg-red-100` | `text-red-400`, `bg-red-400/20` |
-| Info | `text-blue-600`, `bg-blue-100` | `text-primary`, `bg-primary/20` |
-| Pending | `text-gray-500`, `bg-gray-100` | `text-white/60`, `bg-white/10` |
-
-### Progress Bars
-
-```diff
-- bg-gray-200 (track) + bg-primary (fill)
-+ bg-white/20 (track) + bg-primary (fill)
-```
-
-### Badges/Tags
-
-```diff
-- bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs
-+ bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-medium
-```
-
-### Dividers
-
-```diff
-- border-gray-200
-+ border-white/10
-```
-
-### Section Borders
-
-```diff
-- border-t border-gray-100
-+ border-t border-white/10
-```
+*Mobeus University | Catherine v63.0 | Zero Friction Release*

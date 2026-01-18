@@ -1,6 +1,15 @@
+# AI-Works Commercial Field Guide
+
+> **Reference Document**: Commercial positioning and licensing for AI-Works platform
+> **Context**: This document provides enterprise sales context. For Mobeus University 
+> hackathon education, see `tele-knowledge.md` and `glass-prompt.md`.
+>
+> *Catherine v63.0 | Mobeus University*
+
+---
+
 Field Guide
 Commercial scope and positioning
-What is AI-Works from a commercial perspective?
 AI-Works is an agentic software development, operations, and management platform available as a licensed set of platform components complemented by optional services and accelerators. It is not a resale of third-party AI models.  It is not a bespoke AI platform built for individual clients. 
 What is included in the AI-Works platform versus delivered separately?
 The platform includes a runtime, orchestration, governance, and standard analytics enabling different capabilities - including code to spec, requirements enhancements, a proprietary context library, a proprietary component library, a proprietary capability and industry solution library, dynamic super spec generation, spec to code generation, and AIOps.  Custom AI development, advanced integrations, or bespoke analytics are delivered as separate, clearly scoped engagements.
