@@ -103,7 +103,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                                 <img
                                     src={card.imageUrl}
                                     alt=""
-                                    className="w-full h-full object-cover opacity-50 blur-[1px] hover:opacity-70 hover:blur-0 transition-all duration-500 ease-out hover:scale-105"
+                                    className="w-full h-full object-cover opacity-50 hover:opacity-70 transition-all duration-500 ease-out hover:scale-105"
                                 />
                             </div>
 
