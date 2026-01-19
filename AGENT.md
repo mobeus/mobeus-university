@@ -1,8 +1,22 @@
 # 🤖 AGENT.md - Mobeus University Development Reference
 
 > **Two-Agent Architecture Documentation**
-> Catherine v63.0 | Zero Friction Release
+> Catherine v65.0 | Streamlined Colors + Core Concepts
 > Last updated: January 18, 2026
+
+---
+
+## ⚠️ CRITICAL REMINDER: SYNC KNOWLEDGE FILES
+
+**When `tele-knowledge.md` or `glass-prompt.md` is modified, YOU MUST remind the user:**
+
+> 🔄 **SYNC REQUIRED:** The following file(s) were modified and need to be copied to the Runtime LLM:
+> - `tele-knowledge.md` (if changed)
+> - `glass-prompt.md` (if changed)
+>
+> **Process:** Copy the contents of both files → Paste into the Runtime LLM's system prompt/knowledge base
+
+This is MANDATORY because the Runtime Agent (Catherine/GPT 5.0) has a separate context and won't see Build Agent file changes automatically.
 
 ---
 

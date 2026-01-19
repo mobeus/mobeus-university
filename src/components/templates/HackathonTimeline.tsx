@@ -142,8 +142,8 @@ export const HackathonTimeline: React.FC<HackathonTimelineProps> = ({
     return (
         <div className="glass-template-container">
             {/* Header */}
-            <div className="text-center mb-8">
-                <div className="template-badge mb-4">{totalDuration}</div>
+            <div className="text-left mb-8">
+                <div className="template-badge inline-block mb-4">{totalDuration}</div>
                 <h2 className="text-template-title text-3xl mb-2">{title}</h2>
                 <p className="text-template-content">{subtitle}</p>
             </div>
@@ -167,12 +167,12 @@ export const HackathonTimeline: React.FC<HackathonTimelineProps> = ({
                             >
                                 {/* Phase icon */}
                                 <div className={`absolute left-0 w-12 h-12 rounded-full flex items-center justify-center ${phase.status === 'current' ? 'bg-flamingo/20 border-2 border-flamingo' :
-                                        phase.status === 'completed' ? 'bg-jade/20 border-2 border-jade' :
-                                            'bg-mist/10 border border-mist/20'
+                                    phase.status === 'completed' ? 'bg-jade/20 border-2 border-jade' :
+                                        'bg-mist/10 border border-mist/20'
                                     }`}>
                                     <IconComponent className={`w-5 h-5 ${phase.status === 'current' ? 'text-flamingo' :
-                                            phase.status === 'completed' ? 'text-jade' :
-                                                'text-mist/60'
+                                        phase.status === 'completed' ? 'text-jade' :
+                                            'text-mist/60'
                                         }`} />
                                 </div>
 
@@ -204,7 +204,7 @@ export const HackathonTimeline: React.FC<HackathonTimelineProps> = ({
             </div>
 
             {/* CTA */}
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-left">
                 <button
                     className="btn-cta px-8 py-3 text-lg"
                     onClick={() => handleAction(ctaActionPhrase)}

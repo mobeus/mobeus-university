@@ -72,14 +72,14 @@ export const ThinkingIndicator: React.FC<ThinkingIndicatorProps> = ({
                 ctx.filter = `blur(${layer.blur}px)`;
             }
 
-            // Create gradient for the wave - using Flamingo Pink (#F2617A = hsl(351, 86%, 67%))
+            // Create gradient for the wave - using Flamingo Purple (#9B5DE5 = hsl(270, 70%, 65%))
             const gradient = ctx.createLinearGradient(startX, 0, endX, 0);
             const alpha = layer.opacity * fadeOpacityRef.current;
-            gradient.addColorStop(0, `hsla(351, 86%, 67%, 0)`);
-            gradient.addColorStop(0.15, `hsla(351, 86%, 75%, ${alpha * 0.5})`);
-            gradient.addColorStop(0.5, `hsla(351, 86%, 80%, ${alpha})`);
-            gradient.addColorStop(0.85, `hsla(351, 86%, 75%, ${alpha * 0.5})`);
-            gradient.addColorStop(1, `hsla(351, 86%, 67%, 0)`);
+            gradient.addColorStop(0, `hsla(270, 70%, 65%, 0)`);
+            gradient.addColorStop(0.15, `hsla(270, 70%, 70%, ${alpha * 0.5})`);
+            gradient.addColorStop(0.5, `hsla(270, 70%, 75%, ${alpha})`);
+            gradient.addColorStop(0.85, `hsla(270, 70%, 70%, ${alpha * 0.5})`);
+            gradient.addColorStop(1, `hsla(270, 70%, 65%, 0)`);
 
             ctx.beginPath();
             ctx.strokeStyle = gradient;
@@ -125,11 +125,11 @@ export const ThinkingIndicator: React.FC<ThinkingIndicatorProps> = ({
 
             const alpha = envelope * fadeOpacityRef.current * 0.6;
 
-            // Soft particle glow - using Flamingo Pink
+            // Soft particle glow - using Flamingo Purple
             const particleGradient = ctx.createRadialGradient(x, y, 0, x, y, 6);
-            particleGradient.addColorStop(0, `hsla(351, 86%, 85%, ${alpha})`);
-            particleGradient.addColorStop(0.5, `hsla(351, 86%, 75%, ${alpha * 0.3})`);
-            particleGradient.addColorStop(1, `hsla(351, 86%, 67%, 0)`);
+            particleGradient.addColorStop(0, `hsla(270, 70%, 80%, ${alpha})`);
+            particleGradient.addColorStop(0.5, `hsla(270, 70%, 70%, ${alpha * 0.3})`);
+            particleGradient.addColorStop(1, `hsla(270, 70%, 65%, 0)`);
 
             ctx.beginPath();
             ctx.arc(x, y, 6, 0, Math.PI * 2);

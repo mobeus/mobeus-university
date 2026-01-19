@@ -13,6 +13,7 @@ import { notifyTele, handleAcknowledgment, verifyAuthCode, toggleTeleAcknowledge
 import { sendSectionContextToTele } from "@/utils/contextEnrichment";
 import { EvidenceData } from "@/types/evidence";
 import { SubsectionMetadata } from "@/types/subsection";
+import { NavigationHistoryEntry } from "@/types/navigation";
 import { toast } from "@/hooks/use-toast";
 import { playUISound } from "@/utils/soundGenerator";
 import { BackgroundLayer } from "@/components/BackgroundLayer";
@@ -24,9 +25,9 @@ import NDAFirewallSection from "@/components/NDAFirewallSection";
 import { CarColorProvider } from "@/contexts/CarColorContext";
 import RippleEffect from "@/components/RippleEffect";
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
-// Onboarding Transition (kept for potential future use)
 import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
+import { CursorThinkingIndicator } from "@/components/CursorThinkingIndicator";
 
 
 // Welcome section - Catherine prepares developers for the hackathon
@@ -152,6 +153,24 @@ const Index = () => {
   const [backData, setBackData] = useState<any>(null);
   const [isOTPDialogOpen, setIsOTPDialogOpen] = useState(false);
 
+  // Navigation History - Store complete state snapshots for instant back navigation
+  const [navigationHistory, setNavigationHistory] = useState<NavigationHistoryEntry[]>([
+    {
+      timestamp: Date.now(),
+      section: 'welcome',
+      type: 'welcome',
+      snapshot: {
+        activeSection: 'welcome',
+        activeSubSection: null,
+        activeSubSectionMetadata: null,
+        dynamicSectionData: null,
+        displayData: null,
+        originalPayload: 'welcome'
+      }
+    }
+  ]);
+  const [historyIndex, setHistoryIndex] = useState(0);
+
   // Track previous template structure for smart scrolling
   // Only scroll to top when template IDs or their order changes
   const previousTemplateStructureRef = useRef<string>("");
@@ -197,6 +216,66 @@ const Index = () => {
     };
     requestAnimationFrame(animate);
   }, []);
+
+  // Add entry to navigation history
+  const addToHistory = useCallback((entry: NavigationHistoryEntry) => {
+    setNavigationHistory(prev => {
+      // Remove any "future" history if user went back then navigated forward
+      const trimmed = prev.slice(0, historyIndex + 1);
+      return [...trimmed, entry];
+    });
+    setHistoryIndex(prev => prev + 1);
+  }, [historyIndex]);
+
+  // Navigate backward through history (instant restoration from cache)
+  const navigateBack = useCallback(() => {
+    if (historyIndex <= 0) {
+      return false;
+    }
+
+    const previousEntry = navigationHistory[historyIndex - 1];
+    console.log('[History] Navigating back to:', previousEntry.section, 'from index', historyIndex, 'to', historyIndex - 1);
+
+    // Instant state restoration from snapshot
+    setActiveSection(previousEntry.snapshot.activeSection);
+    setActiveSubSection(previousEntry.snapshot.activeSubSection);
+    setActiveSubSectionMetadata(previousEntry.snapshot.activeSubSectionMetadata);
+    setDynamicSectionData(previousEntry.snapshot.dynamicSectionData);
+    setDisplayData(previousEntry.snapshot.displayData);
+
+    // Update history index
+    setHistoryIndex(historyIndex - 1);
+
+    // Smooth scroll to top
+    smoothScrollToTop();
+
+    return true;
+  }, [historyIndex, navigationHistory, smoothScrollToTop]);
+
+  // Navigate forward through history
+  const navigateForward = useCallback(() => {
+    if (historyIndex >= navigationHistory.length - 1) {
+      return false;
+    }
+
+    const nextEntry = navigationHistory[historyIndex + 1];
+    console.log('[History] Navigating forward to:', nextEntry.section, 'from index', historyIndex, 'to', historyIndex + 1);
+
+    // Instant state restoration from snapshot
+    setActiveSection(nextEntry.snapshot.activeSection);
+    setActiveSubSection(nextEntry.snapshot.activeSubSection);
+    setActiveSubSectionMetadata(nextEntry.snapshot.activeSubSectionMetadata);
+    setDynamicSectionData(nextEntry.snapshot.dynamicSectionData);
+    setDisplayData(nextEntry.snapshot.displayData);
+
+    // Update history index
+    setHistoryIndex(historyIndex + 1);
+
+    // Smooth scroll to top
+    smoothScrollToTop();
+
+    return true;
+  }, [historyIndex, navigationHistory, smoothScrollToTop]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -731,6 +810,26 @@ const Index = () => {
           setDynamicSectionData(null);
           setActiveSubSection(null);
           handleSectionChange("welcome", null);
+
+          // Add welcome to history so back/forward works through home navigation
+          setTimeout(() => {
+            const historyEntry: NavigationHistoryEntry = {
+              timestamp: Date.now(),
+              section: 'welcome',
+              type: 'welcome',
+              snapshot: {
+                activeSection: 'welcome',
+                activeSubSection: null,
+                activeSubSectionMetadata: null,
+                dynamicSectionData: null,
+                displayData: null,
+                originalPayload: 'welcome'
+              }
+            };
+            addToHistory(historyEntry);
+            console.log('[History] Added welcome entry, Total history:', navigationHistory.length + 1);
+          }, 1100);
+
           return true;
         }
 
@@ -817,6 +916,34 @@ const Index = () => {
         // Notify Main Index of change, passing whether structure changed
         handleSectionChange(nextSection, subsectionMetadata, generativeContent, structureChanged);
 
+        // Capture complete state snapshot for history AFTER navigation completes
+        const newDynamicSectionData = (badge || title || hasGenerativeContent || finalSubsectionIds.length > 0) ? {
+          badge: badge || "INSIGHT",
+          title: title || "Curated Overview",
+          subtitle,
+          subsectionIds: finalSubsectionIds,
+          generativeSubsections: generativeContent
+        } : null;
+
+        setTimeout(() => {
+          const historyEntry: NavigationHistoryEntry = {
+            timestamp: Date.now(),
+            section: nextSection,
+            type: 'dynamic',
+            snapshot: {
+              activeSection: nextSection,
+              activeSubSection: finalSubsectionIds.length > 0 ? finalSubsectionIds : null,
+              activeSubSectionMetadata: subsectionMetadata.length > 0 ? subsectionMetadata : null,
+              dynamicSectionData: newDynamicSectionData,
+              displayData: null,
+              originalPayload: navigationData
+            }
+          };
+
+          addToHistory(historyEntry);
+          console.log('[History] Added entry:', historyEntry.section, 'Total history:', navigationHistory.length + 1);
+        }, 1100); // After transition completes (handleSectionChange uses 1000ms)
+
         return true;
       },
       getCurrentSection: () => activeSection,
@@ -824,6 +951,11 @@ const Index = () => {
         setShowFlash(true);
         playUISound('on', 'avatar');
         setTimeout(() => setShowFlash(false), 600);
+      },
+      // Subtle flash for click feedback - no sound, shorter duration, lower opacity
+      flashTeleSubtle: () => {
+        setShowFlash(true);
+        setTimeout(() => setShowFlash(false), 250);
       },
       // Car color functions - globally accessible like navigateToSection
       // Use wrapper functions to ensure they work even if CarColorContext hasn't initialized yet
@@ -848,9 +980,18 @@ const Index = () => {
     // Expose navigation API to window
     exposeNavigationAPI(teleNavigation);
 
-    // Left arrow key navigation - intelligent back behavior
+    // Expose history navigation to window for debugging and external access
+    (window as any).navigationHistory = {
+      back: navigateBack,
+      forward: navigateForward,
+      getHistory: () => navigationHistory,
+      getCurrentIndex: () => historyIndex,
+      canGoForward: () => historyIndex < navigationHistory.length - 1
+    };
+
+    // Keyboard navigation - Back/Forward button support
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
+      if (e.key === "ArrowLeft" || e.key === "Backspace") {
         e.preventDefault();
 
         // Priority 1: If in show-only mode, exit to full section
@@ -859,10 +1000,13 @@ const Index = () => {
           return;
         }
 
-        // Priority 2: If not on welcome, go back to welcome
-        if (activeSection !== "welcome") {
-          teleNavigation.navigateToSection("welcome");
-        }
+        // Priority 2: Use history-based back navigation (instant restoration)
+        navigateBack();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+
+        // Forward navigation through history
+        navigateForward();
       }
     };
 
@@ -881,8 +1025,9 @@ const Index = () => {
       window.removeEventListener("closeCurrentSection", handleCloseCurrentSection);
       delete (window as any).teleNavigation;
       delete (window as any).navigateToSection;
+      delete (window as any).navigationHistory;
     };
-  }, [activeSection, activeSubSection, handleSectionChange, navigationBackData]);
+  }, [activeSection, activeSubSection, handleSectionChange, navigateBack, navigateForward, addToHistory, navigationHistory, historyIndex, navigationBackData]);
 
   useEffect(() => {
     console.log("[Index] P2P initialization useEffect running");
@@ -1280,15 +1425,15 @@ const Index = () => {
       />
 
       <div className="min-h-screen squeeze-target overflow-auto">
-        {/* Elegant pulse effect overlay */}
+        {/* Elegant pulse effect overlay - very subtle */}
         {showFlash && (
           <div
             className="fixed inset-0 pointer-events-none"
             style={{
               zIndex: 5,
-              background: "linear-gradient(135deg, hsl(190, 80%, 50%), hsl(145, 60%, 45%))",
-              opacity: 0.15,
-              animation: "fade-in 0.3s ease-in-out, fade-out 0.3s ease-in-out 0.3s forwards",
+              background: "radial-gradient(circle at center, rgba(155, 93, 229, 0.15), transparent 70%)",
+              opacity: 0.5,
+              animation: "fade-in 0.1s ease-out, fade-out 0.15s ease-out 0.1s forwards",
             }}
           />
         )}
@@ -1334,6 +1479,9 @@ const Index = () => {
           onOpenChange={setIsOTPDialogOpen}
           onSubmit={handleOTPSubmit}
         />
+
+        {/* Cursor Thinking Indicator - shows pulsing rings at click position */}
+        <CursorThinkingIndicator />
       </div>
     </CarColorProvider>
   );

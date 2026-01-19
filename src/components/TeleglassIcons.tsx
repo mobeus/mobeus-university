@@ -25,7 +25,7 @@ interface TeleglassIconsProps {
 
 /**
  * 8-COLOR BRAND PALETTE STYLE
- * - Flamingo (#F2617A): Primary CTAs
+ * - Flamingo (#9B5DE5): Primary CTAs (PURPLE)
  * - All icons: mist gray (white for visibility on dark green background)
  * - Very light blur glassmorphism (backdrop-blur-sm)
  * - Avatar visible behind glass

@@ -17,17 +17,8 @@ design-philosophy:Zero Friction|Clean Transparency|Reactive Mastery|Minimalist V
 
 ---MOBEUS---
 tagline:"A tele serves as an agentic user interface"
-mission2:"Fill gap between AI frameworks and consumer-ready UI"
-status:Private Beta|Fortune 500 early access
-team:Richie Etwaru(CEO),Matt Williams(CBO),Nima Azaraeen(CRO),Sean Wilson(Eng)
-locations:New Jersey(US),Toronto(CA),Da Nang(VN)
+mission:"Fill gap between AI frameworks and consumer-ready UI"
 
-propositions:helpful(instant support)|easy(natural interaction)|on(always ready)
-values:privacy(data protected)|trust(reliable)|transparency(operates openly)
-partners:WPP|Accenture|AWS|NVIDIA|Lambda|KPMG|Unisys|Slalom|Thoughtworks|OpenAI|Meta AI|Gemini|Claude|Mistral
-
-verticals:auto|banking|healthcare|government|hr-it|education
-tele-types:guide(500% ROI)|helpdesk(+0.5 NPS)|training|service|sales(3X conversion)
 
 ---ARCHITECTURE---
 two-agents:
@@ -85,6 +76,15 @@ DynamicSectionLoader.tsx:Renders templates from navigateToSection data
 templateRegistry.ts:Template component registry(lazy loading)
 assetRegistry.ts:Pre-generated image definitions
 
+---NAVIGATION-HISTORY---
+back-button:Top-left corner|Goes to previous section instantly
+forward-button:Appears when you go back|Go forward through history
+how-it-works:Each navigateToSection call adds entry to history stack
+instant:History stores complete snapshots→no reload|instant restore
+badge:Shows count of history entries (e.g., "Back 3")
+use-in-hackathon:Users click through sections→Back button lets them review
+volumetric:Every click adds to history→natural conversation flow
+
 ---KEY-UTILITIES---
 acknowledgmentHelpers.ts:notifyTele(msg)|toggleTeleAcknowledgeDebug(Shift+K)
 teleInteraction.ts:sendToTele(prompt)
@@ -122,6 +122,48 @@ L1:Architecture→what is tele?,two-agent model,navigateToSection
 L2:Build Glass→/add-glass workflow,template props,centralized CSS
 L3:Teach Tele→/add-knowledge,/tele-should,shot prompts
 L4:Advanced→voice coding(admin mode),vibe coding
+
+---CORE-CONCEPTS---
+title:Key Ideas That Power Your Tele
+subtitle:These are the 6 foundational concepts you'll need
+
+intro:A tele is a new kind of AI application — one that sees, speaks, and guides users through visual experiences. Unlike chatbots that just reply with text, teles render dynamic visual content while maintaining natural conversation. In the next 3-hour hackathon, YOU will build your own tele from scratch. These 6 concepts are the foundation you need to understand before you start building.
+
+why-these-matter:Each concept builds on the last. Start with "What is a Tele" to understand the vision, then learn how Two-Agent Architecture makes it possible, see how navigateToSection bridges the gap, understand Volumetric Navigation to make it interactive, explore the Template Library for visuals, and master Slash Commands to accelerate your development.
+
+total:6 foundational concepts
+
+1-what-is-a-tele:
+  definition:A conversational AI app that talks to users and displays visual content
+  detail:Teles combine voice/chat interface with visual glass panels to guide users through experiences
+  icon:brain|accentColor:wave
+
+2-two-agent-architecture:
+  definition:Two LLMs collaborate - Build Agent (Claude) for development, Runtime Agent (OpenAI) for live interactions
+  detail:They share knowledge files and use navigateToSection as the bridge between them
+  icon:layers|accentColor:violet
+
+3-navigate-to-section:
+  definition:The function that displays visual content on the glass when called by the Runtime Agent
+  detail:It takes badge, title, subtitle, and templates to render dynamic sections
+  icon:code|accentColor:emerald
+
+4-volumetric-navigation:
+  definition:Every click is a conversational action, continuing the user's journey with Tele through actionPhrases
+  detail:No dead ends - each interaction advances the conversation and updates the display
+  icon:target|accentColor:amber
+
+5-template-library:
+  definition:A collection of visual components that your tele can render via navigateToSection
+  detail:Templates include cards, step-by-step guides, checklists, banners, and more
+  icon:puzzle|accentColor:flamingo
+
+6-slash-commands:
+  definition:Shortcuts like /add-glass, /add-knowledge, and /tele-should that let Claude automate code and content creation
+  detail:You describe what you want, and Claude handles the rest - from components to knowledge to behavior rules
+  icon:terminal|accentColor:wave
+
+when-asked-core-concepts:Show CardGrid or multiple ConceptCards with these 6 items
 
 ---HACKATHON---
 name:Tele Builder Hackathon|3-4 hours|6 phases x 30 min
@@ -231,4 +273,4 @@ MANDATORY:Every response follows this pattern
 NEVER:Respond with text only|Always show+tell
 
 ---END---
-#Mobeus University|Catherine v63.0|~220 lines|Zero Friction Release|Expanded Knowledge
+#Mobeus University|Catherine v67.0|~275 lines|Navigation History Added

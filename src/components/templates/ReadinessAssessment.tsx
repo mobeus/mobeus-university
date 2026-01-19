@@ -128,7 +128,7 @@ export const ReadinessAssessment: React.FC<ReadinessAssessmentProps> = ({
     return (
         <div className="glass-template-container">
             {/* Header */}
-            <div className="text-center mb-8">
+            <div className="text-left mb-8">
                 <h2 className="text-template-title text-3xl mb-2">{title}</h2>
                 <p className="text-template-content">{subtitle}</p>
             </div>

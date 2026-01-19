@@ -128,6 +128,13 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
 
             const isLast = index === generativeSubsections.length - 1;
 
+            // DEFENSIVE: Merge root-level props with nested props
+            // AI sometimes sends data at root level (title, definition) instead of in props
+            const { id, templateId, props = {}, ...rootProps } = section as any;
+            const mergedProps = { ...rootProps, ...props };
+
+            console.log(`[DynamicSectionLoader] Rendering ${templateId} with merged props:`, mergedProps);
+
             return (
               <div
                 key={section.id}
@@ -149,10 +156,10 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
                     fallback={<div className="p-4 border border-flamingo/50 bg-flamingo/10 rounded text-flamingo">Error loading template {section.templateId}</div>}
                     onError={(error, errorInfo) => {
                       console.error(`[Template Error] ${section.templateId}:`, error.message);
-                      console.error('[Template Props]:', section.props);
+                      console.error('[Template Props]:', mergedProps);
                     }}
                   >
-                    <TemplateComponent {...section.props} animationClass={animationClass} isExiting={isExiting} />
+                    <TemplateComponent {...mergedProps} animationClass={animationClass} isExiting={isExiting} />
                   </ErrorBoundary>
                 </Suspense>
               </div>

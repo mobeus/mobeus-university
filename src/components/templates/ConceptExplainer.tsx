@@ -45,8 +45,8 @@ export const ConceptExplainer: React.FC<ConceptExplainerProps> = ({
     return (
         <div className="glass-template-container">
             {/* Header */}
-            <div className="text-center mb-8">
-                <span className="template-badge mb-4">{badge}</span>
+            <div className="text-left mb-8">
+                <span className="template-badge inline-block mb-4">{badge}</span>
                 <h2 className="text-template-title text-3xl">{title}</h2>
             </div>
 

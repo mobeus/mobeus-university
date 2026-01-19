@@ -43,6 +43,15 @@ export function notifyTele(message: string): void {
   }
 
   try {
+    // Dispatch event to signal thinking started (for cursor indicator)
+    window.dispatchEvent(new CustomEvent('teleThinkingStart', { detail: { message } }));
+
+    // Subtle flash on avatar for visual feedback (no sound)
+    const teleNav = (window as any).teleNavigation;
+    if (teleNav?.flashTeleSubtle) {
+      teleNav.flashTeleSubtle();
+    }
+
     sendToTele(message);
 
     // Show debug notification if enabled
