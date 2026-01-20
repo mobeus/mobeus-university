@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useState, useEffect, useCallback, useRef, useMemo, FormEvent, ChangeEvent } from "react";
 import Navigation from "@/components/Navigation";
 import TeleglassSection from "@/components/TeleglassSection";
@@ -989,10 +989,11 @@ const Index = () => {
                 ? document.body.scrollHeight
                 : window.scrollY;
               break;
-            default:
+            default: {
               // Try to parse as number
               const parsed = parseInt(normalizedAmount, 10);
               if (!isNaN(parsed)) scrollAmount = Math.abs(parsed);
+            }
           }
         }
 

@@ -4,7 +4,7 @@ description: Tell Tele how to respond to specific user requests (shot prompts)
 
 # Tele-Should Workflow
 
-When you want Tele to respond a certain way to a user request, add a shot prompt to `glass-prompt.md`.
+When you want Tele to respond a certain way to a user request, add a shot prompt to `public/glass-prompt.md`.
 
 ## 🚨 CRITICAL: Always Call navigateToSection
 
@@ -25,12 +25,12 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
 
 2. Identify what template(s) Tele should show
 
-3. Open `glass-prompt.md` and find the **Shot Prompts** section
+3. Open `public/glass-prompt.md` and find the **Shot Prompts** section
 
 // turbo
 4. Check current line count:
    ```bash
-   wc -l glass-prompt.md
+   wc -l public/glass-prompt.md
    ```
    **Limit: 1500 lines max**
 
@@ -62,7 +62,7 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
 // turbo
 7. Verify the file is under 1500 lines:
    ```bash
-   wc -l glass-prompt.md
+   wc -l public/glass-prompt.md
    ```
 
 ## Example Shot Prompt
@@ -94,7 +94,7 @@ TELE SAYS: "You've got some solid credentials here. Want to add more or see whic
 ```
 
 ## Don't Forget
-- ✅ Keep glass-prompt.md ≤ 1500 lines
+- ✅ Keep public/glass-prompt.md ≤ 1500 lines
 - ✅ Tele speaks naturally, not "Here is your X"
 - ✅ Include the guide (next step suggestion) in TELE SAYS
 - ✅ Use realistic data in props examples

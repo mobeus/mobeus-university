@@ -48,11 +48,6 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
         ]
     );
 
-    // Defensive: Don't render if no cards
-    if (!cards || cards.length === 0) {
-        return null;
-    }
-
     // Track selected index (closest to start)
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
@@ -78,6 +73,11 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
         },
         [emblaApi, playClick]
     );
+
+    // Defensive: Don't render if no cards (moved AFTER hooks)
+    if (!cards || cards.length === 0) {
+        return null;
+    }
 
     const handleCardClick = (actionPhrase: string) => {
         playClick();

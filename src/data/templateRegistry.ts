@@ -145,4 +145,29 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
      * PROPS: { title?, items[{ title, content, actionPhrase }] }
      */
     AccordionList: lazy(() => import("@/components/templates/AccordionList").then(m => ({ default: m.AccordionList }))),
+
+    // ==========================================
+    // LIVE FILE VIEWERS (System Transparency)
+    // ==========================================
+
+    /**
+     * KnowledgeFileViewer
+     * USE WHEN: User asks to see the knowledge file, what Catherine knows, domain knowledge
+     * PROPS: {} (no props - fetches /tele-knowledge.md at runtime)
+     */
+    KnowledgeFileViewer: lazy(() => import("@/components/templates/KnowledgeFileViewer").then(m => ({ default: m.KnowledgeFileViewer }))),
+
+    /**
+     * PromptFileViewer
+     * USE WHEN: User asks to see the prompt file, shot prompts, tool definitions, how Catherine responds
+     * PROPS: {} (no props - fetches /glass-prompt.md at runtime)
+     */
+    PromptFileViewer: lazy(() => import("@/components/templates/PromptFileViewer").then(m => ({ default: m.PromptFileViewer }))),
+
+    /**
+     * FolderStructure
+     * USE WHEN: User asks about project structure, file organization, what files exist
+     * PROPS: { title?, subtitle?, structure?[{ name, type, description, children? }] }
+     */
+    FolderStructure: lazy(() => import("@/components/templates/FolderStructure").then(m => ({ default: m.FolderStructure }))),
 };

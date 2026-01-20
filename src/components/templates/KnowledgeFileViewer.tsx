@@ -126,25 +126,41 @@ export const KnowledgeFileViewer: React.FC = () => {
         fetchContent();
     }, []);
 
-    // Parse markdown into sections by ## headers
+    // Parse markdown into sections by ## headers OR ---SECTION-NAME--- format
     const parseMarkdownSections = (content: string): ParsedSection[] => {
         const lines = content.split('\n');
         const result: ParsedSection[] = [];
         let currentSection: ParsedSection | null = null;
         let currentContent: string[] = [];
 
+        // Helper to format section titles nicely
+        const formatTitle = (raw: string): string => {
+            // Convert "IDENTITY" or "TEMPLATES-REGISTRY" to "Identity" or "Templates Registry"
+            return raw
+                .replace(/-/g, ' ')
+                .toLowerCase()
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        };
+
         for (const line of lines) {
-            // Check for ## headers (level 2)
+            // Check for ## headers (level 2) OR ---SECTION--- format
             const h2Match = line.match(/^## (.+)$/);
-            if (h2Match) {
+            const sectionMatch = line.match(/^---([A-Z][A-Z0-9-]+)---$/);
+
+            if (h2Match || sectionMatch) {
                 // Save previous section
                 if (currentSection) {
                     currentSection.content = currentContent.join('\n').trim();
-                    result.push(currentSection);
+                    if (currentSection.content) { // Only add if has content
+                        result.push(currentSection);
+                    }
                 }
                 // Start new section
+                const rawTitle = h2Match ? h2Match[1] : sectionMatch![1];
                 currentSection = {
-                    title: h2Match[1],
+                    title: h2Match ? rawTitle : formatTitle(rawTitle),
                     content: '',
                     level: 2
                 };
@@ -157,7 +173,9 @@ export const KnowledgeFileViewer: React.FC = () => {
         // Save last section
         if (currentSection) {
             currentSection.content = currentContent.join('\n').trim();
-            result.push(currentSection);
+            if (currentSection.content) {
+                result.push(currentSection);
+            }
         }
 
         return result;
@@ -184,6 +202,36 @@ export const KnowledgeFileViewer: React.FC = () => {
     // Map section titles to action phrases
     const getActionPhrase = (title: string): string | undefined => {
         const mapping: Record<string, string> = {
+            // New ---SECTION--- format (formatted)
+            'Identity': 'What is a tele',
+            'Mobeus': 'Tell me about Mobeus',
+            'Architecture': 'Show me the two-agent architecture',
+            'Site Functions': 'What site functions are available',
+            'Admin Mode': 'How do I enter admin mode',
+            'Project Structure': 'Show me the project structure',
+            'Templates Registry': 'Show me all templates',
+            'Core Components': 'Explain the core components',
+            'Navigation History': 'How does navigation history work',
+            'Key Utilities': 'What utilities are available',
+            'Ui Framework Api': 'Explain the UI Framework API',
+            'Window Globals': 'What window globals exist',
+            'Notification Flow': 'How does notification flow work',
+            '5 Immutable Laws': 'What are the 5 immutable laws',
+            'Curriculum': 'Show me the curriculum',
+            'Core Concepts': 'Explain the core concepts',
+            'Hackathon': 'Show me the hackathon phases',
+            'Voice Coding': 'What is voice coding',
+            'Vibe Coding': 'What is vibe coding',
+            'Css Reference': 'Show me the CSS classes',
+            'Smartimage': 'How does SmartImage work',
+            'Development': 'How do I run the dev server',
+            'Commands': 'Show me the commands',
+            'Teaching Patterns': 'What are the teaching patterns',
+            'Common Questions': 'Common questions about teles',
+            'Key Phrases': 'Show me key phrases',
+            'Assessment': 'Check my readiness',
+            'Response Loop': 'Explain the response loop',
+            // Legacy ## format
             'Who I Am': 'What is a tele',
             'The Two-Agent Architecture': 'Show me the two-agent architecture',
             'Folder Structure': 'Show me the folder structure',

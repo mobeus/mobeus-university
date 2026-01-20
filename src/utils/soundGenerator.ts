@@ -103,9 +103,9 @@ export const playUISound = (type: 'on' | 'off', buttonType: 'chat' | 'mic' | 'av
 // Limited to MAX 3 plays per thinking session
 // ============================================================
 
-let thinkingOscillators: OscillatorNode[] = [];
-let thinkingGainNodes: GainNode[] = [];
-let thinkingLFO: OscillatorNode | null = null;
+const thinkingOscillators: OscillatorNode[] = [];
+const thinkingGainNodes: GainNode[] = [];
+const thinkingLFO: OscillatorNode | null = null;
 let isThinkingSoundPlaying = false;
 let thinkingSoundPlayCount = 0;
 const MAX_THINKING_SOUND_PLAYS = 3;

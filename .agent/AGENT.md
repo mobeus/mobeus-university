@@ -1,8 +1,22 @@
 # 🤖 AGENT.md - Mobeus University Development Reference
 
 > **Two-Agent Architecture Documentation**
-> Catherine v63.0 | Zero Friction Release
+> Catherine v65.0 | Streamlined Colors + Core Concepts
 > Last updated: January 18, 2026
+
+---
+
+## ⚠️ CRITICAL REMINDER: SYNC KNOWLEDGE FILES
+
+**When `tele-knowledge.md` or `glass-prompt.md` is modified, YOU MUST remind the user:**
+
+> 🔄 **SYNC REQUIRED:** The following file(s) were modified and need to be copied to the Runtime LLM:
+> - `tele-knowledge.md` (if changed)
+> - `glass-prompt.md` (if changed)
+>
+> **Process:** Copy the contents of both files → Paste into the Runtime LLM's system prompt/knowledge base
+
+This is MANDATORY because the Runtime Agent (Catherine/GPT 5.0) has a separate context and won't see Build Agent file changes automatically.
 
 ---
 
@@ -17,8 +31,8 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 - **MCP Servers:** None (uses file system directly)
 - **Key Files:**
   - `AGENT.md` (this file) — Your reference document
-  - `tele-knowledge.md` — Domain knowledge you maintain
-  - `glass-prompt.md` — Shot prompts you define
+  - `public/tele-knowledge.md` — Domain knowledge you maintain
+  - `public/glass-prompt.md` — Shot prompts you define
   - `src/components/templates/*.tsx` — Templates you create
 
 ### Runtime Agent (Catherine - OpenAI GPT 5.0)
@@ -27,8 +41,8 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 - **Context:** Limited context window (knowledge + prompt files)
 - **MCP Servers:** Gmail, Calendar, etc. (future)
 - **Key Files:**
-  - `tele-knowledge.md` — What she knows
-  - `glass-prompt.md` — How she responds (tool definition)
+  - `public/tele-knowledge.md` — What she knows
+  - `public/glass-prompt.md` — How she responds (tool definition)
 
 ### How They Collaborate
 ```
@@ -37,16 +51,16 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │              BUILD AGENT (Claude)                         │   │
 │  │  • Creates templates in src/components/templates/         │   │
-│  │  • Writes knowledge in tele-knowledge.md                  │   │
-│  │  • Defines shot prompts in glass-prompt.md                │   │
+│  │  • Writes knowledge in public/tele-knowledge.md           │   │
+│  │  • Defines shot prompts in public/glass-prompt.md         │   │
 │  │  • Registers templates in templateRegistry.ts             │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │                            │                                      │
 │                            ▼                                      │
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │              SHARED FILES                                 │   │
-│  │  • tele-knowledge.md → WHAT tele knows                    │   │
-│  │  • glass-prompt.md → HOW tele responds (tool definition)  │   │
+│  │  • public/tele-knowledge.md → WHAT tele knows             │   │
+│  │  • public/glass-prompt.md → HOW tele responds             │   │
 │  │  • Template Components → WHAT user sees                   │   │
 │  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
@@ -56,8 +70,8 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 │                       RUNTIME                                     │
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │              RUNTIME AGENT (Catherine/GPT 5.0)            │   │
-│  │  • Reads tele-knowledge.md for domain facts               │   │
-│  │  • Reads glass-prompt.md for response patterns            │   │
+│  │  • Reads public/tele-knowledge.md for domain facts        │   │
+│  │  • Reads public/glass-prompt.md for response patterns     │   │
 │  │  • Calls navigateToSection() tool every turn              │   │
 │  │  • Speaks naturally to users                              │   │
 │  └──────────────────────────────────────────────────────────┘   │
@@ -99,17 +113,17 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 
 ## 3. KEY FILES
 
-### Shared Between Agents
+### Shared Between Agents (in /public)
 | File | Purpose | Line Limit |
 |------|---------|------------|
-| `tele-knowledge.md` | Domain knowledge — what Catherine knows | ~150 lines |
-| `glass-prompt.md` | Tool definition — templates, shot prompts | ~1400 lines |
+| `public/tele-knowledge.md` | Domain knowledge — what Catherine knows | ~150 lines |
+| `public/glass-prompt.md` | Tool definition — templates, shot prompts | ~1400 lines |
 
 ### Build Agent Reference
 | File | Purpose |
 |------|---------|
 | `AGENT.md` | This file — Build Agent reference |
-| `src/data/templateRegistry.ts` | Template registry (16 templates) |
+| `src/data/templateRegistry.ts` | Template registry (19 templates) |
 | `.agent/workflows/*.md` | Workflow definitions |
 
 ### Glass Application
@@ -121,7 +135,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 
 ---
 
-## 4. TEMPLATE REGISTRY (16 Templates)
+## 4. TEMPLATE REGISTRY (19 Templates)
 
 ### Current Templates
 | Category | Templates |
@@ -131,6 +145,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 | **Navigation** | CardGrid, WelcomeCarousel, CTABanner |
 | **Layout & Content** | SplitContent, AccordionList |
 | **Tools & Code** | ToolCard, CodeBlock |
+| **Live Viewers** | KnowledgeFileViewer, PromptFileViewer, FolderStructure |
 
 ---
 
@@ -142,17 +157,17 @@ Create a new visual component:
 2. Use centralized CSS classes from `src/index.css`
 3. Every clickable → `notifyTele(actionPhrase)`
 4. Register in `src/data/templateRegistry.ts`
-5. Add schema to `glass-prompt.md`
+5. Add schema to `public/glass-prompt.md`
 6. Verify: `npx tsc --noEmit`
 
 ### /add-knowledge — Add Domain Knowledge
-Add to `tele-knowledge.md`:
+Add to `public/tele-knowledge.md`:
 1. Use compact YAML-like notation
 2. Focus on WHAT tele knows
 3. Keep concise and efficient
 
 ### /tele-should — Add Shot Prompt
-Add response mapping to `glass-prompt.md`:
+Add response mapping to `public/glass-prompt.md`:
 1. Format: `USER: "phrase"` → `navigateToSection: {json}` → `TELE SAYS: "response"`
 2. Always call navigateToSection
 3. Maintain natural speech patterns
@@ -165,43 +180,9 @@ Add response mapping to `glass-prompt.md`:
 2. **TOOL SIGNATURE STABILITY** — `navigateToSection` signature MUST NEVER change.
 3. **NO HALLUCINATION** — If a feature isn't documented, acknowledge it.
 4. **MANDATORY TOOL CALL** — Catherine calls `navigateToSection` in EVERY response.
-5. **FACTUAL ACCURACY** — Use EXACT figures from `tele-knowledge.md`.
+5. **FACTUAL ACCURACY** — Use EXACT figures from `public/tele-knowledge.md`.
 
 ---
-
-## 🚫 PROTECTED TEXT — NEVER REMOVE
-
-The following sections in `glass-prompt.md` are **CRITICAL** and must **NEVER be removed or modified**:
-
-### Protected Section: Response Pattern
-```markdown
-**EVERY RESPONSE MUST:**
-1. **SPEAK FIRST** (1-2 sentences)
-2. **CALL `navigateToSection`** (Visual content)
-3. **SPEAK AGAIN** (Guide to next step)
-```
-
-### Protected Section: Always Show Rule
-```markdown
-**🚨 CRITICAL: ALWAYS SHOW, NEVER JUST TELL 🚨**
-
-Here are examples, basically no matter what the user asks, always show data via `navigateToSection`:
-
-- If user says anything like "tell me X" → Show data via `navigateToSection`
-- If user says anything like "what is X" → Show data via `navigateToSection`
-- If user says anything like "explain X" → Show data via `navigateToSection`
-- If user says anything like "show me X" → Show data via `navigateToSection`
-- If user says anything like "where is X" → Show data via `navigateToSection`
-- If user says anything like "next" → Show data via `navigateToSection`
-- If user says anything like "sure" → Show data via `navigateToSection`
-- If user says anything like "ok" → Show data via `navigateToSection`
-- **NEVER respond with text only** - ALWAYS use templates to visualize the answer
-- **EVERY response MUST include `navigateToSection` call**
-```
-
-**Why Protected:** These rules ensure the Runtime Agent (Catherine) ALWAYS calls `navigateToSection`. Without these rules, Catherine may respond with text-only answers, breaking the visual experience.
-
-
 
 ## 7. CENTRALIZED STYLING
 
@@ -328,6 +309,68 @@ User clicks → playClick() → notifyTele(actionPhrase) → sendToTele()
 - `window.showEmotion(emotion)` — Trigger avatar emotion
 - `window.teleConnect` — Connect avatar
 - `window.teleNavigation` — Navigation API
+
+---
+
+## 12. SITE FUNCTION REGISTRATION
+
+Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (React app)**. When you create a new site function, follow this complete process:
+
+### Registration Steps
+
+| Step | File | Action |
+|------|------|--------|
+| **1** | `index.html` | Create bridge in `UIFrameworkSiteFunctions` registry |
+| **2** | `vite-env.d.ts` | Declare TypeScript types for `Window` interface |
+| **3** | `uiFrameworkRegistration.ts` | Add to `NavigationAPI` interface |
+| **4** | `Index.tsx` | Implement function in `teleNavigation` object |
+| **5** | `Index.tsx` | Clean up in useEffect return |
+| **6** | **CONNECT TO APP** | ⚠️ Backend discovers new functions on first connection |
+
+### ⚠️ CRITICAL: Backend Discovery
+
+**When the app loads for the first time and connects to the backend:**
+
+1. The UIFramework reads `window.UIFrameworkSiteFunctions` registry
+2. Backend compares against its current list of registered functions
+3. **New functions are automatically discovered and registered**
+4. Backend now has an updated list of available site functions
+5. Runtime Agent (Catherine) can now call the new function
+
+**This means:** After adding a new site function, you MUST load the app and establish a connection for the backend to discover and register it. The function won't be available to Catherine until this discovery happens.
+
+### Bridge Pattern (index.html)
+
+```javascript
+const myFunctionBridge = {
+  myNewFunction(param) {
+    if (typeof param !== "string") return undefined;
+    if (typeof window !== "undefined" && 
+        typeof window.myNewFunction === "function") {
+      return window.myNewFunction(param);
+    }
+    return undefined;
+  },
+};
+
+// Merge into registry
+window.UIFrameworkSiteFunctions = {
+  ...existingRegistry,
+  ...myFunctionBridge,
+};
+```
+
+### Existing Site Functions
+| Function | Purpose |
+|----------|---------|
+| `navigateToSection` | Main navigation tool — renders templates |
+| `flashTele` | Flash avatar ring effect |
+| `setVolume` / `adjustVolume` / `getVolume` | Avatar volume control |
+| `startWebcam` / `stopWebcam` | Webcam control |
+| `zoomLevel` | UI zoom control |
+| `externalCall` | External API integration |
+| `dynamicDataLoader` | Load dynamic JSON data |
+| `auther` / `checker` / `getCookieValue` | Authentication functions |
 
 ---
 

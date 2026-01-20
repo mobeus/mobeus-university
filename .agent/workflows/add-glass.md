@@ -343,9 +343,9 @@ MetricsGrid: lazy(() => import("@/components/templates/MetricsGrid")
 ```tsx
 // ❌ Template expects array, Tele sends string
 interface Props { metrics: Metric[] }  // Component expects array
-// But glass-prompt.md shows: "metrics": "40-60%"  // Wrong!
+// But public/glass-prompt.md shows: "metrics": "40-60%"  // Wrong!
 
-// ✅ glass-prompt.md must match exactly:
+// ✅ public/glass-prompt.md must match exactly:
 // "metrics": [{ "value": "40-60%", "label": "Cost Reduction", "actionPhrase": "..." }]
 ```
 

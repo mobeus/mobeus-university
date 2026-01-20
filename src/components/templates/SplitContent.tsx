@@ -53,7 +53,7 @@ export const SplitContent: React.FC<SplitContentProps> = ({
 
     const ImageSection = () => (
         <div className="flex-shrink-0 w-full md:w-2/5">
-            <div className="aspect-[4/3] glass-image-container">
+            <div className="aspect-video glass-image-container">
                 {imageUrl ? (
                     <img
                         src={imageUrl}
