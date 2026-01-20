@@ -42,11 +42,13 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     id: string;
     label: string;
     teleQuery: string;
+    isHighlighted?: boolean;
   }> = [
       {
-        id: 'home',
-        label: 'HOME',
-        teleQuery: 'Go home'
+        id: 'wire',
+        label: 'WIRE 1.0',
+        teleQuery: 'Show me the Copper Wire Language and how to wire up my AI',
+        isHighlighted: true
       },
       {
         id: 'concepts',
@@ -116,20 +118,17 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     onClick={() => {
                       handleAcknowledgment(item.id);
                       playUniversalSound();
-
-                      if (item.id === 'home') {
-                        onSectionChange('welcome', null);
-                      } else {
-                        sendToTele(item.teleQuery);
-                      }
+                      sendToTele(item.teleQuery);
                     }}
                     variant="ghost"
                     size="sm"
                     className={`relative px-4 text-[13px] font-semibold tracking-wide
                     transition-all duration-300
-                    text-mist/90 hover:text-mist hover:bg-mist/10
-                    border border-transparent hover:border-flamingo/40
-                    rounded-full backdrop-blur-sm
+                    ${item.isHighlighted
+                        ? 'text-mist bg-mist/10 border-flamingo/50 shadow-[0_0_12px_rgba(155,93,229,0.3)]'
+                        : 'text-mist/90 hover:text-mist hover:bg-mist/10 border-transparent hover:border-flamingo/40'
+                      }
+                    border rounded-full backdrop-blur-sm
                     h-auto py-2`}
                   >
                     <span className="relative z-10">{item.label}</span>
@@ -203,20 +202,17 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               onClick={() => {
                 handleAcknowledgment(item.id);
                 playUniversalSound();
-
-                if (item.id === 'home') {
-                  onSectionChange('welcome', null);
-                } else {
-                  sendToTele(item.teleQuery);
-                }
+                sendToTele(item.teleQuery);
                 setIsMenuOpen(false);
               }}
               variant="outline"
               size="lg"
               className={`relative w-full justify-start px-6 py-5 text-xl font-bold
                 backdrop-blur-sm
-                border border-mist/20 hover:border-flamingo/50
-                bg-mist/10 hover:bg-mist/15
+                ${item.isHighlighted
+                  ? 'border-flamingo/60 bg-mist/20 shadow-[0_0_16px_rgba(155,93,229,0.4)]'
+                  : 'border-mist/20 hover:border-flamingo/50 bg-mist/10 hover:bg-mist/15'
+                }
                 text-mist
                 rounded-full
                 transition-all duration-300
