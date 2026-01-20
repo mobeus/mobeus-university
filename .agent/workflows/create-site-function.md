@@ -25,7 +25,7 @@ Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (R
 // turbo
 1. Open `index.html` and find the `registerUIFrameworkSiteFunctions()` function (around line 130)
 
-2. Create a bridge object for your function (before line 483 where `existingRegistry` is defined):
+2. Create a bridge object for your function (before where `existingRegistry` is defined):
 
 ```javascript
 const myFunctionBridge = {
@@ -45,7 +45,41 @@ const myFunctionBridge = {
 };
 ```
 
-3. Merge your bridge into the registry (around line 490):
+3. add tool call accepted type as a coment above the function. For example
+
+```javascript
+// Output Format Schema:
+// {
+//   "type": "object",
+//   "properties": {
+//     "badge": { "type": "string" },
+//     "title": { "type": "string" },
+//     "subtitle": { "type": "string" },
+//     "generativeSubsections": {
+//       "type": "array",
+//       "items": {
+//         "type": "object",
+//         "properties": {
+//           "id": { "type": "string" },
+//           "templateId": { "type": "string" },
+//           "title": { "type": "string" },
+//           "props": {
+//             "type": "object",
+//             "additionalProperties": true
+//           }
+//         },
+//         "required": ["id", "templateId", "props"],
+//         "additionalProperties": false
+//       }
+//     }
+//   },
+//   "required": ["badge", "title", "subtitle", "generativeSubsections"],
+//   "additionalProperties": false
+// }
+```
+
+
+3. Merge your bridge into the registry:
 
 ```javascript
 window.UIFrameworkSiteFunctions = {
@@ -57,7 +91,7 @@ window.UIFrameworkSiteFunctions = {
 };
 ```
 
-4. (Optional) Expose as global shortcut (around line 540):
+4. (Optional) Expose as global shortcut:
 
 ```javascript
 if (
@@ -71,67 +105,9 @@ if (
 
 ---
 
-### Step 2: Declare TypeScript Types in `vite-env.d.ts`
 
-// turbo
-1. Open `src/vite-env.d.ts`
 
-2. Add your function to the `Window` interface:
-
-```typescript
-declare global {
-  interface Window {
-    // ... existing declarations
-    myNewFunction: (param1: string, param2?: number) => boolean;
-  }
-}
-```
-
-3. If part of `teleNavigation`, add there too:
-
-```typescript
-teleNavigation: {
-  navigateToSection: (navigationData: any) => boolean;
-  // ... existing
-  myNewFunction: (param1: string, param2?: number) => boolean;
-};
-```
-
----
-
-### Step 3: Update Navigation API Interface in `uiFrameworkRegistration.ts`
-
-// turbo
-1. Open `src/utils/uiFrameworkRegistration.ts`
-
-2. Add to the `NavigationAPI` interface:
-
-```typescript
-interface NavigationAPI {
-  navigateToSection: (navigationData: NavigationData | string) => boolean;
-  getCurrentSection: () => string;
-  flashTele: () => void;
-  // Add your function
-  myNewFunction?: (param1: string, param2?: number) => boolean;
-}
-```
-
-3. (Optional) If exposing as global shortcut, update `exposeNavigationAPI`:
-
-```typescript
-export const exposeNavigationAPI = (navigationAPI: NavigationAPI): void => {
-  (window as any).teleNavigation = navigationAPI;
-  (window as any).navigateToSection = navigationAPI.navigateToSection;
-  // Add your global shortcut
-  if (navigationAPI.myNewFunction) {
-    (window as any).myNewFunction = navigationAPI.myNewFunction;
-  }
-};
-```
-
----
-
-### Step 4: Implement Function in `Index.tsx`
+### Step 2: Implement Function in `Index.tsx` Or anywhere in the application
 
 // turbo
 1. Open `src/pages/Index.tsx`
@@ -160,10 +136,10 @@ const teleNavigation = {
 
 ---
 
-### Step 5: Clean Up on Unmount
+### Step 3: Clean Up on Unmount
 
 // turbo
-1. In the same useEffect in `Index.tsx`, find the cleanup return function (around line 1023)
+1. In the same useEffect in `Index.tsx`, find the cleanup return function
 
 2. Add cleanup for your global:
 
@@ -180,7 +156,7 @@ return () => {
 
 ---
 
-### Step 6: Verify TypeScript Compiles
+### Step 4: Verify TypeScript Compiles
 
 // turbo
 ```bash
@@ -189,7 +165,7 @@ npx tsc --noEmit
 
 ---
 
-### Step 7: Test Backend Discovery
+### Step 5: Test Backend Discovery
 
 1. Start the dev server:
    ```bash
