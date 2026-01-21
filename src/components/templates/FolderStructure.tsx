@@ -26,7 +26,7 @@ interface FolderStructureProps {
     structure?: FolderItem[];
 }
 
-// Default structure with actual project files
+// Default structure with actual project files (v68.0)
 const DEFAULT_STRUCTURE: FolderItem[] = [
     {
         name: '.agent/',
@@ -39,10 +39,11 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                 type: 'folder',
                 description: 'Slash command workflows',
                 children: [
-                    { name: 'add-glass.md', type: 'file' },
-                    { name: 'add-knowledge.md', type: 'file' },
-                    { name: 'tele-should.md', type: 'file' },
-                    { name: 'create-site-function.md', type: 'file' },
+                    { name: 'add-glass.md', type: 'file', description: 'Create visual templates' },
+                    { name: 'add-knowledge.md', type: 'file', description: 'Add domain knowledge' },
+                    { name: 'tele-should.md', type: 'file', description: 'Define shot prompts' },
+                    { name: 'create-site-function.md', type: 'file', description: 'Create site functions' },
+                    { name: 'unwire-tele.md', type: 'file', description: 'Reset to blank slate' },
                 ]
             }
         ]
@@ -60,7 +61,7 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                     {
                         name: 'templates/',
                         type: 'folder',
-                        description: '19 visual templates',
+                        description: '20 visual templates',
                         children: [
                             { name: 'CardGrid.tsx', type: 'file' },
                             { name: 'WelcomeCarousel.tsx', type: 'file' },
@@ -69,11 +70,14 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                             { name: 'ProcessSteps.tsx', type: 'file' },
                             { name: 'CodeBlock.tsx', type: 'file' },
                             { name: 'FolderStructure.tsx', type: 'file' },
-                            { name: '...and 12 more', type: 'file' },
+                            { name: 'KnowledgeFileViewer.tsx', type: 'file' },
+                            { name: 'PromptFileViewer.tsx', type: 'file' },
+                            { name: 'CopperWireLanguage.tsx', type: 'file' },
+                            { name: '...and 10 more', type: 'file' },
                         ]
                     },
-                    { name: 'TeleglassSection.tsx', type: 'file' },
-                    { name: 'DynamicSectionLoader.tsx', type: 'file' },
+                    { name: 'TeleglassSection.tsx', type: 'file', description: 'Chat panel & avatar' },
+                    { name: 'DynamicSectionLoader.tsx', type: 'file', description: 'Template renderer' },
                     { name: 'Navigation.tsx', type: 'file' },
                 ]
             },
@@ -88,15 +92,15 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                 name: 'utils/',
                 type: 'folder',
                 children: [
-                    { name: 'acknowledgmentHelpers.ts', type: 'file' },
-                    { name: 'uiFrameworkRegistration.ts', type: 'file' },
+                    { name: 'acknowledgmentHelpers.ts', type: 'file', description: 'notifyTele function' },
+                    { name: 'uiFrameworkRegistration.ts', type: 'file', description: 'Site function registration' },
                 ]
             },
             {
                 name: 'pages/',
                 type: 'folder',
                 children: [
-                    { name: 'Index.tsx', type: 'file', description: 'Main app logic' },
+                    { name: 'Index.tsx', type: 'file', description: 'Main app logic & navigation' },
                 ]
             },
         ]
@@ -107,14 +111,14 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
         description: 'Static files served at runtime',
         children: [
             {
-                name: 'assets/', type: 'folder', children: [
+                name: 'assets/',
+                type: 'folder',
+                description: 'Images and diagrams',
+                children: [
+                    { name: 'carousel-slide-01.png', type: 'file' },
+                    { name: 'carousel-slide-02.png', type: 'file' },
+                    { name: '...carousel slides', type: 'file' },
                     { name: 'two-agent-architecture.png', type: 'file' },
-                    { name: 'mobeus-hero-tagline.png', type: 'file' },
-                ]
-            },
-            {
-                name: 'images/', type: 'folder', children: [
-                    { name: 'welcome-carousel/', type: 'folder' },
                 ]
             },
             {
@@ -122,7 +126,7 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                 type: 'file',
                 description: 'Runtime Agent shot prompts — click to view live',
                 isHighlighted: true,
-                actionPhrase: 'Show me the glass prompt file'
+                actionPhrase: 'Show me the prompt file'
             },
             {
                 name: 'tele-knowledge.md',
@@ -232,8 +236,8 @@ export const FolderStructure: React.FC<FolderStructureProps> = ({
             <div
                 key={currentPath}
                 className={`flex items-center gap-2 py-1.5 px-2 rounded-lg transition-colors ${isClickable
-                        ? 'hover:bg-flamingo/20 cursor-pointer border border-flamingo/30 bg-flamingo/10 my-1'
-                        : 'hover:bg-white/5'
+                    ? 'hover:bg-flamingo/20 cursor-pointer border border-flamingo/30 bg-flamingo/10 my-1'
+                    : 'hover:bg-white/5'
                     }`}
                 style={{ marginLeft: depth * 16 + 20 }}
                 onClick={() => isClickable && handleFileClick(item)}
