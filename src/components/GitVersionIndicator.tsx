@@ -24,13 +24,13 @@ const getBuildInfo = () => {
                     timeZone: 'America/New_York'
                 }),
             author: 'Richie Etwaru',
-            branch: 'main',
+            branch: 'beta3.1',
         };
     } catch {
         return {
             timestamp: 'Build time unknown',
             author: 'Richie Etwaru',
-            branch: 'main',
+            branch: 'beta3.1',
         };
     }
 };
@@ -71,8 +71,8 @@ export const GitVersionIndicator: React.FC = () => {
             <div style={{ fontSize: '10px', opacity: 0.6 }}>Last Compiled</div>
             <div style={{ fontWeight: 'bold' }}>{BUILD_INFO.timestamp}</div>
             <div style={{ fontSize: '10px', opacity: 0.6, marginTop: '4px' }}>Engineer</div>
-            <div style={{ fontWeight: 'bold' }}>{BUILD_INFO.author}</div>
-            <div style={{ fontSize: '9px', opacity: 0.4, marginTop: '4px' }}>{BUILD_INFO.branch}</div>
+            <div style={{ fontSize: '10px', opacity: 0.6 }}>{BUILD_INFO.author}</div>
+            <div style={{ fontSize: '9px', color: '#5EEAD4', opacity: 1, marginTop: '4px' }}>{BUILD_INFO.branch}</div>
         </div>
     );
 };
