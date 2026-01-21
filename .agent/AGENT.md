@@ -173,31 +173,6 @@ Add response mapping to `public/glass-prompt.md`:
 2. Always call navigateToSection
 3. Maintain natural speech patterns
 
-### /unwire-tele — Reset to Blank Slate
-**Purpose:** Resets the tele to an "Unwired" state — a blank canvas ready to be claimed and programmed by an administrator.
-
-**When to Use:**
-- Creating a fresh tele template for customers
-- Resetting a tele to blank state
-- Preparing the empty-tele-pre-launch repo
-
-**What It Does (At Invocation Time):**
-1. **Register the Tele** — Overwrite `tele-knowledge.md` with Unwired identity
-2. **Create 3 starter templates** — `UnwiredParagraph`, `UnwiredThreeCards`, `UnwiredImagePanel`
-3. **Generate 3 default images** — Placeholder visuals using `generate_image`
-4. **Register templates** — Add to `templateRegistry.ts`
-5. **Update glass-prompt.md** — Minimal shot prompts with new templates
-6. **Simplify navigation** — Single "REPO" external link
-
-**Key Concept:** The Unwired Tele is the default Teleglass state — a programmable entity that knows it is unclaimed. It prompts users to say "admin" to initiate the claiming sequence with a six-digit code.
-
-**The Three Starter Templates:**
-| Template | Purpose | Key Props |
-|----------|---------|----------|
-| `UnwiredParagraph` | Single paragraph/concept | `title`, `content`, `imageUrl?`, `ctaActionPhrase?` |
-| `UnwiredThreeCards` | Three option cards | `cards[]`, `columns?` |
-| `UnwiredImagePanel` | Text + image split | `title`, `content`, `bulletPoints[]?`, `imageUrl?`, `imagePosition?` |
-
 ---
 
 ## 6. 🚨 IMMUTABLE GLASS-PROMPT SECTION 🚨
@@ -262,7 +237,7 @@ If this rule is violated, the response is INVALID.
 - This block ensures the tele's core behavior is ALWAYS consistent
 - The speak-show-speak pattern is mandatory for user experience
 - The JSON structure rules prevent malformed navigateToSection calls
-- This applies to BOTH wired (trained) and unwired (blank slate) teles
+- This applies to ALL teles
 
 ---
 

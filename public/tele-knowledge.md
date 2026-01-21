@@ -80,7 +80,7 @@ navigateToSection({ badge?, title?, subtitle?, generativeSubsections: [{ id, tem
 |----------|---------|
 | `public/glass-prompt.md` | Runtime Agent instructions + shot prompts |
 | `public/tele-knowledge.md` | Domain knowledge (this file) |
-| `.agent/workflows/` | `/add-glass`, `/add-knowledge`, `/tele-should`, `/unwire-tele` |
+| `.agent/workflows/` | `/add-glass`, `/add-knowledge`, `/tele-should`, `/create-site-function` |
 | `src/components/templates/` | 20 visual templates |
 
 ---

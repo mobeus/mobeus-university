@@ -43,7 +43,6 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
                     { name: 'add-knowledge.md', type: 'file', description: 'Add domain knowledge' },
                     { name: 'tele-should.md', type: 'file', description: 'Define shot prompts' },
                     { name: 'create-site-function.md', type: 'file', description: 'Create site functions' },
-                    { name: 'unwire-tele.md', type: 'file', description: 'Reset to blank slate' },
                 ]
             }
         ]
