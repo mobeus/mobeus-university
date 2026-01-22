@@ -515,20 +515,62 @@ const TeleglassSection = ({
         }
       };
       const onOutputItemAdded = (event: any) => {
-        if (
-          event.item.type === "function_call" &&
-          event.item.name === "navigateToSection"
-        ) {
-          setNavigationIsLoading(true);
-          window.dispatchEvent(
-            new CustomEvent("navigationLoadingChange", {
-              detail: { isLoading: true },
-            }),
-          );
+        if (event.item.type === "function_call") {
+          const callId = event.item.call_id;
+          const name = event.item.name || "unknown";
+          console.log("addFunctionCall=====", callId, name, event);
+
+          // Parse input arguments from the event
+          let input: Record<string, any> | undefined;
+          try {
+            if (event.item.arguments) {
+              input =
+                typeof event.item.arguments === "string"
+                  ? JSON.parse(event.item.arguments)
+                  : event.item.arguments;
+            }
+          } catch (e) {
+            console.warn("Failed to parse function call arguments", e);
+          }
+
+          addFunctionCall(callId, name, input);
+
+          // Handle navigation loading state for navigateToSection
+          if (name === "navigateToSection") {
+            setNavigationIsLoading(true);
+            window.dispatchEvent(
+              new CustomEvent("navigationLoadingChange", {
+                detail: { isLoading: true },
+              }),
+            );
+          }
         }
       };
       const onFunctionCallCompleted = (event: any) => {
-        if (event.name === "navigateToSection") {
+        const callId = event.callId;
+        const name = event.name;
+
+        if (callId) {
+          console.log("onFunctionCallCompleted====", callId, event);
+
+          // Parse result from event.arguments (which contains the output)
+          let result: any;
+          try {
+            if (event.arguments) {
+              result =
+                typeof event.arguments === "string"
+                  ? JSON.parse(event.arguments)
+                  : event.arguments;
+            }
+          } catch (e) {
+            console.warn("Failed to parse function call result", e);
+            result = event.arguments; // Use raw value if parsing fails
+          }
+
+          completeFunctionCall(callId, result);
+        }
+
+        if (name === "navigateToSection") {
           setNavigationIsLoading(false);
           window.dispatchEvent(
             new CustomEvent("navigationLoadingChange", {
@@ -1243,7 +1285,14 @@ const TeleglassSection = ({
 
         {/* Chat Input Area - CLEAN MINIMAL */}
         <div className="border-t border-white/[0.15] bg-white/[0.08] backdrop-blur-sm">
-          <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-3">
+          {/* Smart Mode Toggle - Shows tool calls when enabled */}
+          <div className="flex justify-end px-3 sm:px-4 pt-2">
+            <SmartModeToggle
+              isSmartMode={isSmartMode}
+              onToggle={handleSmartModeToggle}
+            />
+          </div>
+          <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-1">
             <input
               type="text"
               value={chatMessage}
