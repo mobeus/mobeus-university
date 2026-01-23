@@ -11,6 +11,7 @@
 **When `tele-knowledge.md` or `glass-prompt.md` is modified, YOU MUST remind the user:**
 
 > 🔄 **SYNC REQUIRED:** The following file(s) were modified and need to be copied to the Runtime LLM:
+>
 > - `tele-knowledge.md` (if changed)
 > - `glass-prompt.md` (if changed)
 >
@@ -25,6 +26,7 @@ This is MANDATORY because the Runtime Agent (Catherine/GPT 5.0) has a separate c
 This platform uses a **Two-Agent Architecture** where two different AI agents collaborate:
 
 ### Build Agent (You - Claude Opus 4.5)
+
 - **When:** Development time (writing code, editing files)
 - **Does:** Creates templates, writes knowledge, defines shot prompts
 - **Context:** Full codebase access via IDE
@@ -36,6 +38,7 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
   - `src/components/templates/*.tsx` — Templates you create
 
 ### Runtime Agent (Catherine - OpenAI GPT 5.0)
+
 - **When:** Live user sessions (speaking, responding)
 - **Does:** Talks to users, calls `navigateToSection` tool
 - **Context:** Limited context window (knowledge + prompt files)
@@ -45,6 +48,7 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
   - `public/glass-prompt.md` — How she responds (tool definition)
 
 ### How They Collaborate
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                      BUILD TIME                                  │
@@ -93,6 +97,7 @@ This platform uses a **Two-Agent Architecture** where two different AI agents co
 This is **Mobeus University** — a teaching platform where Catherine (the Runtime Agent) teaches developers how to build teles (conversational AI applications).
 
 ### Core Identity
+
 - **Tele:** Catherine — A hackathon prep programming teacher
 - **Audience:** Developers learning to build teles
 - **Mission:** Teach the Tele Builder Hackathon curriculum
@@ -100,60 +105,67 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 - **Design Philosophy:** Zero Friction | Clean Transparency | Reactive Mastery
 
 ### The Hackathon Curriculum (3 hours, 6 phases)
-| Phase | Time | Focus | Deliverable |
-|-------|------|-------|-------------|
-| 1. Voice Coding | 0:00-0:30 | Train tele by speaking | 5+ facts, 3+ rules |
-| 2. Vibe Coding | 0:30-1:00 | Iterate with Build Agent | Working concept |
-| 3. Templates | 1:00-1:30 | Create visual components | 2-3 custom templates |
-| 4. Knowledge | 1:30-2:00 | Structure domain knowledge | Knowledge section |
-| 5. Rules | 2:00-2:30 | Define shot prompts | 10+ shot prompts |
-| 6. Design | 2:30-3:00 | Polish and ship | Production-ready tele |
+
+| Phase           | Time      | Focus                      | Deliverable           |
+| --------------- | --------- | -------------------------- | --------------------- |
+| 1. Voice Coding | 0:00-0:30 | Train tele by speaking     | 5+ facts, 3+ rules    |
+| 2. Vibe Coding  | 0:30-1:00 | Iterate with Build Agent   | Working concept       |
+| 3. Templates    | 1:00-1:30 | Create visual components   | 2-3 custom templates  |
+| 4. Knowledge    | 1:30-2:00 | Structure domain knowledge | Knowledge section     |
+| 5. Rules        | 2:00-2:30 | Define shot prompts        | 10+ shot prompts      |
+| 6. Design       | 2:30-3:00 | Polish and ship            | Production-ready tele |
 
 ---
 
 ## 3. KEY FILES
 
 ### Shared Between Agents (in /public)
-| File | Purpose | Line Limit |
-|------|---------|------------|
-| `public/tele-knowledge.md` | Domain knowledge — what Catherine knows | ~150 lines |
-| `public/glass-prompt.md` | Tool definition — templates, shot prompts | ~1400 lines |
+
+| File                       | Purpose                                   | Line Limit  |
+| -------------------------- | ----------------------------------------- | ----------- |
+| `public/tele-knowledge.md` | Domain knowledge — what Catherine knows   | ~150 lines  |
+| `public/glass-prompt.md`   | Tool definition — templates, shot prompts | ~1400 lines |
 
 ### Build Agent Reference
-| File | Purpose |
-|------|---------|
-| `AGENT.md` | This file — Build Agent reference |
-| `src/data/templateRegistry.ts` | Template registry (20 templates) |
-| `.agent/workflows/*.md` | Workflow definitions |
+
+| File                           | Purpose                           |
+| ------------------------------ | --------------------------------- |
+| `AGENT.md`                     | This file — Build Agent reference |
+| `src/data/templateRegistry.ts` | Template registry (20 templates)  |
+| `.agent/workflows/*.md`        | Workflow definitions              |
 
 ### Glass Application
-| File | Purpose |
-|------|---------|
-| `src/pages/Index.tsx` | Main page, navigateToSection implementation |
-| `src/components/TeleglassSection.tsx` | Avatar, chat, controls |
-| `src/components/DynamicSectionLoader.tsx` | Template renderer |
+
+| File                                      | Purpose                                     |
+| ----------------------------------------- | ------------------------------------------- |
+| `src/pages/Index.tsx`                     | Main page, navigateToSection implementation |
+| `src/components/TeleglassSection.tsx`     | Avatar, chat, controls                      |
+| `src/components/DynamicSectionLoader.tsx` | Template renderer                           |
 
 ---
 
 ## 4. TEMPLATE REGISTRY (20 Templates)
 
 ### Current Templates
-| Category | Templates |
-|----------|-----------|
-| **Hackathon** | HackathonTimeline, PhaseOverview, ReadinessCheck, ReadinessAssessment, ReadinessExperience |
-| **Concept Teaching** | ConceptCard, ConceptExplainer, TalkingPoints, ProcessSteps |
-| **Navigation** | CardGrid, WelcomeCarousel, CTABanner |
-| **Layout & Content** | SplitContent, AccordionList |
-| **Tools & Code** | ToolCard, CodeBlock |
-| **Live Viewers** | KnowledgeFileViewer, PromptFileViewer, FolderStructure |
-| **Platform Language** | CopperWireLanguage |
+
+| Category              | Templates                                                                                  |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| **Hackathon**         | HackathonTimeline, PhaseOverview, ReadinessCheck, ReadinessAssessment, ReadinessExperience |
+| **Concept Teaching**  | ConceptCard, ConceptExplainer, TalkingPoints, ProcessSteps                                 |
+| **Navigation**        | CardGrid, WelcomeCarousel, CTABanner                                                       |
+| **Layout & Content**  | SplitContent, AccordionList                                                                |
+| **Tools & Code**      | ToolCard, CodeBlock                                                                        |
+| **Live Viewers**      | KnowledgeFileViewer, PromptFileViewer, FolderStructure                                     |
+| **Platform Language** | CopperWireLanguage                                                                         |
 
 ---
 
 ## 5. WORKFLOWS
 
 ### /add-glass — Add Template
+
 Create a new visual component:
+
 1. Create `src/components/templates/[Name].tsx`
 2. Use centralized CSS classes from `src/index.css`
 3. Every clickable → `notifyTele(actionPhrase)`
@@ -162,16 +174,84 @@ Create a new visual component:
 6. Verify: `npx tsc --noEmit`
 
 ### /add-knowledge — Add Domain Knowledge
+
 Add to `public/tele-knowledge.md`:
+
 1. Use compact YAML-like notation
 2. Focus on WHAT tele knows
 3. Keep concise and efficient
 
 ### /tele-should — Add Shot Prompt
+
 Add response mapping to `public/glass-prompt.md`:
+
 1. Format: `USER: "phrase"` → `navigateToSection: {json}` → `TELE SAYS: "response"`
 2. Always call navigateToSection
 3. Maintain natural speech patterns
+
+### /publish — Automated System Prompt Publishing
+
+Publish updated system prompt files (`tele-knowledge.md`, `template-rules.md`, etc.) from `public/` to the Runtime Agent automatically.
+
+**What it does:**
+
+- Reads markdown files from `public/` directory
+- Detects changes using hash comparison (no unnecessary updates)
+- Updates database (memories and rules)
+- Regenerates system prompt automatically
+
+**When to use:**
+
+- After editing `public/tele-knowledge.md` (partner profiles, firm stats)
+- After editing `public/template-rules.md` (behavioral rules)
+- After editing `public/Agent_Identity.md` or `public/glass-prompt.md`
+
+**How to run:**
+
+User says: "Please run /publish" or "Publish my changes"
+Tenant ID: 3897
+
+You execute:
+
+```bash
+node scripts/publish.cjs
+```
+
+**Expected output:**
+
+```
+📋 Reading AGENT.md...
+   Tenant ID: 3780
+
+📁 Reading files from public/...
+   ✓ tele-knowledge.md
+   ✓ template-rules.md
+
+🌐 API: https://prompt.mobeus.ai
+📤 Publishing to prompt-tool...
+
+✅ Successfully published 1 component(s) and regenerated system prompt
+
+📊 Summary:
+   New: 0
+   Modified: 1
+   Unchanged: 1
+
+📝 Published:
+   ✓ template-rules.md
+
+   Unchanged:
+   - tele-knowledge.md
+```
+
+**Important notes:**
+
+- **No manual sync needed** — Changes are live immediately after `/publish` succeeds
+- **Hash-based detection** — Only changed files trigger database updates
+- **Smart matching** — Uses `source_file` column to reliably track file-to-component mapping
+- **Error handling** — Clear error messages if tenant ID missing or API unavailable
+
+---
 
 ---
 
@@ -187,6 +267,7 @@ This section is marked with `** RICHIE ETWARU - NEVER REMOVE FROM HERE **` and `
 ** RICHIE ETWARU - NEVER REMOVE FROM HERE **
 
 **EVERY RESPONSE MUST:**
+
 1. **SPEAK FIRST** (Acknowledge what they're learning)
 2. **CALL `navigateToSection`** (Visual content to teach)
 3. **SPEAK AGAIN** (Guide them to the next concept or confirm readiness)
@@ -234,6 +315,7 @@ If this rule is violated, the response is INVALID.
 ```
 
 ### Why This Matters:
+
 - This block ensures the tele's core behavior is ALWAYS consistent
 - The speak-show-speak pattern is mandatory for user experience
 - The JSON structure rules prevent malformed navigateToSection calls
@@ -256,18 +338,20 @@ If this rule is violated, the response is INVALID.
 **ALL STYLES MUST BE IN `src/index.css`**
 
 ### Brand Colors (8-Color Palette)
-| Color | Hex | Use |
-|-------|-----|-----|
-| Mist | `#F5F5F5` | Text, icons |
-| Onyx | `#0D0D0D` | Backgrounds |
+
+| Color    | Hex       | Use                    |
+| -------- | --------- | ---------------------- |
+| Mist     | `#F5F5F5` | Text, icons            |
+| Onyx     | `#0D0D0D` | Backgrounds            |
 | Flamingo | `#9B5DE5` | CTAs, primary (purple) |
-| Wave | `#003D4F` | Dark teal bg |
-| Turmeric | `#CC850A` | Secondary |
-| Jade | `#5EEAD4` | Success |
-| Sapphire | `#47A1AD` | Default buttons |
-| Amethyst | `#7C3AED` | Accents |
+| Wave     | `#003D4F` | Dark teal bg           |
+| Turmeric | `#CC850A` | Secondary              |
+| Jade     | `#5EEAD4` | Success                |
+| Sapphire | `#47A1AD` | Default buttons        |
+| Amethyst | `#7C3AED` | Accents                |
 
 ### CSS Classes
+
 - **Containers:** `glass-template-container`, `glass-image-container`
 - **Cards:** `glass-card-minimal`, `glass-card-standard`, `glass-card-featured`, `glass-card-clickable`
 - **Typography:** `text-template-title`, `text-template-subtitle`, `text-template-content`
@@ -275,11 +359,13 @@ If this rule is violated, the response is INVALID.
 - **Grids:** `template-grid-2`, `template-grid-3`, `template-grid-4`
 
 ### ❌ DON'T
+
 ```tsx
 <div className="bg-mist/10 border border-mist/20 rounded-2xl p-6">
 ```
 
 ### ✅ DO
+
 ```tsx
 <div className="glass-template-container">
 ```
@@ -297,8 +383,9 @@ assetId → Check ASSET_REGISTRY → Found? → Load file
 ```
 
 ### Usage
+
 ```tsx
-<SmartImage 
+<SmartImage
   assetId={imageUrl || imagePrompt}
   alt={title}
   className="smart-image"
@@ -316,6 +403,7 @@ npm run build                 # Production build
 ```
 
 ### Debug Mode
+
 - **Shift+K** — Toggle TeleAcknowledge debug toasts
 
 ---
@@ -328,9 +416,9 @@ npm run build                 # Production build
  * STYLING: Uses centralized CSS classes from index.css
  * NAVIGATION: Every clickable element calls notifyTele()
  */
-import React from 'react';
-import { notifyTele } from '@/utils/acknowledgmentHelpers';
-import { useSound } from '@/hooks/useSound';
+import React from "react";
+import { notifyTele } from "@/utils/acknowledgmentHelpers";
+import { useSound } from "@/hooks/useSound";
 
 interface Props {
   items?: Array<{ title: string; actionPhrase: string }>;
@@ -338,7 +426,7 @@ interface Props {
 
 export const TemplateName: React.FC<Props> = ({ items = [] }) => {
   const { playClick } = useSound();
-  
+
   const handleAction = (actionPhrase: string) => {
     playClick();
     notifyTele(actionPhrase);
@@ -347,8 +435,8 @@ export const TemplateName: React.FC<Props> = ({ items = [] }) => {
   return (
     <div className="glass-template-container">
       {items.map((item, i) => (
-        <div 
-          key={i} 
+        <div
+          key={i}
           className="glass-card-standard glass-card-clickable"
           onClick={() => handleAction(item.actionPhrase)}
         >
@@ -365,13 +453,15 @@ export const TemplateName: React.FC<Props> = ({ items = [] }) => {
 ## 12. QUICK REFERENCE
 
 ### Navigation Flow
+
 ```
-User clicks → playClick() → notifyTele(actionPhrase) → sendToTele() 
-  → UIFramework.TellTele() → Catherine processes → navigateToSection() 
+User clicks → playClick() → notifyTele(actionPhrase) → sendToTele()
+  → UIFramework.TellTele() → Catherine processes → navigateToSection()
   → DynamicSectionLoader renders → User sees new templates → ∞
 ```
 
 ### Window Globals
+
 - `window.navigateToSection(data)` — Main tool for Catherine → Glass
 - `window.showEmotion(emotion)` — Trigger avatar emotion
 - `window.teleConnect` — Connect avatar
@@ -385,14 +475,14 @@ Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (R
 
 ### Registration Steps
 
-| Step | File | Action |
-|------|------|--------|
-| **1** | `index.html` | Create bridge in `UIFrameworkSiteFunctions` registry |
-| **2** | `vite-env.d.ts` | Declare TypeScript types for `Window` interface |
-| **3** | `uiFrameworkRegistration.ts` | Add to `NavigationAPI` interface |
-| **4** | `Index.tsx` | Implement function in `teleNavigation` object |
-| **5** | `Index.tsx` | Clean up in useEffect return |
-| **6** | **CONNECT TO APP** | ⚠️ Backend discovers new functions on first connection |
+| Step  | File                         | Action                                                 |
+| ----- | ---------------------------- | ------------------------------------------------------ |
+| **1** | `index.html`                 | Create bridge in `UIFrameworkSiteFunctions` registry   |
+| **2** | `vite-env.d.ts`              | Declare TypeScript types for `Window` interface        |
+| **3** | `uiFrameworkRegistration.ts` | Add to `NavigationAPI` interface                       |
+| **4** | `Index.tsx`                  | Implement function in `teleNavigation` object          |
+| **5** | `Index.tsx`                  | Clean up in useEffect return                           |
+| **6** | **CONNECT TO APP**           | ⚠️ Backend discovers new functions on first connection |
 
 ### ⚠️ CRITICAL: Backend Discovery
 
@@ -412,8 +502,10 @@ Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (R
 const myFunctionBridge = {
   myNewFunction(param) {
     if (typeof param !== "string") return undefined;
-    if (typeof window !== "undefined" && 
-        typeof window.myNewFunction === "function") {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.myNewFunction === "function"
+    ) {
       return window.myNewFunction(param);
     }
     return undefined;
@@ -428,20 +520,21 @@ window.UIFrameworkSiteFunctions = {
 ```
 
 ### Existing Site Functions
-| Function | Purpose |
-|----------|---------|
-| `navigateToSection` | Main navigation tool — renders templates |
-| `flashTele` | Flash avatar ring effect |
-| `scrollPage` | Scroll page up/down by amount |
-| `setVolume` / `adjustVolume` / `getVolume` | Avatar volume control |
-| `startWebcam` / `stopWebcam` | Webcam control |
-| `zoomLevel` | UI zoom control |
-| `externalCall` | External API integration |
-| `dynamicDataLoader` | Load dynamic JSON data |
-| `auther` / `checker` / `getCookieValue` | Authentication functions |
+
+| Function                                   | Purpose                                  |
+| ------------------------------------------ | ---------------------------------------- |
+| `navigateToSection`                        | Main navigation tool — renders templates |
+| `flashTele`                                | Flash avatar ring effect                 |
+| `scrollPage`                               | Scroll page up/down by amount            |
+| `setVolume` / `adjustVolume` / `getVolume` | Avatar volume control                    |
+| `startWebcam` / `stopWebcam`               | Webcam control                           |
+| `zoomLevel`                                | UI zoom control                          |
+| `externalCall`                             | External API integration                 |
+| `dynamicDataLoader`                        | Load dynamic JSON data                   |
+| `auther` / `checker` / `getCookieValue`    | Authentication functions                 |
 
 ---
 
-*Mobeus University — Teaching the World to Build Teles*
-*Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT 5.0)*
-*Catherine v67.0 | Audit Sync Release | January 20, 2026*
+_Mobeus University — Teaching the World to Build Teles_
+_Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT 5.0)_
+_Catherine v67.0 | Audit Sync Release | January 20, 2026_
