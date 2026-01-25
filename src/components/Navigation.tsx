@@ -41,38 +41,39 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   const navItems: Array<{
     id: string;
     label: string;
-    teleQuery: string;
+    teleQuery?: string;
+    externalUrl?: string;
     isHighlighted?: boolean;
   }> = [
       {
+        id: 'promise',
+        label: 'START',
+        teleQuery: 'What can I build'
+      },
+      {
         id: 'concepts',
         label: 'CONCEPTS',
-        teleQuery: 'Show me all core concepts'
-      },
-      {
-        id: 'slash-commands',
-        label: 'WIRE COMMANDS',
-        teleQuery: 'Show me the wire commands and how powerful they are'
-      },
-      {
-        id: 'phases',
-        label: 'HACKATHON',
-        teleQuery: 'Show me the hackathon phases'
-      },
-      {
-        id: 'templates',
-        label: 'TEMPLATES',
-        teleQuery: 'Show me all available templates'
-      },
-      {
-        id: 'ready',
-        label: 'READY?',
-        teleQuery: 'Show me my readiness assessment'
+        teleQuery: 'Show me the core concepts'
       },
       {
         id: 'wire',
-        label: 'WIRE 1.0',
-        teleQuery: 'Show me the Copper Wire Language',
+        label: 'WIRE',
+        teleQuery: 'What are wire commands'
+      },
+      {
+        id: 'anatomy',
+        label: 'ANATOMY',
+        teleQuery: 'Show me the anatomy of a tele'
+      },
+      {
+        id: 'about',
+        label: 'ABOUT',
+        teleQuery: 'Tell me about Mobeus'
+      },
+      {
+        id: 'repo',
+        label: 'GET REPO',
+        externalUrl: 'https://github.com/mobeus/mobeus-university',
         isHighlighted: true
       }
     ];
@@ -118,14 +119,18 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     onClick={() => {
                       handleAcknowledgment(item.id);
                       playUniversalSound();
-                      sendToTele(item.teleQuery);
+                      if (item.externalUrl) {
+                        window.open(item.externalUrl, '_blank', 'noopener,noreferrer');
+                      } else if (item.teleQuery) {
+                        sendToTele(item.teleQuery);
+                      }
                     }}
                     variant="ghost"
                     size="sm"
                     className={`relative px-4 text-[13px] font-semibold tracking-wide
                     transition-all duration-300
                     ${item.isHighlighted
-                        ? 'text-mist bg-mist/10 border-flamingo/50 shadow-[0_0_12px_rgba(155,93,229,0.3)]'
+                        ? 'text-mist bg-flamingo/20 border-flamingo shadow-[0_0_16px_rgba(155,93,229,0.5)]'
                         : 'text-mist/90 hover:text-mist hover:bg-mist/10 border-transparent hover:border-flamingo/40'
                       }
                     border rounded-full backdrop-blur-sm
@@ -202,7 +207,11 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               onClick={() => {
                 handleAcknowledgment(item.id);
                 playUniversalSound();
-                sendToTele(item.teleQuery);
+                if (item.externalUrl) {
+                  window.open(item.externalUrl, '_blank', 'noopener,noreferrer');
+                } else if (item.teleQuery) {
+                  sendToTele(item.teleQuery);
+                }
                 setIsMenuOpen(false);
               }}
               variant="outline"
@@ -210,7 +219,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               className={`relative w-full justify-start px-6 py-5 text-xl font-bold
                 backdrop-blur-sm
                 ${item.isHighlighted
-                  ? 'border-flamingo/60 bg-mist/20 shadow-[0_0_16px_rgba(155,93,229,0.4)]'
+                  ? 'border-flamingo bg-flamingo/20 shadow-[0_0_20px_rgba(155,93,229,0.5)]'
                   : 'border-mist/20 hover:border-flamingo/50 bg-mist/10 hover:bg-mist/15'
                 }
                 text-mist

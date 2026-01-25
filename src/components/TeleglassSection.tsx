@@ -497,7 +497,15 @@ const TeleglassSection = ({
       //     }, 80);
       //   } catch (_) {}
       // };
+
+      // Track if we've already attempted unmute to prevent multiple toggles
+      let hasAttemptedUnmute = false;
+
       const ensureUnmutedAfterConnect = () => {
+        // Guard: Only attempt unmute once per connection
+        if (hasAttemptedUnmute) return;
+        hasAttemptedUnmute = true;
+
         // MODIFIED: Now unmutes the mic after connection
         try {
           setTimeout(() => {

@@ -11,11 +11,13 @@ import useEmblaCarousel from 'embla-carousel-react';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 interface QuestionCard {
     question: string;
     subtext?: string;
-    imageUrl: string;
+    imageUrl?: string;
+    imagePrompt?: string;
     actionPhrase: string;
 }
 
@@ -37,6 +39,8 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
             loop: true,
             align: 'start',
             dragFree: true,
+            containScroll: false, // Important for seamless loop
+            slidesToScroll: 1,
         },
         [
             AutoScroll({
@@ -88,21 +92,21 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
         <div className="w-full py-4">
             {/* Embla Viewport */}
             <div className="overflow-hidden" ref={emblaRef}>
-                {/* Embla Container */}
-                <div className="flex gap-6">
+                {/* Embla Container - no gap, use slide margins instead for seamless loop */}
+                <div className="flex">
                     {cards.map((card, idx) => (
                         <div
                             key={idx}
-                            className="flex-shrink-0 w-[340px] md:w-[380px] glass-card-standard overflow-hidden cursor-pointer
+                            className="flex-shrink-0 w-[340px] md:w-[380px] mr-6 glass-card-standard overflow-hidden cursor-pointer
                                 transform transition-all duration-300 ease-out
                                 hover:scale-[1.02] hover:shadow-glow"
                             onClick={() => handleCardClick(card.actionPhrase)}
                         >
-                            {/* Image - 1024:661 aspect ratio to match screenshots */}
-                            <div className="aspect-[1024/661] w-full overflow-hidden">
-                                <img
-                                    src={card.imageUrl}
-                                    alt=""
+                            {/* Image - Uses SmartImage for live generation fallback */}
+                            <div className="aspect-[1024/661] w-full overflow-hidden bg-obsidian/30">
+                                <SmartImage
+                                    assetId={card.imageUrl || card.imagePrompt || card.question}
+                                    alt={card.question}
                                     className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-70 transition-all duration-500 ease-out hover:scale-105"
                                 />
                             </div>

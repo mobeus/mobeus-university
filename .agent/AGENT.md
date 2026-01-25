@@ -132,7 +132,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 | ------------------------------ | --------------------------------- |
 | `AGENT.md`                     | This file — Build Agent reference |
 | `src/data/templateRegistry.ts` | Template registry (20 templates)  |
-| `.agent/workflows/*.md`        | Workflow definitions              |
+| `.agent/wire-commands/*.md`   | Wire command definitions          |
 
 ### Glass Application
 

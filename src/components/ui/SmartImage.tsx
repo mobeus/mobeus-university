@@ -29,8 +29,12 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
     const [isGenerating, setIsGenerating] = useState(false);
     const [generationError, setGenerationError] = useState<string | null>(null);
     const [useFallback, setUseFallback] = useState(false);
+    const [directPathError, setDirectPathError] = useState(false);
 
-    const asset = ASSET_REGISTRY[assetId];
+    // Check if assetId is a direct path (starts with / or http)
+    const isDirectPath = assetId?.startsWith('/') || assetId?.startsWith('http');
+
+    const asset = !isDirectPath ? ASSET_REGISTRY[assetId] : null;
     const fallbackAsset = fallbackAssetId ? ASSET_REGISTRY[fallbackAssetId] : null;
 
     useEffect(() => {
@@ -40,6 +44,12 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
         setGenerationError(null);
         setIsGenerating(false);
         setUseFallback(false);
+        setDirectPathError(false);
+
+        // Skip generation if it's a direct path
+        if (isDirectPath) {
+            return;
+        }
 
         // CACHE CHECK:
         if (GENERATED_IMAGE_CACHE[assetId]) {
@@ -48,7 +58,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
             // Not in registry, treat as prompt -> Auto-Generate
             generateImage(assetId);
         }
-    }, [assetId, asset]);
+    }, [assetId, asset, isDirectPath]);
 
     const generateImage = async (prompt: string) => {
         // Double check cache before starting network request
@@ -83,6 +93,28 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
             setIsGenerating(false);
         }
     };
+
+    // Case 0: Direct Path (starts with / or http) - use directly
+    if (isDirectPath && !directPathError) {
+        const src = assetId.startsWith('http')
+            ? assetId
+            : `${import.meta.env.BASE_URL}${assetId.startsWith('/') ? assetId.slice(1) : assetId}`;
+        return (
+            <img
+                ref={ref}
+                src={src}
+                alt={alt || assetId}
+                onError={() => {
+                    console.warn(`[SmartImage] Direct path failed: ${assetId}. Falling back to generation...`);
+                    setDirectPathError(true);
+                    // Trigger generation using a descriptive prompt
+                    generateImage(alt || assetId);
+                }}
+                className={`smart-image ${className}`}
+                {...props}
+            />
+        );
+    }
 
     // Case 1: Generating
     if (isGenerating) {

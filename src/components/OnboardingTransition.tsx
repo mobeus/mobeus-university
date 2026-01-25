@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import avatarProfile from '@/assets/avatar_profile.png';
+import { teleAvatar as avatarProfile } from '@/assets';
 
 interface OnboardingTransitionProps {
     isActive: boolean;

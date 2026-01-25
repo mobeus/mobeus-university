@@ -8,11 +8,25 @@ When adding a new template (called an "experience"), follow these steps:
 
 ## Prerequisites
 - Template name should be PascalCase (e.g., `InterviewCoach`, `JobDetails`)
+- **[!] TEMPLATE NAMES MUST BE GENERIC** — Reusable across different teles, not specific to one domain
 - Understand what props the template needs
-- **⚠️ ALL STYLES MUST USE CENTRALIZED CSS CLASSES FROM `src/index.css`**
-- **🚨 EVERY CLICKABLE ELEMENT MUST CALL `notifyTele(actionPhrase)` — NO DEAD ENDS**
+- **[!] ALL STYLES MUST USE CENTRALIZED CSS CLASSES FROM `src/index.css`**
+- **[!] EVERY CLICKABLE ELEMENT MUST CALL `notifyTele(actionPhrase)` — NO DEAD ENDS**
 
-## ⚠️ CRITICAL: VOLUMETRIC NAVIGATION (LAW #1)
+### Template Naming Convention
+
+| ❌ Too Specific (Avoid) | ✅ Generic (Preferred) |
+|------------------------|------------------------|
+| `HackathonTimeline` | `ProcessSteps` |
+| `WealthPillars` | `AccordionList` |
+| `MercedesShowcase` | `ImageCarousel` |
+| `SalesMetrics` | `CardGrid` |
+
+**Why?** Templates must be reusable when users go off-journey. The 5 utility shot prompts need templates that work for ANY context.
+
+**After creating:** Run `/audit-tele` to verify naming and registration.
+
+## [!] CRITICAL: VOLUMETRIC NAVIGATION (LAW #1)
 
 This is a **VOLUMETRIC CONVERSATIONAL PRODUCT**. Every click continues the conversation.
 
@@ -75,7 +89,7 @@ const handleAction = (actionPhrase: string) => {
 
 ---
 
-## 🖼️ IMAGE HANDLING
+## IMAGE HANDLING
 
 ### Hybrid Image System
 Templates use `SmartImage` which automatically:
@@ -111,7 +125,7 @@ import { SmartImage } from '@/components/ui/SmartImage';
 
 ---
 
-## ⚠️ CRITICAL: CENTRALIZED STYLING
+## [!] CRITICAL: CENTRALIZED STYLING
 
 ### DO NOT use inline Tailwind classes like this:
 ```tsx
@@ -244,7 +258,7 @@ export default [TemplateName];
 
 ---
 
-## 🔴 VERIFICATION CHECKLIST (MANDATORY)
+## VERIFICATION CHECKLIST (MANDATORY)
 
 After creating EVERY template, verify ALL boxes:
 
@@ -297,26 +311,26 @@ After creating EVERY template, verify ALL boxes:
 
 ---
 
-## ⚠️ COMMON MISTAKES TO AVOID
+## [!] COMMON MISTAKES TO AVOID
 
 ### 1. Dead-End Clicks (CRITICAL)
 ```tsx
-// ❌ WRONG - Dead end!
+// [-] WRONG - Dead end!
 <div onClick={() => console.log('clicked')}>
 
-// ❌ WRONG - No actionPhrase
+// [-] WRONG - No actionPhrase
 <div onClick={() => notifyTele("hardcoded string")}>
 
-// ✅ CORRECT
+// [+] CORRECT
 <div onClick={() => handleAction(item.actionPhrase)}>
 ```
 
 ### 2. Missing Null Safety
 ```tsx
-// ❌ WRONG - Will crash if items undefined
+// [-] WRONG - Will crash if items undefined
 {items.map(item => <div>{item.title}</div>)}
 
-// ✅ CORRECT
+// [+] CORRECT
 {items?.map((item, index) => (
   <div key={index}>{item?.title || 'Untitled'}</div>
 ))}
@@ -324,16 +338,16 @@ After creating EVERY template, verify ALL boxes:
 
 ### 3. Inline Tailwind
 ```tsx
-// ❌ WRONG - Breaks centralized styling
+// [-] WRONG - Breaks centralized styling
 <div className="bg-white/10 p-4 rounded-lg border">
 
-// ✅ CORRECT
+// [+] CORRECT
 <div className="glass-card-standard">
 ```
 
 ### 4. Forgot to Register
 ```tsx
-// ❌ Template exists but won't render!
+// [-] Template exists but won't render!
 // MUST add to src/data/templateRegistry.ts:
 MetricsGrid: lazy(() => import("@/components/templates/MetricsGrid")
   .then(m => ({ default: m.MetricsGrid }))),
@@ -341,20 +355,20 @@ MetricsGrid: lazy(() => import("@/components/templates/MetricsGrid")
 
 ### 5. Props Mismatch with Tele
 ```tsx
-// ❌ Template expects array, Tele sends string
+// [-] Template expects array, Tele sends string
 interface Props { metrics: Metric[] }  // Component expects array
 // But public/glass-prompt.md shows: "metrics": "40-60%"  // Wrong!
 
-// ✅ public/glass-prompt.md must match exactly:
+// [+] public/glass-prompt.md must match exactly:
 // "metrics": [{ "value": "40-60%", "label": "Cost Reduction", "actionPhrase": "..." }]
 ```
 
 ### 6. Missing handleAction Pattern
 ```tsx
-// ❌ WRONG - No sound, direct call
+// [-] WRONG - No sound, direct call
 onClick={() => notifyTele(actionPhrase)}
 
-// ✅ CORRECT - Sound + call
+// [+] CORRECT - Sound + call
 const handleAction = (actionPhrase: string) => {
   playClick();
   notifyTele(actionPhrase);
@@ -364,7 +378,7 @@ onClick={() => handleAction(item.actionPhrase)}
 
 ---
 
-## 📋 Quick Reference
+## Quick Reference
 
 ### Required Imports
 ```tsx

@@ -5,10 +5,10 @@ async function publish() {
   try {
     // Hardcoded tenant ID for this project
     const tenantId = '3883';
-    console.log('📋 Using tenant ID: ' + tenantId);
+    console.log(' Using tenant ID: ' + tenantId);
 
-    // Read whitelisted files from public/
-    console.log('\n📁 Reading files from public/...');
+    // Read whitelisted files from public/prompts/
+    console.log('\n Reading files from public/prompts/...');
     const whitelist = [
       'tele-knowledge.md',
       'Agent_Identity.md',
@@ -18,7 +18,7 @@ async function publish() {
 
     const files = [];
     for (const filename of whitelist) {
-      const filepath = path.join(process.cwd(), 'public', filename);
+      const filepath = path.join(process.cwd(), 'public', 'prompts', filename);
       if (fs.existsSync(filepath)) {
         const content = fs.readFileSync(filepath, 'utf8');
         files.push({ name: filename, content });
@@ -34,8 +34,8 @@ async function publish() {
 
     // POST to API
     const apiUrl = 'https://prompt.mobeus.ai';
-    console.log(`\n🌐 API: ${apiUrl}`);
-    console.log('\n📤 Publishing to prompt-tool...');
+    console.log(`\n API: ${apiUrl}`);
+    console.log('\n Publishing to prompt-tool...');
 
     const response = await fetch(`${apiUrl}/api/publish/from-files`, {
       method: 'POST',
@@ -58,13 +58,13 @@ async function publish() {
     // Display results
     console.log('\n✅ ' + result.message);
 
-    console.log('\n📊 Summary:');
+    console.log('\n Summary:');
     console.log(`   New: ${result.summary.new}`);
     console.log(`   Modified: ${result.summary.modified}`);
     console.log(`   Unchanged: ${result.summary.unchanged}`);
 
     if (result.published && result.published.length > 0) {
-      console.log('\n📝 Published:');
+      console.log('\n Published:');
       result.published.forEach(item => {
         console.log(`   ${item.action === 'created' ? '+' : '✓'} ${item.filename}`);
       });

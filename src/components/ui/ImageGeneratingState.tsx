@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import avatarImage from '@/assets/avatar_profile.png';
+import { teleAvatar as avatarImage } from '@/assets';
 import { playThinkingSound, stopThinkingSound } from '@/utils/soundGenerator';
 
 interface ImageGeneratingStateProps {

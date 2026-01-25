@@ -30,56 +30,60 @@ import { Logo } from "@/components/Logo";
 import { CursorThinkingIndicator } from "@/components/CursorThinkingIndicator";
 
 
-// Welcome section - Catherine prepares developers for the hackathon
-// KEY CONCEPT: This tele teaches people so they're READY to build their own tele
+// Welcome section - Journey-aligned carousel (7 steps to goal)
 const WELCOME_VARIANTS = [
   {
-    badge: "HACKATHON PREP",
-    title: "You're Going to Build a Tele",
-    subtitle: "Get ready for the 3-hour hackathon where you'll create your own conversational AI",
+    badge: "TELE BUILDER JOURNEY",
+    title: "Build a Conversational Product in 3 Hours",
+    subtitle: "7 steps from curious to ready — anyone can do it",
     generativeSubsections: [
-      // Prep Journey Carousel
       {
-        id: "prep-carousel",
+        id: "journey-carousel",
         templateId: "WelcomeCarousel",
         props: {
-          autoPlayInterval: 60000,
+          autoPlayInterval: 45000,
           cards: [
             {
-              question: "What will I build at the hackathon?",
-              subtext: "Understand what a tele is before you build one",
+              question: "What can I build in 3 hours?",
+              subtext: "A conversational product with a beginning, journey, and goal",
               imageUrl: "/assets/carousel-slide-01.png",
-              actionPhrase: "What is a tele and what will I build"
+              actionPhrase: "What can I build"
             },
             {
-              question: "How does the two-agent architecture work?",
-              subtext: "Build LLM + Runtime LLM working together",
+              question: "How do I build it?",
+              subtext: "Voice coding (speak) + Vibe coding (type)",
               imageUrl: "/assets/carousel-slide-02.png",
-              actionPhrase: "Explain the two agent architecture"
+              actionPhrase: "How do I build it"
             },
             {
-              question: "What are the 6 phases of the hackathon?",
-              subtext: "Preview what you'll do in each 30-minute phase",
+              question: "What are the 4 core concepts?",
+              subtext: "Dual agent, DOM bridge, templates, volumetric nav",
               imageUrl: "/assets/carousel-slide-03.png",
-              actionPhrase: "Show me the hackathon phases"
+              actionPhrase: "Show me the core concepts"
             },
             {
-              question: "What tools and files will I work with?",
-              subtext: "Get familiar with the key concepts before you code",
+              question: "What are Wire Commands?",
+              subtext: "/add-glass, /add-knowledge, /tele-should, /publish",
               imageUrl: "/assets/carousel-slide-04.png",
-              actionPhrase: "Show me the tools I will use"
+              actionPhrase: "What are wire commands"
             },
             {
-              question: "What's navigateToSection and why is it important?",
-              subtext: "The bridge between your tele and the UI",
+              question: "What's inside a Tele?",
+              subtext: "Knowledge, skills, rules, connections, analytics",
               imageUrl: "/assets/carousel-slide-05.png",
-              actionPhrase: "Explain navigateToSection"
+              actionPhrase: "Show me the anatomy of a tele"
             },
             {
-              question: "I'm ready — give me the full hackathon overview",
-              subtext: "See the complete 3-hour journey",
+              question: "What can I use Teles for?",
+              subtext: "Sales, training, service across any industry",
               imageUrl: "/assets/carousel-slide-06.png",
-              actionPhrase: "Start the hackathon overview"
+              actionPhrase: "Show me use cases"
+            },
+            {
+              question: "Ready to start?",
+              subtext: "Get the repo, get 3 free hours, deploy across 5 channels",
+              imageUrl: "/assets/carousel-slide-07.png",
+              actionPhrase: "How do I start"
             }
           ]
         }
@@ -1194,16 +1198,7 @@ const Index = () => {
   const disconnect = async () => {
     setIsConnecting(true);
     playUISound("off", "avatar");
-    try {
-      if (isChatGlassOpen) {
-        setIsChatGlassOpen(false);
-        const setters = (window as any).setTeleglassState;
-        if (setters) {
-          setters.setIsChatActive(false);
-          setters.setIsChatGlassOpen(false);
-        }
-      }
-    } catch (_) { }
+    // NOTE: Chat stays open if it was open - no longer force-closing on disconnect
     try {
       await (window as any).UIFramework?.disconnectOpenAI?.();
       await (window as any).UIFramework?.disconnectHeyGen?.();

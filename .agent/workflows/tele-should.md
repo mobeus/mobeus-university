@@ -4,15 +4,26 @@ description: Tell Tele how to respond to specific user requests (shot prompts)
 
 # Tele-Should Workflow
 
-When you want Tele to respond a certain way to a user request, add a shot prompt to `public/glass-prompt.md`.
+When you want Tele to respond a certain way to a user request, add a shot prompt to `public/prompts/glass-prompt.md`.
 
-## 🚨 CRITICAL: Always Call navigateToSection
+## [!] CRITICAL: Always Call navigateToSection
 
 **Tele MUST call `navigateToSection` in EVERY response, even if the content is identical to what's currently displayed.**
 
 - The UI needs the tool call to confirm Tele is responding
 - Without the call, users see nothing and think Tele is broken
 - Even if same content is showing: **STILL CALL navigateToSection**
+
+## 🚨 HIDDEN JOURNEY RULE
+
+**The user should NOT know they are on a journey.**
+
+- ❌ Never show "STEP 1 OF 7" or step counts in badges
+- ❌ Never say "let's move to the next step"
+- ❌ Never reveal there are 7 steps
+- ✅ Use descriptive badges like "PLATFORM", "CONCEPTS", "USE CASES"
+- ✅ Offer options naturally without forcing progression
+- ✅ Let users explore freely
 
 ## When to Use
 - "Tele should show X when user asks Y"
@@ -25,12 +36,12 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
 
 2. Identify what template(s) Tele should show
 
-3. Open `public/glass-prompt.md` and find the **Shot Prompts** section
+3. Open `public/prompts/glass-prompt.md` and find the **Shot Prompts** section
 
 // turbo
 4. Check current line count:
    ```bash
-   wc -l public/glass-prompt.md
+   wc -l public/prompts/glass-prompt.md
    ```
    **Limit: 1500 lines max**
 
@@ -54,77 +65,80 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
    ```
 
 6. Follow the rules:
-   - ✅ `id`, `templateId`, `props` ONLY at subsection level
-   - ✅ ALL data inside `props`
-   - ✅ TELE SAYS uses natural language, no "Here is your..."
-   - ❌ Never badge/title/subtitle inside props
+   - [+] `id`, `templateId`, `props` ONLY at subsection level
+   - [+] ALL data inside `props`
+   - [+] TELE SAYS uses natural language, no "Here is your..."
+   - [+] NO step counts or journey progression language
+   - [-] Never badge/title/subtitle inside props
 
 // turbo
 7. Verify the file is under 1500 lines:
    ```bash
-   wc -l public/glass-prompt.md
+   wc -l public/prompts/glass-prompt.md
    ```
 
 ## Example Shot Prompt
 
 ```markdown
-### View Certifications
-USER: "Show me my certifications"
+### Explain Any Wire Command
+USER: "Tell me about /add-glass" / "What is /add-knowledge" / "Explain /tele-should"
 
 navigateToSection:
 ```json
 {
-  "badge": "MY TWIN",
-  "title": "Your Certifications",
+  "badge": "WIRE COMMAND",
+  "title": "/add-glass",
   "generativeSubsections": [
     { 
-      "id": "certs-1", 
-      "templateId": "CertificationsList", 
+      "id": "wire-detail", 
+      "templateId": "WireCommandDetail", 
       "props": { 
-        "certifications": [
-          { "name": "AWS Cloud Practitioner", "status": "verified", "issuer": "AWS" }
-        ]
+        "command": "/add-glass"
       }
     }
   ]
 }
 ```
 
-TELE SAYS: "You've got some solid credentials here. Want to add more or see which jobs match these certs?"
+TELE SAYS: "This command creates visual templates. Want to see the others or try something else?"
 ```
 
-## Don't Forget
-- ✅ Keep public/glass-prompt.md ≤ 1500 lines
-- ✅ Tele speaks naturally, not "Here is your X"
-- ✅ Include the guide (next step suggestion) in TELE SAYS
-- ✅ Use realistic data in props examples
+## 🚨 The 15-Shot Prompt Rule
 
-## 🚨 CRITICAL RULE: Always Call navigateToSection
+**Total: 15 Shot Prompts Maximum**
+- **7 Journey Shot Prompts** → Map to journey nodes (hidden from user)
+- **8 Utility Shot Prompts** → Generic patterns, wire commands, use cases, files
 
-**Tele MUST call `navigateToSection` in EVERY response, even if the content would be identical to what's currently displayed.**
+### Shot Prompt Consolidation
+Use **generic patterns** instead of individual prompts:
+- ✅ One prompt for "Explain any wire command" using WireCommandDetail with `command` prop
+- ✅ One prompt for "Describe any use case" using UseCaseDetail with dynamic props
+- ❌ Not one shot prompt per wire command
+- ❌ Not one shot prompt per use case
 
-This is because:
-1. The UI needs the tool call to confirm Tele is responding
-2. Without the tool call, the user sees no visual update
-3. The tool call triggers animations and state updates
+---
 
-**WRONG:**
+## 🚨 Constraints (Check Every Time)
+
+// turbo
+```bash
+echo "=== CONSTRAINT CHECK ===" && \
+echo "tele-knowledge.md: $(wc -l < public/prompts/tele-knowledge.md) lines (max 500)" && \
+echo "glass-prompt.md: $(wc -l < public/prompts/glass-prompt.md) lines (max 1500)" && \
+echo "Shot prompts: $(grep -c '^### ' public/prompts/glass-prompt.md) (max 15)"
 ```
-USER: "Show me my progress"
-TELE: "Here's your progress..." (no navigateToSection call)
-→ User sees nothing new, thinks Tele is broken
-```
 
-**CORRECT:**
-```
-USER: "Show me my progress"
-TELE: Calls navigateToSection with CourseProgress template
-TELE SAYS: "Here's your learning journey. You're 65% through..."
-→ User sees the template load/refresh
-```
+| Constraint | Limit | Action if Exceeded |
+|------------|-------|-------------------|
+| tele-knowledge.md | ≤ **500 lines** | Consolidate content |
+| glass-prompt.md | ≤ **1500 lines** | Remove non-journey prompts |
+| Shot Prompts | ≤ **15 total** | Keep 7 journey + 8 utility max |
+
+## [!] CRITICAL RULE: Always Call navigateToSection
+
+**Tele MUST call `navigateToSection` in EVERY response.**
 
 Even if identical content is already showing:
 - **STILL CALL navigateToSection**
 - The UI handles duplicate content gracefully
 - The user gets visual confirmation Tele heard them
-

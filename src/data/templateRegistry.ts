@@ -1,196 +1,83 @@
 import React, { lazy } from "react";
 
 /**
- * TEMPLATE REGISTRY - MOBEUS UNIVERSITY (HACKATHON PREP)
+ * TEMPLATE REGISTRY - MOBEUS UNIVERSITY
  * 
- * Templates specifically designed for preparing developers for the hackathon.
- * All templates are lazy-loaded for performance.
+ * 28 Templates organized by category:
+ * - Journey (7): One for each journey node (no step counts shown)
+ * - Concept (4): Deep dives on core concepts
+ * - System (3): Wire command, file viewer, use cases
+ * - Utility (14): Reusable components
  * 
- * VOLUMETRIC NAVIGATION: Every clickable element calls notifyTele(actionPhrase)
+ * DESIGN PRINCIPLES:
+ * - 3-Level Hierarchy: Glance → Look → Read
+ * - Volumetric Navigation: All clicks call notifyTele(actionPhrase)
+ * - No journey step counts visible to user
  */
 export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
 
     // ==========================================
-    // CORE NAVIGATION
+    // JOURNEY TEMPLATES (7) - One per journey node
+    // User does NOT see step numbers
+    // ==========================================
+
+    JourneyPromise: lazy(() => import("@/components/templates/JourneyPromise").then(m => ({ default: m.JourneyPromise }))),
+    JourneyBuildModes: lazy(() => import("@/components/templates/JourneyBuildModes").then(m => ({ default: m.JourneyBuildModes }))),
+    JourneyConcepts: lazy(() => import("@/components/templates/JourneyConcepts").then(m => ({ default: m.JourneyConcepts }))),
+    JourneyWireCommands: lazy(() => import("@/components/templates/JourneyWireCommands").then(m => ({ default: m.JourneyWireCommands }))),
+    JourneyAnatomy: lazy(() => import("@/components/templates/JourneyAnatomy").then(m => ({ default: m.JourneyAnatomy }))),
+    JourneyUseCases: lazy(() => import("@/components/templates/JourneyUseCases").then(m => ({ default: m.JourneyUseCases }))),
+    JourneyGetStarted: lazy(() => import("@/components/templates/JourneyGetStarted").then(m => ({ default: m.JourneyGetStarted }))),
+
+    // ==========================================
+    // CONCEPT TEMPLATES (4) - Core concept deep dives
+    // ==========================================
+
+    ConceptDualAgent: lazy(() => import("@/components/templates/ConceptDualAgent").then(m => ({ default: m.ConceptDualAgent }))),
+    ConceptDOMBridge: lazy(() => import("@/components/templates/ConceptDOMBridge").then(m => ({ default: m.ConceptDOMBridge }))),
+    ConceptTemplates: lazy(() => import("@/components/templates/ConceptTemplates").then(m => ({ default: m.ConceptTemplates }))),
+    ConceptVolumetric: lazy(() => import("@/components/templates/ConceptVolumetric").then(m => ({ default: m.ConceptVolumetric }))),
+
+    // ==========================================
+    // SYSTEM TEMPLATES (3) - Wire commands, files, use cases
     // ==========================================
 
     /**
-     * CardGrid
-     * USE WHEN: Topic selection, navigation menus, option cards
-     * PROPS: { cards[{ title, description?, badge?, actionPhrase }], columns?: 2|3|4 }
+     * WireCommandDetail - Shows ANY wire command
+     * PROPS: { command: '/add-glass'|'/add-knowledge'|..., headline?, tagline?, whatItCreates?[], exampleCommand?, exampleResult? }
      */
-    CardGrid: lazy(() => import("@/components/templates/CardGrid").then(m => ({ default: m.CardGrid }))),
+    WireCommandDetail: lazy(() => import("@/components/templates/WireCommandDetail").then(m => ({ default: m.WireCommandDetail }))),
 
     /**
-     * WelcomeCarousel
-     * USE WHEN: Main welcome screen, rotating questions/topics
-     * PROPS: { cards[{ question, subtext?, imageUrl?, actionPhrase }], autoPlayInterval? }
+     * SystemFileViewer - Shows knowledge or prompt file
+     * PROPS: { fileType: 'knowledge'|'prompt' }
      */
+    SystemFileViewer: lazy(() => import("@/components/templates/SystemFileViewer").then(m => ({ default: m.SystemFileViewer }))),
+
+    /**
+     * UseCaseDetail - Shows detailed use case
+     * PROPS: { icon, title, tagline, description, benefits?[], exampleScenarios?[], metrics?[] }
+     */
+    UseCaseDetail: lazy(() => import("@/components/templates/UseCaseDetail").then(m => ({ default: m.UseCaseDetail }))),
+
+    // ==========================================
+    // UTILITY TEMPLATES (14) - Reusable components
+    // ==========================================
+
     WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
+    FeatureGrid: lazy(() => import("@/components/templates/FeatureGrid").then(m => ({ default: m.FeatureGrid }))),
+    HeroSection: lazy(() => import("@/components/templates/HeroSection").then(m => ({ default: m.HeroSection }))),
+    StepByStep: lazy(() => import("@/components/templates/StepByStep").then(m => ({ default: m.StepByStep }))),
+    ComparisonTable: lazy(() => import("@/components/templates/ComparisonTable").then(m => ({ default: m.ComparisonTable }))),
+    StatGrid: lazy(() => import("@/components/templates/StatGrid").then(m => ({ default: m.StatGrid }))),
+    AccordionSection: lazy(() => import("@/components/templates/AccordionSection").then(m => ({ default: m.AccordionSection }))),
+    MediaShowcase: lazy(() => import("@/components/templates/MediaShowcase").then(m => ({ default: m.MediaShowcase }))),
+    ActionBanner: lazy(() => import("@/components/templates/ActionBanner").then(m => ({ default: m.ActionBanner }))),
+    IconList: lazy(() => import("@/components/templates/IconList").then(m => ({ default: m.IconList }))),
+    CodeExample: lazy(() => import("@/components/templates/CodeExample").then(m => ({ default: m.CodeExample }))),
+    LiveFileViewer: lazy(() => import("@/components/templates/LiveFileViewer").then(m => ({ default: m.LiveFileViewer }))),
+    NavigationCards: lazy(() => import("@/components/templates/NavigationCards").then(m => ({ default: m.NavigationCards }))),
+    QuoteBlock: lazy(() => import("@/components/templates/QuoteBlock").then(m => ({ default: m.QuoteBlock }))),
+    AboutCompany: lazy(() => import("@/components/templates/AboutCompany").then(m => ({ default: m.AboutCompany }))),
 
-    // ==========================================
-    // HACKATHON SPECIFIC
-    // ==========================================
-
-    /**
-     * HackathonTimeline
-     * USE WHEN: Showing all 6 hackathon phases overview
-     * PROPS: { title?, subtitle?, totalDuration?, phases?[], currentPhase?, ctaLabel?, ctaActionPhrase? }
-     */
-    HackathonTimeline: lazy(() => import("@/components/templates/HackathonTimeline").then(m => ({ default: m.HackathonTimeline }))),
-
-    /**
-     * PhaseOverview
-     * USE WHEN: Explaining a single hackathon phase in detail
-     * PROPS: { phaseNumber?, title?, timing?, duration?, goal?, description?, activities?[], nextPhaseLabel?, nextPhaseActionPhrase? }
-     */
-    PhaseOverview: lazy(() => import("@/components/templates/PhaseOverview").then(m => ({ default: m.PhaseOverview }))),
-
-    /**
-     * ReadinessCheck
-     * USE WHEN: "Are you ready?" checklist before hackathon
-     * PROPS: { title?, subtitle?, items?[{ text, learnMorePhrase? }], allReadyLabel?, allReadyActionPhrase? }
-     */
-    ReadinessCheck: lazy(() => import("@/components/templates/ReadinessCheck").then(m => ({ default: m.ReadinessCheck }))),
-
-    /**
-     * ReadinessAssessment
-     * USE WHEN: Interactive assessment with progress bars, user speaks about topics
-     * PROPS: { title?, subtitle?, topics?[{ topic, description, progress?, actionPhrase? }], threshold?, celebrationActionPhrase? }
-     */
-    ReadinessAssessment: lazy(() => import("@/components/templates/ReadinessAssessment").then(m => ({ default: m.ReadinessAssessment }))),
-
-    /**
-     * ReadinessExperience
-     * USE WHEN: Voice-based assessment with real-time progress bars and full-screen celebration
-     * PROPS: { title?, subtitle?, concepts?[{ concept, description, progress?, actionPhrase? }], threshold?, celebrationActionPhrase? }
-     */
-    ReadinessExperience: lazy(() => import("@/components/templates/ReadinessExperience").then(m => ({ default: m.ReadinessExperience }))),
-
-    // ==========================================
-    // CONCEPT TEACHING
-    // ==========================================
-
-    /**
-     * ConceptCard
-     * USE WHEN: Defining a single concept/term
-     * PROPS: { title, definition, details?, imageUrl?, ctaLabel?, ctaActionPhrase? }
-     */
-    ConceptCard: lazy(() => import("@/components/templates/ConceptCard").then(m => ({ default: m.ConceptCard }))),
-
-    /**
-     * ConceptExplainer
-     * USE WHEN: Explaining a concept with What/Why/How structure
-     * PROPS: { title?, badge?, what?, why?, how?, example?, imageUrl?, ctaLabel?, ctaActionPhrase? }
-     */
-    ConceptExplainer: lazy(() => import("@/components/templates/ConceptExplainer").then(m => ({ default: m.ConceptExplainer }))),
-
-    /**
-     * TalkingPoints
-     * USE WHEN: Key points, bullet list with details
-     * PROPS: { title?, points[{ point, detail?, actionPhrase }], ctaLabel?, ctaActionPhrase? }
-     */
-    TalkingPoints: lazy(() => import("@/components/templates/TalkingPoints").then(m => ({ default: m.TalkingPoints }))),
-
-    // ==========================================
-    // PROCESS & STEPS
-    // ==========================================
-
-    /**
-     * ProcessSteps
-     * USE WHEN: Numbered steps, workflows, how-to guides
-     * PROPS: { title?, steps[{ title, description, actionPhrase }] }
-     */
-    ProcessSteps: lazy(() => import("@/components/templates/ProcessSteps").then(m => ({ default: m.ProcessSteps }))),
-
-    // ==========================================
-    // TOOLS & CODE
-    // ==========================================
-
-    /**
-     * ToolCard
-     * USE WHEN: Showing a tool, file, or command with examples
-     * PROPS: { name?, type?: file|command|workflow, location?, description?, purpose?, codeExample?, ctaLabel?, ctaActionPhrase? }
-     */
-    ToolCard: lazy(() => import("@/components/templates/ToolCard").then(m => ({ default: m.ToolCard }))),
-
-    /**
-     * CodeBlock
-     * USE WHEN: Showing code snippets, examples
-     * PROPS: { code, language?, title?, showLineNumbers?, actionPhrase? }
-     */
-    CodeBlock: lazy(() => import("@/components/templates/CodeBlock").then(m => ({ default: m.CodeBlock }))),
-
-    // ==========================================
-    // LAYOUT & CONTENT
-    // ==========================================
-
-    /**
-     * SplitContent
-     * USE WHEN: Hero content with image, side-by-side layout
-     * PROPS: { title, content, bulletPoints?[], imageUrl?, imagePosition?: left|right }
-     */
-    SplitContent: lazy(() => import("@/components/templates/SplitContent").then(m => ({ default: m.SplitContent }))),
-
-    /**
-     * CTABanner
-     * USE WHEN: Call to action, "next phase", "I'm ready!"
-     * PROPS: { headline, subheadline?, ctaLabel, ctaActionPhrase }
-     */
-    CTABanner: lazy(() => import("@/components/templates/CTABanner").then(m => ({ default: m.CTABanner }))),
-
-    /**
-     * AccordionList
-     * USE WHEN: FAQs, expandable Q&A
-     * PROPS: { title?, items[{ title, content, actionPhrase }] }
-     */
-    AccordionList: lazy(() => import("@/components/templates/AccordionList").then(m => ({ default: m.AccordionList }))),
-
-    // ==========================================
-    // LIVE FILE VIEWERS (System Transparency)
-    // ==========================================
-
-    /**
-     * KnowledgeFileViewer
-     * USE WHEN: User asks to see the knowledge file, what Catherine knows, domain knowledge
-     * PROPS: {} (no props - fetches /tele-knowledge.md at runtime)
-     */
-    KnowledgeFileViewer: lazy(() => import("@/components/templates/KnowledgeFileViewer").then(m => ({ default: m.KnowledgeFileViewer }))),
-
-    /**
-     * PromptFileViewer
-     * USE WHEN: User asks to see the prompt file, shot prompts, tool definitions, how Catherine responds
-     * PROPS: {} (no props - fetches /glass-prompt.md at runtime)
-     */
-    PromptFileViewer: lazy(() => import("@/components/templates/PromptFileViewer").then(m => ({ default: m.PromptFileViewer }))),
-
-    /**
-     * FolderStructure
-     * USE WHEN: User asks about project structure, file organization, what files exist
-     * PROPS: { title?, subtitle?, structure?[{ name, type, description, children? }] }
-     */
-    FolderStructure: lazy(() => import("@/components/templates/FolderStructure").then(m => ({ default: m.FolderStructure }))),
-
-    // ==========================================
-    // PLATFORM LANGUAGE
-    // ==========================================
-
-    /**
-     * CopperWireLanguage
-     * USE WHEN: User asks about naming conventions, the language for programming AI, copper wires
-     * PROPS: {} (static template with complete naming structure)
-     */
-    CopperWireLanguage: lazy(() => import("@/components/templates/CopperWireLanguage").then(m => ({ default: m.CopperWireLanguage }))),
-
-    // ==========================================
-    // MEDIA & VISUALIZATION
-    // ==========================================
-
-    /**
-     * ImageCarousel
-     * USE WHEN: User asks for image gallery, carousel, slideshow, or collection of images
-     * SUPPORTS: Pre-generated images (local files) OR AI-generated images (prompts)
-     * PROPS: { title?, subtitle?, slides[{ imageId, caption?, actionPhrase? }], autoPlay?, showArrows?, showDots? }
-     */
-    ImageCarousel: lazy(() => import("@/components/templates/ImageCarousel").then(m => ({ default: m.ImageCarousel }))),
 };

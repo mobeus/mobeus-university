@@ -12,7 +12,7 @@ Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (R
 - Define what parameters the function accepts and returns
 - Understand the purpose: What should Catherine be able to do with this function?
 
-## ⚠️ CRITICAL: Backend Discovery
+## [!] CRITICAL: Backend Discovery
 
 **After completing all steps, the app MUST be loaded and connected to the backend for the new function to be discovered and registered.** The function won't be available to Catherine until this discovery happens.
 
@@ -270,7 +270,7 @@ const externalCallBridge = {
 
 ---
 
-## ⚠️ Common Mistakes
+## [!] Common Mistakes
 
 ### 1. Forgot to Connect After Deployment
 ```
