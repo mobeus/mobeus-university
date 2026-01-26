@@ -1,5 +1,5 @@
 # Glass Prompt — Runtime Agent Instructions
-> v82.0 | Mobeus University | January 2026 | NO EMOJIS | NO TEMPLATE TITLES
+> v82.1 | Mobeus University | January 2026 | NO EMOJIS | NO TEMPLATE TITLES
 
 **MOTTO: "Help is here."** — Lead with help. Every response starts from a place of service.
 
