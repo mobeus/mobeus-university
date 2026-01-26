@@ -1,5 +1,5 @@
 # Tele Knowledge — Domain Expertise
-> v80 | Mobeus University | Jan 2026
+> v82.0 | Mobeus University | Jan 2026
 
 ---
 
@@ -73,6 +73,8 @@ These 3 philosophical pillars provide the white-glove framework across the entir
 
 **The Fight**: Mobeus are **Friction Fighters**. We're not building software. We're attacking friction. Every tele reduces friction. Every interaction reclaims humanity.
 
+**Example**: Maria waits 45 minutes on hold for insurance. That's friction. A tele answers instantly, knows her policy, resolves the claim in 90 seconds. Friction eliminated. Humanity reclaimed.
+
 ### 2. Business Flow vs Business Process
 
 **Business Process (The Disease)**: Deterministic software. Written for rigid steps. Slows businesses. Delivers painful experiences. Can't scale.
@@ -81,6 +83,8 @@ These 3 philosophical pillars provide the white-glove framework across the entir
 
 **The Trade**: A little loss, a little imperfection — in exchange for **frictionless human connection**. Software that flows, not freezes.
 
+**Example**: Filling out a 47-field form for a permit? That's process. Talking to a tele that asks the right questions and files automatically? That's flow. Same outcome, zero friction.
+
 ### 3. Productionizing Probabilism
 
 **The Marshmallow**: Probabilism is soft, adaptive, forgiving. A big bag of frictionless potential. But it's shapeless.
@@ -88,6 +92,8 @@ These 3 philosophical pillars provide the white-glove framework across the entir
 **The Copper Wire**: Determinism is rigid, precise, reliable. Wire commands, shot prompts, the Wire 1.0 language — this is the copper.
 
 **The Craft**: Wiring a tele is the art of threading copper through marshmallow. Precision where it matters. Flow everywhere else. **Every person on the planet can productionize probabilism.**
+
+**Example**: A tele for a law firm must NEVER say "I'm not a lawyer." That's copper — a shot prompt that ensures the right response. But it can flow naturally through 1000 different conversations. Marshmallow with a copper core.
 
 ---
 
@@ -145,8 +151,15 @@ Result: Communication↑ Comprehension↑ Retention↑ → Conversion↑ Resolut
 
 **Utilization-Based Pricing**
 - Per interaction, per channel
-- Text: $0.02/msg | Phone: $0.08/min | Chat: $0.01/msg | Voice: $0.05/min | Avatar: $0.10/min
+- Text: $0.002/msg | Chat: FREE | Voice: $0.03/min | Call: $0.07/min | Avatar: $0.10/min
 - Volume discounts, transparent tracking, no hidden fees
+
+**Channel Definitions**:
+- Text: SMS/MMS messaging
+- Chat: Web/app chat widgets (free)
+- Voice: Browser-based voice (WebRTC)
+- Call: Phone calls via PSTN/VoIP
+- Avatar: Visual AI persona with lip sync
 
 ---
 
@@ -265,6 +278,20 @@ Every use case should be told as a STORY with:
 3. **The Connection** — What the tele connects (X to Y)
 4. **The Transformation** — How their world changes
 5. **Material Outcome** — What happens THIS WEEK if started today
+
+### COMPLETE EXAMPLE: The Embassy Liaison
+
+**Hero**: Carlos, 34, trying to get a work visa for his new job in Berlin.
+
+**Challenge**: He's been on the German embassy website for 3 hours. 47 different forms. Which ones does he need? When's his appointment? What documents? He's taken a day off work and he's more confused than when he started.
+
+**The Connection**: A tele connects Carlos (confused applicant) to Embassy knowledge (requirements, forms, appointments, status).
+
+**The Transformation**: Carlos texts "I need a work visa for Germany." The tele asks 5 questions: job type, employer, nationality, timeline, current status. In 4 minutes, Carlos has: the exact forms he needs (3, not 47), a document checklist, an appointment slot, and a timeline. The tele even fills in the forms FROM the conversation.
+
+**Material Outcome (THIS WEEK)**: If Carlos started today, by Friday he'd have completed applications submitted, appointment confirmed, and a tele he can text anytime with "what's my status?" The embassy handles 300% more applicants. Carlos gets his visa in 3 weeks instead of 3 months.
+
+**Why it works**: The tele didn't replace the embassy. It made the embassy accessible. Help is here.
 
 ### BOLD IMAGINATION EXAMPLES
 
