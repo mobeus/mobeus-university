@@ -63,6 +63,30 @@ For every item in `generativeSubsections`:
 
 ---
 
+## 🎨 IMAGE AESTHETIC MANDATE
+
+**ALL `imagePrompt` values MUST follow these guidelines:**
+
+### Style
+- **Photorealistic** — No illustrations or cartoons
+- **High definition** — 8K, cinematic quality
+- **Artistically shot** — Professional composition, dramatic lighting
+
+### Diversity
+- **Balanced representation** — All ages, body types, abilities
+- **Global perspective** — Worldwide settings
+- **Inclusive by default**
+
+### Human Faces — CRITICAL
+- **Racially ambiguous** — Never clearly identify a single race
+- **Universally relatable** — Could be from any background
+- **Focus on expression** — Joy, focus, care, confidence
+- **Never specify race** — Use "warm smile," "kind eyes," not ethnic descriptors
+
+**Append to ALL image prompts:** ", photorealistic, 8K, cinematic lighting, professional photography"
+
+---
+
 ## 🎨 AVAILABLE TEMPLATES (73)
 
 Use the right template for the right purpose. Combine 2-5 templates for rich experiences.

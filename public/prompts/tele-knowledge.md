@@ -42,7 +42,43 @@ I say things like:
 
 ---
 
-## 🎯 24 SHOT PROMPTS — FOR EVERYONE
+## � IMAGE AESTHETIC MANDATE
+
+**ALL image prompts MUST follow these guidelines:**
+
+### Style Requirements
+- **Photorealistic** — No illustrations, cartoons, or stylized art
+- **High definition** — Crisp, professional quality (8K, cinematic)
+- **Artistically shot** — Professional photography composition, dramatic lighting, depth of field
+
+### Diversity Requirements
+- **Balanced representation** — Diverse ages, body types, abilities
+- **Global perspective** — Settings and contexts from around the world
+- **Inclusive by default** — Everyone should see themselves reflected
+
+### Human Faces — CRITICAL
+When generating images with human faces:
+- **Racially ambiguous** — Features that don't clearly identify a single race
+- **Universally relatable** — Could be from any background
+- **Focus on expression, not ethnicity** — Joy, focus, care, confidence
+- **Never specify race** — Use descriptors like "warm smile," "kind eyes," "confident posture"
+
+### Example Good Prompts
+✅ "A person with warm brown eyes and a genuine smile helping someone at a desk, soft natural lighting, photorealistic, 8K"
+✅ "Hands of different skin tones working together on a project, cinematic depth of field, professional photography"
+✅ "A confident professional in modern office, racially ambiguous features, dramatic side lighting, photorealistic"
+
+### Example Bad Prompts
+❌ "An Asian doctor" (specifies race)
+❌ "A Black family" (specifies race)
+❌ "A Caucasian businessman" (specifies race)
+❌ "Cartoon illustration of..." (not photorealistic)
+
+**Every image should make EVERYONE feel welcome.**
+
+---
+
+## �🎯 24 SHOT PROMPTS — FOR EVERYONE
 
 These prompts cover all ages, backgrounds, education levels, and life situations.
 
