@@ -25,6 +25,7 @@ interface GridSection {
 
 interface GridProps {
     sections?: GridSection[];
+    items?: GridCard[];  // Direct items for simpler AI payloads
     ctaLabel?: string;
     ctaActionPhrase?: string;
 }
@@ -37,17 +38,21 @@ const getIcon = (iconName?: string): LucideIcon => {
 
 export const Grid: React.FC<GridProps> = ({
     sections,
+    items,
     ctaLabel,
     ctaActionPhrase,
 }) => {
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
+    // Normalize: convert 'items' to 'sections' if provided
+    const normalizedSections: GridSection[] = sections || (items ? [{ cards: items }] : []);
+
     return (
         <div className="glass-template-container h-full flex flex-col">
-            {sections && sections.length > 0 && (
+            {normalizedSections && normalizedSections.length > 0 && (
                 <div className="space-y-10 flex-grow">
-                    {sections.map((section, sIdx) => {
+                    {normalizedSections.map((section, sIdx) => {
                         const isAccent = section.variant === 'accent';
                         const iconBg = isAccent ? 'bg-flamingo/15 border-flamingo/25' : 'bg-sapphire/10 border-sapphire/20';
                         const iconColor = isAccent ? 'text-flamingo' : 'text-sapphire';

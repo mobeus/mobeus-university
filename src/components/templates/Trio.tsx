@@ -19,6 +19,7 @@ interface Card {
 
 interface TrioProps {
     cards?: Card[];
+    items?: Card[];  // Alias for cards (simpler AI payloads)
     numbered?: boolean;
     ctaLabel?: string;
     ctaActionPhrase?: string;
@@ -32,6 +33,7 @@ const getIcon = (iconName?: string): LucideIcon => {
 
 export const Trio: React.FC<TrioProps> = ({
     cards,
+    items,
     numbered = true,
     ctaLabel,
     ctaActionPhrase,
@@ -39,7 +41,7 @@ export const Trio: React.FC<TrioProps> = ({
     const { playClick } = useSound();
     const handleAction = (actionPhrase: string) => { playClick(); notifyTele(actionPhrase); };
 
-    const displayCards = cards?.slice(0, 3) || [];
+    const displayCards = (cards || items)?.slice(0, 3) || [];
 
     return (
         <div className="glass-template-container h-full flex flex-col">

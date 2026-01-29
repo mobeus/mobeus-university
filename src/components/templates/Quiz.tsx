@@ -29,11 +29,14 @@ interface QuizQuestion {
 }
 
 interface QuizProps {
-    title: string;
+    title?: string;
     subtitle?: string;
     imageUrl?: string;
     imagePrompt?: string;
     questions?: QuizQuestion[];
+    // Simple single-question format for AI:
+    question?: string;
+    options?: string[];
     passingScore?: number;
     passMessage?: string;
     failMessage?: string;
@@ -56,6 +59,8 @@ export const Quiz: React.FC<QuizProps> = ({
     imageUrl,
     imagePrompt,
     questions,
+    question,  // Simple single question text
+    options,   // Simple string array of options
     passingScore = 70,
     passMessage,
     failMessage,
@@ -73,9 +78,16 @@ export const Quiz: React.FC<QuizProps> = ({
     const [isComplete, setIsComplete] = useState(false);
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
-    const totalQuestions = questions?.length || 0;
-    const question = questions?.[currentQuestion];
-    const isCorrect = selectedId === question?.correctId;
+    // Normalize: convert simple question/options to questions array
+    const normalizedQuestions: QuizQuestion[] = questions || (question && options ? [{
+        question,
+        options: options.map((opt, i) => ({ id: `opt-${i}`, text: opt })),
+        correctId: 'opt-0'  // First option is default correct for simple mode
+    }] : []);
+
+    const totalQuestions = normalizedQuestions.length;
+    const currentQ = normalizedQuestions[currentQuestion];
+    const isCorrect = selectedId === currentQ?.correctId;
     const scorePercent = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
     const passed = scorePercent >= passingScore;
 
@@ -89,7 +101,7 @@ export const Quiz: React.FC<QuizProps> = ({
         playClick();
         if (!selectedId) return;
 
-        if (selectedId === question?.correctId) {
+        if (selectedId === currentQ?.correctId) {
             setScore(s => s + 1);
         }
         setShowFeedback(true);
@@ -155,7 +167,7 @@ export const Quiz: React.FC<QuizProps> = ({
 
             {/* Content */}
             <div className="flex-grow py-8">
-                {!isComplete && question ? (
+                {!isComplete && currentQ ? (
                     <div>
                         {/* Question */}
                         <div className="mb-8">
@@ -168,12 +180,12 @@ export const Quiz: React.FC<QuizProps> = ({
                                     />
                                 </div>
                             )}
-                            <h2 className="text-xl font-bold text-white">{question.question}</h2>
+                            <h2 className="text-xl font-bold text-white">{currentQ.question}</h2>
                         </div>
 
                         {/* Options */}
                         <div className="grid gap-3">
-                            {question.options.map((option) => {
+                            {currentQ.options.map((option) => {
                                 const isSelected = selectedId === option.id;
                                 const isCorrectOption = option.id === question.correctId;
 
@@ -218,10 +230,10 @@ export const Quiz: React.FC<QuizProps> = ({
                         </div>
 
                         {/* Feedback */}
-                        {showFeedback && question.explanation && (
+                        {showFeedback && currentQ?.explanation && (
                             <div className={`mt-6 p-4 rounded-xl ${isCorrect ? 'bg-jade/10 border border-jade/30' : 'bg-flamingo/10 border border-flamingo/30'}`}>
                                 <p className={`text-sm ${isCorrect ? 'text-jade/80' : 'text-flamingo/80'}`}>
-                                    {question.explanation}
+                                    {currentQ?.explanation}
                                 </p>
                             </div>
                         )}
