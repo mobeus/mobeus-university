@@ -36,29 +36,7 @@ const WELCOME_VARIANTS = [
     title: "A New Kind of Interface",
     subtitle: "Simple. Intuitive. Responsive. The screen finally cares about your experience.",
     generativeSubsections: [
-      // 1. Hero - The Core Promise
-      {
-        id: "welcome-hero",
-        templateId: "Hero",
-        props: {
-          stat: "14.6T",
-          statLabel: "micro-frustrations we're eliminating",
-          headline: "The Screen Finally Cares",
-          description: "For decades, you've adapted to software. Clicked through menus. Read manuals. Learned interfaces. Now the interface adapts to you.",
-          features: [
-            { icon: "Sparkles", label: "Simple — say what you need" },
-            { icon: "Brain", label: "Intuitive — no learning curve" },
-            { icon: "Zap", label: "Responsive — instant action" },
-            { icon: "Heart", label: "Caring — built for you" }
-          ],
-          insight: { icon: "Lightbulb", title: "The shift", description: "From 'figure it out' to 'help is here'" },
-          quote: "The interface revolution starts now.",
-          ctaLabel: "Experience It",
-          ctaActionPhrase: "show me what a tele can do",
-          variant: "default"
-        }
-      },
-      // 2. Trio - The Three Powers
+      // 1. Trio - The Three Powers
       {
         id: "three-powers",
         templateId: "Trio",
@@ -88,7 +66,7 @@ const WELCOME_VARIANTS = [
           ctaActionPhrase: "show me how this is different"
         }
       },
-      // 3. Compare - Old vs New
+      // 2. Compare - Old vs New
       {
         id: "interface-comparison",
         templateId: "Compare",
@@ -863,32 +841,77 @@ const Index = () => {
     };
 
     const buildLegacyPayload = (args: any[]): Record<string, any> => {
-      const [badge, title, subtitle, arg4] = args;
       const legacyPayload: Record<string, any> = {};
-      if (typeof badge === "string") legacyPayload.badge = badge;
-      if (typeof title === "string") legacyPayload.title = title;
-      if (typeof subtitle === "string") legacyPayload.subtitle = subtitle;
 
-      if (Array.isArray(arg4)) {
-        // Intelligent detection: If the array items have 'templateId', it's generative content
-        const isGenerative = arg4.length > 0 && arg4.some(item => item && typeof item === 'object' && 'templateId' in item);
+      // Check each argument and assign appropriately
+      for (let i = 0; i < args.length; i++) {
+        const arg = args[i];
 
-        if (isGenerative) {
-          legacyPayload.generativeSubsections = arg4;
-        } else {
-          legacyPayload.subsections = arg4;
+        // If it's an array, check if it contains generative content (has templateId)
+        if (Array.isArray(arg)) {
+          const isGenerative = arg.length > 0 && arg.some(item => item && typeof item === 'object' && 'templateId' in item);
+
+          if (isGenerative) {
+            legacyPayload.generativeSubsections = arg;
+            console.log('[buildLegacyPayload] Found generativeSubsections at position', i, 'with', arg.length, 'templates');
+          } else if (arg.length > 0) {
+            // Non-generative array (legacy subsections)
+            legacyPayload.subsections = arg;
+          }
+          // Skip empty arrays
+        } else if (typeof arg === 'string' && arg.trim()) {
+          // String arguments go to badge, title, subtitle in order
+          if (!legacyPayload.badge) {
+            legacyPayload.badge = arg;
+          } else if (!legacyPayload.title) {
+            legacyPayload.title = arg;
+          } else if (!legacyPayload.subtitle) {
+            legacyPayload.subtitle = arg;
+          }
+        } else if (typeof arg === 'object' && arg !== null && !Array.isArray(arg)) {
+          // If it's an object, it might be the full payload - merge it
+          if ('generativeSubsections' in arg) {
+            legacyPayload.generativeSubsections = arg.generativeSubsections;
+            console.log('[buildLegacyPayload] Found generativeSubsections in object arg at position', i);
+          }
+          if ('badge' in arg && typeof arg.badge === 'string') legacyPayload.badge = arg.badge;
+          if ('title' in arg && typeof arg.title === 'string') legacyPayload.title = arg.title;
+          if ('subtitle' in arg && typeof arg.subtitle === 'string') legacyPayload.subtitle = arg.subtitle;
+          if ('subsections' in arg) legacyPayload.subsections = arg.subsections;
         }
       }
+
+      console.log('[buildLegacyPayload] Final payload:', {
+        badge: legacyPayload.badge,
+        title: legacyPayload.title,
+        hasGenerative: !!legacyPayload.generativeSubsections,
+        generativeCount: legacyPayload.generativeSubsections?.length || 0
+      });
+
       return legacyPayload;
     };
 
     // Telelabor Navigation System - simplified interface
     const teleNavigation = {
       navigateToSection: (...navigationData: any[]) => {
+        // DEBUG: Log raw input from runtime agent
+        console.log('[Navigation] RAW INPUT:', JSON.stringify(navigationData, null, 2));
+
         const payload =
           navigationData.length > 1 ? buildLegacyPayload(navigationData) : navigationData[0];
+
+        // DEBUG: Log payload after buildLegacyPayload
+        console.log('[Navigation] PAYLOAD:', JSON.stringify(payload, null, 2));
+
         const parsed = parseNavigationPayload(payload);
+
+        // DEBUG: Log parsed result
+        console.log('[Navigation] PARSED:', JSON.stringify(parsed, null, 2));
+        console.log('[Navigation] Has generativeSubsections?', !!(parsed as any)?.generativeSubsections);
+        console.log('[Navigation] generativeSubsections count:', (parsed as any)?.generativeSubsections?.length || 0);
+
         if (!parsed) {
+          console.error('[Navigation] FAILED TO PARSE - returning false');
           return false;
         }
 
@@ -1527,7 +1550,7 @@ const Index = () => {
 
     return (
       <DynamicSectionLoader
-        key={`${activeSection}-${JSON.stringify(activeSubSection)}-${sectionMetadata.subsectionIds?.length || 0}`}
+        key={`${activeSection}-${JSON.stringify(activeSubSection)}-${sectionMetadata.subsectionIds?.length || 0}-${generativeContent?.length || 0}`}
         isWelcome={isWelcomeSection}
         badge={sectionMetadata.badge}
         title={sectionMetadata.title}

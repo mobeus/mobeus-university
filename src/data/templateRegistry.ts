@@ -132,6 +132,13 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Assessment: lazy(() => import("@/components/templates/Assessment").then(m => ({ default: m.Assessment }))),
     Survey: lazy(() => import("@/components/templates/Survey").then(m => ({ default: m.Survey }))),
     Scorecard: lazy(() => import("@/components/templates/Scorecard").then(m => ({ default: m.Scorecard }))),
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEXT-HEAVY TEMPLATES (3) — Long-form content layouts
+    // ═══════════════════════════════════════════════════════════════════════
+    TextImageLeft: lazy(() => import("@/components/templates/TextImageLeft").then(m => ({ default: m.TextImageLeft }))),
+    TextImageRight: lazy(() => import("@/components/templates/TextImageRight").then(m => ({ default: m.TextImageRight }))),
+    TwoColumns: lazy(() => import("@/components/templates/TwoColumns").then(m => ({ default: m.TwoColumns }))),
 };
 
 export const TEMPLATE_NAMES = Object.keys(TEMPLATE_REGISTRY);

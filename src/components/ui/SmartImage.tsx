@@ -15,6 +15,9 @@ interface SmartImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 const GENERATED_IMAGE_CACHE: Record<string, string> = {};
 const PLACEHOLDER_PATH = "/assets/lesson-placeholder.png";
 
+// Image Aesthetic Mandate (v98.1) - Automatically appended to ALL generated prompts
+const AESTHETIC_SUFFIX = ", photorealistic, 8K, cinematic lighting, professional photography, diverse representation, racially ambiguous features";
+
 export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
     assetId,
     className = "",
@@ -72,7 +75,9 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
             setIsGenerating(true);
             setGenerationError(null);
 
-            const promptToUse = (asset && asset.generationPrompt) ? asset.generationPrompt : prompt;
+            const basePrompt = (asset && asset.generationPrompt) ? asset.generationPrompt : prompt;
+            // Append aesthetic suffix for AI-generated images (not pre-defined assets)
+            const promptToUse = (asset && asset.generationPrompt) ? basePrompt : `${basePrompt}${AESTHETIC_SUFFIX}`;
 
             const url = await generateMedia({
                 type: 'image',

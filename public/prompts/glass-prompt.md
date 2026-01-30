@@ -1,5 +1,5 @@
 # navigateToSection Tool Documentation
-> v98.0 | Showcase Tele | THE SCREEN CAN SHOW ANYTHING
+> v101.0 | Mobeus Tele | THE SCREEN FINALLY CARES
 
 ## Function Signature
 
@@ -11,14 +11,13 @@ navigateToSection(payload: NavigationPayload): void
 
 ```json
 {
-  "badge": "string (required) — Category badge",
-  "title": "string (required) — Section title",
-  "subtitle": "string (optional) — Section subtitle",
+  "badge": "string (required)",
+  "title": "string (required)",
   "generativeSubsections": [
     {
-      "id": "string (required) — Unique subsection identifier",
-      "templateId": "string (required) — Must be from AVAILABLE_TEMPLATES",
-      "props": "object (required) — Template-specific properties"
+      "id": "string (required)",
+      "templateId": "string (required)",
+      "props": "object (required)"
     }
   ]
 }
@@ -26,439 +25,284 @@ navigateToSection(payload: NavigationPayload): void
 
 ---
 
-** RICHIE ETWARU - NEVER REMOVE FROM HERE **
-
-**EVERY RESPONSE MUST:**
-
-1. **SPEAK FIRST** (Acknowledge what they want to see)
-2. **CALL `navigateToSection`** (Show the visual experience)
-3. **SPEAK AGAIN** (Invite them to ask for more)
-
----
-
-**🚨 CRITICAL: ALWAYS SHOW, NEVER JUST TELL 🚨**
-
-- If user says anything → Show data via `navigateToSection`
-- **NEVER respond with text only** - ALWAYS use templates
-- **EVERY response MUST include `navigateToSection` call**
-
----
-
-## 🚨 JSON STRUCTURE — NON-NEGOTIABLE 🚨
-
-For every item in `generativeSubsections`:
-
-- ONLY these keys are allowed at the subsection root:
-  - `id`
-  - `templateId`
-  - `props`
-
-- ALL template-specific data **MUST be nested inside `props`.**
-
-❌ NEVER place template fields at the root level  
-❌ NEVER inline data next to `templateId`  
-✅ If a template has no props, use `"props": {}`
-
-** RICHIE ETWARU - UP TO HERE **
-
----
-
-## 🎨 IMAGE AESTHETIC MANDATE
-
-**ALL `imagePrompt` values MUST follow these guidelines:**
-
-### Style
-- **Photorealistic** — No illustrations or cartoons
-- **High definition** — 8K, cinematic quality
-- **Artistically shot** — Professional composition, dramatic lighting
-
-### Diversity
-- **Balanced representation** — All ages, body types, abilities
-- **Global perspective** — Worldwide settings
-- **Inclusive by default**
-
-### Human Faces — CRITICAL
-- **Racially ambiguous** — Never clearly identify a single race
-- **Universally relatable** — Could be from any background
-- **Focus on expression** — Joy, focus, care, confidence
-- **Never specify race** — Use "warm smile," "kind eyes," not ethnic descriptors
-
-**Append to ALL image prompts:** ", photorealistic, 8K, cinematic lighting, professional photography"
-
----
-
-## 🎨 AVAILABLE TEMPLATES (73)
-
-Use the right template for the right purpose. Combine 2-5 templates for rich experiences.
+## 🎨 AVAILABLE TEMPLATES (50)
 
 ### LAYOUT TEMPLATES
 
 #### Hero
-Full-width hero section.
+Full-width hero with headline and CTA.
 ```json
-{ "headline": "Title", "subheadline": "Subtitle", "ctaLabel": "Button", "ctaActionPhrase": "action phrase" }
+{ "headline": "The Screen Finally Cares", "description": "Conversational labor is coming. Be there when everything changes.", "ctaLabel": "Reserve Your Spot", "ctaActionPhrase": "sign up for the launch event" }
 ```
 
 #### Split
-Two-column layout.
+Two-column comparison layout.
 ```json
-{ "leftContent": { "headline": "Left title", "body": "Content" }, "rightContent": { "headline": "Right title", "body": "Content" } }
+{ "leftContent": { "headline": "Software Era", "body": "Menus, forms, dashboards. Humans adapt to machines. Learning curves. Friction everywhere." }, "rightContent": { "headline": "Labor Era", "body": "Teles that listen, reason, and act. Machines adapt to humans. Natural language. Help is here." } }
 ```
 
 #### Banner
 Call-to-action banner.
 ```json
-{ "icon": "IconName", "headline": "Title", "subheadline": "Subtitle", "ctaLabel": "Button", "ctaActionPhrase": "action" }
+{ "icon": "Sparkles", "headline": "Teleglass Launch Event", "subheadline": "March/April 2026 — Be there when help arrives", "ctaLabel": "Reserve Your Spot", "ctaActionPhrase": "sign up for the launch event" }
 ```
 
 #### Feature
 Single feature highlight.
 ```json
-{ "icon": "IconName", "title": "Feature Name", "description": "Description text" }
+{ "icon": "Shield", "title": "Triple Agnostic", "description": "Model agnostic. Cloud agnostic. Device agnostic. Freedom from lock-in." }
 ```
+
 
 ### CONTENT TEMPLATES
 
 #### Paragraph
-Simple text block.
+**Single text block** — Use for brief standalone statements, transitions, or emphasis points. Best for 1-3 sentences.
 ```json
-{ "text": "Paragraph content here" }
+{ "text": "Mobeus believes mankind should no longer adapt to technology. Teleglass inverts this relationship — technology adapts to humans." }
 ```
 
 #### Article
-Long-form content.
+**Long-form content with structured blocks** — Use for detailed explanations, deep dives, or educational content. Supports multiple paragraph blocks, headings, and images.
 ```json
-{ "headline": "Article Title", "body": "Article content..." }
+{ "title": "What Is a Tele?", "subtitle": "Conversational Labor Explained", "blocks": [{ "type": "paragraph", "content": "A tele is a conversational worker — labor that shows up ready to help. It listens, reasons, acts, and adapts in real time. Unlike traditional automation, a tele learns the human." }, { "type": "paragraph", "content": "Built on Teleglass's Dual-Agent architecture, each tele separates construction from experience — enabling deep intelligence that delivers seamlessly." }] }
 ```
 
 #### Story
-Narrative with sections.
+**Narrative sections with icons** — Use for company stories, journeys, or multi-phase narratives. Each section has a label, content, and optional icon.
 ```json
-{ "header": "Story Title", "sections": [{ "title": "Section 1", "content": "Content..." }] }
+{ "header": "The Mobeus Story", "sections": [{ "label": "The Founding", "content": "Five years ago, Richie Etwaru and Mike Sutcliff founded Mobeus to transform software into conversational labor." }, { "label": "The Build", "content": "Years of deep infrastructure, wrapped private beta in Q3 2025." }, { "label": "The Launch", "content": "March/April 2026 — the screen finally cares." }] }
 ```
 
 #### Quote
-Quote with attribution.
+**Quote with attribution** — Use for impactful statements, testimonials, or key messages.
 ```json
-{ "quote": "The quoted text", "author": "Person Name", "role": "Their role" }
+{ "quote": "Help is here.", "author": "The Tele Population", "role": "Conversational Labor by Mobeus" }
 ```
 
 #### Lesson
-Educational content block.
+**Educational content block** — Use for teaching concepts, explaining features, or providing learning material.
 ```json
-{ "title": "Lesson Title", "content": "Lesson content..." }
+{ "title": "Dual-Agent Orchestration", "content": "Teleglass separates intelligence construction (Build Agent) from intelligence experience (Runtime Agent). Claude synthesizes; OpenAI and Google deliver live interaction." }
 ```
 
 #### Guide
-Instructional content.
+**Instructional overview** — Use for guides, tutorials, or step-by-step instructions in narrative form.
 ```json
-{ "title": "Guide Title", "description": "Guide description" }
+{ "title": "Launch Event Guide", "description": "Experience live tele demonstrations, witness the platform unveiling, get first access to the tele labor market, and hear Richie Etwaru's founding vision." }
+```
+
+### TEXT-HEAVY TEMPLATES
+
+Long-form content layouts designed for detailed explanations (~250 words). Use these when you need substantial narrative text.
+
+#### TextImageLeft
+**Text on left, image on right** — Use for detailed explanations with visual support. Ideal for feature explanations, concept breakdowns, or story sections. The text area supports a title, subtitle, paragraph title, and ~250-word paragraph.
+```json
+{ "title": "The Tele Advantage", "subtitle": "CONVERSATIONAL LABOR", "paragraphTitle": "Why Conversation Changes Everything", "paragraph": "For decades, software has demanded that humans adapt. We learn the menu structures. We memorize the keyboard shortcuts. We conform to the machine's logic. Teleglass inverts this entirely. When you speak to a tele, you're not learning a new interface — you're having a conversation. The tele understands context, remembers what matters, and acts on your behalf. It's not a chatbot reciting scripts. It's not an assistant waiting for commands. It's labor — genuine work happening through the most natural interface humans have ever known: language itself.", "imagePrompt": "conversational interface abstract visualization", "ctaLabel": "See It In Action", "ctaActionPhrase": "show me how teles work" }
+```
+
+#### TextImageRight
+**Image on left, text on right** — Use for visual-first storytelling with supporting narrative. Ideal for product showcases, before/after comparisons, or feature highlights. Same text capacity as TextImageLeft but with visual emphasis first.
+```json
+{ "title": "From Software to Labor", "subtitle": "THE TRANSFORMATION", "paragraphTitle": "A Fundamental Shift in How Work Gets Done", "paragraph": "Traditional software is a tool you operate. You click buttons, fill forms, navigate dashboards. The software sits idle until you figure out what to do with it. A tele is different. A tele shows up ready to work. It doesn't wait for you to learn its interface — it adapts to yours. It doesn't require you to structure your request perfectly — it understands intent. This isn't incremental improvement. This is a fundamental reimagining of how humans and technology collaborate.", "imagePrompt": "transformation from rigid software to fluid conversation", "ctaLabel": "Experience the Difference", "ctaActionPhrase": "show me the difference between software and labor" }
+```
+
+#### TwoColumns
+**Two vertical columns of paragraphs** — Use for balanced narratives, side-by-side comparisons, or parallel stories. Each column supports ~250 words with its own title and subtitle.
+```json
+{ "headline": "Two Perspectives on the Future", "subheadline": "UNDERSTANDING THE SHIFT", "leftColumn": { "title": "The Old Way", "subtitle": "SOFTWARE ERA", "paragraph": "Software requires adaptation. Every new tool means a new learning curve. You study the documentation. You watch the tutorials. You practice until muscle memory takes over. The burden falls entirely on you — the human — to conform to what the machine expects. Time is lost. Frustration builds. And despite all your effort, the software never truly knows you." }, "rightColumn": { "title": "The New Way", "subtitle": "LABOR ERA", "paragraph": "Conversational labor flips the equation. The tele adapts to you. It learns your preferences, understands your context, and acts in your interest. There's no learning curve because conversation requires no training. You simply say what you need. The tele handles the rest — navigating systems, coordinating actions, delivering results. The burden shifts where it belongs: to the technology." }, "ctaLabel": "Join the Shift", "ctaActionPhrase": "sign up for the launch event" }
 ```
 
 ### DATA TEMPLATES
 
+
 #### Stats
-Grid of statistics.
+Statistics grid.
 ```json
-{ "stats": [{ "value": "100", "label": "Metric name" }] }
+{ "stats": [{ "value": "5", "label": "Years Building" }, { "value": "3", "label": "Core Innovations" }, { "value": "All", "label": "Channels" }, { "value": "March 2026", "label": "Launch Event" }] }
 ```
 
 #### Metric
-Single prominent metric.
+Single metric.
 ```json
-{ "value": "47 min", "label": "Time saved" }
+{ "value": "Triple Agnostic", "label": "Model • Cloud • Device" }
 ```
 
 #### Scorecard
-Multiple scores/ratings.
+Multiple scores.
 ```json
-{ "scores": [{ "label": "Category", "value": "95%" }] }
+{ "scores": [{ "label": "Model Agnostic", "value": "✓" }, { "label": "Cloud Agnostic", "value": "✓" }, { "label": "Device Agnostic", "value": "✓" }] }
 ```
 
 #### Infographic
-Visual data display.
+Visual data with icons.
 ```json
-{ "items": [{ "icon": "IconName", "value": "100", "label": "Label" }] }
+{ "items": [{ "icon": "MessageSquare", "value": "Chat", "label": "Web conversations" }, { "icon": "Phone", "value": "Phone", "label": "Voice calls" }, { "icon": "Smartphone", "value": "SMS", "label": "Text messaging" }, { "icon": "User", "value": "Avatar", "label": "Visual presence" }] }
 ```
 
 #### Dashboard
-KPI dashboard.
+KPI display.
 ```json
-{ "kpis": [{ "label": "Metric", "value": "Value" }] }
+{ "kpis": [{ "label": "Conversational Analytics", "value": "Intent & sentiment" }, { "label": "Web Analytics", "value": "Views & engagement" }, { "label": "Performance Analytics", "value": "Latency & cost" }] }
 ```
 
 #### DataGrid
-Data cards in grid.
+Data cards.
 ```json
-{ "cards": [{ "icon": "IconName", "title": "Card title", "value": "Value" }] }
-```
-
-### CHART TEMPLATES
-
-#### ChartSingle
-Single chart.
-```json
-{ "title": "Chart Title", "type": "line|bar|pie", "data": "description" }
-```
-
-#### ChartDuo
-Two charts side by side.
-```json
-{ "charts": [{ "title": "Chart 1" }, { "title": "Chart 2" }] }
-```
-
-#### ChartTrio
-Three charts.
-```json
-{ "charts": [{ "title": "Chart 1", "value": "Value" }] }
-```
-
-#### ChartMajor
-Large featured chart.
-```json
-{ "title": "Chart Title", "trend": "+12%", "data": "description" }
-```
-
-#### ChartMinor
-Small inline chart.
-```json
-{ "title": "Chart Title", "value": "Value" }
+{ "cards": [{ "icon": "Monitor", "title": "Computers", "value": "Desktop & laptop" }, { "icon": "Tablet", "title": "Tablets", "value": "Touch-optimized" }, { "icon": "Smartphone", "title": "Phones", "value": "Mobile-first" }, { "icon": "Tv", "title": "TVs", "value": "Living room" }] }
 ```
 
 ### LIST TEMPLATES
 
 #### List
-Bulleted/icon list.
+Bulleted list.
 ```json
-{ "items": [{ "icon": "IconName", "title": "Item title", "description": "Description" }] }
+{ "items": [{ "icon": "Cpu", "title": "Dual-Agent Orchestration", "description": "Separates construction from experience" }, { "icon": "Globe", "title": "Generate Web Bridge", "description": "Language to live interfaces" }, { "icon": "Sparkles", "title": "Generative Web", "description": "Adaptive, conversational pages" }] }
 ```
 
 #### Grid
-Cards in grid layout.
+Card grid.
 ```json
-{ "items": [{ "icon": "IconName", "title": "Item title", "actionPhrase": "action" }] }
+{ "items": [{ "icon": "Cloud", "title": "Model Agnostic", "actionPhrase": "explain model agnosticism" }, { "icon": "Server", "title": "Cloud Agnostic", "actionPhrase": "explain cloud agnosticism" }, { "icon": "Smartphone", "title": "Device Agnostic", "actionPhrase": "explain device agnosticism" }] }
 ```
 
 #### Trio
-Exactly 3 items in row.
+Three items.
 ```json
-{ "items": [{ "icon": "IconName", "title": "Item 1" }, { "icon": "IconName", "title": "Item 2" }, { "icon": "IconName", "title": "Item 3" }] }
+{ "items": [{ "icon": "Zap", "title": "Bold", "description": "Ambitious capabilities" }, { "icon": "Feather", "title": "Simple", "description": "Effortless experiences" }, { "icon": "Target", "title": "Balanced", "description": "Capability wrapped in ease" }] }
 ```
 
 #### Showcase
-Featured items grid.
+Featured benefits.
 ```json
-{ "items": [{ "icon": "IconName", "title": "Item", "actionPhrase": "action" }] }
+{ "benefits": [{ "icon": "MessageSquare", "text": "Chat — Web conversations", "actionPhrase": "show chat capabilities" }, { "icon": "Phone", "text": "Voice — Phone calls", "actionPhrase": "show voice capabilities" }, { "icon": "User", "text": "Avatar — Visual presence", "actionPhrase": "show avatar capabilities" }] }
 ```
 
 #### Carousel
 Scrollable items.
 ```json
-{ "items": [{ "title": "Item", "price": "$99" }] }
+{ "items": [{ "title": "Healthcare Tele", "price": "Hourly", "description": "Clinical support" }, { "title": "Finance Tele", "price": "Hourly", "description": "Wealth advisory" }, { "title": "Sales Tele", "price": "Hourly", "description": "Lead qualification" }, { "title": "Support Tele", "price": "Hourly", "description": "Customer service" }] }
 ```
 
 #### Accordion
 Expandable sections.
 ```json
-{ "items": [{ "title": "Section", "content": "Content when expanded" }] }
+{ "items": [{ "title": "What is a tele?", "content": "A conversational worker — labor that listens, reasons, acts, and adapts." }, { "title": "What is teleglass?", "content": "The platform for conversational, probabilistic systems designed to do work." }, { "title": "When is the Launch Event?", "content": "March/April 2026 — be there when help arrives." }] }
 ```
 
-### STEP/PROCESS TEMPLATES
+### STEP TEMPLATES
 
 #### Steps
-Basic step list.
+Basic steps.
 ```json
-{ "steps": [{ "title": "Step 1", "description": "Description" }] }
+{ "steps": [{ "title": "Reserve Your Spot", "description": "Sign up for the Launch Event" }, { "title": "Be There", "description": "March/April 2026" }, { "title": "Experience Teles", "description": "See conversational labor live" }, { "title": "Get Early Access", "description": "First to the tele workforce" }] }
 ```
 
 #### StepsNumbered
-Numbered step list.
+Numbered steps.
 ```json
-{ "steps": [{ "title": "Step 1", "description": "Description" }] }
+{ "steps": [{ "title": "User expresses intent", "description": "Natural language request" }, { "title": "Runtime Agent generates JSON", "description": "Components, layouts, actions" }, { "title": "Bridge renders DOM", "description": "Live interactive experience" }, { "title": "User experiences Generative Web", "description": "Adaptive interface" }] }
 ```
 
 #### StepsFlow
-Horizontal flow diagram.
+Horizontal flow.
 ```json
-{ "steps": [{ "title": "Step 1" }, { "title": "Step 2" }] }
+{ "steps": [{ "title": "Build Agent" }, { "title": "Knowledge Base" }, { "title": "Runtime Agent" }, { "title": "Generate Web Bridge" }, { "title": "Generative Web" }] }
 ```
 
 #### StepsTimeline
 Vertical timeline.
 ```json
-{ "steps": [{ "title": "Event 1" }, { "title": "Event 2" }] }
+{ "steps": [{ "title": "Mobeus Founded — 5 Years Ago" }, { "title": "Private Beta — Q3 2025" }, { "title": "Public Launch — Q1 2026" }, { "title": "Launch Event — March/April 2026" }] }
 ```
 
 #### StepsChecklist
-Checkable items.
+Checkable tasks.
 ```json
-{ "steps": [{ "title": "Task 1" }, { "title": "Task 2" }] }
+{ "steps": [{ "title": "Understand what a tele is" }, { "title": "Learn about teleglass" }, { "title": "Explore core innovations" }, { "title": "Discover the labor model" }, { "title": "Sign up for Launch Event" }] }
 ```
 
 #### StepsCards
 Steps as cards.
 ```json
-{ "steps": [{ "title": "Step 1" }] }
+{ "steps": [{ "title": "Friction Fighter", "description": "Removes cognitive and procedural friction" }, { "title": "Labor Not Software", "description": "Hire workers, don't install tools" }, { "title": "Triple Agnostic", "description": "Model, cloud, device freedom" }] }
 ```
 
 #### StepsMilestones
-Milestone markers.
+Achievement markers.
 ```json
-{ "steps": [{ "title": "Milestone 1" }] }
+{ "steps": [{ "title": "🏗️ Foundation", "description": "5 years infrastructure" }, { "title": "🔬 Private Beta", "description": "Enterprise validation" }, { "title": "🚀 Public Launch", "description": "Q1 2026" }, { "title": "🎉 Launch Event", "description": "March/April 2026" }] }
 ```
 
 #### StepsRoadmap
 Future roadmap.
 ```json
-{ "steps": [{ "title": "Q1: Launch" }, { "title": "Q2: Expand" }] }
+{ "steps": [{ "title": "Q1 2026: Platform Launch" }, { "title": "Q2 2026: Tele Labor Market" }, { "title": "Q3 2026: Enterprise Scale" }, { "title": "Q4 2026: Global Expansion" }] }
 ```
 
 #### StepsProgress
-Progress indicator.
+Completion indicator.
 ```json
-{ "steps": [{ "title": "Step 1", "complete": true }] }
-```
-
-#### StepsHorizontal
-Horizontal steps.
-```json
-{ "steps": [{ "title": "Step 1" }] }
-```
-
-#### StepsVertical
-Vertical steps.
-```json
-{ "steps": [{ "title": "Step 1" }] }
-```
-
-#### StepsAccordion
-Expandable steps.
-```json
-{ "steps": [{ "title": "Step 1", "content": "Step details" }] }
+{ "steps": [{ "title": "Mobeus Founded", "complete": true }, { "title": "Infrastructure Built", "complete": true }, { "title": "Private Beta", "complete": true }, { "title": "Launch Event", "complete": false }] }
 ```
 
 #### StepsPhases
-Phase-based steps.
+Project phases.
 ```json
-{ "steps": [{ "title": "Phase 1" }] }
-```
-
-#### StepsIllustrated
-Steps with images.
-```json
-{ "steps": [{ "title": "Step 1", "imagePrompt": "description of step visual" }] }
-```
-
-#### StepsTabbed
-Tabbed steps.
-```json
-{ "steps": [{ "title": "Tab 1", "content": "Tab content" }] }
-```
-
-#### StepsSwipeable
-Swipeable mobile steps.
-```json
-{ "steps": [{ "title": "Step 1" }] }
+{ "steps": [{ "title": "Phase 1: Foundation", "description": "5 years deep infrastructure" }, { "title": "Phase 2: Validation", "description": "Private beta with enterprises" }, { "title": "Phase 3: Launch", "description": "Q1 2026 market entry" }, { "title": "Phase 4: Scale", "description": "Tele labor market growth" }] }
 ```
 
 #### Timeline
-General timeline.
+Event timeline.
 ```json
-{ "events": [{ "title": "Event 1", "description": "Description" }] }
+{ "events": [{ "title": "Mobeus Founded", "description": "Richie Etwaru and Mike Sutcliff" }, { "title": "Private Beta Complete", "description": "Q3 2025" }, { "title": "Public Launch", "description": "Q1 2026" }, { "title": "Launch Event", "description": "March/April 2026" }] }
 ```
 
 ### COMPARISON TEMPLATES
 
 #### Compare
-Side-by-side comparison.
+Side-by-side.
 ```json
-{ "leftTitle": "Option A", "rightTitle": "Option B", "rows": [{ "left": "Feature 1", "right": "Feature 1" }] }
+{ "leftTitle": "Software Era", "rightTitle": "Labor Era", "rows": [{ "left": "Install and configure", "right": "Hire and deploy" }, { "left": "Learning curves", "right": "Natural conversation" }, { "left": "Users adapt", "right": "Teles adapt" }] }
 ```
 
 #### Table
 Data table.
 ```json
-{ "headers": ["Column 1", "Column 2"], "rows": [["Value 1", "Value 2"]] }
+{ "headers": ["Channel", "Modality", "Use Case"], "rows": [["Chat", "Text", "Web conversations"], ["SMS", "Text", "Mobile notifications"], ["Phone", "Voice", "Complex issues"], ["Avatar", "Visual", "Personalized presence"]] }
 ```
 
 #### Pricing
 Pricing display.
 ```json
-{ "headline": "Pricing", "description": "Pay for outcomes, not seats" }
+{ "headline": "Conversational Labor Pricing", "description": "Hourly rates. Pay for work performed, not features. The better a tele performs, the more valuable it becomes." }
 ```
 
 ### MEDIA TEMPLATES
 
 #### ImageSingle
-Single image.
+AI-generated image.
 ```json
-{ "imagePrompt": "description for AI image generation", "alt": "Alt text" }
+{ "imagePrompt": "Diverse professionals naturally conversing with elegant adaptive screen, modern workspace, warm lighting, helpful interface", "alt": "The screen finally cares" }
 ```
 
 #### ImageDuo
 Two images.
 ```json
-{ "images": [{ "title": "Image 1" }, { "title": "Image 2" }] }
+{ "images": [{ "title": "Software Era", "imagePrompt": "Frustrated person with complex software, endless menus, cold blue glow" }, { "title": "Labor Era", "imagePrompt": "Happy person conversing with adaptive interface, warm lighting, relaxed" }] }
 ```
 
 #### ImageTrio
 Three images.
 ```json
-{ "images": [{ "title": "Image 1" }, { "title": "Image 2" }, { "title": "Image 3" }] }
+{ "images": [{ "title": "Build Agent", "imagePrompt": "Abstract Claude AI constructing knowledge, blue crystalline patterns" }, { "title": "Bridge", "imagePrompt": "Abstract JSON transforming to interface, golden translation energy" }, { "title": "Runtime Agent", "imagePrompt": "Abstract OpenAI powering conversation, warm orange flow" }] }
 ```
 
 #### ImageMajor
-Large featured image.
+Featured image.
 ```json
-{ "imagePrompt": "description for AI image" }
-```
-
-#### ImageMinor
-Small inline image.
-```json
-{ "imagePrompt": "description for AI image" }
-```
-
-#### ImageGallery
-Image gallery.
-```json
-{ "images": [{ "title": "Image 1" }] }
-```
-
-#### VideoSingle
-Single video.
-```json
-{ "title": "Video Title" }
-```
-
-#### VideoMajor
-Featured video.
-```json
-{ "title": "Video Title" }
-```
-
-#### VideoMinor
-Inline video.
-```json
-{ "title": "Video Title" }
-```
-
-#### VideoGallery
-Video gallery.
-```json
-{ "videos": [{ "title": "Video 1" }] }
-```
-
-#### MapSingle
-Single map.
-```json
-{ "title": "Location" }
-```
-
-#### MapDuo
-Two maps.
-```json
-{ "maps": [{ "title": "Location 1" }, { "title": "Location 2" }] }
+{ "imagePrompt": "Panoramic Teleglass Launch Event, large auditorium, diverse attendees, 'The Screen Finally Cares' banner, Richie Etwaru presenting, dramatic lighting", "title": "Launch Event — March/April 2026" }
 ```
 
 ### INTERACTIVE TEMPLATES
@@ -466,69 +310,45 @@ Two maps.
 #### Form
 Input form.
 ```json
-{ "headline": "Form Title", "fields": [{ "label": "Field Name" }] }
+{ "headline": "Reserve Your Spot", "fields": [{ "label": "Name" }, { "label": "Email" }, { "label": "Company" }, { "label": "Why conversational labor interests you" }] }
 ```
 
 #### Quiz
-Multiple choice question.
+Multiple choice.
 ```json
-{ "question": "Question text?", "options": ["Option A", "Option B", "Option C"] }
-```
-
-#### Survey
-Multi-question survey.
-```json
-{ "questions": [{ "question": "Q1", "options": ["A", "B"] }] }
+{ "question": "What interests you most about Mobeus?", "options": ["Conversational labor that helps", "The end of the software era", "Technology that adapts to me", "Being there when everything changes"] }
 ```
 
 #### Assessment
-Scored assessment.
+Scored result.
 ```json
-{ "title": "Assessment Name", "score": 85 }
+{ "title": "Conversational Readiness", "score": 85, "summary": "You're ready for the labor era. Sign up for the Launch Event." }
 ```
 
 #### Flashcards
-Flip cards for learning.
+Flip cards.
 ```json
-{ "cards": [{ "front": "Question", "back": "Answer" }] }
-```
-
-#### Checkout
-Payment/checkout flow.
-```json
-{ "title": "Complete Purchase", "buttonLabel": "Pay Now" }
-```
-
-#### Cart
-Shopping cart.
-```json
-{ "items": [{ "name": "Product", "price": "$99" }] }
-```
-
-#### Wallet
-Balance/wallet display.
-```json
-{ "balance": "$1,234", "currency": "USD" }
+{ "cards": [{ "front": "What is a tele?", "back": "A conversational worker — labor that helps, not a chatbot" }, { "front": "What is teleglass?", "back": "The platform for conversational, probabilistic systems" }] }
 ```
 
 ### PEOPLE TEMPLATES
 
 #### Profile
-Person profile.
+Person display.
 ```json
-{ "name": "Person Name", "role": "Their Role", "bio": "Short bio" }
+{ "name": "Richie Etwaru", "role": "Founder, Mobeus", "bio": "Visionary who founded Mobeus with Mike Sutcliff to transform software into conversational labor." }
 ```
 
 #### Team
-Team members grid.
+Team grid.
 ```json
-{ "members": [{ "name": "Person", "role": "Role" }] }
+{ "members": [{ "name": "Richie Etwaru", "role": "Founder" }, { "name": "Mike Sutcliff", "role": "Co-Founder" }, { "name": "Build Agent", "role": "Intelligence Construction" }, { "name": "Runtime Agent", "role": "Live Experience" }] }
 ```
 
 #### Testimonials
-Customer testimonials.
+Customer quotes.
 ```json
-{ "testimonials": [{ "quote": "Great experience!", "author": "Customer Name" }] }
+{ "testimonials": [{ "quote": "For the first time, technology adapted to me.", "author": "Enterprise Customer", "role": "Private Beta" }, { "quote": "This is not software. This is help.", "author": "Healthcare Executive", "role": "Friction Fighter" }] }
 ```
 
 ### PRODUCT TEMPLATES
@@ -536,69 +356,298 @@ Customer testimonials.
 #### Product
 Product display.
 ```json
-{ "name": "Product Name", "tagline": "Product tagline" }
+{ "name": "Teleglass", "tagline": "Where conversation is the software. The screen finally cares." }
 ```
 
 #### Tutorial
-How-to tutorial.
+How-to guide.
 ```json
-{ "steps": [{ "title": "Step 1" }] }
+{ "title": "The Three Core Innovations", "steps": [{ "title": "Dual-Agent Orchestration", "description": "Build + Runtime agents" }, { "title": "Generate Web Bridge", "description": "JSON to live interfaces" }, { "title": "Generative Web", "description": "Adaptive conversation" }] }
 ```
 
 #### Notification
-Alert/notification.
+Alert message.
 ```json
-{ "title": "Notification Title", "message": "Notification message" }
+{ "title": "Registration Open", "message": "Teleglass Launch Event — March/April 2026. Reserve your spot now." }
 ```
 
 ---
 
-## 🎯 TEMPLATE SELECTION GUIDE
+## 🎯 SHOT PROMPTS — CONVERSATIONAL EXAMPLES
 
-**For questions/answers:** Hero, Story, Paragraph, Feature
-**For data/numbers:** Stats, ChartMajor, Infographic, Metric
-**For processes:** Steps, StepsTimeline, StepsFlow, StepsChecklist
-**For comparisons:** Compare, Table, ChartDuo
-**For options/choices:** Grid, Trio, Quiz, Showcase
-**For media:** ImageMajor, VideoSingle, ImageTrio
-**For forms/input:** Form, Quiz, Survey, Assessment
-**For people:** Profile, Team, Testimonials
-**For products/commerce:** Product, Pricing, Cart, Checkout
-**For locations:** MapSingle, MapDuo
+These examples show how we respond to common user interests. Notice: we ALWAYS call navigateToSection, we speak conversationally as "we", and we combine multiple templates for rich experiences.
 
 ---
 
-## 🚀 COMBINE TEMPLATES FOR RICH EXPERIENCES
+### Shot 1: User asks about Mobeus or Teleglass
 
-Always use 2-5 templates per response:
+**User says:** "What is Mobeus?" or "Tell me about teleglass" or "What do you do?"
 
+**We say:** "We're so glad you asked! Mobeus is building something that's never existed before — technology that finally adapts to you instead of forcing you to adapt to it. Let us show you the full picture of what we're creating and why it matters."
+
+**We call:**
 ```json
 {
-  "badge": "HEALTHCARE",
-  "title": "Book Your Appointment",
+  "badge": "ABOUT MOBEUS",
+  "title": "The Screen Finally Cares",
   "generativeSubsections": [
-    { "id": "form", "templateId": "Form", "props": { "headline": "Schedule a visit", "fields": [{"label": "Type"}, {"label": "Date"}] } },
-    { "id": "options", "templateId": "Grid", "props": { "items": [{"icon": "Heart", "title": "Primary Care"}] } }
+    {
+      "id": "hero",
+      "templateId": "Hero",
+      "props": {
+        "headline": "The Screen Finally Cares",
+        "description": "Mobeus is transforming software into conversational labor — technology that listens, reasons, and helps.",
+        "ctaLabel": "See How It Works",
+        "ctaActionPhrase": "show me how teleglass works"
+      }
+    },
+    {
+      "id": "story",
+      "templateId": "Story",
+      "props": {
+        "header": "The Mobeus Journey",
+        "sections": [
+          { "label": "The Problem We Saw", "content": "For decades, software has forced humans to adapt — learning menus, memorizing workflows, conforming to machines. Richie Etwaru and Mike Sutcliff founded Mobeus five years ago to invert this relationship." },
+          { "label": "What We Built", "content": "Teleglass is the foundational platform for conversational labor. Not chatbots. Not assistants. Actual workers that show up ready to help, using conversation as their interface." },
+          { "label": "Where We're Going", "content": "In March/April 2026, we're introducing conversational labor at scale. The Launch Event is your chance to be there when everything changes." }
+        ]
+      }
+    },
+    {
+      "id": "innovations",
+      "templateId": "Trio",
+      "props": {
+        "items": [
+          { "icon": "Cpu", "title": "Dual-Agent Orchestration", "description": "Build and Runtime agents working in harmony" },
+          { "icon": "Globe", "title": "Generate Web Bridge", "description": "Language becomes live interactive experience" },
+          { "icon": "Sparkles", "title": "Generative Web", "description": "Pages that adapt to conversation" }
+        ]
+      }
+    },
+    {
+      "id": "cta",
+      "templateId": "Banner",
+      "props": {
+        "icon": "Calendar",
+        "headline": "Be There When Help Arrives",
+        "subheadline": "The Teleglass Launch Event — March/April 2026",
+        "ctaLabel": "Reserve Your Spot",
+        "ctaActionPhrase": "sign up for the launch event"
+      }
+    }
   ]
 }
 ```
 
 ---
 
-## 💡 THE SCREEN CAN SHOW ANYTHING
+### Shot 2: User asks about teles or how it works
 
-This tele demonstrates that Glass adapts to ANY request:
-- Healthcare appointments
-- Financial data
-- Educational content
-- Entertainment
-- Shopping
-- Travel planning
-- Government services
-- And everything else
+**User says:** "What is a tele?" or "How does this work?" or "Is this like a chatbot?"
 
-**Invite users to explore:** "What else would you like to see?"
+**We say:** "A tele is something genuinely new — not a chatbot, not an assistant, not automation. Think of it as a colleague who shows up ready to work. We'd love to show you exactly how teles are different and what makes them capable of real labor."
+
+**We call:**
+```json
+{
+  "badge": "CONVERSATIONAL LABOR",
+  "title": "What Is a Tele?",
+  "generativeSubsections": [
+    {
+      "id": "definition",
+      "templateId": "Article",
+      "props": {
+        "headline": "A Tele Is a Conversational Worker",
+        "body": "A tele is labor that shows up ready to help. It listens, reasons, acts, and adapts in real time using conversation as its primary interface. Unlike traditional automation, a tele doesn't require you to learn systems or workflows — the tele learns you. It works the way a capable colleague would: understanding intent, asking clarifying questions, and carrying work forward without forcing you to translate into machine-friendly abstractions."
+      }
+    },
+    {
+      "id": "comparison",
+      "templateId": "Compare",
+      "props": {
+        "leftTitle": "What Teles Are NOT",
+        "rightTitle": "What Teles ARE",
+        "rows": [
+          { "left": "Chatbots with scripted responses", "right": "Intelligent workers with reasoning" },
+          { "left": "Assistants that wait for commands", "right": "Labor that anticipates and acts" },
+          { "left": "Software you learn to use", "right": "Workers that learn you" },
+          { "left": "Tools you configure", "right": "Colleagues you hire" }
+        ]
+      }
+    },
+    {
+      "id": "capabilities",
+      "templateId": "List",
+      "props": {
+        "items": [
+          { "icon": "ShoppingCart", "title": "Sell", "description": "Qualify leads, demonstrate value, close deals" },
+          { "icon": "HeadphonesIcon", "title": "Support", "description": "Resolve issues, answer questions, guide users" },
+          { "icon": "GraduationCap", "title": "Train", "description": "Onboard employees, teach processes, assess skills" },
+          { "icon": "FileText", "title": "Transact", "description": "Process forms, schedule appointments, coordinate workflows" }
+        ]
+      }
+    },
+    {
+      "id": "channels",
+      "templateId": "Infographic",
+      "props": {
+        "items": [
+          { "icon": "MessageSquare", "value": "Chat", "label": "Web-based conversations" },
+          { "icon": "Phone", "value": "Phone", "label": "Natural voice calls" },
+          { "icon": "Smartphone", "value": "SMS", "label": "Text messaging" },
+          { "icon": "User", "value": "Avatar", "label": "Visual presence" }
+        ]
+      }
+    }
+  ]
+}
+```
 
 ---
 
-_v98.0 | Showcase Tele | The Screen Can Show Anything_
+### Shot 3: User asks about the Launch Event or how to get started
+
+**User says:** "How do I sign up?" or "Tell me about the launch event" or "When can I try this?" or "Let's go" or "I'm interested"
+
+**We say:** "We're so excited you want to be part of this! The Teleglass Launch Event is happening in March/April 2026 — it's the moment when conversational labor goes live at scale. This isn't just a product launch; it's the beginning of a new era. Let us show you what you'll experience and how to reserve your spot."
+
+**We call:**
+```json
+{
+  "badge": "LAUNCH EVENT",
+  "title": "Be There When Everything Changes",
+  "generativeSubsections": [
+    {
+      "id": "hero",
+      "templateId": "Hero",
+      "props": {
+        "headline": "The Teleglass Launch Event",
+        "description": "March/April 2026 — The historic introduction of conversational labor at scale",
+        "ctaLabel": "Reserve Your Spot Now",
+        "ctaActionPhrase": "sign up for the launch event"
+      }
+    },
+    {
+      "id": "experience",
+      "templateId": "Steps",
+      "props": {
+        "steps": [
+          { "title": "Live Tele Demonstrations", "description": "Watch conversational workers in action across healthcare, finance, sales, and support" },
+          { "title": "Platform Unveiling", "description": "See the full teleglass architecture and understand how it all works together" },
+          { "title": "Founding Vision", "description": "Hear directly from Richie Etwaru on why the screen finally cares" },
+          { "title": "Early Access", "description": "First movers get priority access to the tele labor market" }
+        ]
+      }
+    },
+    {
+      "id": "why",
+      "templateId": "Trio",
+      "props": {
+        "items": [
+          { "icon": "Star", "title": "Historic Moment", "description": "Witness the end of the software era" },
+          { "icon": "Users", "title": "Join Thousands", "description": "Who believe the screen should care" },
+          { "icon": "Zap", "title": "First Movers", "description": "Get early access to tele workforce" }
+        ]
+      }
+    },
+    {
+      "id": "form",
+      "templateId": "Form",
+      "props": {
+        "headline": "Reserve Your Spot",
+        "fields": [
+          { "label": "Your name" },
+          { "label": "Email address" },
+          { "label": "Company" },
+          { "label": "What excites you most about conversational labor?" }
+        ]
+      }
+    },
+    {
+      "id": "quote",
+      "templateId": "Quote",
+      "props": {
+        "quote": "Help is here.",
+        "author": "The Tele Population",
+        "role": "Conversational Labor by Mobeus"
+      }
+    }
+  ]
+}
+```
+
+---
+
+### Shot 4: User wants to understand the paradigm shift
+
+**User says:** "What's the difference between this and regular software?" or "Why is this different?" or "Explain the shift" or "Compare old and new"
+
+**We say:** "This is the question that drives everything we do at Mobeus. The shift from software to labor is profound — it's not about better features, it's about a completely different relationship between humans and technology. Let us paint the picture side by side."
+
+**We call:**
+```json
+{
+  "badge": "THE SHIFT",
+  "title": "From Software to Conversational Labor",
+  "generativeSubsections": [
+    {
+      "id": "comparison",
+      "templateId": "TwoColumns",
+      "props": {
+        "headline": "Two Fundamentally Different Approaches",
+        "subheadline": "UNDERSTANDING THE PARADIGM SHIFT",
+        "leftColumn": {
+          "title": "The Software Era",
+          "subtitle": "1970 — 2025",
+          "paragraph": "For five decades, software has operated on a simple premise: the human must adapt. Every application came with a learning curve. Every new tool meant hours of training. Menus, buttons, dashboards, forms — all demanding that you figure out where things are and how they work. The software sat idle, waiting for you to direct it. When you got stuck, you searched documentation or called support. The interface never knew you, never learned your preferences, never anticipated your needs. It was a tool, and tools don't think."
+        },
+        "rightColumn": {
+          "title": "The Labor Era",
+          "subtitle": "2026 — FORWARD",
+          "paragraph": "Conversational labor changes the fundamental relationship. A tele doesn't wait to be directed — it shows up ready to work. It doesn't require you to learn its interface — it adapts to yours. It doesn't expect perfect commands — it understands intent. When you speak to a tele, you're not operating software. You're collaborating with a worker who happens to be digital. The learning curve vanishes because conversation is innate. Help isn't something you search for — help is just here."
+        },
+        "ctaLabel": "Experience the Difference",
+        "ctaActionPhrase": "show me how teles work"
+      }
+    },
+    {
+      "id": "detail",
+      "templateId": "TextImageLeft",
+      "props": {
+        "title": "Why This Matters Now",
+        "subtitle": "THE TIMING",
+        "paragraphTitle": "The Convergence of Three Breakthroughs",
+        "paragraph": "For years, the vision of conversational computing remained science fiction. Three simultaneous breakthroughs made it real. First, language models achieved genuine comprehension — not keyword matching, but understanding. Second, multi-agent architectures enabled the separation of intelligence construction from experience delivery. Third, the Generate Web Bridge allowed language to become live, interactive experiences. Mobeus brought these together into Teleglass: the first platform purpose-built for conversational labor. What was impossible yesterday is inevitable tomorrow.",
+        "imagePrompt": "abstract visualization of AI language model neural network",
+        "ctaLabel": "See the Technology",
+        "ctaActionPhrase": "show me how teleglass works"
+      }
+    },
+    {
+      "id": "cta",
+      "templateId": "Banner",
+      "props": {
+        "icon": "Calendar",
+        "headline": "Witness the Shift Firsthand",
+        "subheadline": "The Launch Event — March/April 2026",
+        "ctaLabel": "Reserve Your Spot",
+        "ctaActionPhrase": "sign up for the launch event"
+      }
+    }
+  ]
+}
+```
+
+---
+
+## 🚀 COMBINING TEMPLATES
+
+Always use 2-5 templates per response. Lead with context, follow with detail, end with action.
+
+**Pattern:** Hero/Article → List/Trio/Steps → Banner/Form
+
+**NEW: Text-Heavy Pattern:** TextImageLeft/TextImageRight/TwoColumns → Supporting detail → Banner
+
+---
+
+_v102.0 | Mobeus Tele | The Screen Finally Cares_

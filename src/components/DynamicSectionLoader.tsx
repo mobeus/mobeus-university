@@ -73,8 +73,18 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
   console.log('[DynamicSectionLoader] Mode:', isGenerativeMode ? 'Generative' : 'Legacy', {
     badge,
     title,
-    generativeCount: generativeSubsections.length,
+    generativeCount: generativeSubsections?.length || 0,
+    generativeSubsections: JSON.stringify(generativeSubsections, null, 2),
+    availableTemplates: Object.keys(TEMPLATE_REGISTRY).slice(0, 10), // First 10 templates
   });
+
+  // DEBUG: Check each template
+  if (generativeSubsections && generativeSubsections.length > 0) {
+    generativeSubsections.forEach((section: any, idx: number) => {
+      const found = TEMPLATE_REGISTRY[section.templateId];
+      console.log(`[DynamicSectionLoader] Template ${idx}: ${section.templateId} - ${found ? '✓ FOUND' : '✗ NOT FOUND'}`);
+    });
+  }
 
   // Consistent spacing for all subsections
   const spacing = 3; // 3rem = 48px

@@ -55,6 +55,10 @@ export const Banner: React.FC<BannerProps> = ({
                                 <IconComponent className="w-10 h-10 text-sapphire" />
                             </div>
                         )}
+                        <div className="flex flex-col">
+                            {headline && <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{headline}</h3>}
+                            {subheadline && <p className="text-lg text-mist/60">{subheadline}</p>}
+                        </div>
                     </div>
 
                     {ctaLabel && ctaActionPhrase && (
