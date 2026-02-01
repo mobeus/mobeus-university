@@ -90,7 +90,7 @@ const SectionBackButton = () => {
         variant="ghost"
         size="sm"
         onClick={handleBack}
-        className="text-white/70 hover:text-white glass-subtle-hover"
+        className="text-white/70 hover:text-white glass-light-hover"
       >
         <ArrowLeft className="h-4 w-4 mr-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" />
         Back

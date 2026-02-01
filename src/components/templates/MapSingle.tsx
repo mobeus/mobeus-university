@@ -52,7 +52,7 @@ export const MapSingle: React.FC<MapSingleProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(title || subtitle) && (
                 <div className="pb-6">
                     {title && <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">{title}</h2>}

@@ -29,10 +29,19 @@ interface FlowConnection {
     label?: string;
 }
 
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
+    actionPhrase?: string;
+}
+
 interface StepsFlowProps {
     headline?: string;
     subtitle?: string;
     nodes?: FlowNode[];
+    steps?: StepItem[];  // Alias for simplified usage
     connections?: FlowConnection[];
     ctaLabel?: string;
     ctaActionPhrase?: string;
@@ -48,6 +57,7 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
     headline,
     subtitle,
     nodes,
+    steps,
     connections,
     ctaLabel,
     ctaActionPhrase,
@@ -55,11 +65,22 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
+    // Convert steps to nodes format if nodes not provided
+    const displayNodes: FlowNode[] = nodes || (steps?.map((step, i) => ({
+        id: `step-${i}`,
+        icon: step.icon,
+        title: step.title,
+        description: step.description,
+        type: i === 0 ? 'start' : (i === (steps.length - 1) ? 'end' : 'step'),
+        variant: step.complete ? 'success' : 'default',
+        actionPhrase: step.actionPhrase,
+    } as FlowNode)) || []);
+
     const variantStyles = {
-        default: 'border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-transparent',
-        success: 'border-jade/30 bg-jade/10',
-        warning: 'border-flamingo/30 bg-flamingo/10',
-        accent: 'border-sapphire/30 bg-sapphire/10',
+        default: 'glass-medium',
+        success: 'glass-medium border-jade/30',
+        warning: 'glass-medium border-[var(--color-primary)]/30',
+        accent: 'glass-medium border-[var(--color-secondary)]/30',
     };
 
     const typeStyles = {
@@ -70,7 +91,7 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-8">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -78,25 +99,25 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
                 </div>
             )}
 
-            {nodes && nodes.length > 0 && (
+            {displayNodes && displayNodes.length > 0 && (
                 <div className="flex-grow flex flex-col items-center gap-4">
-                    {nodes.map((node, i) => {
+                    {displayNodes.map((node, i) => {
                         const IconComp = getIcon(node.icon);
                         const variant = node.variant || 'default';
-                        const isLast = i === nodes.length - 1;
+                        const isLast = i === displayNodes.length - 1;
 
                         return (
                             <React.Fragment key={node.id}>
                                 <div
                                     onClick={() => node.actionPhrase && handleAction(node.actionPhrase)}
-                                    className={`relative w-full max-w-md p-5 border transition-all
+                                    className={`relative w-full max-w-md p-6 transition-all duration-300
                                         ${variantStyles[variant]} ${typeStyles[node.type]}
                                         ${node.actionPhrase ? 'cursor-pointer hover:scale-[1.02]' : ''}`}
                                 >
                                     <div className="flex gap-4">
                                         {/* Icon or Image */}
                                         {(node.imageUrl || node.imagePrompt) ? (
-                                            <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                                            <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 glass-light">
                                                 <SmartImage
                                                     assetId={node.imageUrl || node.imagePrompt || node.id}
                                                     alt={node.title}
@@ -104,24 +125,24 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
                                                 />
                                             </div>
                                         ) : (
-                                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0
-                                                ${node.type === 'start' ? 'bg-jade' :
-                                                    node.type === 'end' ? 'bg-flamingo' :
-                                                        'bg-white/[0.05] border border-white/[0.1]'}`}>
-                                                <IconComp className={`w-5 h-5 ${node.type === 'start' || node.type === 'end' ? 'text-white' : 'text-sapphire'}`} />
+                                            <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0
+                                                ${node.type === 'start' ? 'bg-jade shadow-lg shadow-jade/30' :
+                                                    node.type === 'end' ? 'bg-[var(--color-primary)] shadow-lg shadow-[var(--color-primary)]/30' :
+                                                        'glass-light border border-[var(--color-primary)]/20'}`}>
+                                                <IconComp className={`w-6 h-6 ${node.type === 'start' || node.type === 'end' ? 'text-white' : 'text-[var(--color-primary)]'}`} />
                                             </div>
                                         )}
 
                                         <div className="flex-grow">
                                             <h3 className="font-bold text-white mb-1">{node.title}</h3>
                                             {node.description && (
-                                                <p className="text-sm text-mist/60">{node.description}</p>
+                                                <p className="text-sm text-mist/70">{node.description}</p>
                                             )}
                                         </div>
 
                                         {/* Node type indicator */}
                                         {node.type === 'decision' && (
-                                            <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-sapphire rounded-full" />
+                                            <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--color-primary)] rounded-full shadow-lg" />
                                         )}
                                     </div>
                                 </div>
@@ -129,12 +150,12 @@ export const StepsFlow: React.FC<StepsFlowProps> = ({
                                 {/* Connector arrow */}
                                 {!isLast && (
                                     <div className="flex flex-col items-center">
-                                        <div className="w-0.5 h-4 bg-gradient-to-b from-sapphire to-transparent" />
-                                        <ArrowDown className="w-5 h-5 text-sapphire" />
+                                        <div className="w-0.5 h-4 bg-gradient-to-b from-[var(--color-primary)] to-transparent" />
+                                        <ArrowDown className="w-5 h-5 text-[var(--color-primary)]" />
 
                                         {/* Connection label */}
                                         {connections && connections[i]?.label && (
-                                            <span className="text-xs text-mist/40 mt-1">{connections[i].label}</span>
+                                            <span className="text-xs text-mist/50 mt-1">{connections[i].label}</span>
                                         )}
                                     </div>
                                 )}

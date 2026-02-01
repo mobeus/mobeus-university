@@ -77,7 +77,7 @@ export const Product: React.FC<ProductProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full">
             <div className="grid md:grid-cols-2 gap-8 h-full">
                 {/* Images Section */}
                 <div className="flex flex-col gap-4">

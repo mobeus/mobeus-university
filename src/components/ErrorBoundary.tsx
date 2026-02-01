@@ -80,7 +80,7 @@ export class ErrorBoundary extends Component<Props, State> {
               </Button>
               <Button
                 onClick={this.handleReload}
-                className="glass-strong glass-strong-hover text-mist"
+                className="glass-heavy glass-heavy-hover text-mist"
               >
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Refresh Page

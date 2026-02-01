@@ -68,7 +68,7 @@ export const CardSkeleton = () => (
 export const ListSkeleton = ({ count = 3 }: { count?: number }) => (
   <div className="space-y-4">
     {Array.from({ length: count }).map((_, i) => (
-      <div key={i} className="flex items-center gap-4 p-4 glass-subtle rounded-lg">
+      <div key={i} className="flex items-center gap-4 p-4 glass-light rounded-lg">
         <Skeleton variant="circular" />
         <div className="flex-1 space-y-2">
           <Skeleton variant="text" width="40%" />

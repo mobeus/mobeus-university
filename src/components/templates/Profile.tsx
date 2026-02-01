@@ -62,8 +62,8 @@ export const Profile: React.FC<ProfileProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full">
-            <div className="max-w-2xl mx-auto">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full">
+            <div className="max-w-2xl">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center mb-8">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-sapphire/30 mb-6">

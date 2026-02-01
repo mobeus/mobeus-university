@@ -58,7 +58,7 @@ export const Pricing: React.FC<PricingProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             <div className="grid md:grid-cols-2 gap-8 flex-grow">
 
                 <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] flex flex-col">

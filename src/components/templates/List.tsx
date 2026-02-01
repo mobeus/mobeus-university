@@ -42,7 +42,7 @@ export const List: React.FC<ListProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
 
 
             {items && items.length > 0 && (
@@ -55,16 +55,15 @@ export const List: React.FC<ListProps> = ({
                             <div
                                 key={index}
                                 onClick={() => item.actionPhrase && handleAction(item.actionPhrase)}
-                                className={`group p-6 rounded-2xl 
-                                    bg-gradient-to-r from-white/[0.03] to-transparent border border-white/[0.06]
+                                className={`group p-6 rounded-2xl glass-light
                                     flex items-start gap-5
-                                    ${isClickable ? 'cursor-pointer hover:border-sapphire/30 hover:from-sapphire/[0.05]' : ''}
+                                    ${isClickable ? 'cursor-pointer hover:border-[var(--color-primary)]/30' : ''}
                                     transition-all duration-300`}
                             >
-                                <div className="w-14 h-14 rounded-2xl bg-sapphire/10 border border-sapphire/20 
+                                <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 
                                     flex items-center justify-center flex-shrink-0
-                                    group-hover:bg-sapphire/15 group-hover:border-sapphire/30 transition-all">
-                                    <IconComp className="w-7 h-7 text-sapphire" />
+                                    group-hover:bg-[var(--color-primary)]/15 group-hover:border-[var(--color-primary)]/30 transition-all">
+                                    <IconComp className="w-7 h-7 text-[var(--color-primary)]" />
                                 </div>
 
                                 <div className="flex-grow pt-1">
@@ -74,7 +73,7 @@ export const List: React.FC<ListProps> = ({
 
                                 {isClickable && (
                                     <ArrowRight className="w-5 h-5 text-mist/20 mt-2
-                                        group-hover:text-sapphire group-hover:translate-x-1 transition-all flex-shrink-0" />
+                                        group-hover:text-[var(--color-primary)] group-hover:translate-x-1 transition-all flex-shrink-0" />
                                 )}
                             </div>
                         );

@@ -48,7 +48,7 @@ export const StepsVertical: React.FC<StepsVerticalProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-8">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}

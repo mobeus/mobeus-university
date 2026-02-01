@@ -102,44 +102,41 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        // CHROME-SAFE: All parent-level animations use opacity only (no transforms)
+        // Transforms break backdrop-filter for ALL descendants in Chromium
         "section-enter": {
           "0%": {
-            opacity: "0",
-            transform: "translateY(15px)"
+            opacity: "0"
+            // REMOVED: transform - breaks backdrop-filter in Chrome
           },
           "100%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           }
         },
         "section-exit": {
           "0%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           },
           "100%": {
-            opacity: "0",
-            transform: "translateY(-10px)"
+            opacity: "0"
           }
         },
         "fade-in": {
           "0%": {
-            opacity: "0",
-            transform: "translateY(5px)"
+            opacity: "0"
+            // REMOVED: transform - breaks backdrop-filter in Chrome
           },
           "100%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           }
         },
         "stagger-enter": {
           "0%": {
-            opacity: "0",
-            transform: "translateY(20px)"
+            opacity: "0"
+            // REMOVED: transform - breaks backdrop-filter in Chrome
           },
           "100%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           }
         },
         "chat-bubble-enter": {
@@ -218,24 +215,23 @@ export default {
             opacity: "0.95"
           }
         },
+        // CHROME-SAFE: Page animations use opacity only
         "page-fade-in": {
           "0%": {
-            opacity: "0",
-            transform: "translateY(20px)"
+            opacity: "0"
+            // REMOVED: transform - breaks backdrop-filter in Chrome
           },
           "100%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           }
         },
         "page-fade-out": {
           "0%": {
-            opacity: "1",
-            transform: "translateY(0)"
+            opacity: "1"
           },
           "100%": {
-            opacity: "0",
-            transform: "translateY(-20px)"
+            opacity: "0"
+            // REMOVED: transform - breaks backdrop-filter in Chrome
           }
         },
         "float": {

@@ -60,7 +60,7 @@ export const Accordion: React.FC<AccordionProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {items && items.length > 0 && (
                 <div className="space-y-4 flex-grow">
                     {items.map((item, index) => {

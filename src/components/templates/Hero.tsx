@@ -68,7 +68,7 @@ export const Hero: React.FC<HeroProps> = ({
     const theme = colors[variant];
 
     return (
-        <div className="glass-template-container h-full flex flex-col justify-between">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col justify-between">
 
             {stat && (
                 <div className="text-center pt-4 pb-8">
@@ -153,7 +153,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex-grow" />
 
             {ctaLabel && ctaActionPhrase && (
-                <div className="pt-6 pb-2 flex justify-end">
+                <div className="pt-6 pb-2 flex justify-center">
                     <button
                         className="inline-flex items-center gap-3 px-8 py-4 bg-flamingo text-white font-semibold rounded-full 
                             hover:bg-flamingo/90 hover:scale-[1.02] active:scale-[0.98]

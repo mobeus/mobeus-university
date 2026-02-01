@@ -2,9 +2,9 @@
 description: Tell Tele how to respond to specific user requests (shot prompts)
 ---
 
-# Tele-Should Workflow
+# Add Skill Workflow
 
-Add a new shot prompt to teach Catherine how to respond.
+Add a new skill (shot prompt) to teach your tele how to respond.
 
 ## Shot Prompt Structure
 

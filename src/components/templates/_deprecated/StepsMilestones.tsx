@@ -23,11 +23,20 @@ interface Milestone {
     actionPhrase?: string;
 }
 
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
+    actionPhrase?: string;
+}
+
 interface StepsMilestonesProps {
     headline?: string;
     subtitle?: string;
     currentPoints?: number;
     milestones?: Milestone[];
+    steps?: StepItem[];  // Alias for simplified usage
     ctaLabel?: string;
     ctaActionPhrase?: string;
 }
@@ -43,17 +52,27 @@ export const StepsMilestones: React.FC<StepsMilestonesProps> = ({
     subtitle,
     currentPoints,
     milestones,
+    steps,
     ctaLabel,
     ctaActionPhrase,
 }) => {
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
-    const maxPoints = Math.max(...(milestones?.map(m => m.points || 0) || [100]));
+    // Convert steps to milestones format if milestones not provided
+    const displayMilestones: Milestone[] = milestones || (steps?.map((step, i) => ({
+        icon: step.icon,
+        title: step.title,
+        description: step.description,
+        status: step.complete ? 'unlocked' : (i === 0 && !steps.some(s => s.complete) ? 'current' : 'locked'),
+        actionPhrase: step.actionPhrase,
+    } as Milestone)) || []);
+
+    const maxPoints = Math.max(...(displayMilestones?.map(m => m.points || 0) || [100]));
     const progressPercent = currentPoints ? Math.min((currentPoints / maxPoints) * 100, 100) : 0;
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-6">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -87,9 +106,9 @@ export const StepsMilestones: React.FC<StepsMilestonesProps> = ({
             )}
 
             {/* Milestones */}
-            {milestones && milestones.length > 0 && (
+            {displayMilestones && displayMilestones.length > 0 && (
                 <div className="flex-grow grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {milestones.map((milestone, i) => {
+                    {displayMilestones.map((milestone, i) => {
                         const IconComp = getIcon(milestone.icon);
                         const isUnlocked = milestone.status === 'unlocked';
                         const isCurrent = milestone.status === 'current';

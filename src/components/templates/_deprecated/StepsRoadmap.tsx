@@ -14,11 +14,20 @@ import { SmartImage } from '@/components/ui/SmartImage';
 interface RoadmapPhase {
     icon?: string;
     title: string;
+    description?: string;
     status: 'completed' | 'current' | 'upcoming';
     items?: { text: string; completed?: boolean }[];
     imageUrl?: string;
     imagePrompt?: string;
     eta?: string;
+    actionPhrase?: string;
+}
+
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
     actionPhrase?: string;
 }
 
@@ -28,6 +37,7 @@ interface StepsRoadmapProps {
     startLabel?: string;
     endLabel?: string;
     phases?: RoadmapPhase[];
+    steps?: StepItem[];  // Alias for simplified usage
     ctaLabel?: string;
     ctaActionPhrase?: string;
 }
@@ -44,11 +54,21 @@ export const StepsRoadmap: React.FC<StepsRoadmapProps> = ({
     startLabel,
     endLabel,
     phases,
+    steps,
     ctaLabel,
     ctaActionPhrase,
 }) => {
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
+
+    // Convert steps to phases format if phases not provided
+    const displayPhases: RoadmapPhase[] = phases || (steps?.map((step, i) => ({
+        icon: step.icon,
+        title: step.title,
+        description: step.description,
+        status: step.complete ? 'completed' : (i === 0 && !steps.some(s => s.complete) ? 'current' : 'upcoming'),
+        actionPhrase: step.actionPhrase,
+    } as RoadmapPhase)) || []);
 
     const statusColors = {
         completed: 'bg-jade border-jade',
@@ -57,7 +77,7 @@ export const StepsRoadmap: React.FC<StepsRoadmapProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-8">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -85,9 +105,9 @@ export const StepsRoadmap: React.FC<StepsRoadmapProps> = ({
                 )}
 
                 {/* Phases */}
-                {phases && phases.length > 0 && (
-                    <div className="pt-16 grid gap-6" style={{ gridTemplateColumns: `repeat(${phases.length}, 1fr)` }}>
-                        {phases.map((phase, i) => {
+                {displayPhases && displayPhases.length > 0 && (
+                    <div className="pt-16 grid gap-6" style={{ gridTemplateColumns: `repeat(${displayPhases.length}, 1fr)` }}>
+                        {displayPhases.map((phase, i) => {
                             const IconComp = getIcon(phase.icon);
 
                             return (
@@ -122,7 +142,7 @@ export const StepsRoadmap: React.FC<StepsRoadmapProps> = ({
 
                                         <div className="flex items-center justify-between mb-3">
                                             <h3 className={`font-bold ${phase.status === 'completed' ? 'text-jade' :
-                                                    phase.status === 'current' ? 'text-white' : 'text-mist/50'
+                                                phase.status === 'current' ? 'text-white' : 'text-mist/50'
                                                 }`}>{phase.title}</h3>
                                             {phase.eta && (
                                                 <span className="text-xs text-mist/40">{phase.eta}</span>
@@ -135,7 +155,7 @@ export const StepsRoadmap: React.FC<StepsRoadmapProps> = ({
                                                 {phase.items.map((item, j) => (
                                                     <li key={j} className="flex items-center gap-2 text-sm">
                                                         <div className={`w-1.5 h-1.5 rounded-full ${item.completed ? 'bg-jade' :
-                                                                phase.status === 'upcoming' ? 'bg-mist/20' : 'bg-sapphire'
+                                                            phase.status === 'upcoming' ? 'bg-mist/20' : 'bg-sapphire'
                                                             }`} />
                                                         <span className={item.completed ? 'text-jade/70 line-through' : 'text-mist/60'}>
                                                             {item.text}

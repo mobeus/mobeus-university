@@ -24,9 +24,10 @@ export interface AssetDefinition {
     category: "avatar" | "platform" | "badge" | "dashboard" | "hero" | "ui" | "icon";
 }
 
-// Asset Registry - Pre-generated images for instant loading
+// Asset Registry - Empty: All images will be live-generated
+// SmartImage will treat any assetId as a prompt and generate via AI
 export const ASSET_REGISTRY: Record<string, AssetDefinition> = {
-    // Add assets here as needed
+    // No pre-registered assets — all images are live-generated using cinematic prompts
 };
 
 // Helper: Get all assets by category

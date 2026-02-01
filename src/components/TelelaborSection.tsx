@@ -939,22 +939,27 @@ const TelelaborSection = ({
       />
 
       {/* Chat Glass Panel - FULLY TRANSPARENT - Avatar fully visible */}
+      {/* CHROME FIX: Use right-position animation instead of transform to preserve backdrop-filter */}
       <div
         className={`fixed telelabor-panel top-0 h-dvh z-50
-          transform transition-all duration-500 ease-out ${isChatGlassOpen
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0"
-          }
+          transition-[right,opacity] duration-500 ease-out
           ${isLightboardMode
             ? "border-l border-white/[0.05]"
             : "border-l border-white/[0.08]"
           }
         flex flex-col
-        xl:right-0
         max-xl:left-0 max-xl:right-0 max-xl:w-full`}
         style={{
           width: "var(--chat-glass-width)",
           maxWidth: "100vw",
+          // CHROME FIX: Position-based animation instead of transform
+          right: isChatGlassOpen ? "0" : "calc(-1 * var(--chat-glass-width))",
+          opacity: isChatGlassOpen ? 1 : 0,
+          // GPU compositing hints for stable backdrop-filter
+          isolation: "isolate",
+          willChange: "right, opacity",
+          WebkitBackfaceVisibility: "hidden",
+          backfaceVisibility: "hidden",
         }}
       >
         {/* Simple top border line */}
@@ -1169,8 +1174,8 @@ const TelelaborSection = ({
                 )}
                 <div
                   className={`chat-message-bubble max-w-[75%] sm:max-w-[70%] p-3 sm:p-4 rounded-2xl
-                  transform transition-all duration-500
-                  hover:scale-[1.01]
+                  transition-all duration-500
+                  hover:brightness-110 hover:shadow-lg
                   border backdrop-blur-sm text-sm sm:text-base text-mist`}
                   style={{
                     background:

@@ -38,12 +38,12 @@ export const TextImageLeft: React.FC<TextImageLeftProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full">
             <div className="grid md:grid-cols-2 gap-10 items-start">
                 {/* Left: Text Content */}
                 <div className="flex flex-col justify-center">
                     {subtitle && (
-                        <div className="text-sm text-sapphire font-semibold uppercase tracking-wider mb-3">
+                        <div className="text-sm text-[var(--color-secondary)] font-semibold uppercase tracking-wider mb-3">
                             {subtitle}
                         </div>
                     )}
@@ -79,7 +79,7 @@ export const TextImageLeft: React.FC<TextImageLeftProps> = ({
 
                 {/* Right: Image */}
                 <div className="flex items-center justify-center">
-                    <div className="rounded-2xl overflow-hidden border border-white/[0.06] w-full">
+                    <div className="glass-medium rounded-2xl overflow-hidden w-full">
                         <SmartImage
                             assetId={imageUrl || imagePrompt || 'text-image-left'}
                             alt={imageAlt || title || 'Visual'}

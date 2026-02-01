@@ -54,7 +54,7 @@ export const Story: React.FC<StoryProps> = ({
     const handleAction = (actionPhrase: string) => { playClick(); notifyTele(actionPhrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(header || headerLabel) && (
                 <div className="flex items-center gap-4 mb-8">
                     <div className="w-14 h-14 rounded-2xl bg-flamingo/10 border border-flamingo/20 flex items-center justify-center">

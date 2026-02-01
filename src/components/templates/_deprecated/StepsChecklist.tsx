@@ -22,10 +22,19 @@ interface ChecklistItem {
     actionPhrase?: string;
 }
 
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
+    actionPhrase?: string;
+}
+
 interface StepsChecklistProps {
     headline?: string;
     subtitle?: string;
     items?: ChecklistItem[];
+    steps?: StepItem[];  // Alias for simplified usage
     progressLabel?: string;
     completedLabel?: string;
     ctaLabel?: string;
@@ -42,6 +51,7 @@ export const StepsChecklist: React.FC<StepsChecklistProps> = ({
     headline,
     subtitle,
     items,
+    steps,
     progressLabel,
     completedLabel,
     ctaLabel,
@@ -50,12 +60,21 @@ export const StepsChecklist: React.FC<StepsChecklistProps> = ({
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
-    const checkedCount = items?.filter(i => i.checked).length || 0;
-    const totalCount = items?.length || 0;
+    // Convert steps to items format if items not provided
+    const displayItems: ChecklistItem[] = items || (steps?.map(step => ({
+        icon: step.icon,
+        title: step.title,
+        description: step.description,
+        checked: step.complete,
+        actionPhrase: step.actionPhrase,
+    })) || []);
+
+    const checkedCount = displayItems?.filter(i => i.checked).length || 0;
+    const totalCount = displayItems?.length || 0;
     const progress = totalCount > 0 ? (checkedCount / totalCount) * 100 : 0;
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-6">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -80,9 +99,9 @@ export const StepsChecklist: React.FC<StepsChecklistProps> = ({
             </div>
 
             {/* Checklist items */}
-            {items && items.length > 0 && (
+            {displayItems && displayItems.length > 0 && (
                 <div className="flex-grow space-y-3">
-                    {items.map((item, i) => {
+                    {displayItems.map((item, i) => {
                         const IconComp = getIcon(item.icon);
 
                         return (

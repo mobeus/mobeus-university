@@ -37,7 +37,7 @@ export const Stats: React.FC<StatsProps> = ({
                     : 'grid-cols-2 md:grid-cols-4';
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {stats && stats.length > 0 && (
                 <div className={`grid ${gridCols} gap-6 flex-grow`}>
                     {stats.map((stat, index) => (

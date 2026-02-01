@@ -22,11 +22,20 @@ interface Milestone {
     imagePrompt?: string;
 }
 
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
+    actionPhrase?: string;
+}
+
 interface StepsProgressProps {
     headline?: string;
     subtitle?: string;
     progress: number; // 0-100
     milestones?: Milestone[];
+    steps?: StepItem[];  // Alias for simplified usage
     currentLabel?: string;
     currentValue?: string;
     goalLabel?: string;
@@ -46,6 +55,7 @@ export const StepsProgress: React.FC<StepsProgressProps> = ({
     subtitle,
     progress,
     milestones,
+    steps,
     currentLabel,
     currentValue,
     goalLabel,
@@ -56,8 +66,17 @@ export const StepsProgress: React.FC<StepsProgressProps> = ({
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
+    // Convert steps to milestones format if milestones not provided
+    const displayMilestones: Milestone[] = milestones || (steps?.map((step, i, arr) => ({
+        icon: step.icon,
+        title: step.title,
+        position: ((i + 1) / arr.length) * 100,
+        reached: step.complete,
+        current: !step.complete && (i === 0 || arr.slice(0, i).every(s => s.complete)),
+    } as Milestone)) || []);
+
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="pb-8">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -94,7 +113,7 @@ export const StepsProgress: React.FC<StepsProgressProps> = ({
                     </div>
 
                     {/* Milestones */}
-                    {milestones && milestones.map((milestone, i) => {
+                    {displayMilestones && displayMilestones.map((milestone, i) => {
                         const IconComp = getIcon(milestone.icon);
                         const isReached = milestone.reached || progress >= milestone.position;
                         const isCurrent = milestone.current;

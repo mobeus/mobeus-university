@@ -61,7 +61,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
 
 
             {cards && cards.length > 0 && (

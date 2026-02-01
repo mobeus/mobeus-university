@@ -48,13 +48,13 @@ export const StepsNumbered: React.FC<StepsNumberedProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     const colClass = {
-        1: 'grid-cols-1 max-w-2xl mx-auto',
+        1: 'grid-cols-1 max-w-2xl',
         2: 'md:grid-cols-2',
         3: 'md:grid-cols-3',
     }[columns];
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="text-center pb-10">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -63,7 +63,7 @@ export const StepsNumbered: React.FC<StepsNumberedProps> = ({
             )}
 
             {steps && steps.length > 0 && (
-                <div className={`grid ${colClass} gap-8 flex-grow`}>
+                <div className={`grid ${colClass} gap-6 flex-grow`}>
                     {steps.map((step, i) => {
                         const IconComp = getIcon(step.icon);
 
@@ -71,20 +71,22 @@ export const StepsNumbered: React.FC<StepsNumberedProps> = ({
                             <div
                                 key={i}
                                 onClick={() => step.actionPhrase && handleAction(step.actionPhrase)}
-                                className={`relative text-center ${step.actionPhrase ? 'cursor-pointer group' : ''}`}
+                                className={`group relative glass-medium rounded-2xl p-8 text-center
+                                    hover:scale-[1.02] transition-all duration-300
+                                    ${step.actionPhrase ? 'cursor-pointer' : ''}`}
                             >
-                                {/* Large number */}
-                                <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6
-                                    text-4xl font-bold transition-transform group-hover:scale-110
+                                {/* Premium Gradient Number Circle */}
+                                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6
+                                    text-3xl font-bold transition-all duration-300 group-hover:scale-110
                                     ${step.highlight
-                                        ? 'bg-gradient-to-br from-flamingo to-sapphire text-white shadow-xl shadow-flamingo/20'
-                                        : 'bg-white/[0.05] border border-white/[0.1] text-white'}`}>
+                                        ? 'bg-gradient-to-br from-[var(--color-primary)] to-[var(--gradient-end)] text-white shadow-xl shadow-[var(--color-primary)]/30'
+                                        : 'glass-heavy text-white'}`}>
                                     {i + 1}
                                 </div>
 
                                 {/* Image */}
                                 {(step.imageUrl || step.imagePrompt) && (
-                                    <div className="w-full aspect-video rounded-xl overflow-hidden mb-4">
+                                    <div className="w-full aspect-video rounded-xl overflow-hidden mb-5 glass-light">
                                         <SmartImage
                                             assetId={step.imageUrl || step.imagePrompt || `step-${i}`}
                                             alt={step.title}
@@ -95,21 +97,21 @@ export const StepsNumbered: React.FC<StepsNumberedProps> = ({
 
                                 {/* Icon (if no image) */}
                                 {!(step.imageUrl || step.imagePrompt) && step.icon && (
-                                    <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-sapphire/10 border border-sapphire/20
-                                        flex items-center justify-center">
-                                        <IconComp className="w-6 h-6 text-sapphire" />
+                                    <div className="w-14 h-14 mx-auto mb-5 rounded-xl glass-medium
+                                        flex items-center justify-center border border-[var(--color-primary)]/20">
+                                        <IconComp className="w-7 h-7 text-[var(--color-primary)]" />
                                     </div>
                                 )}
 
-                                <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
                                 {step.description && (
-                                    <p className="text-mist/60 leading-relaxed">{step.description}</p>
+                                    <p className="text-mist/70 leading-relaxed">{step.description}</p>
                                 )}
 
                                 {/* Connector line (for single column) */}
                                 {columns === 1 && i < steps.length - 1 && (
-                                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-8 
-                                        bg-gradient-to-b from-sapphire/50 to-transparent" />
+                                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0.5 h-6 
+                                        bg-gradient-to-b from-[var(--color-primary)]/50 to-transparent" />
                                 )}
                             </div>
                         );

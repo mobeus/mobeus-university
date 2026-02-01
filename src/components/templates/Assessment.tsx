@@ -115,7 +115,7 @@ export const Assessment: React.FC<AssessmentProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {/* Header */}
             <div className="pb-6 border-b border-white/[0.06]">
                 <div className="flex items-start gap-4">
@@ -151,7 +151,7 @@ export const Assessment: React.FC<AssessmentProps> = ({
             {/* Content */}
             <div className="flex-grow py-8">
                 {!isComplete && item ? (
-                    <div className="max-w-2xl mx-auto">
+                    <div className="max-w-2xl">
                         {/* Category badge */}
                         <div className="inline-block px-3 py-1 mb-4 text-xs font-medium rounded-full 
                             bg-sapphire/10 text-sapphire border border-sapphire/20">

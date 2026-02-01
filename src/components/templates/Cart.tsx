@@ -62,7 +62,7 @@ export const Cart: React.FC<CartProps> = ({
     const hasItems = items && items.length > 0;
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {hasItems && (
                 <div className="flex items-center gap-3 pb-6 border-b border-white/[0.06]">
                     <ShoppingBag className="w-6 h-6 text-sapphire" />

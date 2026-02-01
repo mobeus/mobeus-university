@@ -68,7 +68,7 @@ export const Lesson: React.FC<LessonProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {/* Header */}
             <div className="pb-8 border-b border-white/[0.06]">
                 <div className="flex flex-col md:flex-row gap-6">

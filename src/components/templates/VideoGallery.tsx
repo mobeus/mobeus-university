@@ -76,7 +76,7 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     if (!videos || videos.length === 0) return null;
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             <div className="flex items-center justify-end pb-6">
                 <div className="flex gap-2">
                     <button

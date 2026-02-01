@@ -38,11 +38,11 @@ export const TextImageRight: React.FC<TextImageRightProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full">
             <div className="grid md:grid-cols-2 gap-10 items-start">
                 {/* Left: Image */}
                 <div className="flex items-center justify-center order-2 md:order-1">
-                    <div className="rounded-2xl overflow-hidden border border-white/[0.06] w-full">
+                    <div className="glass-medium rounded-2xl overflow-hidden w-full">
                         <SmartImage
                             assetId={imageUrl || imagePrompt || 'text-image-right'}
                             alt={imageAlt || title || 'Visual'}
@@ -54,7 +54,7 @@ export const TextImageRight: React.FC<TextImageRightProps> = ({
                 {/* Right: Text Content */}
                 <div className="flex flex-col justify-center order-1 md:order-2">
                     {subtitle && (
-                        <div className="text-sm text-sapphire font-semibold uppercase tracking-wider mb-3">
+                        <div className="text-sm text-[var(--color-secondary)] font-semibold uppercase tracking-wider mb-3">
                             {subtitle}
                         </div>
                     )}

@@ -88,7 +88,7 @@ export const Table: React.FC<TableProps> = ({
     }, [rows, sortKey, sortDir, searchQuery]);
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
                 <div>
                     {title && <h2 className="text-2xl font-bold text-white tracking-tight">{title}</h2>}

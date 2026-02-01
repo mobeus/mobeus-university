@@ -40,11 +40,11 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
 
 
             {testimonials && testimonials.length > 0 && (
-                <div className={`grid gap-6 flex-grow ${testimonials.length === 1 ? 'grid-cols-1 max-w-2xl mx-auto' :
+                <div className={`grid gap-6 flex-grow ${testimonials.length === 1 ? 'grid-cols-1 max-w-2xl' :
                     testimonials.length === 2 ? 'md:grid-cols-2' :
                         'md:grid-cols-2 lg:grid-cols-3'
                     }`}>

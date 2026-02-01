@@ -64,7 +64,7 @@ export const Split: React.FC<SplitProps> = ({
     const colors = variantColors[leftVariant];
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             <div className="grid md:grid-cols-2 gap-8 flex-grow">
 
                 <div className={`p-8 rounded-2xl bg-gradient-to-b ${colors.bg} border ${colors.border} flex flex-col`}>

@@ -108,7 +108,7 @@ export const ImageMinor: React.FC<ImageMinorProps> = ({
     );
 
     return (
-        <div className="glass-template-container h-full">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full">
             <div className="grid md:grid-cols-3 gap-6 h-full">
                 {reversed ? (
                     <>

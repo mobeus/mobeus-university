@@ -18,9 +18,10 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Story: lazy(() => import("@/components/templates/Story").then(m => ({ default: m.Story }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // LAYOUT TEMPLATES (5)
+    // LAYOUT TEMPLATES (6)
     // ═══════════════════════════════════════════════════════════════════════
     Carousel: lazy(() => import("@/components/templates/Carousel").then(m => ({ default: m.Carousel }))),
+    WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
     Split: lazy(() => import("@/components/templates/Split").then(m => ({ default: m.Split }))),
     Grid: lazy(() => import("@/components/templates/Grid").then(m => ({ default: m.Grid }))),
     Pricing: lazy(() => import("@/components/templates/Pricing").then(m => ({ default: m.Pricing }))),
@@ -100,23 +101,14 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Notification: lazy(() => import("@/components/templates/Notification").then(m => ({ default: m.Notification }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // STEPS TEMPLATES (12) — v94.0 NEW
+    // STEPS TEMPLATES (3) — Streamlined from 16
     // ═══════════════════════════════════════════════════════════════════════
-    StepsVertical: lazy(() => import("@/components/templates/StepsVertical").then(m => ({ default: m.StepsVertical }))),
-    StepsHorizontal: lazy(() => import("@/components/templates/StepsHorizontal").then(m => ({ default: m.StepsHorizontal }))),
-    StepsCards: lazy(() => import("@/components/templates/StepsCards").then(m => ({ default: m.StepsCards }))),
+    // Deprecated: StepsVertical, StepsHorizontal, StepsCards, StepsChecklist,
+    // StepsRoadmap, StepsTimeline, StepsIllustrated, StepsAccordion, StepsTabbed,
+    // StepsNumbered, StepsPhases, StepsMilestones, StepsSwipeable, StepsSplit
     StepsProgress: lazy(() => import("@/components/templates/StepsProgress").then(m => ({ default: m.StepsProgress }))),
-    StepsChecklist: lazy(() => import("@/components/templates/StepsChecklist").then(m => ({ default: m.StepsChecklist }))),
-    StepsRoadmap: lazy(() => import("@/components/templates/StepsRoadmap").then(m => ({ default: m.StepsRoadmap }))),
-    StepsTimeline: lazy(() => import("@/components/templates/StepsTimeline").then(m => ({ default: m.StepsTimeline }))),
     StepsFlow: lazy(() => import("@/components/templates/StepsFlow").then(m => ({ default: m.StepsFlow }))),
-    StepsIllustrated: lazy(() => import("@/components/templates/StepsIllustrated").then(m => ({ default: m.StepsIllustrated }))),
-    StepsAccordion: lazy(() => import("@/components/templates/StepsAccordion").then(m => ({ default: m.StepsAccordion }))),
-    StepsTabbed: lazy(() => import("@/components/templates/StepsTabbed").then(m => ({ default: m.StepsTabbed }))),
-    StepsNumbered: lazy(() => import("@/components/templates/StepsNumbered").then(m => ({ default: m.StepsNumbered }))),
-    StepsPhases: lazy(() => import("@/components/templates/StepsPhases").then(m => ({ default: m.StepsPhases }))),
-    StepsMilestones: lazy(() => import("@/components/templates/StepsMilestones").then(m => ({ default: m.StepsMilestones }))),
-    StepsSwipeable: lazy(() => import("@/components/templates/StepsSwipeable").then(m => ({ default: m.StepsSwipeable }))),
+
 
     // ═══════════════════════════════════════════════════════════════════════
     // TEACHING TEMPLATES (3) — v94.0 NEW

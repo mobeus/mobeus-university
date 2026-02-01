@@ -59,7 +59,7 @@ export const StepsHorizontal: React.FC<StepsHorizontalProps> = ({
     const progress = steps ? ((currentIndex + 1) / steps.length) * 100 : 0;
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
 
 
             {/* Stepper */}

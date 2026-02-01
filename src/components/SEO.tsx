@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Mobeus University | Learn to Build Conversational AI',
-  description = 'Learn to wire conversational AI applications with Catherine. Master voice wiring, vibe wiring, templates, knowledge, rules, and design.',
+  title = 'Teleco | The Assisted Future',
+  description = 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Telelabor', 'Voice Wiring', 'Vibe Wiring', 'AI Development', 'Catherine'],
+  keywords = ['Teleco', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'Help is Here'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'Mobeus University', true);
+    updateMetaTag('og:site_name', 'Teleco', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,42 +72,42 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - Mobeus University
+// Pre-configured SEO for sections - Teleco Platform
 export const sectionSEO = {
   welcome: {
-    title: 'Mobeus University | Learn to Build Conversational AI',
-    description: 'Learn to build teles—conversational AI with visual interfaces. Master the curriculum with Catherine.',
-    keywords: ['Mobeus', 'Tele', 'Conversational AI', 'hackathon', 'voice wiring'],
+    title: 'Teleco | The Assisted Future',
+    description: 'Machines helping mankind. A population of helpful teles giving humanity space for life.',
+    keywords: ['Teleco', 'The Assisted Future', 'Tele', 'Space for Life', 'Help is Here'],
   },
 
-  concepts: {
-    title: 'Key Concepts | Mobeus University',
-    description: 'Understand the core concepts: what a tele is, two-agent architecture, navigateToSection, and the wire commands.',
-    keywords: ['tele', 'two-agent architecture', 'navigateToSection', 'wire commands'],
+  platform: {
+    title: 'The Teleco Platform | Operating System for Conversational Labor',
+    description: 'The infrastructure that deploys a population of helpful teles at scale. Language in, outcomes out.',
+    keywords: ['Teleco Platform', 'Conversational Labor', 'Tele', 'Infrastructure'],
   },
 
-  phases: {
-    title: 'Hackathon Phases | Mobeus University',
-    description: 'The 6-phase hackathon: voice wiring, vibe wiring, templates, knowledge, rules, and design. Wire your tele.',
-    keywords: ['hackathon', 'phases', 'voice wiring', 'vibe wiring', 'templates'],
+  teles: {
+    title: 'The Tele Population | Helpful Conversational Workers',
+    description: 'A population of helpful teles — conversational workers accelerating The Assisted Future.',
+    keywords: ['Tele', 'Tele Population', 'Conversational Workers', 'Help is Here'],
   },
 
-  templates: {
-    title: 'Template Library | Mobeus University',
-    description: 'Explore the 14 templates available for your tele: CardGrid, HackathonTimeline, ConceptCard, ProcessSteps, and more.',
-    keywords: ['templates', 'glass', 'components', 'UI', 'React'],
+  future: {
+    title: 'The Assisted Future | Space for Life',
+    description: 'A world where machines truly help mankind, giving humanity space for life. Time for family, creativity, and joy.',
+    keywords: ['The Assisted Future', 'Space for Life', 'Machines Helping Mankind'],
   },
 
-  ready: {
-    title: 'Readiness Check | Mobeus University',
-    description: 'Test your hackathon readiness. Speak about what you know and prove you understand the key concepts.',
-    keywords: ['readiness', 'assessment', 'hackathon prep', 'knowledge check'],
+  launch: {
+    title: 'Launch Event | The Assisted Future Arrives',
+    description: 'March/April 2026 — The historic moment when machines start truly helping mankind. Be there.',
+    keywords: ['Launch Event', 'The Assisted Future', 'Teleco', 'March 2026'],
   },
 
   home: {
-    title: 'Mobeus University | Learn to Build Conversational AI',
-    description: 'Welcome to Mobeus University. Let Catherine prepare you for the hackathon where you will build your own tele.',
-    keywords: ['Mobeus', 'Catherine', 'hackathon', 'tele', 'conversational AI'],
+    title: 'Teleco | The Assisted Future',
+    description: 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
+    keywords: ['Teleco', 'The Assisted Future', 'Tele', 'Space for Life'],
   },
 };
 

@@ -48,7 +48,7 @@ export function ChatInvitationDialog({ open, type, onAccept, onDecline }: ChatIn
 
   return (
     <Dialog open={open}>
-      <DialogContent className="sm:max-w-md glass-prominent text-white" onInteractOutside={(e) => e.preventDefault()}>
+      <DialogContent className="sm:max-w-md glass-heavy text-white" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle className="text-white">{title}</DialogTitle>
           <DialogDescription className="text-white/80">
@@ -59,7 +59,7 @@ export function ChatInvitationDialog({ open, type, onAccept, onDecline }: ChatIn
           <Button variant="outline" onClick={handleDeclineClick} className="glass-medium glass-medium-hover text-white border-mist/20">
             Decline
           </Button>
-          <Button onClick={handleAcceptClick} className="glass-strong glass-strong-hover text-white">
+          <Button onClick={handleAcceptClick} className="glass-heavy glass-heavy-hover text-white">
             {acceptLabel}
           </Button>
         </DialogFooter>

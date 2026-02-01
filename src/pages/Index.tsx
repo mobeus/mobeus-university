@@ -29,134 +29,98 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section - Multi-template experience: Simplicity, Intuitiveness, Responsiveness
+// Welcome section — TELEUS: Handled.
 const WELCOME_VARIANTS = [
   {
-    badge: "THE SCREEN CARES",
-    title: "A New Kind of Interface",
-    subtitle: "Simple. Intuitive. Responsive. The screen finally cares about your experience.",
+    badge: "TELEUS",
+    title: "Handled.",
+    subtitle: "Everything you have to do but don't want to. We handle it.",
     generativeSubsections: [
-      // 1. Trio - The Three Powers
+      // 0. WelcomeCarousel - "Handled." Cards
       {
-        id: "three-powers",
+        id: "handled-carousel",
+        templateId: "WelcomeCarousel",
+        props: {
+          cards: [
+            { question: "Calls? Handled.", subtext: "Hold music is someone else's problem now.", icon: "phoneOff", actionPhrase: "How do you handle calls?" },
+            { question: "Joy.", subtext: "This is what free time looks like.", imageUrl: "/images/carousel-joy.png", actionPhrase: "What do I get back?" },
+            { question: "Forms? Handled.", subtext: "We fill them out. You don't.", icon: "fileX", actionPhrase: "How do you handle forms?" },
+            { question: "Scheduling? Handled.", subtext: "Appointments, reservations, reminders. Done.", icon: "calendarCheck", actionPhrase: "How do you handle scheduling?" },
+            { question: "Peace.", subtext: "The weight lifts.", imageUrl: "/images/carousel-peace.png", actionPhrase: "What do I get back?" },
+            { question: "Questions? Handled.", subtext: "We find the answers. You get the results.", icon: "searchCheck", actionPhrase: "How do you handle questions?" },
+            { question: "Bureaucracy? Handled.", subtext: "Insurance. Government. Billing. All of it.", icon: "shieldCheck", actionPhrase: "How do you handle bureaucracy?" },
+            { question: "Relief.", subtext: "Finally.", imageUrl: "/images/carousel-relief.png", actionPhrase: "What do I get back?" },
+            { question: "Everything else? Yours.", subtext: "That's the point.", icon: "sparkles", actionPhrase: "Tell me about Teleus", isAccent: true }
+          ]
+        }
+      },
+      // 1. Hero - The Promise
+      {
+        id: "promise-hero",
+        templateId: "Hero",
+        props: {
+          headline: "Life has enough friction.",
+          description: "We handle the rest.",
+          ctaLabel: "See How",
+          ctaActionPhrase: "tell me how teleus works"
+        }
+      },
+      // 2. Trio - What We Handle
+      {
+        id: "what-we-handle",
         templateId: "Trio",
         props: {
           cards: [
             {
-              icon: "Sparkles",
-              title: "Simplicity",
-              description: "No menus to navigate. No buttons to find. No syntax to learn. Just speak naturally — and things happen.",
-              actionPhrase: "show me simplicity"
+              icon: "Phone",
+              title: "Communication",
+              description: "Calls, emails, messages. We make them. We answer them. You don't have to.",
+              actionPhrase: "tell me about communication handling"
             },
             {
-              icon: "Compass",
-              title: "Intuitiveness",
-              description: "The screen anticipates what you need. Shows what matters. Hides what doesn't. Every interaction designed around you.",
-              actionPhrase: "show me intuitiveness"
+              icon: "Calendar",
+              title: "Coordination",
+              description: "Scheduling, reminders, follow-ups. Everything in the right place at the right time.",
+              actionPhrase: "tell me about coordination handling"
             },
             {
-              icon: "Zap",
-              title: "Responsiveness",
-              description: "Ask and receive. No lag. No loading. No waiting. The screen moves as fast as your thoughts.",
-              actionPhrase: "show me responsiveness"
+              icon: "Shield",
+              title: "Complexity",
+              description: "Insurance claims, government forms, billing disputes. We navigate it all.",
+              actionPhrase: "tell me about complexity handling"
             }
           ],
-          numbered: true,
-          ctaLabel: "See It In Action",
-          ctaActionPhrase: "show me how this is different"
+          numbered: false,
+          ctaLabel: "Learn More",
+          ctaActionPhrase: "what else do you handle"
         }
       },
-      // 2. Compare - Old vs New
+      // 3. Quote - The Truth
       {
-        id: "interface-comparison",
-        templateId: "Compare",
+        id: "the-truth",
+        templateId: "Quote",
         props: {
-          headline: "Interfaces That Ignore You vs. Interfaces That Care",
-          subheadline: "The difference is everything",
-          columns: [
-            {
-              icon: "Frown",
-              title: "Traditional Interfaces",
-              value: "You adapt",
-              items: [
-                "Learn the menu structure",
-                "Remember where things are",
-                "Click through 5 screens",
-                "Read the documentation",
-                "Figure it out yourself"
-              ],
-              variant: "bad"
-            },
-            {
-              icon: "Smile",
-              title: "The Tele Way",
-              value: "It adapts",
-              items: [
-                "Just say what you need",
-                "The right screen appears",
-                "One step, done",
-                "It explains as you go",
-                "Help is always here"
-              ],
-              variant: "good"
-            }
-          ],
-          summary: { title: "A fundamental shift", description: "From interfaces that demand to interfaces that serve." },
-          ctaLabel: "Try the Difference",
-          ctaActionPhrase: "show me real examples"
+          quote: "When everything is handled, what will you do?",
+          author: "Teleus",
+          role: ""
         }
       },
-      // 4. Stats - The Impact
+      // 4. Banner - Get Started
       {
-        id: "impact-stats",
-        templateId: "Stats",
-        props: {
-          stats: [
-            { value: "47 min", label: "Average hold time eliminated", context: "No more waiting", actionPhrase: "show me eliminating wait times" },
-            { value: "94%", label: "First-contact resolution", context: "Ask once, done", actionPhrase: "show me resolution rates" },
-            { value: "100+", label: "Languages understood", context: "Speak naturally", actionPhrase: "show me languages" },
-            { value: "24/7", label: "Always available", context: "Life doesn't wait", actionPhrase: "show me availability" }
-          ],
-          ctaLabel: "See More Impact",
-          ctaActionPhrase: "show me the data"
-        }
-      },
-      // 5. Showcase - What This Enables
-      {
-        id: "what-enables",
-        templateId: "Showcase",
-        props: {
-          headline: "When the Screen Cares, Everything Changes",
-          subheadline: "Real tasks that used to frustrate you — now effortless.",
-          benefits: [
-            { icon: "Calendar", text: "Schedule a doctor's appointment without hold music", actionPhrase: "show me scheduling" },
-            { icon: "GraduationCap", text: "Help your child with homework at their pace", actionPhrase: "show me tutoring" },
-            { icon: "BarChart3", text: "Understand a dashboard in plain English", actionPhrase: "show me dashboards" },
-            { icon: "FileText", text: "Fill out a form correctly the first time", actionPhrase: "show me forms" },
-            { icon: "Heart", text: "Navigate benefits without crying", actionPhrase: "show me benefits" },
-            { icon: "Globe", text: "Get help in your language, any language", actionPhrase: "show me languages" }
-          ],
-          tagline: "This is what interfaces should have always been.",
-          ctaLabel: "Experience It Now",
-          ctaActionPhrase: "show me how a tele works"
-        }
-      },
-      // 6. Banner - The Launch Event CTA
-      {
-        id: "launch-cta",
+        id: "get-started",
         templateId: "Banner",
         props: {
-          icon: "Rocket",
-          headline: "Be There When Everything Changes",
-          subheadline: "End of Q1 — the Launch Event. The moment teles go live for everyone. Reserve your spot.",
-          ctaLabel: "Sign Up for Launch Event",
-          ctaActionPhrase: "sign up for the launch event",
+          headline: "Get Started",
+          subheadline: "Join the waitlist. Be first when we launch.",
+          ctaLabel: "Join Waitlist",
+          ctaActionPhrase: "sign up for the waitlist",
           variant: "gradient"
         }
       }
     ]
   },
 ];
+
 
 
 
@@ -1408,6 +1372,11 @@ const Index = () => {
       await new Promise((r) => setTimeout(r, 1000));
 
       setAvatarState("connected");
+
+      // Flash the tele to indicate successful connection
+      setShowFlash(true);
+      playUISound('on', 'avatar');
+      setTimeout(() => setShowFlash(false), 600);
 
       // Create new session ID for this avatar connection
       const sessionId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

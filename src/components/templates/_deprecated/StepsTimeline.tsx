@@ -23,10 +23,19 @@ interface TimelineEvent {
     actionPhrase?: string;
 }
 
+interface StepItem {
+    icon?: string;
+    title: string;
+    description?: string;
+    complete?: boolean;
+    actionPhrase?: string;
+}
+
 interface StepsTimelineProps {
     headline?: string;
     subtitle?: string;
     events?: TimelineEvent[];
+    steps?: StepItem[];  // Alias for simplified usage
     layout?: 'alternating' | 'left' | 'right';
     ctaLabel?: string;
     ctaActionPhrase?: string;
@@ -42,6 +51,7 @@ export const StepsTimeline: React.FC<StepsTimelineProps> = ({
     headline,
     subtitle,
     events,
+    steps,
     layout = 'alternating',
     ctaLabel,
     ctaActionPhrase,
@@ -49,8 +59,18 @@ export const StepsTimeline: React.FC<StepsTimelineProps> = ({
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
+    // Convert steps to events format if events not provided
+    const displayEvents: TimelineEvent[] = events || (steps?.map((step, i) => ({
+        icon: step.icon,
+        date: '',
+        title: step.title,
+        description: step.description,
+        status: step.complete ? 'past' : (i === 0 ? 'current' : 'future'),
+        actionPhrase: step.actionPhrase,
+    } as TimelineEvent)) || []);
+
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             {(headline || subtitle) && (
                 <div className="text-center pb-8">
                     {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
@@ -58,7 +78,7 @@ export const StepsTimeline: React.FC<StepsTimelineProps> = ({
                 </div>
             )}
 
-            {events && events.length > 0 && (
+            {displayEvents && displayEvents.length > 0 && (
                 <div className="flex-grow relative">
                     {/* Center line */}
                     {layout === 'alternating' && (
@@ -72,7 +92,7 @@ export const StepsTimeline: React.FC<StepsTimelineProps> = ({
                     )}
 
                     <div className="space-y-8">
-                        {events.map((event, i) => {
+                        {displayEvents.map((event, i) => {
                             const IconComp = getIcon(event.icon);
                             const isLeft = layout === 'left' || (layout === 'alternating' && i % 2 === 0);
                             const status = event.status || 'past';

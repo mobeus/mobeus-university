@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as mobeusLogo } from "@/assets/mobeus-logo.png";
+import { default as telecoLogo } from "@/assets/teleco-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -35,8 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // MOBEUS UNIVERSITY - PLATFORM NAVIGATION
-  // Menu items organized by platform capabilities
+  // TELEUS — Handled.
   // ============================================
   const navItems: Array<{
     id: string;
@@ -46,29 +45,24 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
-        id: 'what-tele-does',
-        label: 'WHAT I CAN DO',
-        teleQuery: 'Show me what a tele can do'
-      },
-      {
-        id: 'how-different',
+        id: 'how-it-works',
         label: 'HOW IT WORKS',
-        teleQuery: 'Show me how this is different'
+        teleQuery: 'How does Teleus work?'
       },
       {
-        id: 'real-examples',
-        label: 'REAL EXAMPLES',
-        teleQuery: 'Show me real examples of friction killed'
+        id: 'what-we-handle',
+        label: 'WHAT WE HANDLE',
+        teleQuery: 'What does Teleus handle?'
       },
       {
-        id: 'about-mobeus',
+        id: 'about',
         label: 'ABOUT',
-        teleQuery: 'Tell me about Mobeus'
+        teleQuery: 'Tell me about Teleus'
       },
       {
-        id: 'launch-event',
-        label: '🚀 LAUNCH EVENT',
-        teleQuery: 'Sign up for the launch event',
+        id: 'get-started',
+        label: 'GET STARTED',
+        teleQuery: 'Sign up for the waitlist',
         isHighlighted: true
       }
     ];
@@ -99,8 +93,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={mobeusLogo}
-                  alt="Mobeus"
+                  src={telecoLogo}
+                  alt="Teleco"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />

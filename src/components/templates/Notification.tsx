@@ -71,7 +71,7 @@ export const Notification: React.FC<NotificationProps> = ({
     const IconComp = icon ? getIcon(icon) : config.icon;
 
     return (
-        <div className="glass-template-container">
+        <div className="glass-medium rounded-2xl p-4 md:p-6">
             <div className={`relative p-6 rounded-2xl bg-gradient-to-r ${config.bg} border ${config.border}`}>
                 <div className="flex items-start gap-4">
                     <div className={`flex-shrink-0 ${config.iconColor}`}>

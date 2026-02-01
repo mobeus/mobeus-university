@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+ * CHROME BACKDROP-FILTER FIX
+ * Chrome/Chromium requires special handling for backdrop-filter:
+ * 1. No transforms on PARENT elements
+ * 2. Explicit -webkit-backdrop-filter prefix
+ * 3. Explicit background with some opacity
+ * 4. isolation: isolate to create proper stacking context
+ * ============================================ */
+
+/* All glass elements get Chrome-safe rendering */
+[class*="glass-"],
+.glass-template-container,
+[class*="backdrop-blur"] {
+  -webkit-backdrop-filter: blur(var(--glass-blur, 16px)) saturate(var(--glass-saturate, 1.4));
+  backdrop-filter: blur(var(--glass-blur, 16px)) saturate(var(--glass-saturate, 1.4));
+  isolation: isolate;
+  will-change: backdrop-filter, opacity;
+}
+
+
 /* Global Cursor Rules */
 body {
   cursor: default;
@@ -78,56 +98,154 @@ button,
   opacity: 1;
 }
 
-/* Accenture + Salesforce RFP Design System */
+/* ============================================
+ * RESPONSIVE DESIGN SYSTEM
+ * Mobile-first breakpoints (matches Tailwind)
+ * ============================================
+ * 
+ * BREAKPOINTS:
+ * - sm:  640px   (large phones)
+ * - md:  768px   (tablets)
+ * - lg:  1024px  (laptops)
+ * - xl:  1280px  (desktops)
+ * - 2xl: 1536px  (large screens)
+ * 
+ * PATTERN (use in Tailwind classes):
+ * - className="text-sm md:text-base lg:text-lg"
+ * - className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+ * - className="p-4 md:p-6 lg:p-8"
+ * 
+ * ============================================ */
 
 @layer base {
   :root {
-    /* Navigation Height */
+    /* Navigation Height - responsive */
+    --nav-h: 64px;
+
+    /* Responsive spacing scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* Responsive text scale */
+    --text-xs: 0.75rem;
+    /* 12px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 1.875rem;
+    /* 30px */
+    --text-4xl: 2.25rem;
+    /* 36px */
+  }
+
+  /* Tablet and up */
+  @media (min-width: 768px) {
+    :root {
+      --nav-h: 80px;
+    }
+  }
+
+  /* Desktop and up */
+  @media (min-width: 1024px) {
+    :root {
+      --nav-h: 96px;
+    }
+  }
+}
+
+@layer base {
+  :root {
     --nav-h: 96px;
 
     /* ============================================
-     * TELELABOR PLATFORM - FUTURISTIC DESIGN SYSTEM
+     * APPLE GLASSMORPHISM DESIGN SYSTEM v2.0
      * ============================================
      * 
-     * VOLUMETRIC CONVERSATIONAL MEDIA
-     * This is not a website—it's a floating glass interface through which
-     * you fly conversationally. Every element exists in depth space.
+     * LIQUID GLASS — Inspired by Apple's unified glass aesthetic
+     * Seamless frosted panels that float above atmospheric backgrounds.
      * 
-     * LAYER ARCHITECTURE:
-     * - Tele (Background): Deep atmospheric space, Tele avatar
-     * - Glass (Foreground): Floating UI panels with LIGHT frost/blur
-     * - Depth: Everything has Z-space positioning
+     * DESIGN PRINCIPLES:
+     * 1. Heavy blur (16-24px) for premium frosted effect
+     * 2. Ultra-subtle white tints for glass
+     * 3. Luminous borders on top/left edges
+     * 4. Minimal shadows, maximum depth through blur
+     * 5. Colors harmonize with hero background
      * 
      * ============================================
-     * 8-COLOR BRAND PALETTE - MOBEUS.COM STYLE
+     * REFINED 6-COLOR PALETTE
      * ============================================
-     * Mist Gray:      #F5F5F5 - Light backgrounds, text, icons
-     * Onyx Black:     #0D0D0D - Dark backgrounds (deeper black)
-     * Violet Purple:  #9B5DE5 - Primary CTAs, headlines (THE MOBEUS PURPLE)
-     * Wave Blue:      #003D4F - Secondary accent, headers
-     * Turmeric Yellow:#CC850A - Buttons, warnings
-     * Jade Teal:      #5EEAD4 - Success states, teal accents
-     * Sapphire Blue:  #47A1AD - Buttons, links
-     * Amethyst Purple:#7C3AED - Deep purple accents
+     * Optimized for dark backgrounds with colorful hero images
      * ============================================ */
 
     /* ============================================
-     * THE 8 BRAND COLORS - MOBEUS STYLE
+     * CORE COLORS — Work with any background
      * ============================================ */
-    --color-mist: #F5F5F5;
-    --color-onyx: #0D0D0D;
-    --color-flamingo: #9B5DE5;
-    /* NOW PURPLE - Primary accent */
-    --color-wave: #003D4F;
-    --color-turmeric: #CC850A;
-    --color-jade: #5EEAD4;
-    /* Teal accent */
-    --color-sapphire: #47A1AD;
-    --color-amethyst: #7C3AED;
-    /* Deep purple */
+    --color-mist: #FFFFFF;
+    --color-onyx: #000000;
+
+    /* Accent Colors - Refined for harmony */
+    --color-primary: #A78BFA;
+    /* Soft violet - accessible on dark */
+    --color-secondary: #67E8F9;
+    /* Cyan - complements hero colors */
+    --color-accent: #F472B6;
+    /* Soft pink - warm accent */
+    --color-success: #34D399;
+    /* Emerald - success states */
+    --color-warning: #FBBF24;
+    /* Amber - warnings */
+    --color-muted: #94A3B8;
+    /* Slate - subdued text */
+
+    /* Legacy color mappings */
+    --color-flamingo: var(--color-primary);
+    --color-wave: #1E3A5F;
+    --color-turmeric: var(--color-warning);
+    --color-jade: var(--color-success);
+    --color-sapphire: var(--color-secondary);
+    --color-amethyst: #8B5CF6;
 
     /* ============================================
-     * SEMANTIC COLOR MAPPINGS
+     * GLASS TOKENS — Apple-style frosted glass
+     * ============================================ */
+
+    /* Glass tints - ultra subtle whites with slight saturation for vibrancy */
+    --glass-tint-subtle: rgba(255, 255, 255, 0.04);
+    --glass-tint-light: rgba(255, 255, 255, 0.08);
+    --glass-tint-medium: rgba(255, 255, 255, 0.12);
+    --glass-tint-strong: rgba(255, 255, 255, 0.16);
+    --glass-tint-prominent: rgba(255, 255, 255, 0.20);
+
+    /* Glass borders - luminous edges */
+    --glass-border-subtle: rgba(255, 255, 255, 0.10);
+    --glass-border-light: rgba(255, 255, 255, 0.15);
+    --glass-border-medium: rgba(255, 255, 255, 0.20);
+    --glass-border-strong: rgba(255, 255, 255, 0.28);
+
+    /* Blur intensities - APPLE STYLE: Heavy, consistent blur */
+    --glass-blur-light: 24px;
+    --glass-blur-medium: 40px;
+    --glass-blur-heavy: 60px;
+
+    /* Glass shadows - soft, diffused */
+    --glass-shadow-subtle: 0 2px 16px rgba(0, 0, 0, 0.10);
+    --glass-shadow-light: 0 4px 24px rgba(0, 0, 0, 0.14);
+    --glass-shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.18);
+    --glass-shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.26);
+
+    /* ============================================
+     * SEMANTIC MAPPINGS
      * ============================================ */
 
     /* Backgrounds */
@@ -135,60 +253,102 @@ button,
     --foreground: var(--color-mist);
 
     /* Cards & Surfaces */
-    --card: rgba(237, 241, 243, 0.05);
+    --card: var(--glass-tint-light);
     --card-foreground: var(--color-mist);
 
-    /* Primary Accent (Flamingo Pink) - CTAs, buttons, highlights */
-    --primary: var(--color-flamingo);
+    /* Primary Accent */
+    --primary: var(--color-primary);
     --primary-foreground: var(--color-mist);
 
-    /* Secondary Accent (Wave Blue) - Headers, icons, subtle highlights */
-    --secondary: var(--color-wave);
-    --secondary-foreground: var(--color-mist);
+    /* Secondary Accent */
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-onyx);
 
-    /* Accent (same as primary for simplicity) */
-    --accent: var(--color-flamingo);
+    /* Accent */
+    --accent: var(--color-accent);
     --accent-foreground: var(--color-mist);
 
     /* Muted */
-    --muted: rgba(237, 241, 243, 0.3);
-    --muted-foreground: rgba(237, 241, 243, 0.7);
-
-    /* Destructive (use flamingo as the only "warm" color) */
-    --destructive: var(--color-flamingo);
-    --destructive-foreground: var(--color-mist);
+    --muted: rgba(255, 255, 255, 0.06);
+    --muted-foreground: rgba(255, 255, 255, 0.60);
 
     /* Borders & Inputs */
-    --border: rgba(237, 241, 243, 0.15);
-    --input: rgba(237, 241, 243, 0.1);
-    --ring: var(--color-flamingo);
+    --border: var(--glass-border-subtle);
+    --input: var(--glass-tint-light);
+    --ring: var(--color-primary);
+
+    /* Destructive */
+    --destructive: #EF4444;
+    --destructive-foreground: var(--color-mist);
 
     /* ============================================
-     * SHADOWS & GLOWS (using palette colors)
+     * TYPOGRAPHY — SF Pro-inspired scale
      * ============================================ */
-    --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.18), 0 12px 48px rgba(0, 0, 0, 0.1);
-    --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.22), 0 20px 64px rgba(0, 0, 0, 0.14);
-    --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.28), 0 32px 96px rgba(0, 0, 0, 0.18);
-    --shadow-glow-accent: 0 0 48px rgba(155, 93, 229, 0.35), 0 0 96px rgba(155, 93, 229, 0.18);
-    --shadow-glow-wave: 0 0 48px rgba(0, 61, 79, 0.35), 0 0 96px rgba(0, 61, 79, 0.18);
-    --shadow-glow-ambient: 0 0 80px rgba(237, 241, 243, 0.06), 0 0 40px rgba(237, 241, 243, 0.03);
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 
-    /* Legacy shadow names (mapped to new) */
-    --shadow-glow-cyan: var(--shadow-glow-accent);
+    /* Font sizes - Apple's refined scale */
+    --text-xs: 0.6875rem;
+    /* 11px */
+    --text-sm: 0.8125rem;
+    /* 13px */
+    --text-base: 0.9375rem;
+    /* 15px */
+    --text-lg: 1.0625rem;
+    /* 17px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 1.875rem;
+    /* 30px */
+    --text-4xl: 2.25rem;
+    /* 36px */
+    --text-5xl: 3rem;
+    /* 48px */
 
-    /* Volumetric Glass Animations - Elegant Floating */
+    /* Letter spacing - Apple style, slightly tight */
+    --tracking-tighter: -0.03em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: -0.01em;
+    --tracking-wide: 0.02em;
+    --tracking-wider: 0.08em;
+
+    /* ============================================
+     * SHADOWS & GLOWS — Refined, minimal
+     * ============================================ */
+    --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.12);
+    --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.24);
+
+    --shadow-glow-primary: 0 0 24px rgba(167, 139, 250, 0.3);
+    --shadow-glow-secondary: 0 0 24px rgba(103, 232, 249, 0.3);
+    --shadow-glow-accent: 0 0 24px rgba(244, 114, 182, 0.3);
+
+    /* Legacy shadow names */
+    --shadow-glow-cyan: var(--shadow-glow-secondary);
+
+    /* ============================================
+     * TRANSITIONS — Smooth Apple-style easing
+     * ============================================ */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Named transitions */
     --transition-float: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-depth: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-glow: box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-materialize: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
-    /* Scroll-based Shadow Intensity Levels */
-    --shadow-depth-0: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.04);
-    --shadow-depth-1: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
-    --shadow-depth-2: 0 8px 20px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.12);
-    --shadow-depth-3: 0 12px 28px rgba(0, 0, 0, 0.2), 0 6px 14px rgba(0, 0, 0, 0.15);
-    --shadow-depth-4: 0 16px 36px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.18);
-    --shadow-depth-5: 0 20px 44px rgba(0, 0, 0, 0.3), 0 10px 22px rgba(0, 0, 0, 0.22);
+    /* Legacy shadow depths */
+    --shadow-depth-0: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-depth-1: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-depth-2: 0 8px 20px rgba(0, 0, 0, 0.12);
+    --shadow-depth-3: 0 12px 28px rgba(0, 0, 0, 0.16);
+    --shadow-depth-4: 0 16px 36px rgba(0, 0, 0, 0.20);
+    --shadow-depth-5: 0 20px 44px rgba(0, 0, 0, 0.24);
 
     /* Chat Glass - Responsive Widths */
     --chat-glass-width: 24.2rem;
@@ -197,7 +357,8 @@ button,
     --telelabor-top: 2rem;
     --telelabor-right: 1rem;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
 
     /* ============================================
      * INTERACTION STANDARDS (Hover & Focus)
@@ -828,99 +989,286 @@ button,
     animation: shadow-pulse-5 1.5s ease-in-out infinite;
   }
 
-  /* Glassmorphism Visual Hierarchy System */
+  /* ============================================
+   * STREAMLINED GLASS SYSTEM — Rule of 3
+   * 3 Blur Levels × 5 Colors = 15 Classes
+   * Chrome-safe: No transforms on glass elements
+   * ============================================
+   * 
+   * BLUR LEVELS:
+   * - Light: 16px blur, subtle tint (background elements)
+   * - Medium: 24px blur, standard tint (cards, panels)
+   * - Heavy: 40px blur, strong tint (overlays, modals)
+   * 
+   * COLORS:
+   * - Neutral (white tint): Default glass
+   * - Dark (black tint): Dark mode elements
+   * - Primary (violet): Accent glass
+   * - Secondary (cyan): Secondary accent
+   * - Accent (pink): Highlight glass
+   * 
+   * ============================================ */
 
-  /* Level 1: Subtle - Background elements, avatars, less important UI */
-  .glass-subtle {
-    @apply bg-black/5 border border-white/5 transition-all duration-300;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  /* ----------------------------------------
+   * NEUTRAL GLASS (White Tint) - Default
+   * ---------------------------------------- */
+  .glass-light {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-blur: 16px;
+    --glass-saturate: 1.3;
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
   }
 
-  .glass-subtle-hover {
-    @apply bg-black/5 border border-white/5 transition-all duration-300;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
-  }
-
-  .glass-subtle-hover:hover {
-    @apply bg-black/10;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Level 2: Medium - Standard cards, default content containers */
   .glass-medium {
-    @apply bg-black/10 border border-white/10 transition-all duration-300;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2), 0 5px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    --glass-blur: 24px;
+    --glass-saturate: 1.4;
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
   }
 
-  .glass-medium-hover {
-    @apply bg-black/10 border border-white/10 transition-all duration-300;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2), 0 5px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+  .glass-heavy {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    --glass-blur: 40px;
+    --glass-saturate: 1.5;
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   }
 
-  .glass-medium-hover:hover {
-    @apply bg-black/15;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 6px 14px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  /* ----------------------------------------
+   * DARK GLASS (Black Tint)
+   * For dark panels, chat bubbles, overlays
+   * ---------------------------------------- */
+  .glass-light-dark {
+    background: rgba(0, 0, 0, 0.20);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    --glass-blur: 16px;
+    --glass-saturate: 1.3;
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.20);
   }
 
-  /* Level 3: Strong - Interactive elements, primary content, user messages */
-  .glass-strong {
-    @apply bg-black/15 border border-white/15 transition-all duration-300;
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25), 0 7px 16px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  .glass-medium-dark {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    --glass-blur: 24px;
+    --glass-saturate: 1.4;
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
   }
 
-  .glass-strong-hover {
-    @apply bg-black/15 border border-white/15 transition-all duration-300;
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25), 0 7px 16px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.12);
+  .glass-heavy-dark {
+    background: rgba(0, 0, 0, 0.50);
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    --glass-blur: 40px;
+    --glass-saturate: 1.5;
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
   }
 
-  .glass-strong-hover:hover {
-    @apply bg-black/20;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3), 0 9px 20px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
+  /* ----------------------------------------
+   * PRIMARY GLASS (Violet Tint) - #A78BFA
+   * For accent panels, highlighted content
+   * ---------------------------------------- */
+  .glass-light-primary {
+    background: rgba(167, 139, 250, 0.08);
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    --glass-blur: 16px;
+    --glass-saturate: 1.3;
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(167, 139, 250, 0.10);
   }
 
-  /* Level 4: Prominent - Overlays, modals, panels, navigation */
+  .glass-medium-primary {
+    background: rgba(167, 139, 250, 0.15);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    --glass-blur: 24px;
+    --glass-saturate: 1.4;
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    box-shadow: 0 4px 24px rgba(167, 139, 250, 0.15);
+  }
+
+  .glass-heavy-primary {
+    background: rgba(167, 139, 250, 0.25);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    --glass-blur: 40px;
+    --glass-saturate: 1.5;
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(167, 139, 250, 0.20);
+  }
+
+  /* ----------------------------------------
+   * SECONDARY GLASS (Cyan Tint) - #67E8F9
+   * For secondary accents, info panels
+   * ---------------------------------------- */
+  .glass-light-secondary {
+    background: rgba(103, 232, 249, 0.08);
+    border: 1px solid rgba(103, 232, 249, 0.15);
+    --glass-blur: 16px;
+    --glass-saturate: 1.3;
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(103, 232, 249, 0.10);
+  }
+
+  .glass-medium-secondary {
+    background: rgba(103, 232, 249, 0.15);
+    border: 1px solid rgba(103, 232, 249, 0.25);
+    --glass-blur: 24px;
+    --glass-saturate: 1.4;
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    box-shadow: 0 4px 24px rgba(103, 232, 249, 0.15);
+  }
+
+  .glass-heavy-secondary {
+    background: rgba(103, 232, 249, 0.25);
+    border: 1px solid rgba(103, 232, 249, 0.35);
+    --glass-blur: 40px;
+    --glass-saturate: 1.5;
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(103, 232, 249, 0.20);
+  }
+
+  /* ----------------------------------------
+   * ACCENT GLASS (Pink Tint) - #F472B6
+   * For highlights, special emphasis
+   * ---------------------------------------- */
+  .glass-light-accent {
+    background: rgba(244, 114, 182, 0.08);
+    border: 1px solid rgba(244, 114, 182, 0.15);
+    --glass-blur: 16px;
+    --glass-saturate: 1.3;
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(244, 114, 182, 0.10);
+  }
+
+  .glass-medium-accent {
+    background: rgba(244, 114, 182, 0.15);
+    border: 1px solid rgba(244, 114, 182, 0.25);
+    --glass-blur: 24px;
+    --glass-saturate: 1.4;
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    box-shadow: 0 4px 24px rgba(244, 114, 182, 0.15);
+  }
+
+  .glass-heavy-accent {
+    background: rgba(244, 114, 182, 0.25);
+    border: 1px solid rgba(244, 114, 182, 0.35);
+    --glass-blur: 40px;
+    --glass-saturate: 1.5;
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(244, 114, 182, 0.20);
+  }
+
+  /* ----------------------------------------
+   * LEGACY ALIASES (for backward compatibility)
+   * Map old class names to new system
+   * ---------------------------------------- */
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+  }
+
+  .glass-strong,
   .glass-prominent {
-    @apply bg-black/20 border border-white/20 transition-all duration-300;
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 9px 22px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .glass-prominent-hover {
-    @apply bg-black/20 border border-white/20 transition-all duration-300;
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 9px 22px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .glass-prominent-hover:hover {
-    @apply bg-black/25;
-    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.35), 0 11px 26px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   }
 
   /* Legacy Glass Effects (kept for compatibility) */
   .glass-card {
-    @apply bg-black/30 border border-black/40 rounded-3xl;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 5px 18px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.18);
+    @apply rounded-3xl transition-all duration-300;
+    background: var(--glass-tint-medium);
+    border: 1px solid var(--glass-border-medium);
+    backdrop-filter: blur(var(--glass-blur-heavy)) saturate(1.5);
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(1.5);
+    box-shadow: var(--glass-shadow-medium);
   }
 
   .glass-button {
-    @apply bg-black/20 border border-black/30 rounded-2xl transition-all duration-300;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.12);
+    @apply rounded-2xl transition-all duration-300;
+    background: var(--glass-tint-light);
+    border: 1px solid var(--glass-border-light);
+    backdrop-filter: blur(var(--glass-blur-light)) saturate(1.3);
+    -webkit-backdrop-filter: blur(var(--glass-blur-light)) saturate(1.3);
   }
 
   .glass-button:hover {
-    @apply bg-black/35;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.4), 0 5px 18px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: var(--glass-tint-medium);
+    border-color: var(--glass-border-medium);
   }
 
   /* ============================================
-   * SEMANTIC TEMPLATE CLASSES
-   * Use these in components instead of inline Tailwind
+   * SEMANTIC TEMPLATE CLASSES — Apple Glass Style
+   * Premium frosted panels with heavy blur
    * ============================================ */
 
-  /* Template Container - Tinted dark glass panel */
+  /* Template Container - Premium frosted glass panel */
   .glass-template-container {
-    @apply backdrop-blur-sm rounded-2xl p-6;
-    background: rgba(255, 255, 255, 0.08);
-    /* white tint - frosted glass */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    @apply rounded-2xl p-6;
+    /* Chrome requires explicit background with some opacity for backdrop-filter */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border-light);
+    backdrop-filter: blur(32px) saturate(1.5);
+    -webkit-backdrop-filter: blur(32px) saturate(1.5);
+    box-shadow: var(--glass-shadow-light);
+    /* CHROME FIX: GPU compositing WITHOUT transform (transform breaks backdrop-filter) */
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* REMOVED: transform: translate3d(0, 0, 0) - this BREAKS backdrop-filter in Chrome */
+    will-change: backdrop-filter, opacity;
+    contain: layout style paint;
+  }
+
+  /* ============================================
+   * TELELABOR PANEL — Chrome-Safe Glass
+   * Critical fix: No transforms on this panel or children
+   * ============================================ */
+  .telelabor-panel {
+    /* GPU compositing hints that DON'T break backdrop-filter */
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: right, opacity;
+    contain: layout style;
+    /* Ensure all blur effects work inside this panel */
+  }
+
+  /* All backdrop-blur elements inside telelabor need webkit prefix */
+  .telelabor-panel .backdrop-blur-sm,
+  .telelabor-panel [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .telelabor-panel .backdrop-blur-lg {
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
 
   /* Image Container - For template image sections */
@@ -931,62 +1279,14 @@ button,
   }
 
   /* ============================================
-   * DARK TEAL GLASS UTILITIES
-   * For Telelabor chat panel and system UI
-   * Color: (17, 34, 51) - dark teal
+   * DEPRECATED: teal-glass-* and teal-border-*
+   * REPLACED BY: glass-*-dark classes
+   * 
+   * Migration guide:
+   * - teal-glass-30 → glass-light-dark
+   * - teal-glass-50 → glass-medium-dark
+   * - teal-glass-55 → glass-heavy-dark
    * ============================================ */
-
-  .teal-glass-30 {
-    background: rgba(17, 34, 51, 0.30);
-  }
-
-  .teal-glass-35 {
-    background: rgba(17, 34, 51, 0.35);
-  }
-
-  .teal-glass-40 {
-    background: rgba(17, 34, 51, 0.40);
-  }
-
-  .teal-glass-45 {
-    background: rgba(17, 34, 51, 0.45);
-  }
-
-  .teal-glass-50 {
-    background: rgba(17, 34, 51, 0.50);
-  }
-
-  .teal-glass-55 {
-    background: rgba(17, 34, 51, 0.55);
-  }
-
-  .teal-border-30 {
-    border-color: rgba(17, 34, 51, 0.30);
-  }
-
-  .teal-border-40 {
-    border-color: rgba(17, 34, 51, 0.40);
-  }
-
-  .teal-border-45 {
-    border-color: rgba(17, 34, 51, 0.45);
-  }
-
-  .teal-border-50 {
-    border-color: rgba(17, 34, 51, 0.50);
-  }
-
-  .teal-border-55 {
-    border-color: rgba(17, 34, 51, 0.55);
-  }
-
-  .teal-border-60 {
-    border-color: rgba(17, 34, 51, 0.60);
-  }
-
-  .teal-border-65 {
-    border-color: rgba(17, 34, 51, 0.65);
-  }
 
   /* ============================================
    * BUTTON SEMANTIC CLASSES - 8-COLOR PALETTE
@@ -1521,52 +1821,54 @@ button,
     }
   }
 
-  /* Section entrance animations */
+  /* Section entrance animations - CHROME-SAFE: opacity only
+   * Transform-based animations break backdrop-filter for ALL descendants in Chromium
+   */
   @keyframes section-enter {
     0% {
       opacity: 0;
-      transform: scale(0.95) translateY(20px);
+      /* REMOVED: transform: scale(0.95) translateY(20px) - breaks backdrop-filter */
     }
 
     100% {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      /* REMOVED: transform: scale(1) translateY(0) */
     }
   }
 
   @keyframes section-exit {
     0% {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      /* REMOVED: transform: scale(1) translateY(0) */
     }
 
     100% {
       opacity: 0;
-      transform: scale(0.92) translateY(-10px);
+      /* REMOVED: transform: scale(0.92) translateY(-10px) */
     }
   }
 
   @keyframes page-enter {
     0% {
       opacity: 0;
-      transform: translateX(20px);
+      /* REMOVED: transform: translateX(20px) - breaks backdrop-filter */
     }
 
     100% {
       opacity: 1;
-      transform: translateX(0);
+      /* REMOVED: transform: translateX(0) */
     }
   }
 
   @keyframes page-exit {
     0% {
       opacity: 1;
-      transform: translateX(0);
+      /* REMOVED: transform: translateX(0) */
     }
 
     100% {
       opacity: 0;
-      transform: translateX(-20px);
+      /* REMOVED: transform: translateX(-20px) */
     }
   }
 
@@ -1611,16 +1913,14 @@ button,
     animation: pulse-subtle 2s ease-in-out infinite;
   }
 
-  /* Subsection appear - simple and elegant */
+  /* Subsection appear - Chrome-safe (no transform to preserve backdrop-filter) */
   @keyframes subsection-appear {
     0% {
       opacity: 0;
-      transform: translateY(4px);
     }
 
     100% {
       opacity: 1;
-      transform: translateY(0);
     }
   }
 
@@ -1736,10 +2036,12 @@ button,
     animation: color-pulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  /* Section entrance animations with dramatic depth effects */
+  /* Section entrance animations - CHROME-SAFE: no transforms
+   * Transform-style: preserve-3d breaks backdrop-filter in Chromium
+   */
   .animate-section-enter {
     animation: fly-through-space 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-style: preserve-3d;
+    /* REMOVED: transform-style: preserve-3d - breaks backdrop-filter */
   }
 
   .animate-section-exit {
@@ -2180,28 +2482,30 @@ button,
     }
   }
 
-  /* Page transition animations for smooth section changes */
+  /* Page transition animations - CHROME-SAFE: opacity only, no transforms
+   * Transform-based animations break backdrop-filter for ALL descendants in Chromium
+   */
   @keyframes page-fade-in {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      /* REMOVED: transform: translateY(20px) - breaks backdrop-filter in Chrome */
     }
 
     to {
       opacity: 1;
-      transform: translateY(0);
+      /* REMOVED: transform: translateY(0) */
     }
   }
 
   @keyframes page-fade-out {
     from {
       opacity: 1;
-      transform: translateY(0);
+      /* REMOVED: transform: translateY(0) */
     }
 
     to {
       opacity: 0;
-      transform: translateY(-20px);
+      /* REMOVED: transform: translateY(-20px) - breaks backdrop-filter in Chrome */
     }
   }
 
@@ -2253,33 +2557,35 @@ button,
     transform: translateZ(30px);
   }
 
-  /* Section Transition - Flying Through Space with Motion Blur and Depth Fade */
+  /* Section Transition - CHROME-SAFE: opacity and filter only
+   * Transform-based animations break backdrop-filter for ALL descendants in Chromium
+   */
   @keyframes fly-through-space {
     0% {
       opacity: 0;
-      transform: translateZ(-200px) scale(0.95);
       filter: blur(4px);
+      /* REMOVED: transform: translateZ(-200px) scale(0.95) - breaks backdrop-filter */
     }
 
     100% {
       opacity: 1;
-      transform: translateZ(0) scale(1);
       filter: blur(0);
+      /* REMOVED: transform: translateZ(0) scale(1) */
     }
   }
 
-  /* Conversational Regeneration Effect */
+  /* Conversational Regeneration Effect - CHROME-SAFE */
   @keyframes regenerate {
     0% {
       opacity: 0;
-      transform: scale(0.95) translateY(20px);
       filter: blur(8px);
+      /* REMOVED: transform: scale(0.95) translateY(20px) - breaks backdrop-filter */
     }
 
     100% {
       opacity: 1;
-      transform: scale(1) translateY(0);
       filter: blur(0);
+      /* REMOVED: transform: scale(1) translateY(0) */
     }
   }
 

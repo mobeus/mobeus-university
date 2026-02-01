@@ -2,9 +2,9 @@
 description: Create a new site function that the Runtime Agent (Catherine) can call to operate the Glass
 ---
 
-# Create Site Function Workflow
+# Register Function Workflow
 
-Add a new function that Catherine can call to control the Glass.
+Register a new function that your tele can call to control the Glass.
 
 ## Existing Site Functions
 

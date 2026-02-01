@@ -51,7 +51,7 @@ export const Metric: React.FC<MetricProps> = ({
     const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : null;
 
     return (
-        <div className="glass-template-container h-full flex flex-col items-center justify-center">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col items-center justify-center">
 
             <div className={`relative px-16 py-14 rounded-3xl bg-gradient-to-b ${theme.bg} border ${theme.border}
                 shadow-2xl ${theme.glow} max-w-lg w-full text-center`}>

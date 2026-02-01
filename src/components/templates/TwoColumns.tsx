@@ -60,12 +60,12 @@ export const TwoColumns: React.FC<TwoColumnsProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
-            {/* Header */}
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
+            {/* Header - Left Aligned */}
             {(headline || subheadline) && (
-                <div className="text-center mb-10">
+                <div className="mb-10">
                     {subheadline && (
-                        <div className="text-sm text-sapphire font-semibold uppercase tracking-wider mb-3">
+                        <div className="text-sm text-[var(--color-secondary)] font-semibold uppercase tracking-wider mb-3">
                             {subheadline}
                         </div>
                     )}
@@ -77,12 +77,12 @@ export const TwoColumns: React.FC<TwoColumnsProps> = ({
                 </div>
             )}
 
-            {/* Two Columns */}
-            <div className="grid md:grid-cols-2 gap-10 flex-grow">
-                <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06]">
+            {/* Two Columns - Glass Cards */}
+            <div className="grid md:grid-cols-2 gap-8 flex-grow">
+                <div className="glass-medium rounded-2xl p-8">
                     {renderColumn(leftColumn)}
                 </div>
-                <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06]">
+                <div className="glass-medium rounded-2xl p-8">
                     {renderColumn(rightColumn)}
                 </div>
             </div>

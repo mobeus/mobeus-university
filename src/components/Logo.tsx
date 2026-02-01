@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { default as aiworksLogo } from '@/assets/aiworks-logo.png';
+import { default as telecoLogo } from '@/assets/teleco-logo.png';
 
 interface LogoProps {
     onClick?: () => void;
@@ -25,8 +25,8 @@ export const Logo: React.FC<LogoProps> = ({ onClick, className = '' }) => {
             disabled={!onClick}
         >
             <img
-                src={aiworksLogo}
-                alt="AIworks"
+                src={telecoLogo}
+                alt="Teleco"
                 className="no-lightboard h-[27px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
                 style={{ aspectRatio: 'auto' }}
             />

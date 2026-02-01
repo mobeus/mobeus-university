@@ -1,14 +1,16 @@
 /**
  * Form - GENERIC
  * Interactive form with live-updating fields
+ * Split layout: Content on left, Form on right
  * NO ENGLISH DEFAULTS — All content from JSON
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Calendar, User, Mail, Send, CheckCircle, Sparkles, PartyPopper, LucideIcon } from 'lucide-react';
+import { Calendar, User, Mail, Send, CheckCircle, Sparkles, PartyPopper, LucideIcon, ArrowRight } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 interface FormField {
     name: string;
@@ -23,6 +25,21 @@ interface InfoItem {
     text: string;
 }
 
+interface Badge {
+    icon?: string;
+    label: string;
+    variant?: 'default' | 'accent' | 'success';
+}
+
+interface ContentPanel {
+    title?: string;
+    subtitle?: string;
+    paragraph?: string;
+    imageUrl?: string;
+    imagePrompt?: string;
+    badges?: Badge[];
+}
+
 interface FormProps {
     headline?: string;
     subheadline?: string;
@@ -35,6 +52,7 @@ interface FormProps {
     confirmed?: boolean;
     confirmationTitle?: string;
     confirmationMessage?: string;
+    content?: ContentPanel;  // NEW: Left side content
 }
 
 const getIcon = (iconName?: string): LucideIcon => {
@@ -121,12 +139,14 @@ export const Form: React.FC<FormProps> = ({
     confirmed = false,
     confirmationTitle,
     confirmationMessage,
+    content,
 }) => {
     const { playClick } = useSound();
     const [localValues, setLocalValues] = useState<Record<string, string>>(propValues);
     const [showCelebration, setShowCelebration] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
+    // Live update: When tele sends new values, update the form fields
     useEffect(() => {
         Object.entries(propValues).forEach(([key, val]) => {
             if (val && val !== localValues[key]) {
@@ -155,10 +175,11 @@ export const Form: React.FC<FormProps> = ({
 
     const hasDateField = fields?.some(f => f.type === 'date');
     const dateValue = hasDateField && fields ? localValues[fields.find(f => f.type === 'date')!.name] : null;
+    const hasContent = content && (content.title || content.imageUrl || content.imagePrompt || content.paragraph);
 
     if (submitted || confirmed) {
         return (
-            <div className="glass-template-container h-full flex items-center justify-center">
+            <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex items-center justify-center">
                 <div className="p-16 rounded-3xl bg-gradient-to-b from-jade/10 to-jade/5 border border-jade/20 text-center max-w-lg">
                     <div className={`transition-all duration-700 ${showCelebration ? 'scale-110' : 'scale-100'}`}>
                         <div className="flex items-center justify-center gap-4 mb-8">
@@ -177,15 +198,77 @@ export const Form: React.FC<FormProps> = ({
     }
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
+            {/* Optional header */}
+            {(headline || subheadline) && (
+                <div className="pb-6">
+                    {headline && <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{headline}</h2>}
+                    {subheadline && <p className="text-mist/60 mt-2">{subheadline}</p>}
+                </div>
+            )}
+
+            {/* Split layout */}
             <div className="grid md:grid-cols-2 gap-8 flex-grow">
 
+                {/* LEFT: Content Panel */}
                 <div className="flex flex-col gap-6">
+                    {/* Content panel with title, image, paragraph */}
+                    {hasContent && (
+                        <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.06] flex-grow flex flex-col">
+                            {/* Image */}
+                            {(content.imageUrl || content.imagePrompt) && (
+                                <div className="aspect-square rounded-xl overflow-hidden mb-6 border border-white/[0.06]">
+                                    <SmartImage
+                                        assetId={content.imageUrl || content.imagePrompt || 'form-image'}
+                                        alt={content.title || 'Form'}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            )}
 
+                            {/* Title */}
+                            {content.title && (
+                                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{content.title}</h3>
+                            )}
+
+                            {/* Subtitle */}
+                            {content.subtitle && (
+                                <p className="text-lg text-sapphire font-medium mb-4">{content.subtitle}</p>
+                            )}
+
+                            {/* Paragraph */}
+                            {content.paragraph && (
+                                <p className="text-mist/60 leading-relaxed mb-6">{content.paragraph}</p>
+                            )}
+
+                            {/* Badges */}
+                            {content.badges && content.badges.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mt-auto">
+                                    {content.badges.map((badge, i) => {
+                                        const BadgeIcon = getIcon(badge.icon);
+                                        const variantClass = badge.variant === 'accent'
+                                            ? 'bg-flamingo/10 text-flamingo border-flamingo/20'
+                                            : badge.variant === 'success'
+                                                ? 'bg-jade/10 text-jade border-jade/20'
+                                                : 'bg-sapphire/10 text-sapphire border-sapphire/20';
+                                        return (
+                                            <div key={i} className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-sm ${variantClass}`}>
+                                                {badge.icon && <BadgeIcon className="w-3 h-3" />}
+                                                {badge.label}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Calendar if date field exists */}
                     {hasDateField && <MiniCalendar selectedDate={dateValue || null} />}
 
+                    {/* Info items if provided */}
                     {infoItems && infoItems.length > 0 && (
-                        <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.06] flex-grow">
+                        <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.06]">
                             {infoLabel && <h4 className="text-sm font-semibold text-flamingo mb-4 uppercase tracking-wider">{infoLabel}</h4>}
                             <ul className="space-y-3">
                                 {infoItems.map((item, i) => (
@@ -199,6 +282,7 @@ export const Form: React.FC<FormProps> = ({
                     )}
                 </div>
 
+                {/* RIGHT: Form Fields */}
                 <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.06]">
                     <form onSubmit={handleSubmit} className="space-y-6 h-full flex flex-col">
                         {fields && fields.map((field) => {
@@ -213,39 +297,61 @@ export const Form: React.FC<FormProps> = ({
                                         {field.label}
                                         {hasValue && <Sparkles className="w-3 h-3 text-sapphire animate-pulse ml-auto" />}
                                     </label>
-                                    <input
-                                        type={field.type}
-                                        required={field.required}
-                                        placeholder={field.placeholder}
-                                        className={`w-full px-5 py-4 rounded-xl 
-                                            bg-white/[0.02] border text-white text-lg
-                                            placeholder:text-mist/30 
-                                            focus:outline-none focus:bg-white/[0.04]
-                                            transition-all duration-200
-                                            ${hasValue
-                                                ? 'border-sapphire/40 ring-1 ring-sapphire/20'
-                                                : 'border-white/[0.06] hover:border-white/[0.12]'
-                                            }`}
-                                        value={value}
-                                        onChange={(e) => setLocalValues(prev => ({ ...prev, [field.name]: e.target.value }))}
-                                    />
+                                    {field.type === 'textarea' ? (
+                                        <textarea
+                                            required={field.required}
+                                            placeholder={field.placeholder}
+                                            className={`w-full px-5 py-4 rounded-xl 
+                                                bg-white/[0.02] border text-white text-lg
+                                                placeholder:text-mist/30 
+                                                focus:outline-none focus:bg-white/[0.04]
+                                                transition-all duration-200 min-h-[120px] resize-none
+                                                ${hasValue
+                                                    ? 'border-sapphire/40 ring-1 ring-sapphire/20'
+                                                    : 'border-white/[0.06] hover:border-white/[0.12]'
+                                                }`}
+                                            value={value}
+                                            onChange={(e) => setLocalValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+                                        />
+                                    ) : (
+                                        <input
+                                            type={field.type}
+                                            required={field.required}
+                                            placeholder={field.placeholder}
+                                            className={`w-full px-5 py-4 rounded-xl 
+                                                bg-white/[0.02] border text-white text-lg
+                                                placeholder:text-mist/30 
+                                                focus:outline-none focus:bg-white/[0.04]
+                                                transition-all duration-200
+                                                ${hasValue
+                                                    ? 'border-sapphire/40 ring-1 ring-sapphire/20'
+                                                    : 'border-white/[0.06] hover:border-white/[0.12]'
+                                                }`}
+                                            value={value}
+                                            onChange={(e) => setLocalValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+                                        />
+                                    )}
                                 </div>
                             );
                         })}
 
+                        {/* Spacer to push button to bottom */}
                         <div className="flex-grow" />
 
+                        {/* Submit button - BOTTOM RIGHT */}
                         {submitLabel && (
-                            <button
-                                type="submit"
-                                className="w-full inline-flex items-center justify-center gap-3 px-8 py-5 
-                                    bg-flamingo text-white font-semibold rounded-2xl 
-                                    hover:bg-flamingo/90 hover:scale-[1.01] active:scale-[0.99]
-                                    transition-all text-lg shadow-lg shadow-flamingo/20"
-                            >
-                                <Send className="w-5 h-5" />
-                                {submitLabel}
-                            </button>
+                            <div className="flex justify-end pt-4">
+                                <button
+                                    type="submit"
+                                    className="inline-flex items-center gap-3 px-8 py-4 
+                                        bg-flamingo text-white font-semibold rounded-full 
+                                        hover:bg-flamingo/90 hover:scale-[1.02] active:scale-[0.98]
+                                        transition-all text-lg shadow-lg shadow-flamingo/20"
+                                >
+                                    {submitLabel}
+                                    <ArrowRight className="w-5 h-5" />
+                                </button>
+                            </div>
                         )}
                     </form>
                 </div>
@@ -255,3 +361,4 @@ export const Form: React.FC<FormProps> = ({
 };
 
 export default Form;
+

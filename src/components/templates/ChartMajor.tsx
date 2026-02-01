@@ -160,7 +160,7 @@ export const ChartMajor: React.FC<ChartMajorProps> = ({
     };
 
     return (
-        <div className="glass-template-container h-full flex flex-col">
+        <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col">
             <div className="grid md:grid-cols-3 gap-6 flex-grow">
                 {/* 2/3 Chart */}
                 <div className="md:col-span-2 p-6 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] flex flex-col">
