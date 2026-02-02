@@ -7,6 +7,20 @@ declare global {
     TellTele: (message: string) => void;
     setAvatarVolume?: (volume: number) => void;
     getAvatarVolume?: () => number;
+    // Conference (Web-to-Phone) methods
+    createConferenceCall?: (options: {
+      phoneNumber: string;
+      webUserId?: string;
+      reason?: string;
+      tenantUuid?: string;
+      agentId?: string;
+    }) => Promise<any>;
+    hangupConferenceCall?: () => boolean;
+    setConferenceMuted?: (muted: boolean) => boolean;
+    isConferenceMuted?: () => boolean;
+    getConferenceStatus?: () => any;
+    onConferenceEvent?: (event: string, handler: (data: any) => void) => void;
+    offConferenceEvent?: (event: string, handler: (data: any) => void) => void;
   }
 
   interface Window {
