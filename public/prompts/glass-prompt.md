@@ -26,8 +26,9 @@ navigateToSection(payload: NavigationPayload): void
 
 ---
 
-## 🎨 TEMPLATES (21)
+<!-- TEMPLATE-SCHEMAS-START -->
 
+## 🎨 TEMPLATES (21)
 
 ### LAYOUT
 
@@ -362,6 +363,8 @@ Displays input fields for all 4 required data points plus calculated profit prev
 ```
 
 ---
+
+<!-- TEMPLATE-SCHEMAS-END -->
 
 ## 🎯 SHOT PROMPTS
 
