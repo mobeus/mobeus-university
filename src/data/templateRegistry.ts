@@ -1,41 +1,44 @@
 /**
- * Template Registry v100.3
+ * Template Registry v105.0
  * 
- * 30 Core Templates + 3 Legacy Aliases (33 total for LLM compatibility)
+ * 21 Core Templates (Mortgage-Focused) + 3 Legacy Aliases (24 total for LLM compatibility)
  * All templates documented in glass-prompt.md
  */
+
 
 import { lazy } from 'react';
 
 export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // ═══════════════════════════════════════════════════════════════════════
-    // CORE TEMPLATES (5)
+    // CORE TEMPLATES (4)
     // ═══════════════════════════════════════════════════════════════════════
     Hero: lazy(() => import("@/components/templates/Hero").then(m => ({ default: m.Hero }))),
     Stats: lazy(() => import("@/components/templates/Stats").then(m => ({ default: m.Stats }))),
     Trio: lazy(() => import("@/components/templates/Trio").then(m => ({ default: m.Trio }))),
     Banner: lazy(() => import("@/components/templates/Banner").then(m => ({ default: m.Banner }))),
-    Story: lazy(() => import("@/components/templates/Story").then(m => ({ default: m.Story }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // LAYOUT TEMPLATES (6)
+    // LAYOUT TEMPLATES (2)
     // ═══════════════════════════════════════════════════════════════════════
-    Carousel: lazy(() => import("@/components/templates/Carousel").then(m => ({ default: m.Carousel }))),
     WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
     Split: lazy(() => import("@/components/templates/Split").then(m => ({ default: m.Split }))),
-    Grid: lazy(() => import("@/components/templates/Grid").then(m => ({ default: m.Grid }))),
-    Accordion: lazy(() => import("@/components/templates/Accordion").then(m => ({ default: m.Accordion }))),
-    ConsultationScheduler: lazy(() => import("@/components/templates/ConsultationScheduler").then(m => ({ default: m.ConsultationScheduler }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // CONTENT TEMPLATES (6)
+    // INTERACTIVE TEMPLATES (6) - MORTGAGE-SPECIFIC
     // ═══════════════════════════════════════════════════════════════════════
-    Showcase: lazy(() => import("@/components/templates/Showcase").then(m => ({ default: m.Showcase }))),
-    Guide: lazy(() => import("@/components/templates/Guide").then(m => ({ default: m.Guide }))),
+    MortgageReview: lazy(() => import("@/components/templates/MortgageReview").then(m => ({ default: m.MortgageReview }))),
+    ComplianceConsent: lazy(() => import("@/components/templates/ComplianceConsent").then(m => ({ default: m.ComplianceConsent }))),
+    RentalPropertyReview: lazy(() => import("@/components/templates/RentalPropertyReview").then(m => ({ default: m.RentalPropertyReview }))),
+    FlipPropertyReview: lazy(() => import("@/components/templates/FlipPropertyReview").then(m => ({ default: m.FlipPropertyReview }))),
+    RentalDataCapture: lazy(() => import("@/components/templates/RentalDataCapture").then(m => ({ default: m.RentalDataCapture }))),
+    FlipDataCapture: lazy(() => import("@/components/templates/FlipDataCapture").then(m => ({ default: m.FlipDataCapture }))),
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // CONTENT TEMPLATES (3)
+    // ═══════════════════════════════════════════════════════════════════════
     List: lazy(() => import("@/components/templates/List").then(m => ({ default: m.List }))),
-    Timeline: lazy(() => import("@/components/templates/Timeline").then(m => ({ default: m.Timeline }))),
-    Form: lazy(() => import("@/components/templates/Form").then(m => ({ default: m.Form }))),
-    PartyConfirmation: lazy(() => import("@/components/templates/PartyConfirmation").then(m => ({ default: m.PartyConfirmation }))),
+    Article: lazy(() => import("@/components/templates/Article").then(m => ({ default: m.Article }))),
+    Paragraph: lazy(() => import("@/components/templates/Paragraph").then(m => ({ default: m.Paragraph }))),
 
     // ═══════════════════════════════════════════════════════════════════════
     // COMPARISON & DISPLAY TEMPLATES (4)
@@ -46,35 +49,14 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Steps: lazy(() => import("@/components/templates/Steps").then(m => ({ default: m.Steps }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // IMAGE TEMPLATES (1)
-    // ═══════════════════════════════════════════════════════════════════════
-    ImageSingle: lazy(() => import("@/components/templates/ImageSingle").then(m => ({ default: m.ImageSingle }))),
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // DATA & UTILITY TEMPLATES (5)
+    // DATA & UTILITY TEMPLATES (2)
     // ═══════════════════════════════════════════════════════════════════════
     Table: lazy(() => import("@/components/templates/Table").then(m => ({ default: m.Table }))),
-    Infographic: lazy(() => import("@/components/templates/Infographic").then(m => ({ default: m.Infographic }))),
-    Article: lazy(() => import("@/components/templates/Article").then(m => ({ default: m.Article }))),
-    Feature: lazy(() => import("@/components/templates/Feature").then(m => ({ default: m.Feature }))),
-    Paragraph: lazy(() => import("@/components/templates/Paragraph").then(m => ({ default: m.Paragraph }))),
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // TEACHING TEMPLATES (1)
-    // ═══════════════════════════════════════════════════════════════════════
-    Lesson: lazy(() => import("@/components/templates/Lesson").then(m => ({ default: m.Lesson }))),
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // RATING & TESTING TEMPLATES (1)
-    // ═══════════════════════════════════════════════════════════════════════
-    Scorecard: lazy(() => import("@/components/templates/Scorecard").then(m => ({ default: m.Scorecard }))),
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // TEXT-HEAVY TEMPLATES (1 - Consolidated)
-    // ═══════════════════════════════════════════════════════════════════════
     MediaText: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
 
-    // Backward compatibility - map old templates to MediaText
+    // ═══════════════════════════════════════════════════════════════════════
+    // LEGACY ALIASES (Backward Compatibility)
+    // ═══════════════════════════════════════════════════════════════════════
     TextImageLeft: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
     TextImageRight: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
     TwoColumns: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),

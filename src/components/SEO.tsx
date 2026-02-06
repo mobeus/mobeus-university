@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Mobeus | The Assisted Future',
-  description = 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
+  title = 'CashCo Mortgage | Smart Financing for Smart Investors',
+  description = 'Non-QM mortgages for rental income and fix-and-flip investments. Get your 30-day non-binding estimate today.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Mobeus', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'Help is Here'],
+  keywords = ['CashCo', 'Non-QM Mortgage', 'Rental Property Financing', 'Fix and Flip Loans', 'Investment Property'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'Mobeus', true);
+    updateMetaTag('og:site_name', 'CashCo', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,41 +72,35 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - Mobeus Platform
+// Pre-configured SEO for sections - CashCo Mortgage Concierge
 export const sectionSEO = {
   welcome: {
-    title: 'Mobeus | The Assisted Future',
-    description: 'Experience The Assisted Future. Conversational labor that helps you. Help is here.',
-    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life', 'Help is Here'],
+    title: 'CashCo Mortgage | Smart Financing for Smart Investors',
+    description: 'Non-QM mortgages for rental income and fix-and-flip investments. Get your 30-day non-binding estimate.',
+    keywords: ['CashCo', 'Non-QM Mortgage', 'Rental Property Financing', 'Fix and Flip Loans', 'Investment Property'],
   },
 
-  platform: {
-    title: 'The Mobeus Platform | Operating System for Conversational Labor',
-    description: 'Built on six agnostic foundations. Model, cloud, device, channel, language, and use case agnostic.',
-    keywords: ['Mobeus Platform', 'Conversational Labor', 'Tele', 'Infrastructure'],
+  rental: {
+    title: 'Purchase to Rent Financing | CashCo Mortgage',
+    description: 'Long-term rental income strategy. Flexible non-QM terms for investment property financing.',
+    keywords: ['Rental Property Financing', 'Non-QM Loans', 'Investment Property', 'Purchase to Rent'],
   },
 
-  teles: {
-    title: 'The Tele Population | Helpful Conversational Workers',
-    description: 'A population of helpful teles — conversational workers accelerating The Assisted Future.',
-    keywords: ['Tele', 'Tele Population', 'Conversational Workers', 'Help is Here'],
+  flip: {
+    title: 'Purchase to Flip Financing | CashCo Mortgage',
+    description: 'Short-term renovation profits. Quick turnaround financing for fix-and-flip investors.',
+    keywords: ['Fix and Flip Loans', 'Renovation Financing', 'House Flipping', 'Short-term Investment'],
   },
 
-  future: {
-    title: 'The Assisted Future | Space for Life',
-    description: 'A world where machines truly help mankind, giving humanity space for life. Time for family, creativity, and joy.',
-    keywords: ['The Assisted Future', 'Space for Life', 'Machines Helping Mankind'],
-  },
-
-  launch: {
-    title: 'Population Party | The Assisted Future Arrives',
-    description: 'March 15, 2026 - Join the Population Party. Music, dancing, celebration. RSVP now.',
-    keywords: ['Population Party', 'The Assisted Future', 'Mobeus', 'March 2026', 'Celebration'],
+  estimate: {
+    title: 'Get Your Mortgage Estimate | CashCo',
+    description: 'Calculate your mortgage in minutes. Non-binding estimate valid for 30 days.',
+    keywords: ['Mortgage Calculator', 'Mortgage Estimate', 'Non-Binding Quote', 'CashCo'],
   },
 
   home: {
-    title: 'Mobeus | The Assisted Future',
-    description: 'Experience The Assisted Future.',
-    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life'],
+    title: 'CashCo Mortgage | Smart Financing for Smart Investors',
+    description: 'Specialized in non-QM financing for rental and flip properties.',
+    keywords: ['CashCo', 'Investment Property Financing', 'Non-QM Mortgage'],
   },
 };

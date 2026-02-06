@@ -35,7 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // MOBEUS — Help is here
+  // CASHCO — Smart Financing for Smart Investors
   // ============================================
   const navItems: Array<{
     id: string;
@@ -45,24 +45,24 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
+        id: 'rental-financing',
+        label: 'RENTAL FINANCING',
+        teleQuery: 'show me rental financing options'
+      },
+      {
+        id: 'flip-financing',
+        label: 'FLIP FINANCING',
+        teleQuery: 'show me flip financing options'
+      },
+      {
         id: 'how-it-works',
         label: 'HOW IT WORKS',
         teleQuery: 'show me how it works'
       },
       {
-        id: 'what-we-do',
-        label: 'WHAT WE DO',
-        teleQuery: 'show me what you do'
-      },
-      {
-        id: 'about',
-        label: 'ABOUT',
-        teleQuery: 'show me what mobeus is'
-      },
-      {
-        id: 'get-started',
-        label: 'LAUNCH EVENT',
-        teleQuery: 'show me launch event registration',
+        id: 'get-estimate',
+        label: 'GET ESTIMATE',
+        teleQuery: 'show me mortgage estimate',
         isHighlighted: true
       }
     ];

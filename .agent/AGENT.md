@@ -111,6 +111,24 @@ Run `/audit-tele` for live metrics. Expected healthy state:
 
 ---
 
+## 🔒 PROTECTED FILES — NEVER DELETE
+
+**These files are SACRED and must NEVER be deleted:**
+
+### Core Prompt Files (The Brain)
+- ✅ `public/prompts/tele-knowledge.md` — The tele's knowledge, mission, and personality
+- ✅ `public/prompts/glass-prompt.md` — Template schemas and shot prompt examples
+
+**Why Protected:**
+- These files define the tele's entire intelligence
+- Deleting them breaks the conversational experience
+- They should be modified/updated, NEVER deleted
+- Even during cleanup or refactoring, these stay
+
+**RULE:** If you're cleaning up the project and see deletion suggestions for these files, **REJECT** them.
+
+---
+
 ## 🎨 DESIGN SYSTEM — Rule of 3
 
 ### Colors

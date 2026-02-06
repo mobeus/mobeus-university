@@ -177,10 +177,10 @@ button,
      * 
      * DESIGN PRINCIPLES:
      * 1. Heavy blur (16-24px) for premium frosted effect
-     * 2. Ultra-subtle white tints for glass
-     * 3. Luminous borders on top/left edges
-     * 4. Minimal shadows, maximum depth through blur
-     * 5. Colors harmonize with hero background
+     * 2. Ultra-subtle black tints for glass on white
+     * 3. Dark borders for definition
+     * 4. Visible shadows for depth on white
+     * 5. Colors harmonize with white background
      * 
      * ============================================
      * REFINED 6-COLOR PALETTE
@@ -194,13 +194,13 @@ button,
     --color-mist: #FFFFFF;
     --color-onyx: #000000;
 
-    /* Accent Colors - Refined for harmony */
-    --color-primary: #A78BFA;
-    /* Soft violet - accessible on dark */
-    --color-secondary: #67E8F9;
-    /* Cyan - complements hero colors */
-    --color-accent: #F472B6;
-    /* Soft pink - warm accent */
+    /* Accent Colors - Unified bright blue palette */
+    --color-primary: #3B82F6;
+    /* Bright blue - primary brand color */
+    --color-secondary: #3B82F6;
+    /* Bright blue - unified accent */
+    --color-accent: #3B82F6;
+    /* Bright blue - consistent accent */
     --color-success: #34D399;
     /* Emerald - success states */
     --color-warning: #FBBF24;
@@ -209,29 +209,29 @@ button,
     /* Slate - subdued text */
 
     /* Legacy color mappings */
-    --color-flamingo: var(--color-primary);
+    --color-flamingo: #3B82F6;
     --color-wave: #1E3A5F;
     --color-turmeric: var(--color-warning);
     --color-jade: var(--color-success);
-    --color-sapphire: var(--color-secondary);
-    --color-amethyst: #8B5CF6;
+    --color-sapphire: #3B82F6;
+    --color-amethyst: #3B82F6;
 
     /* ============================================
      * GLASS TOKENS — Apple-style frosted glass
      * ============================================ */
 
-    /* Glass tints - ultra subtle whites with slight saturation for vibrancy */
-    --glass-tint-subtle: rgba(255, 255, 255, 0.04);
-    --glass-tint-light: rgba(255, 255, 255, 0.08);
-    --glass-tint-medium: rgba(255, 255, 255, 0.12);
-    --glass-tint-strong: rgba(255, 255, 255, 0.16);
-    --glass-tint-prominent: rgba(255, 255, 255, 0.20);
+    /* Glass tints - ultra subtle blacks for visibility on white */
+    --glass-tint-subtle: rgba(0, 0, 0, 0.02);
+    --glass-tint-light: rgba(0, 0, 0, 0.04);
+    --glass-tint-medium: rgba(0, 0, 0, 0.06);
+    --glass-tint-strong: rgba(0, 0, 0, 0.08);
+    --glass-tint-prominent: rgba(0, 0, 0, 0.12);
 
-    /* Glass borders - luminous edges */
-    --glass-border-subtle: rgba(255, 255, 255, 0.10);
-    --glass-border-light: rgba(255, 255, 255, 0.15);
-    --glass-border-medium: rgba(255, 255, 255, 0.20);
-    --glass-border-strong: rgba(255, 255, 255, 0.28);
+    /* Glass borders - dark edges for definition on white */
+    --glass-border-subtle: rgba(0, 0, 0, 0.08);
+    --glass-border-light: rgba(0, 0, 0, 0.12);
+    --glass-border-medium: rgba(0, 0, 0, 0.16);
+    --glass-border-strong: rgba(0, 0, 0, 0.24);
 
     /* Blur intensities - APPLE STYLE: Heavy, consistent blur */
     --glass-blur-light: 24px;
@@ -248,17 +248,17 @@ button,
      * SEMANTIC MAPPINGS
      * ============================================ */
 
-    /* Backgrounds */
-    --background: var(--color-onyx);
-    --foreground: var(--color-mist);
+    /* Backgrounds - Inverted for white background */
+    --background: var(--color-mist);
+    --foreground: var(--color-onyx);
 
     /* Cards & Surfaces */
     --card: var(--glass-tint-light);
-    --card-foreground: var(--color-mist);
+    --card-foreground: var(--color-onyx);
 
     /* Primary Accent */
     --primary: var(--color-primary);
-    --primary-foreground: var(--color-mist);
+    --primary-foreground: var(--color-onyx);
 
     /* Secondary Accent */
     --secondary: var(--color-secondary);
@@ -266,11 +266,11 @@ button,
 
     /* Accent */
     --accent: var(--color-accent);
-    --accent-foreground: var(--color-mist);
+    --accent-foreground: var(--color-onyx);
 
     /* Muted */
-    --muted: rgba(255, 255, 255, 0.06);
-    --muted-foreground: rgba(255, 255, 255, 0.60);
+    --muted: rgba(0, 0, 0, 0.04);
+    --muted-foreground: rgba(0, 0, 0, 0.60);
 
     /* Borders & Inputs */
     --border: var(--glass-border-subtle);
@@ -321,9 +321,9 @@ button,
     --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.16);
     --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.24);
 
-    --shadow-glow-primary: 0 0 24px rgba(167, 139, 250, 0.3);
-    --shadow-glow-secondary: 0 0 24px rgba(103, 232, 249, 0.3);
-    --shadow-glow-accent: 0 0 24px rgba(244, 114, 182, 0.3);
+    --shadow-glow-primary: 0 0 24px rgba(59, 130, 246, 0.3);
+    --shadow-glow-secondary: 0 0 24px rgba(59, 130, 246, 0.3);
+    --shadow-glow-accent: 0 0 24px rgba(59, 130, 246, 0.3);
 
     /* Legacy shadow names */
     --shadow-glow-cyan: var(--shadow-glow-secondary);
@@ -659,6 +659,296 @@ button,
   body {
     @apply bg-background text-foreground;
   }
+
+  /* ============================================
+   * WHITE BACKGROUND COMPATIBILITY OVERRIDES
+   * ============================================
+   * Global overrides for hardcoded text-white classes
+   * to work with white backgrounds.
+   * This allows existing TSX components to work without
+   * manual edits while we migrate to semantic tokens.
+   * ============================================ */
+
+  .text-white {
+    color: rgba(0, 0, 0, 1) !important;
+  }
+
+  .text-white\/90 {
+    color: rgba(0, 0, 0, 0.90) !important;
+  }
+
+  .text-white\/80 {
+    color: rgba(0, 0, 0, 0.80) !important;
+  }
+
+  .text-white\/70 {
+    color: rgba(0, 0, 0, 0.70) !important;
+  }
+
+  .text-white\/60 {
+    color: rgba(0, 0, 0, 0.60) !important;
+  }
+
+  .text-white\/50 {
+    color: rgba(0, 0, 0, 0.50) !important;
+  }
+
+  .text-white\/40 {
+    color: rgba(0, 0, 0, 0.40) !important;
+  }
+
+  /* ADDITIONAL TEXT VARIATIONS */
+  .text-mist,
+  .text-mist\/70,
+  .text-mist\/80,
+  .text-mist\/90,
+  .text-mist\/60 {
+    color: rgba(0, 0, 0, 0.85) !important;
+  }
+
+  /* SVG ICON OVERRIDES - Force all SVG elements to black */
+  svg {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  svg path,
+  svg circle,
+  svg rect,
+  svg line,
+  svg polyline,
+  svg polygon,
+  svg ellipse {
+    stroke: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  svg[fill]:not([fill="none"]):not([fill="transparent"]) path,
+  svg[fill]:not([fill="none"]):not([fill="transparent"]) circle,
+  svg[fill]:not([fill="none"]):not([fill="transparent"]) rect {
+    fill: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* LUCIDE ICONS - Specific override for icon library */
+  .lucide,
+  .lucide *,
+  [class*="lucide-"],
+  [class*="lucide-"] * {
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* GENERIC ICON CLASSES */
+  .icon,
+  [class*="icon-"],
+  [class*="Icon"],
+  [class*="-icon"] {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* TELEGLASS COMPONENTS */
+  .telelabor-panel,
+  .telelabor-panel *:not(.text-primary):not(.text-secondary):not(.text-accent),
+  .telelabor-icons,
+  .telelabor-icons * {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* CHAT INTERFACE */
+  .chat-glass,
+  .chat-glass *:not(.text-primary):not(.text-secondary),
+  .chat-message,
+  .chat-message *,
+  .chat-bubble,
+  .chat-bubble * {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* NAVIGATION ELEMENTS */
+  nav *:not(.text-primary):not(.text-secondary),
+  .navigation *,
+  [role="navigation"] *,
+  .nav-item,
+  .nav-item * {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* BUTTONS & INTERACTIVE ELEMENTS */
+  button *:not(.text-primary):not(.text-secondary),
+  [role="button"] *,
+  .btn *,
+  .button * {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* HOVER STATES */
+  .hover\:text-white:hover,
+  .hover\:text-mist:hover,
+  *:hover .text-white {
+    color: rgba(0, 0, 0, 1) !important;
+  }
+
+  /* GLASS PANELS - Ensure text is black */
+  .glass-light *:not(.text-primary):not(.text-secondary):not(.text-accent),
+  .glass-medium *:not(.text-primary):not(.text-secondary):not(.text-accent),
+  .glass-heavy *:not(.text-primary):not(.text-secondary):not(.text-accent),
+  .glass-template-container *:not(.text-primary):not(.text-secondary):not(.text-accent) {
+    color: rgba(0, 0, 0, 0.85) !important;
+  }
+
+  /* BACKGROUND OVERLAYS */
+  .bg-white\/5,
+  .bg-white\/10,
+  .bg-white\/15,
+  .bg-white\/20,
+  .bg-white\/30 {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+
+  /* BORDER OVERRIDES */
+  .border-white\/5,
+  .border-white\/10,
+  .border-white\/15,
+  .border-white\/20,
+  .border-white\/30,
+  .border-white\/40 {
+    border-color: rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* ============================================
+   * BUTTON TEXT - Force WHITE for readability
+   * ============================================ */
+  button,
+  button *,
+  [role="button"],
+  [role="button"] *,
+  .btn,
+  .btn *,
+  .btn-cta,
+  .btn-cta *,
+  .btn-sapphire,
+  .btn-sapphire *,
+  .bg-flamingo,
+  .bg-flamingo *,
+  .bg-sapphire,
+  .bg-sapphire *,
+  .bg-primary,
+  .bg-primary * {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+
+  /* SEND BUTTON - Make it BLUE */
+  button[type="submit"],
+  button[aria-label*="send" i],
+  button[aria-label*="Send" i],
+  .send-button,
+  [class*="send-button"],
+  [class*="sendButton"] {
+    background-color: #3B82F6 !important;
+    border-color: #3B82F6 !important;
+  }
+
+  /* ============================================
+   * CHAT INTERFACE - Dark bubbles with white text
+   * ============================================ */
+  .chat-glass,
+  .chat-glass *:not(button):not(.btn),
+  .chat-message,
+  .chat-message *,
+  .chat-bubble,
+  .chat-bubble *,
+  [class*="chat"] *:not(button):not(.btn) {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* Chat bubble backgrounds - DARK for visibility */
+  .chat-bubble,
+  [class*="chat-bubble"],
+  .glass-heavy-dark {
+    background: rgba(0, 0, 0, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* User messages - blue background */
+  .chat-bubble.user,
+  [class*="user-message"],
+  [class*="UserMessage"] {
+    background: rgba(59, 130, 246, 0.8) !important;
+    border: 1px solid rgba(59, 130, 246, 0.5) !important;
+  }
+
+  /* Chat icons - WHITE */
+  .chat-glass svg,
+  .chat-glass svg *,
+  .chat-message svg,
+  .chat-message svg *,
+  [class*="chat"] svg:not(.lucide-x):not([class*="close"]) {
+    stroke: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* ============================================
+   * TITLE & SUBTITLE - Force BLACK (exclude chat)
+   * ============================================ */
+  h1:not(.chat-glass *):not([class*="chat"] *),
+  h2:not(.chat-glass *):not([class*="chat"] *),
+  h3:not(.chat-glass *):not([class*="chat"] *),
+  h4:not(.chat-glass *):not([class*="chat"] *),
+  h5:not(.chat-glass *):not([class*="chat"] *),
+  h6:not(.chat-glass *):not([class*="chat"] *),
+  .title:not(.chat-glass *):not([class*="chat"] *),
+  .subtitle:not(.chat-glass *):not([class*="chat"] *),
+  [class*="title"]:not(.chat-glass):not([class*="chat"]),
+  [class*="subtitle"]:not(.chat-glass):not([class*="chat"]),
+  [class*="heading"]:not(.chat-glass):not([class*="chat"]) {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* Keep button headings white */
+  button h1,
+  button h2,
+  button h3,
+  button h4,
+  button h5,
+  button h6,
+  .btn h1,
+  .btn h2,
+  .btn h3,
+  .btn h4,
+  .btn h5,
+  .btn h6 {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+
+  /* ============================================
+   * TELEGLASS ICONS - Blue active/focus states
+   * ============================================ */
+  .telelabor-icons button:active,
+  .telelabor-icons button:focus,
+  .telelabor-icons button[aria-expanded="true"],
+  [class*="teleglass"] button:active,
+  [class*="teleglass"] button:focus {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+    border-color: rgba(59, 130, 246, 0.4) !important;
+  }
+
+  .telelabor-icons button:active svg,
+  .telelabor-icons button:focus svg,
+  .telelabor-icons button[aria-expanded="true"] svg {
+    stroke: #3B82F6 !important;
+    color: #3B82F6 !important;
+  }
+
+  /* ============================================
+   * CAROUSEL CARDS - Keep text BLACK
+   * ============================================ */
+  .carousel *:not(button):not(.btn),
+  [class*="carousel"] *:not(button):not(.btn),
+  .card *:not(button):not(.btn):not([class*="chat"]),
+  [class*="card"] *:not(button):not(.btn):not([class*="chat"]) {
+    color: rgba(0, 0, 0, 0.85) !important;
+  }
+
+
+
 
   /* ============================================
    * LIGHTBOARD MODE - CSS-Based Filter System
@@ -1013,8 +1303,8 @@ button,
    * NEUTRAL GLASS (White Tint) - Default
    * ---------------------------------------- */
   .glass-light {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     --glass-blur: 16px;
     --glass-saturate: 1.3;
     backdrop-filter: blur(16px) saturate(1.3);
@@ -1023,8 +1313,8 @@ button,
   }
 
   .glass-medium {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     --glass-blur: 24px;
     --glass-saturate: 1.4;
     backdrop-filter: blur(24px) saturate(1.4);
@@ -1033,8 +1323,8 @@ button,
   }
 
   .glass-heavy {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.16);
     --glass-blur: 40px;
     --glass-saturate: 1.5;
     backdrop-filter: blur(40px) saturate(1.5);
@@ -1077,105 +1367,105 @@ button,
   }
 
   /* ----------------------------------------
-   * PRIMARY GLASS (Violet Tint) - #A78BFA
+   * PRIMARY GLASS (Bright Blue) - #3B82F6
    * For accent panels, highlighted content
    * ---------------------------------------- */
   .glass-light-primary {
-    background: rgba(167, 139, 250, 0.08);
-    border: 1px solid rgba(167, 139, 250, 0.15);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
     --glass-blur: 16px;
     --glass-saturate: 1.3;
     backdrop-filter: blur(16px) saturate(1.3);
     -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    box-shadow: 0 2px 16px rgba(167, 139, 250, 0.10);
+    box-shadow: 0 2px 16px rgba(59, 130, 246, 0.10);
   }
 
   .glass-medium-primary {
-    background: rgba(167, 139, 250, 0.15);
-    border: 1px solid rgba(167, 139, 250, 0.25);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.25);
     --glass-blur: 24px;
     --glass-saturate: 1.4;
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    box-shadow: 0 4px 24px rgba(167, 139, 250, 0.15);
+    box-shadow: 0 4px 24px rgba(59, 130, 246, 0.15);
   }
 
   .glass-heavy-primary {
-    background: rgba(167, 139, 250, 0.25);
-    border: 1px solid rgba(167, 139, 250, 0.35);
+    background: rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(59, 130, 246, 0.35);
     --glass-blur: 40px;
     --glass-saturate: 1.5;
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
-    box-shadow: 0 8px 32px rgba(167, 139, 250, 0.20);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.20);
   }
 
   /* ----------------------------------------
-   * SECONDARY GLASS (Cyan Tint) - #67E8F9
+   * SECONDARY GLASS (Bright Blue) - #3B82F6
    * For secondary accents, info panels
    * ---------------------------------------- */
   .glass-light-secondary {
-    background: rgba(103, 232, 249, 0.08);
-    border: 1px solid rgba(103, 232, 249, 0.15);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
     --glass-blur: 16px;
     --glass-saturate: 1.3;
     backdrop-filter: blur(16px) saturate(1.3);
     -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    box-shadow: 0 2px 16px rgba(103, 232, 249, 0.10);
+    box-shadow: 0 2px 16px rgba(59, 130, 246, 0.10);
   }
 
   .glass-medium-secondary {
-    background: rgba(103, 232, 249, 0.15);
-    border: 1px solid rgba(103, 232, 249, 0.25);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.25);
     --glass-blur: 24px;
     --glass-saturate: 1.4;
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    box-shadow: 0 4px 24px rgba(103, 232, 249, 0.15);
+    box-shadow: 0 4px 24px rgba(59, 130, 246, 0.15);
   }
 
   .glass-heavy-secondary {
-    background: rgba(103, 232, 249, 0.25);
-    border: 1px solid rgba(103, 232, 249, 0.35);
+    background: rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(59, 130, 246, 0.35);
     --glass-blur: 40px;
     --glass-saturate: 1.5;
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
-    box-shadow: 0 8px 32px rgba(103, 232, 249, 0.20);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.20);
   }
 
   /* ----------------------------------------
-   * ACCENT GLASS (Pink Tint) - #F472B6
+   * ACCENT GLASS (Bright Blue) - #3B82F6
    * For highlights, special emphasis
    * ---------------------------------------- */
   .glass-light-accent {
-    background: rgba(244, 114, 182, 0.08);
-    border: 1px solid rgba(244, 114, 182, 0.15);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
     --glass-blur: 16px;
     --glass-saturate: 1.3;
     backdrop-filter: blur(16px) saturate(1.3);
     -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    box-shadow: 0 2px 16px rgba(244, 114, 182, 0.10);
+    box-shadow: 0 2px 16px rgba(59, 130, 246, 0.10);
   }
 
   .glass-medium-accent {
-    background: rgba(244, 114, 182, 0.15);
-    border: 1px solid rgba(244, 114, 182, 0.25);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.25);
     --glass-blur: 24px;
     --glass-saturate: 1.4;
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    box-shadow: 0 4px 24px rgba(244, 114, 182, 0.15);
+    box-shadow: 0 4px 24px rgba(59, 130, 246, 0.15);
   }
 
   .glass-heavy-accent {
-    background: rgba(244, 114, 182, 0.25);
-    border: 1px solid rgba(244, 114, 182, 0.35);
+    background: rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(59, 130, 246, 0.35);
     --glass-blur: 40px;
     --glass-saturate: 1.5;
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
-    box-shadow: 0 8px 32px rgba(244, 114, 182, 0.20);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.20);
   }
 
   /* ----------------------------------------
@@ -1183,8 +1473,8 @@ button,
    * Map old class names to new system
    * ---------------------------------------- */
   .glass-subtle {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(16px) saturate(1.3);
     -webkit-backdrop-filter: blur(16px) saturate(1.3);
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
@@ -1192,8 +1482,8 @@ button,
 
   .glass-strong,
   .glass-prominent {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.16);
     backdrop-filter: blur(40px) saturate(1.5);
     -webkit-backdrop-filter: blur(40px) saturate(1.5);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
@@ -1231,7 +1521,7 @@ button,
   .glass-template-container {
     @apply rounded-2xl p-6;
     /* Chrome requires explicit background with some opacity for backdrop-filter */
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.03);
     border: 1px solid var(--glass-border-light);
     backdrop-filter: blur(32px) saturate(1.5);
     -webkit-backdrop-filter: blur(32px) saturate(1.5);
@@ -1295,20 +1585,20 @@ button,
    * Turmeric: Secondary buttons
    * ============================================ */
 
-  /* CTA Button - Flamingo Pink (#9B5DE5) */
+  /* CTA Button - Bright Blue (#3B82F6) */
   .btn-cta {
     @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300;
-    background: rgba(155, 93, 229, 0.8);
-    /* flamingo/80 */
-    border: 1px solid rgba(155, 93, 229, 0.6);
-    /* flamingo/60 */
+    background: rgba(59, 130, 246, 0.8);
+    /* blue/80 */
+    border: 1px solid rgba(59, 130, 246, 0.6);
+    /* blue/60 */
     color: #F5F5F5;
     /* mist */
   }
 
   .btn-cta:hover {
-    background: #9B5DE5;
-    /* flamingo */
+    background: #3B82F6;
+    /* bright blue */
     transform: translateY(-1px);
   }
 
@@ -1316,21 +1606,21 @@ button,
     transform: translateY(0) scale(0.98);
   }
 
-  /* Sapphire Button - Default (#47A1AD) */
+  /* Sapphire Button - Bright Blue (#3B82F6) */
   .btn-sapphire {
     @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm;
-    background: rgba(71, 161, 173, 0.7);
-    /* sapphire/70 */
-    border: 1px solid rgba(71, 161, 173, 0.5);
-    /* sapphire/50 */
+    background: rgba(59, 130, 246, 0.7);
+    /* blue/70 */
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    /* blue/50 */
     color: #F5F5F5;
     /* mist */
   }
 
   .btn-sapphire:hover {
-    background: rgba(71, 161, 173, 0.9);
-    /* sapphire/90 */
-    border-color: rgba(71, 161, 173, 0.7);
+    background: rgba(59, 130, 246, 0.9);
+    /* blue/90 */
+    border-color: rgba(59, 130, 246, 0.7);
     transform: translateY(-1px);
   }
 
@@ -1378,8 +1668,8 @@ button,
 
   .text-template-subtitle {
     @apply text-sm;
-    color: #9B5DE5;
-    /* flamingo */
+    color: #3B82F6;
+    /* bright blue */
   }
 
   .text-template-content {
@@ -1401,7 +1691,7 @@ button,
 
   /* Text colors - explicit hex for reliability */
   .text-flamingo {
-    color: #9B5DE5 !important;
+    color: #3B82F6 !important;
   }
 
   .text-turmeric {
@@ -1413,11 +1703,11 @@ button,
   }
 
   .text-sapphire {
-    color: #47A1AD !important;
+    color: #3B82F6 !important;
   }
 
   .text-amethyst {
-    color: #7C3AED !important;
+    color: #3B82F6 !important;
   }
 
   .text-mist {
@@ -1430,7 +1720,7 @@ button,
 
   /* Background colors */
   .bg-flamingo {
-    background-color: #9B5DE5 !important;
+    background-color: #3B82F6 !important;
   }
 
   .bg-turmeric {
@@ -1442,20 +1732,20 @@ button,
   }
 
   .bg-sapphire {
-    background-color: #47A1AD !important;
+    background-color: #3B82F6 !important;
   }
 
   .bg-amethyst {
-    background-color: #7C3AED !important;
+    background-color: #3B82F6 !important;
   }
 
   /* Background colors with opacity */
   .bg-flamingo\/10 {
-    background-color: rgba(155, 93, 229, 0.1) !important;
+    background-color: rgba(59, 130, 246, 0.1) !important;
   }
 
   .bg-flamingo\/20 {
-    background-color: rgba(155, 93, 229, 0.2) !important;
+    background-color: rgba(59, 130, 246, 0.2) !important;
   }
 
   .bg-turmeric\/10 {
@@ -1475,11 +1765,11 @@ button,
   }
 
   .bg-sapphire\/10 {
-    background-color: rgba(71, 161, 173, 0.1) !important;
+    background-color: rgba(59, 130, 246, 0.1) !important;
   }
 
   .bg-sapphire\/20 {
-    background-color: rgba(71, 161, 173, 0.2) !important;
+    background-color: rgba(59, 130, 246, 0.2) !important;
   }
 
   /* ============================================
@@ -1579,14 +1869,14 @@ button,
 
   .template-list-icon {
     @apply w-5 h-5 flex-shrink-0 mt-0.5;
-    color: #9B5DE5;
-    /* flamingo */
+    color: #3B82F6;
+    /* bright blue */
   }
 
   .template-list-icon-sapphire {
     @apply w-5 h-5 flex-shrink-0 mt-0.5;
-    color: #47A1AD;
-    /* sapphire */
+    color: #3B82F6;
+    /* bright blue */
   }
 
   /* ============================================
@@ -1596,16 +1886,16 @@ button,
 
   .template-badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
-    background: rgba(155, 93, 229, 0.2);
-    color: #9B5DE5;
-    border: 1px solid rgba(155, 93, 229, 0.3);
+    background: rgba(59, 130, 246, 0.2);
+    color: #3B82F6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .template-badge-sapphire {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
-    background: rgba(71, 161, 173, 0.2);
-    color: #47A1AD;
-    border: 1px solid rgba(71, 161, 173, 0.3);
+    background: rgba(59, 130, 246, 0.2);
+    color: #3B82F6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .template-badge-turmeric {
@@ -1642,8 +1932,8 @@ button,
   }
 
   .template-metric-highlight {
-    color: #9B5DE5;
-    /* flamingo */
+    color: #3B82F6;
+    /* bright blue */
   }
 
   /* ============================================
@@ -1669,18 +1959,18 @@ button,
 
   .template-icon-container {
     @apply w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0;
-    background: rgba(155, 93, 229, 0.15);
-    border: 1px solid rgba(155, 93, 229, 0.3);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .template-icon-container-lg {
     @apply w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0;
-    background: rgba(155, 93, 229, 0.15);
-    border: 1px solid rgba(155, 93, 229, 0.3);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .template-icon-container svg {
-    color: #9B5DE5;
+    color: #3B82F6;
   }
 
   /* ============================================
@@ -1901,11 +2191,11 @@ button,
 
     0%,
     100% {
-      box-shadow: 0 0 16px rgba(155, 93, 229, 0.5);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.5);
     }
 
     50% {
-      box-shadow: 0 0 24px rgba(155, 93, 229, 0.7), 0 0 40px rgba(155, 93, 229, 0.3);
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.7), 0 0 40px rgba(59, 130, 246, 0.3);
     }
   }
 

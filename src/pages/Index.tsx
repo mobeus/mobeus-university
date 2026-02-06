@@ -29,25 +29,25 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section — MOBEUS UNIVERSITY: The Screen Finally Cares
+// Welcome section — CASHCO MORTGAGE CONCIERGE: Smart Financing for Smart Investors
 const WELCOME_VARIANTS = [
   {
-    badge: "MOBEUS UNIVERSITY",
-    title: "The Screen Finally Cares",
-    subtitle: "Learn how conversational labor changes everything.",
+    badge: "CASHCO MORTGAGE",
+    title: "Smart Financing for Smart Investors",
+    subtitle: "Non-QM mortgages for rental income and fix-and-flip investments.",
     generativeSubsections: [
-      // 0. WelcomeCarousel - Journey cards
+      // 0. WelcomeCarousel - Two Investment Paths
       {
-        id: "journey-carousel",
+        id: "investment-paths",
         templateId: "WelcomeCarousel",
         props: {
           cards: [
-            { question: "What is Mobeus?", subtext: "Transforming software into conversational labor.", icon: "Sparkles", actionPhrase: "what is mobeus" },
-            { question: "What's a tele?", subtext: "Conversational workers. Not chatbots.", icon: "Users", actionPhrase: "what is a tele" },
-            { question: "What's Teleglass?", subtext: "The platform for conversational labor.", icon: "Globe", actionPhrase: "tell me about teleglass" },
-            { question: "How is this different?", subtext: "50 years: humans→machines. We inverted that.", icon: "Zap", actionPhrase: "how is this different from software" },
-            { question: "Who built this?", subtext: "Richie Etwaru and Mike Sutcliff. 5 years ago.", icon: "Users", actionPhrase: "who founded mobeus" },
-            { question: "When is launch?", subtext: "March/April 2026 — Be there when help arrives.", icon: "Calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
+            { question: "Purchase to Rent?", subtext: "Long-term rental income strategy.", icon: "Home", actionPhrase: "show me rental financing options" },
+            { question: "Purchase to Flip?", subtext: "Short-term renovation profits.", icon: "Hammer", actionPhrase: "show me flip financing options" },
+            { question: "How it works?", subtext: "Simple 5-step mortgage estimation process.", icon: "Map", actionPhrase: "show me how it works" },
+            { question: "Non-QM Financing?", subtext: "Flexible qualification. Competitive rates.", icon: "Shield", actionPhrase: "tell me about non-qm financing" },
+            { question: "Who is CashCo?", subtext: "Specialized in investor financing since 2010.", icon: "Building", actionPhrase: "tell me about cashco" },
+            { question: "Get my estimate?", subtext: "30-day non-binding mortgage calculation.", icon: "Calculator", actionPhrase: "show me mortgage estimate", isAccent: true, accentColor: "emerald" }
           ]
         }
       },
@@ -56,61 +56,76 @@ const WELCOME_VARIANTS = [
         id: "promise-hero",
         templateId: "Hero",
         props: {
-          headline: "The Screen Finally Cares",
-          description: "Conversational labor is coming.",
-          ctaLabel: "See How",
-          ctaActionPhrase: "what is mobeus"
+          headline: "Smart Financing for Smart Investors",
+          description: "Non-QM mortgages for rental and flip properties.",
+          ctaLabel: "Get Started",
+          ctaActionPhrase: "show me mortgage estimate"
         }
       },
-      // 2. Trio - Three Innovations
+      // 2. Split - Two Paths
       {
-        id: "three-innovations",
+        id: "two-paths",
+        templateId: "Split",
+        props: {
+          leftContent: {
+            headline: "Purchase to Rent",
+            body: "Generate consistent monthly income. Build long-term wealth through appreciation. We finance your rental property investment with flexible non-QM terms."
+          },
+          rightContent: {
+            headline: "Purchase to Flip",
+            body: "Maximize short-term profits through strategic renovation. Quick turnaround financing for fix-and-flip investors with competitive rates."
+          }
+        }
+      },
+      // 3. Trio - Three Benefits
+      {
+        id: "three-benefits",
         templateId: "Trio",
         props: {
           cards: [
             {
-              icon: "Cpu",
-              title: "Dual-Agent",
-              description: "Build Agent constructs. Runtime Agent delivers.",
-              actionPhrase: "explain dual-agent"
+              icon: "Shield",
+              title: "Non-Binding Estimates",
+              description: "Get your 30-day mortgage calculation. No commitment required.",
+              actionPhrase: "show me mortgage estimate"
             },
             {
-              icon: "Globe",
-              title: "DOM-LLM Bridge",
-              description: "Language becomes live experiences.",
-              actionPhrase: "explain dom-llm bridge"
+              icon: "Zap",
+              title: "Fast Approval",
+              description: "Non-QM flexibility. Investor-focused qualification.",
+              actionPhrase: "tell me about non-qm financing"
             },
             {
-              icon: "Sparkles",
-              title: "Generative Web",
-              description: "Pages adapt to you.",
-              actionPhrase: "explain generative web"
+              icon: "TrendingUp",
+              title: "Both Paths Covered",
+              description: "Rental income or flip profits. We finance both strategies.",
+              actionPhrase: "show me how it works"
             }
           ],
           numbered: false,
-          ctaLabel: "Learn More",
-          ctaActionPhrase: "show me how teleglass works"
+          ctaLabel: "Explore Options",
+          ctaActionPhrase: "show me financing paths"
         }
       },
-      // 3. Quote - The Promise
+      // 4. Quote - The Value
       {
-        id: "the-promise",
+        id: "the-value",
         templateId: "Quote",
         props: {
-          quote: "Help is here.",
-          author: "The Tele Population",
-          role: "Conversational Labor"
+          quote: "Your property. Our expertise.",
+          author: "CashCo Team",
+          role: "Investor Financing Specialists"
         }
       },
-      // 4. Banner - Get Started
+      // 5. Banner - Get Started
       {
-        id: "get-started",
+        id: "get-estimate-banner",
         templateId: "Banner",
         props: {
-          headline: "The Teleglass Launch Event",
-          subheadline: "March/April 2026",
-          ctaLabel: "Reserve Your Spot",
-          ctaActionPhrase: "sign up for the launch event",
+          headline: "Get Your Mortgage Estimate",
+          subheadline: "Non-binding. Valid for 30 days.",
+          ctaLabel: "Start Now",
+          ctaActionPhrase: "show me mortgage estimate",
           variant: "gradient"
         }
       }

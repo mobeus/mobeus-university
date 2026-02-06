@@ -1,5 +1,5 @@
 # navigateToSection Tool
-> v111.0 | Mobeus Tele
+> v3.0 | CashCo Mortgage Concierge | 21 Templates
 
 ## Function Signature
 
@@ -13,11 +13,12 @@ navigateToSection(payload: NavigationPayload): void
 {
   "badge": "string (required)",
   "title": "string (required)",
+  "subtitle": "string (optional)",
   "generativeSubsections": [
     {
-      "id": "string (required)",
-      "templateId": "string (required)",
-      "props": "object (required)"
+      "id": "unique-id",
+      "templateId": "TemplateName",
+      "props": { "template-specific properties" }
     }
   ]
 }
@@ -27,89 +28,72 @@ navigateToSection(payload: NavigationPayload): void
 
 <!-- TEMPLATE-SCHEMAS-START -->
 
-## 🎨 TEMPLATES (30)
+## 🎨 TEMPLATES (21)
 
 ### LAYOUT
 
 #### Hero
-Full-width hero.
+Primary landing.
 ```json
-{ "headline": "The Screen Finally Cares", "description": "Conversational labor is coming.", "ctaLabel": "Reserve Your Spot", "ctaActionPhrase": "show me launch event registration" }
+{ "headline": "Smart Financing", "description": "Non-QM mortgages", "ctaLabel": "Get Started", "ctaActionPhrase": "show me mortgage estimate" }
 ```
 
 #### Split
-Two-column comparison.
+Two columns comparison.
 ```json
-{ "leftContent": { "headline": "Software Era", "body": "Humans adapt to machines." }, "rightContent": { "headline": "Labor Era", "body": "Machines adapt to humans." } }
+{
+  "leftContent": { "headline": "Purchase to Rent", "body": "Long-term income." },
+  "rightContent": { "headline": "Purchase to Flip", "body": "Short-term profits." }
+}
 ```
 
 #### Banner
-Call-to-action banner.
+Call to action bar.
 ```json
-{ "icon": "Sparkles", "headline": "Launch Event", "subheadline": "March/April 2026", "ctaLabel": "Reserve Spot", "ctaActionPhrase": "show me launch event registration" }
-```
-
-#### Feature
-Single feature.
-```json
-{ "icon": "Shield", "title": "Triple Agnostic", "description": "Model. Cloud. Device." }
-```
-
-#### Story
-Narrative sections.
-```json
-{ "header": "The Mobeus Story", "sections": [{ "label": "The Founding", "content": "Richie Etwaru and Mike Sutcliff founded Mobeus 5 years ago." }, { "label": "The Launch", "content": "March/April 2026 — help arrives." }] }
+{ "headline": "Get Your Estimate", "subheadline": "30 days", "ctaLabel": "Start Now", "ctaActionPhrase": "show me mortgage estimate", "variant": "gradient" }
 ```
 
 ---
 
-### CONTENT
+### TEXT
 
 #### Paragraph
-Brief text.
+Short text block.
 ```json
-{ "text": "Teleglass inverts the relationship. Technology adapts to humans." }
+{ "text": "CashCo provides non-QM mortgages for investment properties." }
 ```
 
 #### Article
 Long-form content.
 ```json
-{ "title": "What Is a Tele?", "blocks": [{ "type": "paragraph", "content": "A tele is conversational labor. It shows up ready to work." }] }
+{ "title": "Non-QM Financing Guide", "description": "Flexible qualification for rental and flip properties." }
 ```
 
 #### Quote
-Quote with attribution.
+Highlighted quote.
 ```json
-{ "quote": "Help is here.", "author": "The Tele Population", "role": "Conversational Labor" }
+{ "quote": "Your property. Our expertise.", "author": "CashCo Team", "role": "Investor Financing Specialists" }
 ```
-
-#### Lesson
-Educational block with sections.
-```json
-{ "title": "Double Agent Architecture", "sections": [{ "title": "Overview", "content": "Build Agent constructs. Runtime Agent delivers." }] }
-```
-
-#### Guide
-Instructional overview.
-```json
-{ "title": "Launch Event Guide", "description": "Live demos, platform unveiling, early access." }
-```
-
----
-
-### TEXT-HEAVY
 
 #### MediaText
 Text + image or two-column layouts.
 
 **Text + Image:**
 ```json
-{ "title": "The Tele Advantage", "paragraph": "For decades, software demanded humans adapt. Teleglass inverts this.", "imagePrompt": "conversational interface", "ctaLabel": "See It", "ctaActionPhrase": "show me", "layout": "imageLeft" }
+{
+  "headline": "Two Investment Paths",
+  "text": "Rental or flip financing.",
+  "assetId": "mortgage-paths",
+  "imagePosition": "right"
+}
 ```
 
-**Two-Column:**
+**Two Columns:**
 ```json
-{ "headline": "Two Perspectives", "leftColumn": { "title": "Software Era", "paragraph": "Humans learn the machine..." }, "rightColumn": { "title": "Labor Era", "paragraph": "Machines learn you..." }, "layout": "twoColumn" }
+{
+  "leftContent": { "headline": "Rental", "body": "Monthly income" },
+  "rightContent": { "headline": "Flip", "body": "Sale profits" }
+}
 ```
 
 ---
@@ -117,33 +101,21 @@ Text + image or two-column layouts.
 ### DATA
 
 #### Stats
-Statistics grid.
+Key metrics.
 ```json
-{ "stats": [{ "value": "5", "label": "Years", "context": "Building conversational labor" }, { "value": "March 2026", "label": "Launch", "actionPhrase": "show launch event details" }] }
+{ "stats": [{ "value": "5.5%", "label": "Interest Rate" }, { "value": "30", "label": "Days Valid" }] }
 ```
 
 #### Metric
-Single metric.
+Single large number.
 ```json
-{ "value": "Triple Agnostic", "label": "Model • Cloud • Device" }
-```
-
-#### Scorecard
-Multiple scores.
-```json
-{ "scores": [{ "label": "Model Agnostic", "value": "✓" }, { "label": "Cloud Agnostic", "value": "✓" }] }
-```
-
-#### Infographic
-Visual data with icons.
-```json
-{ "items": [{ "icon": "MessageSquare", "value": "Chat", "label": "Web" }, { "icon": "Phone", "value": "Phone", "label": "Voice" }] }
+{ "value": "$450,000", "label": "Purchase Price", "icon": "DollarSign" }
 ```
 
 #### Table
 Data table.
 ```json
-{ "headers": ["Channel", "Use Case"], "rows": [["Chat", "Web conversations"], ["Phone", "Complex issues"]] }
+{ "headers": ["PropertyType", "Data Required"], "rows": [["Rental", "Price, Rent, Taxes"], ["Flip", "Price, Renovation, Sale"]] }
 ```
 
 ---
@@ -153,105 +125,241 @@ Data table.
 #### List
 Bulleted list.
 ```json
-{ "items": [{ "icon": "Cpu", "title": "Double Agent Architecture", "description": "Build + Runtime" }, { "icon": "Globe", "title": "Browser Model Bridge", "description": "Language to interfaces" }] }
-```
-
-#### Grid
-Interactive cards.
-```json
-{ "headline": "Core Principles", "badge": "ARCHITECTURE", "items": [{ "icon": "Cloud", "title": "Model Agnostic", "description": "Works with any LLM", "actionPhrase": "show model agnostic architecture" }, { "icon": "Globe", "title": "Cloud Agnostic", "description": "Deploy anywhere" }] }
+{ "items": ["Purchase Price", "Monthly Rent", "Property Taxes", "Insurance"] }
 ```
 
 #### Trio
-Three items.
+Three-column cards.
 ```json
-{ "items": [{ "icon": "Zap", "title": "Bold", "description": "Ambitious" }, { "icon": "Feather", "title": "Simple", "description": "Effortless" }, { "icon": "Target", "title": "Focused", "description": "Purposeful" }] }
-```
-
-#### Showcase
-Featured benefits.
-```json
-{ "headline": "Platform Capabilities", "badge": "FEATURES", "benefits": [{ "icon": "MessageSquare", "title": "Chat", "text": "Web conversations", "actionPhrase": "show chat features" }, { "icon": "Phone", "title": "Voice", "text": "Phone interactions", "highlight": true }] }
-```
-
-#### Carousel
-Scrollable items.
-```json
-{ "items": [{ "title": "Healthcare Tele", "description": "Clinical support" }] }
+{
+  "cards": [
+    { "icon": "Shield", "title": "Non-Binding", "description": "30-day estimate" },
+    { "icon": "Zap", "title": "Fast Approval", "description": "Non-QM flexibility" },
+    { "icon": "TrendingUp", "title": "Both Paths", "description": "Rental or flip" }
+  ],
+  "numbered": false
+}
 ```
 
 #### WelcomeCarousel
 Auto-scrolling welcome.
 ```json
-{ "items": [{ "title": "The Screen Finally Cares", "description": "Mobeus is building conversational labor" }] }
-```
-
-#### Accordion
-Expandable sections.
-```json
-{ "items": [{ "title": "What is a tele?", "content": "Conversational labor." }] }
-```
-
----
-
-### STEPS
-
-#### Steps
-Sequential steps.
-```json
-{ "steps": [{ "icon": "Calendar", "title": "Reserve", "description": "Sign up for the event" }, { "icon": "Users", "title": "Attend", "description": "March 2026", "actionPhrase": "show event details" }] }
-```
-
-#### Timeline
-Two-column timeline with deliverables and steps.
-```json
-{ "leftHeadline": "Launch Deliverables", "leftSubheadline": "What You Get", "leftIcon": "Package", "deliverablesLabel": "INCLUDED", "deliverables": [{ "icon": "CheckCircle", "text": "Platform access" }, { "icon": "Users", "text": "Community membership" }], "stepsLabel": "SCHEDULE", "steps": [{ "time": "Q1 2026", "title": "Beta access", "icon": "Rocket" }, { "time": "March 2026", "title": "Official launch", "icon": "Calendar" }] }
+{
+  "cards": [
+    { "question": "Purchase to Rent?", "subtext": "Rental income", "icon": "Home", "actionPhrase": "show me rental financing" },
+    { "question": "Purchase to Flip?", "subtext": "Flip profits", "icon": "Hammer", "actionPhrase": "show me flip financing" }
+  ]
+}
 ```
 
 ---
 
 ### COMPARISON
 
+#### Steps
+Numbered process flow.
+```json
+{ "items": [{ "title": "Intent", "description": "Rent or flip?" }, { "title": "Data", "description": "Property details" }] }
+```
+
 #### Compare
 Side-by-side comparison.
 ```json
-{ "columns": [{ "icon": "X", "title": "Software", "items": ["Learn it", "Adapt to it"], "variant": "bad" }, { "icon": "Check", "title": "Labor", "items": ["It learns you", "Adapts to you"], "variant": "good", "highlight": true }] }
+{
+  "leftOption": { "title": "Rental", "features": ["Monthly income", "Long-term"] },
+  "rightOption": { "title": "Flip", "features": ["Sale profits", "Short-term"] }
+}
 ```
 
 ---
 
-### MEDIA
+### INTERACTIVE (Mortgage-Specific)
 
-#### ImageSingle
-Single image.
+#### MortgageReview
+**Interactive mortgage calculator with real-time updates.**
+
+Shows calculated monthly payments with interactive controls for down payment, interest rate, and loan term. Users can adjust sliders/buttons, or the tele can update values conversationally.
+
 ```json
-{ "imagePrompt": "diverse professionals with adaptive screen", "alt": "The screen finally cares" }
+{
+  "propertyAddress": "123 Main St, Austin, TX",
+  "purchasePrice": 450000,
+  "propertyType": "rental",
+  "expectedMonthlyRent": 3200,
+  "annualPropertyTaxes": 9000,
+  "annualInsurance": 2250,
+  "defaultDownPayment": 45000,
+  "defaultInterestRate": 5.5,
+  "defaultTerm": 30
+}
 ```
 
----
+**For Flip Properties:**
+- Omit `expectedMonthlyRent`
+- Use `propertyType: "flip"`
+- Estimate taxes: `purchasePrice * 0.02`
+- Estimate insurance: `purchasePrice * 0.005`
 
-### FORMS
-
-#### Form
-Interactive data collection with split layout.
-```json
-{ "headline": "Join the Launch Event", "fields": [{ "name": "fullName", "label": "Full Name", "type": "text", "icon": "User", "required": true }, { "name": "email", "label": "Email", "type": "email", "icon": "Mail", "required": true }, { "name": "date", "label": "Preferred Date", "type": "date", "icon": "Calendar" }], "submitLabel": "Register", "submitActionPhrase": "register for launch event", "content": { "title": "What to Expect", "paragraph": "Live demos, platform unveiling, and early access opportunities." } }
+**Tele Can Update Dynamically:**
+```javascript
+window.updateMortgageReview({ defaultDownPayment: 90000 })
+window.updateMortgageReview({ defaultInterestRate: 6.0 })
+window.updateMortgageReview({ defaultTerm: 15 })
 ```
 
----
+**Example User Interactions:**
+- User: "Show me with 20% down" → `window.updateMortgageReview({ defaultDownPayment: 90000 })`
+- User: "What if the rate is 6%?" → `window.updateMortgageReview({ defaultInterestRate: 6.0 })`
+- User: "Compare with a 15-year loan" → `window.updateMortgageReview({ defaultTerm: 15 })`
 
-### INTERACTIVE
+#### ComplianceConsent
+**Interactive compliance disclaimer with explicit confirmation.**
 
-#### ConsultationScheduler
-Event registration.
+Displays mandatory compliance statement requiring user acknowledgment via button click or voice command.
+
 ```json
-{ "topic": "The Teleglass Launch Event", "imageId": "launch-event", "date": "March 2026 (Date TBA)", "time": "Details on registration", "meetingType": "In-Person Event", "meetingLocation": "Location on registration" }
+{ "statement": "This mortgage estimate is not legally binding and is valid for 30 days.", "confirmActionPhrase": "yes" }
 ```
 
-#### PartyConfirmation
-Confirmation message.
+**Props:**
+- `icon` (optional): Shield, AlertTriangle, Info
+- `badge` (optional): COMPLIANCE, DISCLOSURE, IMPORTANT
+- `headline` (optional): Important Disclosure
+- `statement` (required): The compliance text
+- `confirmLabel` (optional): I Understand
+- `confirmActionPhrase` (required): yes
+- `variant` (optional): default, warning, info
+
+**User Interaction:**
+- Click "I Understand" button → Sends confirmActionPhrase automatically
+- Say "yes" (or the confirmActionPhrase) → Tele receives confirmation
+
+**Example:**
 ```json
-{ "message": "You're registered! Check email for details." }
+{
+  "statement": "This mortgage estimate is not legally binding and is valid for 30 days.",
+  "confirmActionPhrase": "yes"
+}
+```
+
+When user clicks button or says "yes", tele receives "yes" and can proceed to next step.
+
+#### RentalPropertyReview
+**Review rental property data with AI-generated property image.**
+
+Displays all 5 rental data points plus net cash flow calculation with property image and confirmation buttons.
+
+```json
+{
+  "propertyAddress": "123 Main St, Austin, TX",
+  "purchasePrice": 450000,
+  "expectedMonthlyRent": 3200,
+  "annualPropertyTaxes": 9000,
+  "annualInsurance": 2250,
+  "assetId": "rental-property",
+  "editActionPhrase": "edit details",
+  "confirmActionPhrase": "yes"
+}
+```
+
+**User Interaction:**
+- Click "Edit Details" → Sends editActionPhrase
+- Click "Looks Good" → Sends confirmActionPhrase and proceeds
+
+#### FlipPropertyReview
+**Review flip property data with AI-generated renovation image.**
+
+Displays all 4 flip-specific data points plus calculated profit with renovation image and confirmation buttons.
+
+```json
+{
+  "propertyAddress": "789 Oak Ave, Dallas, TX",
+  "purchasePrice": 300000,
+  "renovationCosts": 75000,
+  "expectedSalePrice": 450000,
+  "assetId": "flip-property",
+  "editActionPhrase": "edit details",
+  "confirmActionPhrase": "yes"
+}
+```
+
+**User Interaction:**
+- Click "Edit Details" → Sends editActionPhrase
+- Click "Looks Good" → Sends confirmActionPhrase and proceeds
+
+#### RentalDataCapture
+**Conversational form to capture all rental property data at once.**
+
+Displays input fields for all 5 required data points with real-time validation and AI-generated property image.
+
+```json
+{
+  "headline": "Rental Property Details",
+  "subheadline": "Provide your property information",
+  "assetId": "rental-property",
+  "submitLabel": "Calculate Estimate",
+  "submitActionPhrase": "submit rental data"
+}
+```
+
+**Optional Pre-fill Props:**
+- `defaultPropertyAddress` (string)
+- `defaultPurchasePrice` (number)
+- `defaultExpectedMonthlyRent` (number)
+- `defaultAnnualPropertyTaxes` (number)
+- `defaultAnnualInsurance` (number)
+
+**User Interaction:**
+- User fills all 5 fields
+- Submit button enables when all fields valid
+- Click submit → Sends `submitActionPhrase` + JSON data
+
+**Data Sent to Tele:**
+```json
+{
+  "propertyAddress": "123 Main St, Austin, TX",
+  "purchasePrice": 450000,
+  "expectedMonthlyRent": 3200,
+  "annualPropertyTaxes": 9000,
+  "annualInsurance": 2250
+}
+```
+
+#### FlipDataCapture
+**Conversational form to capture all flip property data at once.**
+
+Displays input fields for all 4 required data points plus calculated profit preview with AI-generated renovation image.
+
+```json
+{
+  "headline": "Flip Property Details",
+  "subheadline": "Provide your flip project information",
+  "assetId": "flip-property",
+  "submitLabel": "Calculate Estimate",
+  "submitActionPhrase": "submit flip data"
+}
+```
+
+**Optional Pre-fill Props:**
+- `defaultPropertyAddress` (string)
+- `defaultPurchasePrice` (number)
+- `defaultRenovationCosts` (number)
+- `defaultExpectedSalePrice` (number)
+
+**User Interaction:**
+- User fills all 4 fields
+- Live profit calculation shows as fields are filled
+- Submit button enables when all fields valid
+- Click submit → Sends `submitActionPhrase` + JSON data
+
+**Data Sent to Tele:**
+```json
+{
+  "propertyAddress": "789 Oak Ave, Dallas, TX",
+  "purchasePrice": 300000,
+  "renovationCosts": 75000,
+  "expectedSalePrice": 450000
+}
 ```
 
 ---
@@ -260,9 +368,9 @@ Confirmation message.
 
 ## 🎯 SHOT PROMPTS
 
-### Shot 1: "What is Mobeus?"
+### Shot 1: "What is CashCo?"
 
-**User:** "What is Mobeus?" / "Tell me about Teleglass"
+**User:** "What is CashCo?" / "Tell me about your services"
 
 **Tele:** "Let me show you."
 
@@ -270,160 +378,32 @@ Confirmation message.
 ```json
 {
   "badge": "ABOUT",
-  "title": "The Screen Finally Cares",
+  "title": "Smart Financing for Smart Investors",
   "generativeSubsections": [
     {
-      "id": "platform-capabilities",
-      "templateId": "Grid",
+      "id": "two-paths",
+      "templateId": "Split",
       "props": {
-        "headline": "Platform Capabilities",
-        "subtitle": "Every channel. One platform.",
-        "badge": "CHANNELS",
-        "items": [
-          {
-            "icon": "MessageSquare",
-            "title": "Chat",
-            "description": "Web conversations",
-            "actionPhrase": "show me chat capabilities"
-          },
-          {
-            "icon": "Phone",
-            "title": "Voice",
-            "description": "Phone interactions",
-            "actionPhrase": "show me voice capabilities"
-          },
-          {
-            "icon": "MessageCircle",
-            "title": "SMS",
-            "description": "Text messaging",
-            "actionPhrase": "show me sms capabilities"
-          },
-          {
-            "icon": "User",
-            "title": "Avatar",
-            "description": "Visual presence",
-            "actionPhrase": "show me avatar capabilities"
-          },
-          {
-            "icon": "Layout",
-            "title": "Glass",
-            "description": "Generative interfaces",
-            "actionPhrase": "show me glass capabilities"
-          },
-          {
-            "icon": "Smartphone",
-            "title": "Phone",
-            "description": "Mobile native",
-            "actionPhrase": "show me phone capabilities"
-          }
-        ],
-        "columns": 3
+        "leftContent": {
+          "headline": "Purchase to Rent",
+          "body": "Long-term rental income strategy. Build wealth through appreciation and monthly cash flow."
+        },
+        "rightContent": {
+          "headline": "Purchase to Flip",
+          "body": "Short-term renovation profits. Quick turnaround financing for fix-and-flip investors."
+        }
       }
     },
     {
-      "id": "innovations",
+      "id": "benefits",
       "templateId": "Trio",
       "props": {
-        "headline": "Three Core Innovations",
-        "subtitle": "What makes this possible",
-        "items": [
-          {
-            "icon": "Cpu",
-            "title": "Double Agent Architecture",
-            "description": "Build + Runtime separation",
-            "actionPhrase": "show me double agent architecture"
-          },
-          {
-            "icon": "Globe",
-            "title": "Browser Model Bridge",
-            "description": "Language becomes interface",
-            "actionPhrase": "show me browser model bridge"
-          },
-          {
-            "icon": "Sparkles",
-            "title": "Generative Web",
-            "description": "Every page adapts to you",
-            "actionPhrase": "show me generative web"
-          }
-        ],
-        "variant": "default",
-        "numbered": false
-      }
-    }
-  ]
-}
-```
-
----
-
-### Shot 2: "What's a tele?"
-
-**User:** "What is a tele?" / "How does this work?"
-
-**Tele:** "Think of it as a colleague who shows up ready to work."
-
-**Call:**
-```json
-{
-  "badge": "CONVERSATIONAL LABOR",
-  "title": "What Is a Tele?",
-  "generativeSubsections": [
-    {
-      "id": "definition",
-      "templateId": "Article",
-      "props": {
-        "title": "A Tele Is Conversational Labor",
-        "blocks": [
-          {
-            "type": "paragraph",
-            "content": "A tele shows up ready to help. It listens, reasons, acts. Unlike automation, a tele learns you — understanding intent, asking questions, carrying work forward."
-          },
-          {
-            "type": "paragraph",
-            "content": "Teles work across every channel: chat, voice, SMS, avatar. They remember context. They adapt to your workflow. They handle transactions, train users, close sales, and provide support."
-          },
-          {
-            "type": "paragraph",
-            "content": "This is not a chatbot. This is labor."
-          }
+        "cards": [
+          { "icon": "Shield", "title": "Non-Binding", "description": "30-day estimates" },
+          { "icon": "Zap", "title": "Fast Approval", "description": "Non-QM flexibility" },
+          { "icon": "TrendingUp", "title": "Both Paths", "description": "Rental or flip" }
         ]
       }
-    },
-    {
-      "id": "capabilities",
-      "templateId": "Grid",
-      "props": {
-        "headline": "What Teles Do",
-        "subtitle": "Conversational labor across domains",
-        "badge": "CAPABILITIES",
-        "items": [
-          {
-            "icon": "ShoppingCart",
-            "title": "Sell",
-            "description": "Qualify leads, demonstrate value, close deals",
-            "actionPhrase": "show sales tele examples"
-          },
-          {
-            "icon": "Headphones",
-            "title": "Support",
-            "description": "Resolve issues, answer questions, guide users",
-            "actionPhrase": "show support tele examples"
-          },
-          {
-            "icon": "GraduationCap",
-            "title": "Train",
-            "description": "Onboard employees, teach systems, assess learning",
-            "actionPhrase": "show training tele examples"
-          },
-          {
-            "icon": "FileText",
-            "title": "Transact",
-            "description": "Process requests, schedule meetings, coordinate workflows",
-            "actionPhrase": "show transaction tele examples"
-          }
-        ],
-        "columns": 2
-      }
     }
   ]
 }
@@ -431,146 +411,127 @@ Confirmation message.
 
 ---
 
-### Shot 3: "Sign me up"
+### Shot 2: "Show me rental financing"
 
-**User:** "How do I sign up?" / "I'm interested" / "Let's go"
+**User:** "Show me rental financing" / "Purchase to rent"
 
-**Tele:** "Let's get you registered."
-
-**Call:**
-```json
-{
-  "badge": "LAUNCH EVENT",
-  "title": "Be There When Help Arrives",
-  "generativeSubsections": [
-    {
-      "id": "event-details",
-      "templateId": "Banner",
-      "props": {
-        "icon": "Calendar",
-        "badge": "MARCH 2026",
-        "headline": "The Teleglass Launch Event",
-        "subheadline": "Conversational labor goes live",
-        "description": "Live demonstrations, platform unveiling, founding vision from Richie Etwaru",
-        "features": [
-          {
-            "icon": "Eye",
-            "text": "Watch teles work live"
-          },
-          {
-            "icon": "Cpu",
-            "text": "See the architecture"
-          },
-          {
-            "icon": "Zap",
-            "text": "Early access for attendees"
-          }
-        ],
-        "ctaLabel": "Reserve Your Spot",
-        "ctaActionPhrase": "show me launch event registration",
-        "variant": "gradient",
-        "highlight": true
-      }
-    },
-    {
-      "id": "experience",
-      "templateId": "Steps",
-      "props": {
-        "headline": "What to Expect",
-        "subheadline": "Your launch event experience",
-        "steps": [
-          {
-            "icon": "Eye",
-            "title": "Live Demonstrations",
-            "description": "Watch teles sell, support, train, and transact in real time",
-            "actionPhrase": "show me the demos"
-          },
-          {
-            "icon": "Cpu",
-            "title": "Platform Unveiling",
-            "description": "Deep dive into Double Agent Architecture and Browser Model Bridge",
-            "actionPhrase": "show me the platform"
-          },
-          {
-            "icon": "User",
-            "title": "Founding Vision",
-            "description": "Richie Etwaru presents the future of conversational labor",
-            "actionPhrase": "show me the vision"
-          },
-          {
-            "icon": "Zap",
-            "title": "Early Access",
-            "description": "First movers get priority access to the platform",
-            "actionPhrase": "show me early access"
-          }
-        ],
-        "layout": "vertical",
-        "ctaLabel": "I'm In",
-        "ctaActionPhrase": "show me launch event registration"
-      }
-    }
-  ]
-}
-```
-
----
-
-### Shot 4: "How is this different?"
-
-**User:** "What's different?" / "Explain the shift"
-
-**Tele:** "We flipped 50 years of software on its head."
+**Tele:** "Let's calculate your rental property financing."
 
 **Call:**
 ```json
 {
-  "badge": "THE SHIFT",
-  "title": "From Software to Labor",
+  "badge": "RENTAL FINANCING",
+  "title": "Purchase to Rent",
   "generativeSubsections": [
     {
-      "id": "paradigm-shift",
-      "templateId": "Compare",
-      "props": {
-        "columns": [
-          {
-            "icon": "X",
-            "title": "Software Era (1970—2025)",
-            "items": [
-              "Humans adapt to machines",
-              "Learning curves everywhere",
-              "Menus, buttons, dashboards",
-              "Software waits for commands",
-              "You operate the interface"
-            ],
-            "variant": "bad"
-          },
-          {
-            "icon": "Check",
-            "title": "Labor Era (2026→)",
-            "items": [
-              "Machines adapt to humans",
-              "Conversation replaces training",
-              "Natural language everywhere",
-              "Teles act with reasoning",
-              "You collaborate with workers"
-            ],
-            "variant": "good",
-            "highlight": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "breakthrough",
+      "id": "rental-info",
       "templateId": "MediaText",
       "props": {
-        "title": "Why Now",
-        "subtitle": "Three Breakthroughs Made This Real",
-        "paragraph": "For years, conversational computing was fiction. Then three things happened: Language models achieved true comprehension. Multi-agent architectures separated construction from delivery. The Browser Model Bridge turned language into live interfaces. Mobeus brought them together.",
-        "imagePrompt": "neural network visualization",
-        "ctaLabel": "See the Architecture",
-        "ctaActionPhrase": "show me teleglass architecture",
-        "layout": "imageLeft"
+        "headline": "Generate Rental Income",
+        "text": "Long-term wealth through monthly cash flow and property appreciation.",
+        "assetId": "rental-property"
+      }
+    },
+    {
+      "id": "data-needed",
+      "templateId": "List",
+      "props": {
+        "headline": "Data We Need",
+        "items": [
+          "Property Address",
+          "Purchase Price",
+          "Expected Monthly Rent",
+          "Annual Property Taxes",
+          "Annual Insurance"
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Then immediately:** Start collecting data in sequence.
+
+---
+
+### Shot 3: "Show me flip financing"
+
+**User:** "Show me flip financing" / "Fix and flip"
+
+**Tele:** "Let's structure financing for your flip."
+
+**Call:**
+```json
+{
+  "badge": "FLIP FINANCING",
+  "title": "Purchase to Flip",
+  "generativeSubsections": [
+    {
+      "id": "flip-info",
+      "templateId": "MediaText",
+      "props": {
+        "headline": "Maximize Flip Profits",
+        "text": "Short-term renovation financing with competitive rates for quick turnarounds.",
+        "assetId": "flip-property"
+      }
+    },
+    {
+      "id": "data-needed",
+      "templateId": "List",
+      "props": {
+        "headline": "Data We Need",
+        "items": [
+          "Property Address",
+          "Purchase Price",
+          "Renovation Costs",
+          "Expected Sale Price"
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Then immediately:** Start collecting data (any order).
+
+---
+
+### Shot 4: "Compare rental vs flip"
+
+**User:** "What's the difference?" / "Which should I choose?"
+
+**Tele:** "Here's the comparison."
+
+**Call:**
+```json
+{
+  "badge": "COMPARISON",
+  "title": "Rental vs Flip",
+  "generativeSubsections": [
+    {
+      "id": "path-comparison",
+      "templateId": "Compare",
+      "props": {
+        "leftOption": {
+          "title": "Purchase to Rent",
+          "features": [
+            "Monthly rental income",
+            "Long-term appreciation",
+            "5.5% interest rate",
+            "10% down payment",
+            "Stable cash flow"
+          ]
+        },
+        "rightOption": {
+          "title": "Purchase to Flip",
+          "features": [
+            "Sale profit on exit",
+            "Short-term investment",
+            "6.5% interest rate",
+            "20% down payment",
+            "Quick turnaround"
+          ]
+        }
       }
     }
   ]
@@ -579,18 +540,24 @@ Confirmation message.
 
 ---
 
-## 🚀 PATTERN
+## 📐 JSON RULES
 
-**Every response uses exactly 2 templates.**
-
-Pattern: Context → Action
-
-Examples:
-- Hero → Trio
-- Article → Grid
-- Banner → Steps
-- Compare → MediaText
+1. **Props Structure:** All template data goes in `props`, never at root
+2. **Exact Names:** Use exact prop names from template definitions
+3. **Required Fields:** `badge` and `title` always required in payload
+4. **IDs:** Each subsection needs unique `id`
 
 ---
 
-_v111.0 | The Screen Finally Cares_
+## ✅ BEST PRACTICES
+
+- **Always combine 2-4 templates** for complete experiences
+- **Use assetId** for AI-generated images when showing properties
+- **Include actionPhrase** on clickable elements
+- **Keep text concise** - let templates do the visual work
+- **Match template to data** - don't force complex data into simple templates
+
+---
+
+_v3.0 | 21 Core Templates | Your Property. Our Expertise._
+
