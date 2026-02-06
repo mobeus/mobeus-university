@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "generate-schemas": "node scripts/generate-template-schemas.cjs",
     "prebuild": "node scripts/generate-build-info.cjs",
     "predev": "node scripts/generate-build-info.cjs",
     "dev": "vite",

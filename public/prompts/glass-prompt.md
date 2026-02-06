@@ -25,6 +25,8 @@ navigateToSection(payload: NavigationPayload): void
 
 ---
 
+<!-- TEMPLATE-SCHEMAS-START -->
+
 ## 🎨 TEMPLATES (30)
 
 ### LAYOUT
@@ -253,6 +255,8 @@ Confirmation message.
 ```
 
 ---
+
+<!-- TEMPLATE-SCHEMAS-END -->
 
 ## 🎯 SHOT PROMPTS
 
