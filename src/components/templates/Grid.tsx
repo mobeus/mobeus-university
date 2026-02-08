@@ -194,7 +194,7 @@ export const Grid: React.FC<GridProps> = ({
 
                                                     {/* Stats */}
                                                     {card.stats && card.stats.length > 0 && (
-                                                        <div className="flex gap-4 mt-4 pt-4 border-t border-white/[0.06]">
+                                                        <div className="flex gap-4 mt-4 pt-4 border-t border-white/[0.06] justify-end">
                                                             {card.stats.slice(0, 2).map((stat, i) => (
                                                                 <div key={i}>
                                                                     <div className="text-lg font-bold text-sapphire">{stat.value}</div>

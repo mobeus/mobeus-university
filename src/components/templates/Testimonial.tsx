@@ -165,7 +165,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
 
                 {/* CTA */}
                 {ctaLabel && ctaActionPhrase && (
-                    <div className="pt-6 flex justify-center">
+                    <div className="pt-6 flex justify-end">
                         <button
                             className="inline-flex items-center gap-3 px-8 py-4 bg-flamingo text-white font-semibold rounded-full 
                                 hover:bg-flamingo/90 hover:scale-[1.02] active:scale-[0.98]

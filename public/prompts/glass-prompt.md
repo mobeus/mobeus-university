@@ -1,5 +1,5 @@
 # navigateToSection Tool
-> v113.0 | Mobeus Tele
+> v119.0 | Mobeus Tele
 
 ## Function Signature
 
@@ -27,7 +27,7 @@ navigateToSection(payload: NavigationPayload): void
 
 <!-- TEMPLATE-SCHEMAS-START -->
 
-## ---TEMPLATES--- (39)
+## ---TEMPLATES--- (30)
 
 ### Accordion
 GENERIC
@@ -63,11 +63,6 @@ GENERIC
 RICH GENERIC
 ```json
 {"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "columns"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "subtitle"?: "string", "value"?: "string", "items": ["string"], "variant": {}, "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "summary"?: {"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}, "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
-```
-
-### ConsultationScheduler
-```json
-{"topic": "string", "imageId"?: "string", "meetingType": "string", "meetingLocation": "string", "date": "string", "time": "string", "status"?: "proposed"}
 ```
 
 ### Countdown
@@ -106,12 +101,6 @@ RICH GENERIC
 {"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "sections"?: [{"icon"?: "string", "label"?: "string", "description"?: "string", "cards": [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "stats"?: [{}], "highlight"?: false, "actionPhrase"?: "string", "ctaLabel"?: "string"}], "variant"?: {}}], "items"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "stats"?: [{"value": "string", "label": "string"}], "highlight"?: false, "actionPhrase"?: "string", "ctaLabel"?: "string"}], "columns"?: 3, "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-### Guide
-GENERIC
-```json
-{"modes"?: [{"icon"?: "string", "title": "string", "description": "string", "variant"?: {}, "examples"?: ["string"]}], "commandsLabel"?: "string", "commands"?: [{"cmd": "string", "desc": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
 ### Hero
 GENERIC
 ```json
@@ -134,17 +123,6 @@ GENERIC
 GENERIC
 ```json
 {"title": "string", "subtitle"?: "string", "duration"?: "string", "difficulty"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "objectivesLabel"?: "string", "objectives"?: ["string"], "sections"?: [{"icon"?: "string", "title": "string", "content": "string", "imageUrl"?: "string", "imagePrompt"?: "string", "keyPoints"?: ["string"]}], "summaryLabel"?: "string", "summary"?: "string", "keyTakeaways"?: ["string"], "nextLabel"?: "string", "nextPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
-### List
-GENERIC
-```json
-{"headline"?: "string", "subheadline"?: "string", "items"?: [{"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
-### MediaText
-```json
-{"layout"?: "imageLeft", "title"?: "string", "subtitle"?: "string", "paragraph"?: "string", "imagePrompt"?: "string", "imageUrl"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "leftColumn"?: "string", "rightColumn"?: "string", "headline"?: "string"}
 ```
 
 ### Metric
@@ -195,22 +173,10 @@ GENERIC
 {"leftIcon"?: "string", "leftHeadline"?: "string", "leftSubheadline"?: "string", "leftItems"?: [{"icon"?: "string", "text": "string"}], "leftConclusion"?: "string", "leftVariant"?: "default", "rightItems"?: [{"icon"?: "string", "value": "string", "label": "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-### Stats
-GENERIC
-```json
-{"stats"?: [{"value": "string", "label": "string", "context"?: "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
 ### Steps
 GENERIC
 ```json
 {"headline"?: "string", "subheadline"?: "string", "steps"?: [{"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}], "layout"?: "vertical", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
-### Story
-GENERIC
-```json
-{"header"?: "string", "headerLabel"?: "string", "sections"?: [{"icon"?: "string", "label": "string", "content": "string", "highlight"?: false}], "relatedStories"?: [{"title": "string", "subtitle"?: "string", "actionPhrase": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
 ### Table
@@ -225,18 +191,6 @@ RICH GENERIC
 {"icon"?: "string", "badge"?: "string", "quote": "string", "attribution": "string", "role"?: "string", "location"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "context"?: "string", "tagline"?: "string", "variant"?: "warm", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-### TextImageLeft
-GENERIC
-```json
-{"title"?: "string", "subtitle"?: "string", "paragraphTitle"?: "string", "paragraph"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "imageAlt"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
-### TextImageRight
-GENERIC
-```json
-{"title"?: "string", "subtitle"?: "string", "paragraphTitle"?: "string", "paragraph"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "imageAlt"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
 ### Timeline
 GENERIC
 ```json
@@ -247,12 +201,6 @@ GENERIC
 RICH GENERIC
 ```json
 {"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "cards"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "features"?: ["string"], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "items"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "features"?: ["string"], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "numbered"?: true, "variant"?: "default", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
-```
-
-### TwoColumns
-GENERIC
-```json
-{"headline"?: "string", "subheadline"?: "string", "leftColumn"?: {"title"?: "string", "subtitle"?: "string", "paragraph"?: "string"}, "rightColumn"?: {"title"?: "string", "subtitle"?: "string", "paragraph"?: "string"}, "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
 ### WelcomeCarousel
@@ -269,7 +217,7 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What is Mobeus?" / "Tell me about Teleglass"
 
-**Tele:** "I'm Catherine. I'm a tele. Let me show you what we do."
+**Tele:** "Mobeus built the caring screen. Let me show you what that looks like."
 
 **Call:**
 ```json
@@ -365,7 +313,7 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What is a tele?" / "How does this work?"
 
-**Tele:** "I'm one. We're conversational workers. We show up ready to work."
+**Tele:** "I'm one. We're caring workers. We show up ready to work — let me show you."
 
 **Call:**
 ```json
@@ -377,7 +325,7 @@ Apple-style solid color cards for Mobeus
       "id": "definition",
       "templateId": "Article",
       "props": {
-        "title": "A Tele Is Conversational Labor",
+        "title": "We Are Caring Workers",
         "blocks": [
           {
             "type": "paragraph",
@@ -385,7 +333,7 @@ Apple-style solid color cards for Mobeus
           },
           {
             "type": "paragraph",
-            "content": "We teles work across every channel: chat, voice, SMS, avatar. We remember context. We adapt to your workflow. We handle transactions, train users, close sales, and provide support."
+            "content": "We work across every channel: chat, voice, SMS, avatar. We remember context. We adapt to your workflow. We handle transactions, train users, close sales, and provide support."
           },
           {
             "type": "paragraph",
@@ -460,7 +408,7 @@ Apple-style solid color cards for Mobeus
         "features": [
           {
             "icon": "Eye",
-            "text": "Watch us teles work live"
+            "text": "Watch us work live"
           },
           {
             "icon": "Cpu",
@@ -524,13 +472,13 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What's different?" / "Explain the shift"
 
-**Tele:** "We teles flipped 50 years of software on its head."
+**Tele:** "We flipped 50 years of software on its head."
 
 **Call:**
 ```json
 {
   "badge": "THE SHIFT",
-  "title": "From Software to Labor",
+  "title": "From Software to Caring",
   "generativeSubsections": [
     {
       "id": "paradigm-shift",
@@ -551,12 +499,12 @@ Apple-style solid color cards for Mobeus
           },
           {
             "icon": "Check",
-            "title": "Labor Era (2026→)",
+            "title": "Caring Era (2026→)",
             "items": [
-              "Machines adapt to humans",
+              "Technology adapts to you",
               "Conversation replaces training",
               "Natural language everywhere",
-              "Teles act with reasoning — that's us",
+              "We act with reasoning",
               "You collaborate with workers"
             ],
             "variant": "good",
@@ -567,15 +515,14 @@ Apple-style solid color cards for Mobeus
     },
     {
       "id": "breakthrough",
-      "templateId": "MediaText",
+      "templateId": "Paragraph",
       "props": {
         "title": "Why Now",
         "subtitle": "Three Breakthroughs Made This Real",
-        "paragraph": "For years, conversational computing was fiction. Then three things happened: Language models achieved true comprehension. Multi-agent architectures separated construction from delivery. The Browser Model Bridge turned language into live interfaces. Mobeus brought them together.",
+        "content": "For years, conversational computing was fiction. Then three things happened: Language models achieved true comprehension. Multi-agent architectures separated construction from delivery. The Browser Model Bridge turned language into live interfaces. Mobeus brought them together.",
         "imagePrompt": "neural network visualization",
         "ctaLabel": "See the Architecture",
-        "ctaActionPhrase": "show me teleglass architecture",
-        "layout": "imageLeft"
+        "ctaActionPhrase": "show me teleglass architecture"
       }
     }
   ]
@@ -594,8 +541,8 @@ Examples:
 - Hero → Trio
 - Article → Grid
 - Banner → Steps
-- Compare → MediaText
+- Compare → Paragraph
 
 ---
 
-_v113.0 | The Screen Finally Cares_
+_v119.0 | The Screen Finally Cares_

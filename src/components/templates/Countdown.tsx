@@ -184,7 +184,7 @@ export const Countdown: React.FC<CountdownProps> = ({
 
                 {/* CTAs */}
                 {(ctaLabel || secondaryCtaLabel) && (
-                    <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <div className="flex flex-wrap items-center justify-end gap-4 pt-4">
                         {ctaLabel && ctaActionPhrase && (
                             <button
                                 className="inline-flex items-center gap-3 px-8 py-4 bg-flamingo text-white font-semibold rounded-full 

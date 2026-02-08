@@ -3,8 +3,8 @@ const path = require("path");
 
 async function publish() {
   try {
-    // Put your tenant ID for this project here
-    const tenantId = "3883";
+    // Put your tenant ID for this project here, or pass TENANT_ID env var
+    const tenantId = process.env.TENANT_ID || "3883";
     console.log("📋 Using tenant ID: " + tenantId);
 
     // Read whitelisted files from public/prompts/

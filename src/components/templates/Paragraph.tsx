@@ -77,7 +77,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
 
     return (
         <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col justify-center">
-            <div className={`max-w-3xl ${alignment === 'center' ? 'mx-auto' : alignment === 'right' ? 'ml-auto' : ''}`}>
+            <div className={`w-full ${alignment === 'center' ? 'mx-auto' : alignment === 'right' ? 'ml-auto' : ''}`}>
                 <div className={`flex flex-col ${alignClass} ${variantStyles[variant]}`}>
 
                     {/* Badge & Icon Header */}
@@ -100,7 +100,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
                     {hasImage && (
                         <div
                             onClick={() => contentActionPhrase && handleAction(contentActionPhrase)}
-                            className={`w-full max-w-md aspect-square rounded-2xl overflow-hidden border border-white/[0.06] mb-8 ${contentActionPhrase ? 'cursor-pointer hover:border-sapphire/30' : ''} transition-colors`}
+                            className={`w-full max-w-xl aspect-square rounded-2xl overflow-hidden border border-white/[0.06] mb-8 ${contentActionPhrase ? 'cursor-pointer hover:border-sapphire/30' : ''} transition-colors`}
                         >
                             <SmartImage
                                 assetId={imageUrl || imagePrompt || 'paragraph-image'}
@@ -122,14 +122,29 @@ export const Paragraph: React.FC<ParagraphProps> = ({
                         </h2>
                     )}
 
-                    {displayText && (
-                        <p
-                            onClick={() => contentActionPhrase && handleAction(contentActionPhrase)}
-                            className={`text-lg text-mist/60 leading-relaxed mb-6 ${contentActionPhrase ? 'cursor-pointer hover:text-white transition-colors' : ''}`}
-                        >
-                            {displayText}
-                        </p>
-                    )}
+                    {displayText && (() => {
+                        const paragraphs = displayText.split(/\n\n+/).filter(Boolean);
+                        return paragraphs.length > 1 ? (
+                            <div className="space-y-4 mb-6">
+                                {paragraphs.map((para, i) => (
+                                    <p
+                                        key={i}
+                                        onClick={() => contentActionPhrase && handleAction(contentActionPhrase)}
+                                        className={`text-lg text-mist/60 leading-relaxed ${contentActionPhrase ? 'cursor-pointer hover:text-white transition-colors' : ''}`}
+                                    >
+                                        {para}
+                                    </p>
+                                ))}
+                            </div>
+                        ) : (
+                            <p
+                                onClick={() => contentActionPhrase && handleAction(contentActionPhrase)}
+                                className={`text-lg text-mist/60 leading-relaxed mb-6 ${contentActionPhrase ? 'cursor-pointer hover:text-white transition-colors' : ''}`}
+                            >
+                                {displayText}
+                            </p>
+                        );
+                    })()}
 
                     {/* Highlights / Bullet Points */}
                     {highlights && highlights.length > 0 && (
@@ -162,7 +177,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
 
                     {/* CTAs */}
                     {(ctaLabel || secondaryCtaLabel) && (
-                        <div className="flex flex-wrap gap-4 justify-center w-full">
+                        <div className="flex flex-wrap gap-4 justify-end w-full">
                             {secondaryCtaLabel && secondaryCtaActionPhrase && (
                                 <button
                                     className="inline-flex items-center gap-3 px-6 py-3 bg-white/[0.05] border border-white/[0.1] text-white font-semibold rounded-full 
@@ -183,6 +198,13 @@ export const Paragraph: React.FC<ParagraphProps> = ({
                                     <ArrowRight className="w-5 h-5" />
                                 </button>
                             )}
+                        </div>
+                    )}
+
+                    {/* Bottom accent — only when no CTA, quote, or highlights */}
+                    {!ctaLabel && !quote && (!highlights || highlights.length === 0) && (
+                        <div className="w-full pt-4 mt-2">
+                            <div className="h-[2px] w-full bg-gradient-to-r from-sapphire/30 via-flamingo/20 to-transparent rounded-full" />
                         </div>
                     )}
                 </div>

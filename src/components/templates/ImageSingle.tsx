@@ -194,7 +194,7 @@ export const ImageSingle: React.FC<ImageSingleProps> = ({
 
             {/* CTAs */}
             {(ctaLabel || secondaryCtaLabel) && (
-                <div className="pt-6 flex flex-wrap gap-4">
+                <div className="pt-6 flex flex-wrap gap-4 justify-end">
                     {secondaryCtaLabel && secondaryCtaActionPhrase && (
                         <button
                             className="inline-flex items-center gap-3 px-6 py-3 bg-white/[0.05] border border-white/[0.1] text-white font-semibold rounded-full 

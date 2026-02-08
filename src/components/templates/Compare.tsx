@@ -198,7 +198,7 @@ export const Compare: React.FC<CompareProps> = ({
 
                                     {/* Stats */}
                                     {col.stats && col.stats.length > 0 && (
-                                        <div className="flex gap-4 mt-4 pt-4 border-t border-white/[0.06]">
+                                        <div className="flex gap-4 mt-4 pt-4 border-t border-white/[0.06] justify-end">
                                             {col.stats.slice(0, 2).map((stat, i) => (
                                                 <div key={i}>
                                                     <div className={`text-lg font-bold ${isBad ? 'text-mist/40' : 'text-jade'}`}>{stat.value}</div>
