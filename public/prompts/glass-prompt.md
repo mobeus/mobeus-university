@@ -27,234 +27,203 @@ navigateToSection(payload: NavigationPayload): void
 
 <!-- TEMPLATE-SCHEMAS-START -->
 
-## 🎨 TEMPLATES (30)
+## ---TEMPLATES--- (33)
 
-### LAYOUT
-
-#### Hero
-Full-width hero.
+### Accordion
+GENERIC
 ```json
-{ "headline": "The Screen Finally Cares", "description": "Conversational labor is coming.", "ctaLabel": "Reserve Your Spot", "ctaActionPhrase": "show me launch event registration" }
+{"items"?: [{"icon"?: "string", "number"?: 0, "title": "string", "subtitle"?: "string", "description"?: "string", "details"?: ["string"], "actionPhrase"?: "string", "actionLabel"?: "string"}], "allowMultiple"?: false, "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Split
-Two-column comparison.
+### Article
+RICH GENERIC
 ```json
-{ "leftContent": { "headline": "Software Era", "body": "Humans adapt to machines." }, "rightContent": { "headline": "Labor Era", "body": "Machines adapt to humans." } }
+{"icon"?: "string", "badge"?: "string", "heroImages"?: [{"url"?: "string", "prompt"?: "string"}], "heroImageUrl"?: "string", "heroImagePrompt"?: "string", "title"?: "string", "subtitle"?: "string", "meta"?: {"author"?: "string", "date"?: "string", "readTime"?: "string", "category"?: "string"}, "blocks"?: [{"type": {}, "content"?: "string", "items"?: ["string"], "imageUrl"?: "string", "imagePrompt"?: "string", "images"?: [{"url"?: "string", "prompt"?: "string", "caption"?: "string"}], "caption"?: "string", "icon"?: "string", "variant"?: {}, "actionPhrase"?: "string"}], "tags"?: ["string"], "relatedLinks"?: [{"label": "string", "actionPhrase": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### Banner
-Call-to-action banner.
+### Banner
+RICH GENERIC
 ```json
-{ "icon": "Sparkles", "headline": "Launch Event", "subheadline": "March/April 2026", "ctaLabel": "Reserve Spot", "ctaActionPhrase": "show me launch event registration" }
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subheadline"?: "string", "description"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "stats"?: [{"value": "string", "label": "string"}], "features"?: [{"icon"?: "string", "text": "string"}], "highlight"?: false, "variant"?: "gradient", "bannerActionPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### Feature
-Single feature.
+### Carousel
+GENERIC
 ```json
-{ "icon": "Shield", "title": "Triple Agnostic", "description": "Model. Cloud. Device." }
+{"cards"?: [{"title": "string", "subtitle"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "actionPhrase": "string"}], "autoScrollSpeed"?: 1}
 ```
 
-#### Story
-Narrative sections.
+### Compare
+RICH GENERIC
 ```json
-{ "header": "The Mobeus Story", "sections": [{ "label": "The Founding", "content": "Richie Etwaru and Mike Sutcliff founded Mobeus 5 years ago." }, { "label": "The Launch", "content": "March/April 2026 — help arrives." }] }
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "columns"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "subtitle"?: "string", "value"?: "string", "items": ["string"], "variant": {}, "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "summary"?: {"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}, "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
----
-
-### CONTENT
-
-#### Paragraph
-Brief text.
+### ConsultationScheduler
 ```json
-{ "text": "Teleglass inverts the relationship. Technology adapts to humans." }
+{"topic": "string", "imageId"?: "string", "meetingType": "string", "meetingLocation": "string", "date": "string", "time": "string", "status"?: "proposed"}
 ```
 
-#### Article
-Long-form content.
+### Feature
+GENERIC
 ```json
-{ "title": "What Is a Tele?", "blocks": [{ "type": "paragraph", "content": "A tele is conversational labor. It shows up ready to work." }] }
+{"imageUrl"?: "string", "imagePrompt"?: "string", "badge"?: "string", "title"?: "string", "description"?: "string", "points"?: [{"icon"?: "string", "text": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryLabel"?: "string", "secondaryPhrase"?: "string", "reversed"?: false}
 ```
 
-#### Quote
-Quote with attribution.
+### Form
+GENERIC
 ```json
-{ "quote": "Help is here.", "author": "The Tele Population", "role": "Conversational Labor" }
+{"headline"?: "string", "subheadline"?: "string", "fields"?: [{"name": "string", "label": "string", "type": {}, "icon"?: "string", "placeholder"?: "string", "required"?: false}], "infoLabel"?: "string", "infoItems"?: [{"text": "string"}], "submitLabel"?: "string", "submitActionPhrase"?: "string", "values"?: "string", "confirmed"?: false, "confirmationTitle"?: "string", "confirmationMessage"?: "string", "content"?: {"title"?: "string", "subtitle"?: "string", "paragraph"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "badges"?: [{"icon"?: "string", "label": "string", "variant"?: {}}]}}
 ```
 
-#### Lesson
-Educational block with sections.
+### Grid
+RICH GENERIC
 ```json
-{ "title": "Double Agent Architecture", "sections": [{ "title": "Overview", "content": "Build Agent constructs. Runtime Agent delivers." }] }
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "sections"?: [{"icon"?: "string", "label"?: "string", "description"?: "string", "cards": [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "stats"?: [{}], "highlight"?: false, "actionPhrase"?: "string", "ctaLabel"?: "string"}], "variant"?: {}}], "items"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "stats"?: [{"value": "string", "label": "string"}], "highlight"?: false, "actionPhrase"?: "string", "ctaLabel"?: "string"}], "columns"?: 3, "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### Guide
-Instructional overview.
+### Guide
+GENERIC
 ```json
-{ "title": "Launch Event Guide", "description": "Live demos, platform unveiling, early access." }
+{"modes"?: [{"icon"?: "string", "title": "string", "description": "string", "variant"?: {}, "examples"?: ["string"]}], "commandsLabel"?: "string", "commands"?: [{"cmd": "string", "desc": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### TEXT-HEAVY
-
-#### MediaText
-Text + image or two-column layouts.
-
-**Text + Image:**
+### Hero
+GENERIC
 ```json
-{ "title": "The Tele Advantage", "paragraph": "For decades, software demanded humans adapt. Teleglass inverts this.", "imagePrompt": "conversational interface", "ctaLabel": "See It", "ctaActionPhrase": "show me", "layout": "imageLeft" }
+{"stat"?: "string", "statLabel"?: "string", "headline"?: "string", "description"?: "string", "features"?: [{"icon"?: "string", "label": "string", "muted"?: false}], "insight"?: {"icon"?: "string", "title": "string", "description": "string"}, "quote"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "variant"?: "default"}
 ```
 
-**Two-Column:**
+### ImageSingle
+RICH GENERIC
 ```json
-{ "headline": "Two Perspectives", "leftColumn": { "title": "Software Era", "paragraph": "Humans learn the machine..." }, "rightColumn": { "title": "Labor Era", "paragraph": "Machines learn you..." }, "layout": "twoColumn" }
+{"icon"?: "string", "badge"?: "string", "title"?: "string", "subtitle"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "images"?: [{"url"?: "string", "prompt"?: "string", "caption"?: "string", "actionPhrase"?: "string"}], "caption"?: "string", "aspectRatio"?: "'1:1',  // Default to square", "showThumbnails"?: false, "imageActionPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
----
-
-### DATA
-
-#### Stats
-Statistics grid.
+### Infographic
+GENERIC
 ```json
-{ "stats": [{ "value": "5", "label": "Years", "context": "Building conversational labor" }, { "value": "March 2026", "label": "Launch", "actionPhrase": "show launch event details" }] }
+{"imageUrl"?: "string", "imagePrompt"?: "string", "title"?: "string", "subtitle"?: "string", "description"?: "string", "points"?: [{"icon"?: "string", "label": "string", "value": "string", "description"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Metric
-Single metric.
+### Lesson
+GENERIC
 ```json
-{ "value": "Triple Agnostic", "label": "Model • Cloud • Device" }
+{"title": "string", "subtitle"?: "string", "duration"?: "string", "difficulty"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "objectivesLabel"?: "string", "objectives"?: ["string"], "sections"?: [{"icon"?: "string", "title": "string", "content": "string", "imageUrl"?: "string", "imagePrompt"?: "string", "keyPoints"?: ["string"]}], "summaryLabel"?: "string", "summary"?: "string", "keyTakeaways"?: ["string"], "nextLabel"?: "string", "nextPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Scorecard
-Multiple scores.
+### List
+GENERIC
 ```json
-{ "scores": [{ "label": "Model Agnostic", "value": "✓" }, { "label": "Cloud Agnostic", "value": "✓" }] }
+{"headline"?: "string", "subheadline"?: "string", "items"?: [{"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Infographic
-Visual data with icons.
+### MediaText
 ```json
-{ "items": [{ "icon": "MessageSquare", "value": "Chat", "label": "Web" }, { "icon": "Phone", "value": "Phone", "label": "Voice" }] }
+{"layout"?: "imageLeft", "title"?: "string", "subtitle"?: "string", "paragraph"?: "string", "imagePrompt"?: "string", "imageUrl"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "leftColumn"?: "string", "rightColumn"?: "string", "headline"?: "string"}
 ```
 
-#### Table
-Data table.
+### Metric
+GENERIC
 ```json
-{ "headers": ["Channel", "Use Case"], "rows": [["Chat", "Web conversations"], ["Phone", "Complex issues"]] }
+{"value": "string", "label": "string", "context"?: "string", "icon"?: "string", "trend"?: "neutral", "variant"?: "default", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### LISTS
-
-#### List
-Bulleted list.
+### Paragraph
+RICH GENERIC
 ```json
-{ "items": [{ "icon": "Cpu", "title": "Double Agent Architecture", "description": "Build + Runtime" }, { "icon": "Globe", "title": "Browser Model Bridge", "description": "Language to interfaces" }] }
+{"icon"?: "string", "badge"?: "string", "title"?: "string", "subtitle"?: "string", "content"?: "string", "text"?: "string", "highlights"?: ["string"], "quote"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "variant"?: "default", "alignment"?: "left", "contentActionPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### Grid
-Interactive cards.
+### PartyConfirmation
+CELEBRATION
 ```json
-{ "headline": "Core Principles", "badge": "ARCHITECTURE", "items": [{ "icon": "Cloud", "title": "Model Agnostic", "description": "Works with any LLM", "actionPhrase": "show model agnostic architecture" }, { "icon": "Globe", "title": "Cloud Agnostic", "description": "Deploy anywhere" }] }
+{"badge"?: "YOU'RE ON THE LIST", "headline"?: "See You at the Population Party! 🎉", "subheadline"?: "string", "partyDate"?: "March 15, 2026", "partyTime"?: "7:00 PM - Midnight EST", "location"?: "string", "partyHighlights"?: [], "celebrationImage"?: "party-celebration-confirmed", "confirmationMessage"?: "string"}
 ```
 
-#### Trio
-Three items.
+### Quote
+RICH GENERIC
 ```json
-{ "items": [{ "icon": "Zap", "title": "Bold", "description": "Ambitious" }, { "icon": "Feather", "title": "Simple", "description": "Effortless" }, { "icon": "Target", "title": "Focused", "description": "Purposeful" }] }
+{"icon"?: "string", "badge"?: "string", "quote": "string", "author"?: "string", "role"?: "string", "company"?: "string", "avatarUrl"?: "string", "avatarPrompt"?: "string", "rating"?: 0, "source"?: "string", "sourceActionPhrase"?: "string", "variant"?: "default", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### Showcase
-Featured benefits.
+### Scorecard
+GENERIC
 ```json
-{ "headline": "Platform Capabilities", "badge": "FEATURES", "benefits": [{ "icon": "MessageSquare", "title": "Chat", "text": "Web conversations", "actionPhrase": "show chat features" }, { "icon": "Phone", "title": "Voice", "text": "Phone interactions", "highlight": true }] }
+{"title": "string", "subtitle"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "periodLabel"?: "string", "period"?: "string", "overallScore"?: 0, "overallGrade"?: "string", "overallLabel"?: "string", "sections"?: [{"title": "string", "imageUrl"?: "string", "imagePrompt"?: "string", "metrics": [{"icon"?: "string", "label": "string", "value": "string", "target"?: "string", "trend"?: {}, "trendValue"?: "string", "grade"?: {}, "status"?: {}}], "overallScore"?: 0, "overallGrade"?: "string"}], "highlights"?: [{"icon"?: "string", "label": "string", "value": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Carousel
-Scrollable items.
+### Showcase
+RICH GENERIC
 ```json
-{ "items": [{ "title": "Healthcare Tele", "description": "Clinical support" }] }
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subheadline"?: "string", "heroImageUrl"?: "string", "heroImagePrompt"?: "string", "rating"?: 0, "ratingLabel"?: "string", "benefits"?: [{"icon"?: "string", "badge"?: "string", "title"?: "string", "text"?: "string", "description"?: "string", "stat"?: "string", "highlight"?: false, "actionPhrase"?: "string"}], "items"?: [{"icon"?: "string", "badge"?: "string", "title"?: "string", "text"?: "string", "description"?: "string", "stat"?: "string", "highlight"?: false, "actionPhrase"?: "string"}], "tagline"?: "string", "taglineIcon"?: "string", "taglineActionPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
-#### WelcomeCarousel
-Auto-scrolling welcome.
+### Split
+GENERIC
 ```json
-{ "items": [{ "title": "The Screen Finally Cares", "description": "Mobeus is building conversational labor" }] }
+{"leftIcon"?: "string", "leftHeadline"?: "string", "leftSubheadline"?: "string", "leftItems"?: [{"icon"?: "string", "text": "string"}], "leftConclusion"?: "string", "leftVariant"?: "default", "rightItems"?: [{"icon"?: "string", "value": "string", "label": "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Accordion
-Expandable sections.
+### Stats
+GENERIC
 ```json
-{ "items": [{ "title": "What is a tele?", "content": "Conversational labor." }] }
+{"stats"?: [{"value": "string", "label": "string", "context"?: "string", "actionPhrase"?: "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### STEPS
-
-#### Steps
-Sequential steps.
+### Steps
+GENERIC
 ```json
-{ "steps": [{ "icon": "Calendar", "title": "Reserve", "description": "Sign up for the event" }, { "icon": "Users", "title": "Attend", "description": "March 2026", "actionPhrase": "show event details" }] }
+{"headline"?: "string", "subheadline"?: "string", "steps"?: [{"icon"?: "string", "title": "string", "description"?: "string", "actionPhrase"?: "string"}], "layout"?: "vertical", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### Timeline
-Two-column timeline with deliverables and steps.
+### Story
+GENERIC
 ```json
-{ "leftHeadline": "Launch Deliverables", "leftSubheadline": "What You Get", "leftIcon": "Package", "deliverablesLabel": "INCLUDED", "deliverables": [{ "icon": "CheckCircle", "text": "Platform access" }, { "icon": "Users", "text": "Community membership" }], "stepsLabel": "SCHEDULE", "steps": [{ "time": "Q1 2026", "title": "Beta access", "icon": "Rocket" }, { "time": "March 2026", "title": "Official launch", "icon": "Calendar" }] }
+{"header"?: "string", "headerLabel"?: "string", "sections"?: [{"icon"?: "string", "label": "string", "content": "string", "highlight"?: false}], "relatedStories"?: [{"title": "string", "subtitle"?: "string", "actionPhrase": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
----
-
-### COMPARISON
-
-#### Compare
-Side-by-side comparison.
+### Table
+GENERIC
 ```json
-{ "columns": [{ "icon": "X", "title": "Software", "items": ["Learn it", "Adapt to it"], "variant": "bad" }, { "icon": "Check", "title": "Labor", "items": ["It learns you", "Adapts to you"], "variant": "good", "highlight": true }] }
+{"title"?: "string", "subtitle"?: "string", "searchPlaceholder"?: "string", "columns"?: [{"key": "string", "label": "string", "sortable"?: false, "align"?: {}}], "rows"?: [{"id": "string", "cells": "string", "actionPhrase"?: "string"}], "emptyMessage"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### MEDIA
-
-#### ImageSingle
-Single image.
+### TextImageLeft
+GENERIC
 ```json
-{ "imagePrompt": "diverse professionals with adaptive screen", "alt": "The screen finally cares" }
+{"title"?: "string", "subtitle"?: "string", "paragraphTitle"?: "string", "paragraph"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "imageAlt"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### FORMS
-
-#### Form
-Interactive data collection with split layout.
+### TextImageRight
+GENERIC
 ```json
-{ "headline": "Join the Launch Event", "fields": [{ "name": "fullName", "label": "Full Name", "type": "text", "icon": "User", "required": true }, { "name": "email", "label": "Email", "type": "email", "icon": "Mail", "required": true }, { "name": "date", "label": "Preferred Date", "type": "date", "icon": "Calendar" }], "submitLabel": "Register", "submitActionPhrase": "register for launch event", "content": { "title": "What to Expect", "paragraph": "Live demos, platform unveiling, and early access opportunities." } }
+{"title"?: "string", "subtitle"?: "string", "paragraphTitle"?: "string", "paragraph"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "imageAlt"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
-
-### INTERACTIVE
-
-#### ConsultationScheduler
-Event registration.
+### Timeline
+GENERIC
 ```json
-{ "topic": "The Teleglass Launch Event", "imageId": "launch-event", "date": "March 2026 (Date TBA)", "time": "Details on registration", "meetingType": "In-Person Event", "meetingLocation": "Location on registration" }
+{"leftIcon"?: "string", "leftHeadline"?: "string", "leftSubheadline"?: "string", "deliverablesLabel"?: "string", "deliverables"?: [{"icon"?: "string", "text": "string"}], "stepsLabel"?: "string", "steps"?: [{"time"?: "string", "title": "string", "icon"?: "string"}], "successNote"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
-#### PartyConfirmation
-Confirmation message.
+### Trio
+RICH GENERIC
 ```json
-{ "message": "You're registered! Check email for details." }
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "cards"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "features"?: ["string"], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "items"?: [{"icon"?: "string", "badge"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "title": "string", "description": "string", "highlight"?: false, "stats"?: [{"value": "string", "label": "string"}], "features"?: ["string"], "actionPhrase"?: "string", "ctaLabel"?: "string"}], "numbered"?: true, "variant"?: "default", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
----
+### TwoColumns
+GENERIC
+```json
+{"headline"?: "string", "subheadline"?: "string", "leftColumn"?: {"title"?: "string", "subtitle"?: "string", "paragraph"?: "string"}, "rightColumn"?: {"title"?: "string", "subtitle"?: "string", "paragraph"?: "string"}, "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+```
+
+### WelcomeCarousel
+Apple-style solid color cards for Mobeus
+```json
+{"cards"?: [{"question": "string", "subtext"?: "string", "icon"?: "string", "imageUrl"?: "string", "actionPhrase": "string", "isAccent"?: false, "accentColor"?: {}}]}
+```
 
 <!-- TEMPLATE-SCHEMAS-END -->
 
@@ -441,7 +410,7 @@ Confirmation message.
 ```json
 {
   "badge": "LAUNCH EVENT",
-  "title": "Be There When Help Arrives",
+  "title": "The Screen Finally Cares",
   "generativeSubsections": [
     {
       "id": "event-details",

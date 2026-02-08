@@ -699,32 +699,49 @@ button,
   }
 
   /* ============================================
-   * AVATAR CONNECTING - Background Pulse Animation
+   * AVATAR CONNECTING - Hero Pulse Overlay
    * ============================================
-   * When avatar-connecting class is on body,
-   * the background pulses to indicate loading.
+   * When connecting, the hero-pulse-overlay fades
+   * between 50% and 15% opacity, creating a visible
+   * avatar pulse effect with backgroundEmpty behind it.
    * ============================================ */
 
-  @keyframes bg-pulse-connecting {
+  @keyframes hero-pulse-fade {
 
     0%,
     100% {
-      transform: scale(1);
-      opacity: 1;
+      opacity: 0.5;
     }
 
     50% {
-      transform: scale(1.02);
-      opacity: 0.85;
+      opacity: 0.15;
     }
   }
 
-  /* Apply pulsing to background layer while connecting */
-  body.avatar-connecting .bg-layer,
-  body.avatar-connecting .bg-layer video,
-  body.avatar-connecting .bg-layer img,
-  body.avatar-connecting .hero-background {
-    animation: bg-pulse-connecting 1.5s ease-in-out infinite;
+  .hero-pulse-overlay {
+    animation: hero-pulse-fade 2s ease-in-out infinite;
+    opacity: 0.5;
+  }
+
+
+  /* ============================================
+   * TELE THINKING - Pulsing Overlay
+   * ============================================
+   * When tele is thinking (after notifyTele click),
+   * a React-rendered overlay pulses with this
+   * animation, creating a visible glow effect.
+   * ============================================ */
+
+  @keyframes tele-thinking-pulse {
+
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+
+    50% {
+      opacity: 0.8;
+    }
   }
 
 

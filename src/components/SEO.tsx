@@ -12,11 +12,11 @@ interface SEOProps {
 
 export const SEO = ({
   title = 'Mobeus | The Assisted Future',
-  description = 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
+  description = 'Machines helping mankind. A population of helpful teles giving humanity space for life. The screen finally cares.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Mobeus', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'Help is Here'],
+  keywords = ['Mobeus', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'The Screen Finally Cares'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -76,8 +76,8 @@ export const SEO = ({
 export const sectionSEO = {
   welcome: {
     title: 'Mobeus | The Assisted Future',
-    description: 'Experience The Assisted Future. Conversational labor that helps you. Help is here.',
-    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life', 'Help is Here'],
+    description: 'Experience The Assisted Future. Conversational labor that helps you. The screen finally cares.',
+    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life', 'The Screen Finally Cares'],
   },
 
   platform: {
@@ -89,7 +89,7 @@ export const sectionSEO = {
   teles: {
     title: 'The Tele Population | Helpful Conversational Workers',
     description: 'A population of helpful teles — conversational workers accelerating The Assisted Future.',
-    keywords: ['Tele', 'Tele Population', 'Conversational Workers', 'Help is Here'],
+    keywords: ['Tele', 'Tele Population', 'Conversational Workers', 'The Screen Finally Cares'],
   },
 
   future: {

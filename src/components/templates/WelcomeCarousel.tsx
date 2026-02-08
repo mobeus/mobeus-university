@@ -36,7 +36,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
     const { playClick } = useSound();
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    // Default cards: "Help is here" brand - 5-step journey
+    // Default cards: "The screen finally cares" brand - 5-step journey
     const defaultCards: QuestionCard[] = [
         {
             question: "Why do you exist?",
@@ -70,7 +70,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
         },
         {
             question: "When does this launch?",
-            subtext: "March/April 2026 — Be there when help arrives",
+            subtext: "March/April 2026 — The screen finally cares",
             icon: "calendar",
             actionPhrase: "sign up for the launch event",
             isAccent: true

@@ -35,7 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // MOBEUS — Help is here
+  // MOBEUS — The screen finally cares
   // ============================================
   const navItems: Array<{
     id: string;

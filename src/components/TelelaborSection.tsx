@@ -50,9 +50,7 @@ const TelelaborSection = ({
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [isChatActive, setIsChatActive] = useState(false);
   const [isSmileyOn, setIsSmileyOn] = useState(true);
-  // COMMENTED OUT: Mic now starts unmuted on initial connection
-  // const [isMicMuted, setIsMicMuted] = useState(true); // Start muted
-  const [isMicMuted, setIsMicMuted] = useState(false); // Start unmuted
+  const [isMicMuted, setIsMicMuted] = useState(false);
   const [isChatGlassOpen, setIsChatGlassOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const [isVoiceConnected, setIsVoiceConnected] = useState(false);
@@ -119,6 +117,65 @@ const TelelaborSection = ({
     };
   }, [navigationIsLoading, isConnecting]);
 
+  // Start thinking animation immediately when notifyTele fires
+  // Uses epoch tracking to prevent stale output events from cancelling fresh thinking
+  useEffect(() => {
+    let safetyTimeout: ReturnType<typeof setTimeout> | null = null;
+    let thinkingEpoch = 0;
+    let thinkingStartTime = 0;
+    const MIN_THINKING_MS = 800;
+
+    const handleThinkingStart = () => {
+      thinkingEpoch++;
+      thinkingStartTime = Date.now();
+      setNavigationIsLoading(true);
+      window.dispatchEvent(
+        new CustomEvent("navigationLoadingChange", {
+          detail: { isLoading: true },
+        }),
+      );
+
+      // Safety timeout: stop thinking after 10s if no response arrives
+      if (safetyTimeout) clearTimeout(safetyTimeout);
+      const currentEpoch = thinkingEpoch;
+      safetyTimeout = setTimeout(() => {
+        if (thinkingEpoch === currentEpoch) {
+          setNavigationIsLoading(false);
+          window.dispatchEvent(
+            new CustomEvent("navigationLoadingChange", {
+              detail: { isLoading: false },
+            }),
+          );
+        }
+      }, 10000);
+    };
+
+    // Stop thinking when tele starts responding (speech/audio output)
+    const handleTeleResponse = () => {
+      if (safetyTimeout) clearTimeout(safetyTimeout);
+      const elapsed = Date.now() - thinkingStartTime;
+      const remaining = Math.max(0, MIN_THINKING_MS - elapsed);
+
+      // Ensure minimum visible duration
+      setTimeout(() => {
+        setNavigationIsLoading(false);
+        window.dispatchEvent(
+          new CustomEvent("navigationLoadingChange", {
+            detail: { isLoading: false },
+          }),
+        );
+      }, remaining);
+    };
+
+    window.addEventListener('teleThinkingStart', handleThinkingStart);
+    window.addEventListener('teleResponseStarted', handleTeleResponse);
+    return () => {
+      window.removeEventListener('teleThinkingStart', handleThinkingStart);
+      window.removeEventListener('teleResponseStarted', handleTeleResponse);
+      if (safetyTimeout) clearTimeout(safetyTimeout);
+    };
+  }, []);
+
   const [isMouseActive, setIsMouseActive] = useState(true);
   const { playTelelaborSound, playChatSound } = useSound();
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
@@ -140,9 +197,7 @@ const TelelaborSection = ({
 
   // Play sound when thinking starts
   useEffect(() => {
-    console.log("[TelelaborSection] isThinking changed:", isThinking);
     if (isThinking) {
-      console.log("[TelelaborSection] Playing thinking sound");
       playUISound("on", "mic", 0.4);
     }
   }, [isThinking]);
@@ -503,18 +558,6 @@ const TelelaborSection = ({
       const ui: any = (window as any).UIFramework;
       const model: any = ui?.getVoiceComponents?.()?.model;
       if (!model || !model.addEventListener) return false;
-      // COMMENTED OUT: No longer enforcing muted state after connect
-      // const ensureMutedAfterConnect = () => {
-      //   try {
-      //     setTimeout(() => {
-      //       try {
-      //         syncMicFromModel();
-      //       } catch (_) {}
-      //     }, 80);
-      //   } catch (_) {}
-      // };
-
-      // REMOVED: Auto-unmute after connect - now mic state is controlled purely by user
       const onMuteChange = ({ isMuted }: any) => {
         if (!cancelled) {
           setIsMicMuted(!!isMuted);
@@ -524,7 +567,6 @@ const TelelaborSection = ({
         if (!cancelled) {
           const connected = state === "connected" || !!model.isConnected;
           setIsVoiceConnected(connected);
-          // REMOVED: No longer auto-unmuting on connect
         }
       };
       const onStatus = ({ status }: any) => {
@@ -532,14 +574,13 @@ const TelelaborSection = ({
           if (status === "connected") setIsVoiceConnected(true);
           if (status === "disconnected" || status === "error")
             setIsVoiceConnected(false);
-          // REMOVED: No longer auto-unmuting on connect
         }
       };
       const onOutputItemAdded = (event: any) => {
         if (event.item.type === "function_call") {
           const callId = event.item.call_id;
           const name = event.item.name || "unknown";
-          console.log("addFunctionCall=====", callId, name, event);
+          console.log("[Tele] Function call:", name, callId);
 
           // Parse input arguments from the event
           let input: Record<string, any> | undefined;
@@ -565,6 +606,9 @@ const TelelaborSection = ({
               }),
             );
           }
+        } else {
+          // Non-function-call output (speech/text) — tele has started responding
+          window.dispatchEvent(new CustomEvent('teleResponseStarted'));
         }
       };
       const onFunctionCallCompleted = (event: any) => {
@@ -572,7 +616,7 @@ const TelelaborSection = ({
         const name = event.name;
 
         if (callId) {
-          console.log("onFunctionCallCompleted====", callId, event);
+          console.log("[Tele] Function completed:", callId);
 
           // Parse result from event.arguments (which contains the output)
           let result: any;
@@ -605,11 +649,6 @@ const TelelaborSection = ({
       model.addEventListener("muteStateChanged", onMuteChange);
       model.addEventListener("connectionStateChange", onConnChange);
       model.addEventListener("statusChange", onStatus);
-      // REMOVED: No longer auto-unmuting on session creation
-      // COMMENTED OUT: Don't sync initial muted state, we want unmuted
-      // try {
-      //   setIsMicMuted(!!model.isMuted);
-      // } catch (_) { }
       try {
         setIsVoiceConnected(!!model.isConnected);
       } catch (_) { }
@@ -623,7 +662,7 @@ const TelelaborSection = ({
         try {
           model.removeEventListener?.("statusChange", onStatus);
         } catch (_) { }
-        // REMOVED: onSessionCreated cleanup (no longer registering)
+
       };
       return true;
     };
@@ -643,20 +682,7 @@ const TelelaborSection = ({
     };
   }, [syncMicFromModel]);
 
-  // COMMENTED OUT: Speaker now stays on when avatar connects
-  // useEffect(() => {
-  //   if (avatarState === "connected") {
-  //     setIsSoundOn(false);
-  //     try {
-  //       const ui: any = (window as any).UIFramework;
-  //       if (ui?.setAvatarVideoMuted) {
-  //         ui.setAvatarVideoMuted(true);
-  //       }
-  //     } catch (error) {
-  //       // Silent error handling for production
-  //     }
-  //   }
-  // }, [avatarState]);
+
 
   // Connect chat to avatar connection state
   useEffect(() => {
@@ -918,7 +944,7 @@ const TelelaborSection = ({
 
   return (
     <>
-      {/* ThinkingIndicator removed - animation now shows around avatar */}
+
       {/* Normal positioning when chat glass is closed */}
       <TelelaborIcons
         isChatGlassOpen={isChatGlassOpen}

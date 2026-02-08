@@ -61,7 +61,7 @@ export const GitVersionIndicator: React.FC = () => {
             style={{
                 fontFamily: 'monospace',
                 fontSize: '11px',
-                color: 'rgba(255, 255, 255, 0.175)',
+                color: 'rgba(255, 255, 255, 0.5)',
                 letterSpacing: '0.5px',
                 textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                 textAlign: 'right',

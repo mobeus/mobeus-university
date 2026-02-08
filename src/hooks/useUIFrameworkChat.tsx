@@ -14,8 +14,8 @@ const createMessageId = () =>
 
 const getFramework = () =>
   (typeof window !== "undefined" ? (window as any).UIFramework : undefined) as
-    | any
-    | undefined;
+  | any
+  | undefined;
 
 type ExternalMessage = {
   role: "user" | "assistant";
@@ -147,7 +147,7 @@ export function useUIFrameworkChat(isOpen: boolean) {
 
       try {
         ui.setVoiceChatVisibility?.(false);
-      } catch (_) {}
+      } catch (_) { }
       await ui.connectOpenAI?.();
       setConnected(true);
       return true;
@@ -255,6 +255,8 @@ export function useUIFrameworkChat(isOpen: boolean) {
     const onThinkingStart = (e: any) => {
       console.log("[useUIFrameworkChat] Thinking Start Event:", e.type);
       setIsThinking(true);
+      // Dispatch global event so TelelaborSection shows spinning avatar animation
+      window.dispatchEvent(new CustomEvent('teleThinkingStart'));
     };
 
     // Capture function calls as they occur during the response cycle
@@ -436,7 +438,7 @@ export function useUIFrameworkChat(isOpen: boolean) {
       model.addEventListener("response.done", onResponseDone);
       model.addEventListener(
         "conversation.item.input_audio_transcription.completed",
-        () => {},
+        () => { },
       );
       model.addEventListener("outputItemAdded", onOutputItemAdded);
       model.addEventListener("functionCallCompleted", onFunctionCallCompleted);
@@ -452,14 +454,14 @@ export function useUIFrameworkChat(isOpen: boolean) {
     return () => {
       try {
         ui.offChatEvent?.("messageAppended", onAppended);
-      } catch (_) {}
+      } catch (_) { }
       if (model?.removeEventListener) {
         try {
           model.removeEventListener("assistantTranscriptDelta", onDelta);
           model.removeEventListener("response.done", onResponseDone);
           model.removeEventListener(
             "conversation.item.input_audio_transcription.completed",
-            () => {},
+            () => { },
           );
           model.removeEventListener("outputItemAdded", onOutputItemAdded);
           model.removeEventListener(
@@ -475,7 +477,7 @@ export function useUIFrameworkChat(isOpen: boolean) {
             "input_audio_buffer.committed",
             onThinkingStart,
           );
-        } catch (_) {}
+        } catch (_) { }
       }
     };
   }, []);

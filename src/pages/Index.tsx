@@ -47,7 +47,7 @@ const WELCOME_VARIANTS = [
             { question: "What's Teleglass?", subtext: "The platform for conversational labor.", icon: "Globe", actionPhrase: "tell me about teleglass" },
             { question: "How is this different?", subtext: "50 years: humans→machines. We inverted that.", icon: "Zap", actionPhrase: "how is this different from software" },
             { question: "Who built this?", subtext: "Richie Etwaru and Mike Sutcliff. 5 years ago.", icon: "Users", actionPhrase: "who founded mobeus" },
-            { question: "When is launch?", subtext: "March/April 2026 — Be there when help arrives.", icon: "Calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
+            { question: "When is launch?", subtext: "March/April 2026 — The screen finally cares.", icon: "Calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
           ]
         }
       },
@@ -70,21 +70,21 @@ const WELCOME_VARIANTS = [
           cards: [
             {
               icon: "Cpu",
-              title: "Dual-Agent",
-              description: "Build Agent constructs. Runtime Agent delivers.",
-              actionPhrase: "explain dual-agent"
+              title: "Tech Agnostic",
+              description: "Any model. Any cloud. Any device.",
+              actionPhrase: "explain tech agnostic"
             },
             {
               icon: "Globe",
-              title: "DOM-LLM Bridge",
-              description: "Language becomes live experiences.",
-              actionPhrase: "explain dom-llm bridge"
+              title: "Channel Agnostic",
+              description: "Chat. Voice. Phone. SMS. Avatar. Glass.",
+              actionPhrase: "explain channel agnostic"
             },
             {
               icon: "Sparkles",
-              title: "Generative Web",
-              description: "Pages adapt to you.",
-              actionPhrase: "explain generative web"
+              title: "Persona Agnostic",
+              description: "Any face. Any voice. Any look.",
+              actionPhrase: "explain persona agnostic"
             }
           ],
           numbered: false,
@@ -92,14 +92,51 @@ const WELCOME_VARIANTS = [
           ctaActionPhrase: "show me how teleglass works"
         }
       },
-      // 3. Quote - The Promise
+      // 3. Grid - The Six Agnostic Foundations
       {
-        id: "the-promise",
-        templateId: "Quote",
+        id: "agnostic-foundations",
+        templateId: "Grid",
         props: {
-          quote: "Help is here.",
-          author: "The Tele Population",
-          role: "Conversational Labor"
+          headline: "Six Agnostic Foundations",
+          badge: "PLATFORM",
+          items: [
+            {
+              icon: "Cpu",
+              title: "Tech Agnostic",
+              description: "Any model. Any cloud. Any device.",
+              actionPhrase: "explain tech agnostic"
+            },
+            {
+              icon: "Radio",
+              title: "Channel Agnostic",
+              description: "Chat. Voice. Phone. SMS. Avatar. Glass.",
+              actionPhrase: "explain channel agnostic"
+            },
+            {
+              icon: "Briefcase",
+              title: "Use Case Agnostic",
+              description: "Sales. Support. Training. Transactions.",
+              actionPhrase: "explain use case agnostic"
+            },
+            {
+              icon: "Languages",
+              title: "Language Agnostic",
+              description: "Every language. Every culture.",
+              actionPhrase: "explain language agnostic"
+            },
+            {
+              icon: "Building2",
+              title: "Industry Agnostic",
+              description: "Healthcare. Finance. Retail. Government. Education.",
+              actionPhrase: "explain industry agnostic"
+            },
+            {
+              icon: "User",
+              title: "Persona Agnostic",
+              description: "Any face. Any voice. Any look.",
+              actionPhrase: "explain persona agnostic"
+            }
+          ]
         }
       },
       // 4. Banner - Get Started
@@ -134,10 +171,7 @@ const API_BASE_URL = (import.meta.env.VITE_PROMPT_TOOL_API_URL || "https://promp
 const showWelcomeVideo = true;
 
 const Index = () => {
-  // ========================================
-  // ONBOARDING STATE (simplified - always complete)
-  // ========================================
-  // Static onboarding removed - always show dynamic experience directly
+  // Onboarding state (always complete — dynamic experience only)
   const isOnboardingComplete = true;
   const isTransitioning = false;
   const contentRevealed = true;
@@ -155,7 +189,7 @@ const Index = () => {
       badge: WELCOME_VARIANTS[0].badge,
       title: WELCOME_VARIANTS[0].title,
       subtitle: WELCOME_VARIANTS[0].subtitle,
-      subsectionIds: [], // Legacy IDs removed
+      subsectionIds: [],
       generativeSubsections: WELCOME_VARIANTS[0].generativeSubsections
     };
   }, []);
@@ -185,6 +219,7 @@ const Index = () => {
   const [navigationBackData, setNavigationBackData] = useState<any>(null);
   const [backData, setBackData] = useState<any>(null);
   const [isOTPDialogOpen, setIsOTPDialogOpen] = useState(false);
+  const [isTeleThinking, setIsTeleThinking] = useState(false);
 
   // Navigation History - Store complete state snapshots for instant back navigation
   const [navigationHistory, setNavigationHistory] = useState<NavigationHistoryEntry[]>([
@@ -339,6 +374,49 @@ const Index = () => {
       document.body.classList.remove('avatar-connecting');
     };
   }, [isConnecting]);
+
+  // Track tele thinking state for video pulse + avatar animation
+  useEffect(() => {
+    let thinkingStartTime = 0;
+    const MIN_THINKING_MS = 800; // Minimum visible thinking duration
+
+    const handleThinkingStart = () => {
+      thinkingStartTime = Date.now();
+      setIsTeleThinking(true);
+      document.body.classList.add('tele-thinking');
+    };
+
+    const stopThinking = () => {
+      const elapsed = Date.now() - thinkingStartTime;
+      const remaining = Math.max(0, MIN_THINKING_MS - elapsed);
+
+      // Ensure minimum visible duration before removing
+      setTimeout(() => {
+        setIsTeleThinking(false);
+        document.body.classList.remove('tele-thinking');
+      }, remaining);
+    };
+
+    const handleNavigationChange = (e: CustomEvent<{ isLoading: boolean }>) => {
+      if (!e.detail.isLoading) {
+        stopThinking();
+      }
+    };
+
+    const handleTeleResponse = () => {
+      stopThinking();
+    };
+
+    window.addEventListener('teleThinkingStart', handleThinkingStart);
+    window.addEventListener('navigationLoadingChange', handleNavigationChange as EventListener);
+    window.addEventListener('teleResponseStarted', handleTeleResponse);
+    return () => {
+      window.removeEventListener('teleThinkingStart', handleThinkingStart);
+      window.removeEventListener('navigationLoadingChange', handleNavigationChange as EventListener);
+      window.removeEventListener('teleResponseStarted', handleTeleResponse);
+      document.body.classList.remove('tele-thinking');
+    };
+  }, []);
 
   const attachUIFrameworkDisconnectCleanup = useCallback(() => {
     if (typeof window === "undefined") {
@@ -814,7 +892,6 @@ const Index = () => {
 
           if (isGenerative) {
             legacyPayload.generativeSubsections = arg;
-            console.log('[buildLegacyPayload] Found generativeSubsections at position', i, 'with', arg.length, 'templates');
           } else if (arg.length > 0) {
             // Non-generative array (legacy subsections)
             legacyPayload.subsections = arg;
@@ -833,7 +910,6 @@ const Index = () => {
           // If it's an object, it might be the full payload - merge it
           if ('generativeSubsections' in arg) {
             legacyPayload.generativeSubsections = arg.generativeSubsections;
-            console.log('[buildLegacyPayload] Found generativeSubsections in object arg at position', i);
           }
           if ('badge' in arg && typeof arg.badge === 'string') legacyPayload.badge = arg.badge;
           if ('title' in arg && typeof arg.title === 'string') legacyPayload.title = arg.title;
@@ -842,34 +918,16 @@ const Index = () => {
         }
       }
 
-      console.log('[buildLegacyPayload] Final payload:', {
-        badge: legacyPayload.badge,
-        title: legacyPayload.title,
-        hasGenerative: !!legacyPayload.generativeSubsections,
-        generativeCount: legacyPayload.generativeSubsections?.length || 0
-      });
-
       return legacyPayload;
     };
 
     // Telelabor Navigation System - simplified interface
     const teleNavigation = {
       navigateToSection: (...navigationData: any[]) => {
-        // DEBUG: Log raw input from runtime agent
-        console.log('[Navigation] RAW INPUT:', JSON.stringify(navigationData, null, 2));
-
         const payload =
           navigationData.length > 1 ? buildLegacyPayload(navigationData) : navigationData[0];
 
-        // DEBUG: Log payload after buildLegacyPayload
-        console.log('[Navigation] PAYLOAD:', JSON.stringify(payload, null, 2));
-
         const parsed = parseNavigationPayload(payload);
-
-        // DEBUG: Log parsed result
-        console.log('[Navigation] PARSED:', JSON.stringify(parsed, null, 2));
-        console.log('[Navigation] Has generativeSubsections?', !!(parsed as any)?.generativeSubsections);
-        console.log('[Navigation] generativeSubsections count:', (parsed as any)?.generativeSubsections?.length || 0);
 
         if (!parsed) {
           console.error('[Navigation] FAILED TO PARSE - returning false');
@@ -1195,7 +1253,7 @@ const Index = () => {
     };
   }, [activeSection, activeSubSection, handleSectionChange, navigateBack, navigateForward, addToHistory, navigationHistory, historyIndex, navigationBackData]);
 
-  // P2P chat initialization removed - this project does not use UUIDs
+
 
   // Shift+K hotkey to toggle TeleAcknowledge debug notifications
   useEffect(() => {
@@ -1222,14 +1280,12 @@ const Index = () => {
   const handleOTPSubmit = async (otp: string) => {
     console.log("OTP submitted:", otp);
     setIsOTPDialogOpen(false);
-    // OTP verification removed - dead code cleanup
     notifyTele("Authentication submitted");
   };
 
   const disconnect = async () => {
     setIsConnecting(true);
     playUISound("off", "avatar");
-    // NOTE: Chat stays open if it was open - no longer force-closing on disconnect
     try {
       await (window as any).UIFramework?.disconnectOpenAI?.();
       await (window as any).UIFramework?.disconnectHeyGen?.();
@@ -1258,7 +1314,7 @@ const Index = () => {
     cleanupSessionStorage();
   };
 
-  const handleAvatarClick = useCallback(async () => {
+  const handleAvatarClick = useCallback(async (sendGreeting = true) => {
     if (isConnecting) return;
 
     // If connected, perform disconnect (and close chat first)
@@ -1377,10 +1433,12 @@ const Index = () => {
       // Stabilization delay for OpenAI session readiness
       // await new Promise(r => setTimeout(r, 1000));
 
-      // Send greeting prompt 500ms after connection is stable
-      setTimeout(() => {
-        notifyTele("hello");
-      }, 500);
+      // Send greeting prompt 500ms after connection is stable (only for START button)
+      if (sendGreeting) {
+        setTimeout(() => {
+          notifyTele("hello");
+        }, 500);
+      }
 
       // Trigger gentle dark pulse effect
       setShowFlash(true);
@@ -1412,8 +1470,8 @@ const Index = () => {
       return true;
     }
 
-    // Trigger connection via handleAvatarClick
-    await handleAvatarClick();
+    // Trigger connection via handleAvatarClick (no greeting — caller has its own message)
+    await handleAvatarClick(false);
 
     // Wait a bit for state to update and check success
     await new Promise((r) => setTimeout(r, 500));
@@ -1505,16 +1563,17 @@ const Index = () => {
   };
 
   let imageBackground = backgroundHero;
+  const isAvatarConnecting = avatarState === "connecting";
 
   // Static onboarding always uses empty background
   if (!isOnboardingComplete) {
     imageBackground = backgroundEmpty;
   } else if (showWelcomeVideo) {
-    if (avatarState !== "off") {
+    if (avatarState !== "off" || isTeleThinking) {
       imageBackground = backgroundEmpty;
     }
   } else {
-    if (avatarState === "connected") {
+    if (avatarState === "connected" || isAvatarConnecting || isTeleThinking) {
       imageBackground = backgroundEmpty;
     }
   }
@@ -1526,7 +1585,12 @@ const Index = () => {
       <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.welcome)} />
 
       {/* Fixed Background Layer - Portaled to body for absolute stability */}
-      <BackgroundLayer image={imageBackground} />
+      <BackgroundLayer
+        image={imageBackground}
+        heroImage={backgroundHero}
+        isConnecting={isAvatarConnecting}
+        isThinking={isTeleThinking}
+      />
 
       {/* Onboarding Transition Overlay */}
       <OnboardingTransition
@@ -1544,6 +1608,18 @@ const Index = () => {
               background: "radial-gradient(circle at center, rgba(155, 93, 229, 0.15), transparent 70%)",
               opacity: 0.5,
               animation: "fade-in 0.1s ease-out, fade-out 0.15s ease-out 0.1s forwards",
+            }}
+          />
+        )}
+
+        {/* Tele thinking pulse — continuous radial glow while processing */}
+        {isTeleThinking && (
+          <div
+            className="fixed inset-0 pointer-events-none"
+            style={{
+              zIndex: 4,
+              background: "radial-gradient(circle at center, rgba(155, 93, 229, 0.12), transparent 65%)",
+              animation: "tele-thinking-pulse 2s ease-in-out infinite",
             }}
           />
         )}

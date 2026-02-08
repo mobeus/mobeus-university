@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
   base: '/',
   server: {
     host: "::",
-    port: 3135,
+    port: 3131,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

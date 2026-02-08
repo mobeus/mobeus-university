@@ -46,6 +46,9 @@ export function notifyTele(message: string): void {
     // Create instant flash effect for visual feedback
     createFlashEffect();
 
+    // Dispatch teleThinkingStart immediately — triggers background pulse + thinking animation
+    window.dispatchEvent(new CustomEvent('teleThinkingStart'));
+
     // Subtle flash on avatar for visual feedback (no sound)
     const teleNav = (window as any).teleNavigation;
     if (teleNav?.flashTeleSubtle) {

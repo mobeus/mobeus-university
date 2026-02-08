@@ -66,25 +66,8 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
   onNavigateToNDAFirewall,
 }) => {
 
-  // MODE DETECTION: Generative vs Legacy
+  // Mode detection: generative vs legacy
   const isGenerativeMode = generativeSubsections && generativeSubsections.length > 0;
-
-  // Debug logging
-  console.log('[DynamicSectionLoader] Mode:', isGenerativeMode ? 'Generative' : 'Legacy', {
-    badge,
-    title,
-    generativeCount: generativeSubsections?.length || 0,
-    generativeSubsections: JSON.stringify(generativeSubsections, null, 2),
-    availableTemplates: Object.keys(TEMPLATE_REGISTRY).slice(0, 10), // First 10 templates
-  });
-
-  // DEBUG: Check each template
-  if (generativeSubsections && generativeSubsections.length > 0) {
-    generativeSubsections.forEach((section: any, idx: number) => {
-      const found = TEMPLATE_REGISTRY[section.templateId];
-      console.log(`[DynamicSectionLoader] Template ${idx}: ${section.templateId} - ${found ? '✓ FOUND' : '✗ NOT FOUND'}`);
-    });
-  }
 
   // Consistent spacing for all subsections
   const spacing = 3; // 3rem = 48px
@@ -92,9 +75,7 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
   // Sound hook
   const { playUniversalSound } = useSound();
 
-  // Sound Trigger
-
-  // Sound Trigger
+  // Play arrival sound for new sections
   useEffect(() => {
     if (isWelcome || isExiting) return;
     if (isGenerativeMode) {
@@ -143,7 +124,7 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
             const { id, templateId, props = {}, ...rootProps } = section as any;
             const mergedProps = { ...rootProps, ...props };
 
-            console.log(`[DynamicSectionLoader] Rendering ${templateId} with merged props:`, mergedProps);
+
 
             return (
               <div
