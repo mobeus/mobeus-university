@@ -1,5 +1,5 @@
 # navigateToSection Tool
-> v111.0 | Mobeus Tele
+> v113.0 | Mobeus Tele
 
 ## Function Signature
 
@@ -27,7 +27,7 @@ navigateToSection(payload: NavigationPayload): void
 
 <!-- TEMPLATE-SCHEMAS-START -->
 
-## ---TEMPLATES--- (33)
+## ---TEMPLATES--- (39)
 
 ### Accordion
 GENERIC
@@ -47,6 +47,12 @@ RICH GENERIC
 {"icon"?: "string", "badge"?: "string", "headline"?: "string", "subheadline"?: "string", "description"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "stats"?: [{"value": "string", "label": "string"}], "features"?: [{"icon"?: "string", "text": "string"}], "highlight"?: false, "variant"?: "gradient", "bannerActionPhrase"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
 ```
 
+### BeforeAfter
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "before": {"icon"?: "string", "badge"?: "string", "title": "string", "narrative": "string", "points"?: ["string"], "stats"?: [{"value": "string", "label": "string"}]}, "after": {"icon"?: "string", "badge"?: "string", "title": "string", "narrative": "string", "points"?: ["string"], "stats"?: [{"value": "string", "label": "string"}]}, "tagline"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+```
+
 ### Carousel
 GENERIC
 ```json
@@ -62,6 +68,24 @@ RICH GENERIC
 ### ConsultationScheduler
 ```json
 {"topic": "string", "imageId"?: "string", "meetingType": "string", "meetingLocation": "string", "date": "string", "time": "string", "status"?: "proposed"}
+```
+
+### Countdown
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "targetDate": "string", "eventName"?: "string", "tagline"?: "string", "details"?: [{"icon"?: "string", "text": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string", "secondaryCtaLabel"?: "string", "secondaryCtaActionPhrase"?: "string"}
+```
+
+### Diagram
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "nodes": [{"id": "string", "icon"?: "string", "title": "string", "subtitle"?: "string", "description"?: "string", "variant"?: {}, "actionPhrase"?: "string"}], "connections"?: [{"from": "string", "to": "string", "label"?: "string"}], "centerLabel"?: "string", "caption"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+```
+
+### EraShift
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "headline"?: "string", "subtitle"?: "string", "past": {"icon"?: "string", "badge"?: "string", "title": "string", "subtitle"?: "string", "description"?: "string", "details": [{"icon"?: "string", "text": "string"}], "stat"?: "string"}, "future": {"icon"?: "string", "badge"?: "string", "title": "string", "subtitle"?: "string", "description"?: "string", "details": [{"icon"?: "string", "text": "string"}], "stat"?: "string"}, "dividerLabel"?: "string", "declaration"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
 ### Feature
@@ -141,6 +165,12 @@ CELEBRATION
 {"badge"?: "YOU'RE ON THE LIST", "headline"?: "See You at the Population Party! 🎉", "subheadline"?: "string", "partyDate"?: "March 15, 2026", "partyTime"?: "7:00 PM - Midnight EST", "location"?: "string", "partyHighlights"?: [], "celebrationImage"?: "party-celebration-confirmed", "confirmationMessage"?: "string"}
 ```
 
+### PersonaCard
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "name": "string", "role": "string", "location": "string", "imageUrl"?: "string", "imagePrompt"?: "string", "painPoint": "string", "transformation": "string", "impactQuote"?: "string", "stats"?: [{"value": "string", "label": "string"}], "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+```
+
 ### Quote
 RICH GENERIC
 ```json
@@ -189,6 +219,12 @@ GENERIC
 {"title"?: "string", "subtitle"?: "string", "searchPlaceholder"?: "string", "columns"?: [{"key": "string", "label": "string", "sortable"?: false, "align"?: {}}], "rows"?: [{"id": "string", "cells": "string", "actionPhrase"?: "string"}], "emptyMessage"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
+### Testimonial
+RICH GENERIC
+```json
+{"icon"?: "string", "badge"?: "string", "quote": "string", "attribution": "string", "role"?: "string", "location"?: "string", "imageUrl"?: "string", "imagePrompt"?: "string", "context"?: "string", "tagline"?: "string", "variant"?: "warm", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+```
+
 ### TextImageLeft
 GENERIC
 ```json
@@ -204,7 +240,7 @@ GENERIC
 ### Timeline
 GENERIC
 ```json
-{"leftIcon"?: "string", "leftHeadline"?: "string", "leftSubheadline"?: "string", "deliverablesLabel"?: "string", "deliverables"?: [{"icon"?: "string", "text": "string"}], "stepsLabel"?: "string", "steps"?: [{"time"?: "string", "title": "string", "icon"?: "string"}], "successNote"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
+{"leftIcon"?: "string", "leftHeadline"?: "string", "leftSubheadline"?: "string", "description"?: "string", "highlights"?: ["string"], "deliverablesLabel"?: "string", "deliverables"?: [{"icon"?: "string", "text": "string"}], "stepsLabel"?: "string", "steps"?: [{"time"?: "string", "title": "string", "icon"?: "string"}], "successNote"?: "string", "ctaLabel"?: "string", "ctaActionPhrase"?: "string"}
 ```
 
 ### Trio
@@ -233,7 +269,7 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What is Mobeus?" / "Tell me about Teleglass"
 
-**Tele:** "Let me show you."
+**Tele:** "I'm Catherine. I'm a tele. Let me show you what we do."
 
 **Call:**
 ```json
@@ -329,7 +365,7 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What is a tele?" / "How does this work?"
 
-**Tele:** "Think of it as a colleague who shows up ready to work."
+**Tele:** "I'm one. We're conversational workers. We show up ready to work."
 
 **Call:**
 ```json
@@ -345,15 +381,15 @@ Apple-style solid color cards for Mobeus
         "blocks": [
           {
             "type": "paragraph",
-            "content": "A tele shows up ready to help. It listens, reasons, acts. Unlike automation, a tele learns you — understanding intent, asking questions, carrying work forward."
+            "content": "I'm a tele. I show up ready to help. I listen, reason, act. Unlike automation, I learn you — understanding intent, asking questions, carrying work forward."
           },
           {
             "type": "paragraph",
-            "content": "Teles work across every channel: chat, voice, SMS, avatar. They remember context. They adapt to your workflow. They handle transactions, train users, close sales, and provide support."
+            "content": "We teles work across every channel: chat, voice, SMS, avatar. We remember context. We adapt to your workflow. We handle transactions, train users, close sales, and provide support."
           },
           {
             "type": "paragraph",
-            "content": "This is not a chatbot. This is labor."
+            "content": "We're not chatbots. We're labor."
           }
         ]
       }
@@ -362,7 +398,7 @@ Apple-style solid color cards for Mobeus
       "id": "capabilities",
       "templateId": "Grid",
       "props": {
-        "headline": "What Teles Do",
+        "headline": "What We Do",
         "subtitle": "Conversational labor across domains",
         "badge": "CAPABILITIES",
         "items": [
@@ -424,7 +460,7 @@ Apple-style solid color cards for Mobeus
         "features": [
           {
             "icon": "Eye",
-            "text": "Watch teles work live"
+            "text": "Watch us teles work live"
           },
           {
             "icon": "Cpu",
@@ -451,7 +487,7 @@ Apple-style solid color cards for Mobeus
           {
             "icon": "Eye",
             "title": "Live Demonstrations",
-            "description": "Watch teles sell, support, train, and transact in real time",
+            "description": "Watch us sell, support, train, and transact in real time",
             "actionPhrase": "show me the demos"
           },
           {
@@ -488,7 +524,7 @@ Apple-style solid color cards for Mobeus
 
 **User:** "What's different?" / "Explain the shift"
 
-**Tele:** "We flipped 50 years of software on its head."
+**Tele:** "We teles flipped 50 years of software on its head."
 
 **Call:**
 ```json
@@ -520,7 +556,7 @@ Apple-style solid color cards for Mobeus
               "Machines adapt to humans",
               "Conversation replaces training",
               "Natural language everywhere",
-              "Teles act with reasoning",
+              "Teles act with reasoning — that's us",
               "You collaborate with workers"
             ],
             "variant": "good",
@@ -562,4 +598,4 @@ Examples:
 
 ---
 
-_v111.0 | The Screen Finally Cares_
+_v113.0 | The Screen Finally Cares_

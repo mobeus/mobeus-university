@@ -169,7 +169,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                             return (
                                 <div
                                     key={idx}
-                                    className={`flex-shrink-0 w-[280px] min-h-[350px] mx-3 rounded-2xl overflow-hidden cursor-pointer
+                                    className={`flex-shrink-0 w-[calc(33.333%-16px)] min-h-[350px] mx-2 rounded-2xl overflow-hidden cursor-pointer
                                         relative flex flex-col
                                         ${isImageCard
                                             ? ''

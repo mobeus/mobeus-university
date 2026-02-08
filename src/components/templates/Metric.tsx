@@ -54,7 +54,7 @@ export const Metric: React.FC<MetricProps> = ({
         <div className="glass-medium rounded-2xl p-4 md:p-6 h-full flex flex-col items-center justify-center">
 
             <div className={`relative px-16 py-14 rounded-3xl bg-gradient-to-b ${theme.bg} border ${theme.border}
-                shadow-2xl ${theme.glow} max-w-lg w-full text-center`}>
+                shadow-2xl ${theme.glow} w-full text-center`}>
 
                 {icon && (
                     <div className="flex justify-center mb-6">

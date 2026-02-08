@@ -116,24 +116,29 @@ export const PartyConfirmation: React.FC<PartyConfirmationProps> = ({
             </div>
 
             {/* Party Highlights */}
-            {partyHighlights.length > 0 && (
+            {partyHighlights.filter(h => h.title).length > 0 && (
                 <div className="mb-8">
                     <h3 className="text-xl font-bold text-white mb-4">What to Expect</h3>
                     <div className="grid md:grid-cols-2 gap-4">
-                        {partyHighlights.map((highlight, i) => (
-                            <div key={i} className="glass-light rounded-xl p-4 flex items-start gap-3">
-                                {highlight.icon === 'Music' && <Music className="w-5 h-5 text-flamingo flex-shrink-0 mt-0.5" />}
-                                {highlight.icon === 'Camera' && <Camera className="w-5 h-5 text-jade flex-shrink-0 mt-0.5" />}
-                                {highlight.icon === 'Gift' && <Gift className="w-5 h-5 text-sapphire flex-shrink-0 mt-0.5" />}
-                                {!highlight.icon && <Sparkles className="w-5 h-5 text-amethyst flex-shrink-0 mt-0.5" />}
-                                <div>
-                                    <div className="font-semibold text-white mb-1">{highlight.title}</div>
-                                    {highlight.description && (
-                                        <div className="text-sm text-mist/70">{highlight.description}</div>
-                                    )}
+                        {partyHighlights.filter(h => h.title).map((highlight, i) => {
+                            const iconMap: Record<string, React.ReactNode> = {
+                                Music: <Music className="w-5 h-5 text-flamingo flex-shrink-0 mt-0.5" />,
+                                Camera: <Camera className="w-5 h-5 text-jade flex-shrink-0 mt-0.5" />,
+                                Gift: <Gift className="w-5 h-5 text-sapphire flex-shrink-0 mt-0.5" />,
+                            };
+                            const iconNode = (highlight.icon && iconMap[highlight.icon]) || <Sparkles className="w-5 h-5 text-amethyst flex-shrink-0 mt-0.5" />;
+                            return (
+                                <div key={i} className="glass-light rounded-xl p-4 flex items-start gap-3">
+                                    {iconNode}
+                                    <div>
+                                        <div className="font-semibold text-white mb-1">{highlight.title}</div>
+                                        {highlight.description && (
+                                            <div className="text-sm text-mist/70">{highlight.description}</div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             )}

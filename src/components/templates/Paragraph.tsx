@@ -162,7 +162,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
 
                     {/* CTAs */}
                     {(ctaLabel || secondaryCtaLabel) && (
-                        <div className={`flex flex-wrap gap-4 ${alignment === 'center' ? 'justify-center' : ''}`}>
+                        <div className="flex flex-wrap gap-4 justify-center w-full">
                             {secondaryCtaLabel && secondaryCtaActionPhrase && (
                                 <button
                                     className="inline-flex items-center gap-3 px-6 py-3 bg-white/[0.05] border border-white/[0.1] text-white font-semibold rounded-full 

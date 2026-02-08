@@ -82,8 +82,8 @@ export const Carousel: React.FC<CarouselProps> = ({
     };
 
     return (
-        <div className="w-full h-full flex flex-col">
-            <div className="overflow-hidden flex-grow" ref={emblaRef}>
+        <div className="w-full h-full flex flex-col overflow-visible">
+            <div className="overflow-hidden flex-grow -mx-4 px-4" ref={emblaRef}>
                 <div className="flex h-full">
                     {cards.map((card, idx) => (
                         <div
@@ -95,7 +95,7 @@ export const Carousel: React.FC<CarouselProps> = ({
                                 group flex flex-col"
                             onClick={() => handleCardClick(card.actionPhrase)}
                         >
-                            <div className="aspect-[16/10] w-full overflow-hidden bg-obsidian/20">
+                            <div className="aspect-video w-full overflow-hidden bg-obsidian/20">
                                 <SmartImage
                                     assetId={card.imageUrl || card.imagePrompt || card.title}
                                     alt={card.title}

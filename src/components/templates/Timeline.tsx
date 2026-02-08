@@ -25,6 +25,8 @@ interface TimelineProps {
     leftIcon?: string;
     leftHeadline?: string;
     leftSubheadline?: string;
+    description?: string;
+    highlights?: string[];
     deliverablesLabel?: string;
     deliverables?: Deliverable[];
     stepsLabel?: string;
@@ -44,6 +46,8 @@ export const Timeline: React.FC<TimelineProps> = ({
     leftIcon,
     leftHeadline,
     leftSubheadline,
+    description,
+    highlights,
     deliverablesLabel,
     deliverables,
     stepsLabel,
@@ -64,7 +68,7 @@ export const Timeline: React.FC<TimelineProps> = ({
                     border border-white/[0.06] flex flex-col">
 
                     {(leftHeadline || leftIcon) && (
-                        <div className="flex items-start gap-5 mb-8">
+                        <div className="flex items-start gap-5 mb-6">
                             <div className="w-16 h-16 rounded-2xl bg-sapphire/10 border border-sapphire/20 
                                 flex items-center justify-center flex-shrink-0">
                                 <LeftIconComp className="w-8 h-8 text-sapphire" />
@@ -74,6 +78,30 @@ export const Timeline: React.FC<TimelineProps> = ({
                                 {leftSubheadline && <p className="text-sapphire font-medium mt-1">{leftSubheadline}</p>}
                             </div>
                         </div>
+                    )}
+
+                    {/* Description */}
+                    {description && (
+                        <p className="text-mist/60 leading-relaxed text-sm md:text-base mb-6">{description}</p>
+                    )}
+
+                    {/* Highlight Chips */}
+                    {highlights && highlights.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {highlights.map((tag, i) => (
+                                <span
+                                    key={i}
+                                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-sapphire/10 text-sapphire/80 border border-sapphire/15"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Divider */}
+                    {(description || (highlights && highlights.length > 0)) && (deliverables && deliverables.length > 0) && (
+                        <div className="w-full h-px bg-gradient-to-r from-white/[0.08] via-white/[0.04] to-transparent mb-6" />
                     )}
 
                     {deliverablesLabel && (
@@ -152,7 +180,7 @@ export const Timeline: React.FC<TimelineProps> = ({
                     {ctaLabel && ctaActionPhrase && (
                         <button
                             className="mt-6 w-full inline-flex items-center justify-center gap-3 px-6 py-5 
-                                bg-flamingo text-white font-semibold rounded-2xl 
+                                bg-flamingo text-white font-semibold rounded-full 
                                 hover:bg-flamingo/90 transition-all text-lg shadow-lg shadow-flamingo/20"
                             onClick={() => handleAction(ctaActionPhrase)}
                         >

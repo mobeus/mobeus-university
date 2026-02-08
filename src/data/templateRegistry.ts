@@ -1,7 +1,7 @@
 /**
- * Template Registry v100.3
+ * Template Registry v101.0
  * 
- * 30 Core Templates + 3 Legacy Aliases (33 total for LLM compatibility)
+ * 36 Core Templates + 3 Legacy Aliases (39 total for LLM compatibility)
  * All templates documented in glass-prompt.md
  */
 
@@ -74,6 +74,16 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // ═══════════════════════════════════════════════════════════════════════
     MediaText: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
 
+    // ═══════════════════════════════════════════════════════════════════════
+    // NARRATIVE & STORYTELLING TEMPLATES (6)
+    // ═══════════════════════════════════════════════════════════════════════
+    BeforeAfter: lazy(() => import("@/components/templates/BeforeAfter").then(m => ({ default: m.BeforeAfter }))),
+    PersonaCard: lazy(() => import("@/components/templates/PersonaCard").then(m => ({ default: m.PersonaCard }))),
+    Diagram: lazy(() => import("@/components/templates/Diagram").then(m => ({ default: m.Diagram }))),
+    Countdown: lazy(() => import("@/components/templates/Countdown").then(m => ({ default: m.Countdown }))),
+    Testimonial: lazy(() => import("@/components/templates/Testimonial").then(m => ({ default: m.Testimonial }))),
+    EraShift: lazy(() => import("@/components/templates/EraShift").then(m => ({ default: m.EraShift }))),
+
     // Backward compatibility - map old templates to MediaText
     TextImageLeft: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
     TextImageRight: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
@@ -81,3 +91,4 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
 };
 
 export const TEMPLATE_NAMES = Object.keys(TEMPLATE_REGISTRY);
+
