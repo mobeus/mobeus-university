@@ -37,17 +37,6 @@ declare global {
       defaultTerm?: number;
       residualValue?: number;
     }) => void;
-    updateMortgageReview?: (data: {
-      propertyAddress?: string;
-      purchasePrice?: number;
-      propertyType?: "rental" | "flip";
-      expectedMonthlyRent?: number;
-      annualPropertyTaxes?: number;
-      annualInsurance?: number;
-      defaultDownPayment?: number;
-      defaultInterestRate?: number;
-      defaultTerm?: number;
-    }) => void;
     scrollPage?: (direction: 'up' | 'down', amount?: 'little' | 'medium' | 'lot' | 'max' | number) => string;
     setPageContrast?: (mode: 'high' | 'normal' | 'low') => boolean;
     getPageContrast?: () => 'high' | 'normal' | 'low';
