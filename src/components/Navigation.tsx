@@ -81,7 +81,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         background: 'transparent',
       }}
     >
-      <div className="relative px-4 md:px-8">
+      <div className="relative pr-4 md:pr-8">
         {/* Top edge glow */}
         {isScrolled && (
           <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${edgeGlowColor} to-transparent`} />

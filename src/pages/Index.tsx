@@ -1630,7 +1630,9 @@ const Index = () => {
         {isOnboardingComplete && (
           <div className="opacity-100">
             {/* Platform Header - Navigation and Telelabor Interface */}
-            <div className={`no-lightboard flex justify-between align-center container mx-auto max-w-[1400px] px-16 md:px-24 lg:px-32`}>
+            <div 
+              className={`no-lightboard flex justify-between align-center max-w-full px-4 md:px-8 xl:max-w-6xl xl:px-0 mx-auto`}
+            >
               <Navigation
                 activeSection={activeSection}
                 isChatGlassOpen={isChatGlassOpen}
